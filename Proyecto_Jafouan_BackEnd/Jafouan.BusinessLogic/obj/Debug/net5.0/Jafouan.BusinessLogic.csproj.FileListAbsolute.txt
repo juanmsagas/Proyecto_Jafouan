@@ -1,0 +1,85 @@
+C:\Users\isaac\OneDrive\Escritorio\Proyecto React\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.BusinessLogic.deps.json
+C:\Users\isaac\OneDrive\Escritorio\Proyecto React\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.BusinessLogic.dll
+C:\Users\isaac\OneDrive\Escritorio\Proyecto React\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\ref\Jafouan.BusinessLogic.dll
+C:\Users\isaac\OneDrive\Escritorio\Proyecto React\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.BusinessLogic.pdb
+C:\Users\isaac\OneDrive\Escritorio\Proyecto React\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.DataAccess.dll
+C:\Users\isaac\OneDrive\Escritorio\Proyecto React\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.Entities.dll
+C:\Users\isaac\OneDrive\Escritorio\Proyecto React\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.DataAccess.pdb
+C:\Users\isaac\OneDrive\Escritorio\Proyecto React\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.Entities.pdb
+C:\Users\isaac\OneDrive\Escritorio\Proyecto React\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.csproj.AssemblyReference.cache
+C:\Users\isaac\OneDrive\Escritorio\Proyecto React\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\isaac\OneDrive\Escritorio\Proyecto React\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.AssemblyInfoInputs.cache
+C:\Users\isaac\OneDrive\Escritorio\Proyecto React\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.AssemblyInfo.cs
+C:\Users\isaac\OneDrive\Escritorio\Proyecto React\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.csproj.CoreCompileInputs.cache
+C:\Users\isaac\OneDrive\Escritorio\Proyecto React\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.csproj.CopyComplete
+C:\Users\isaac\OneDrive\Escritorio\Proyecto React\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.dll
+C:\Users\isaac\OneDrive\Escritorio\Proyecto React\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\ref\Jafouan.BusinessLogic.dll
+C:\Users\isaac\OneDrive\Escritorio\Proyecto React\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.pdb
+C:\Users\LAB02\Desktop\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.BusinessLogic.deps.json
+C:\Users\LAB02\Desktop\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.BusinessLogic.dll
+C:\Users\LAB02\Desktop\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\ref\Jafouan.BusinessLogic.dll
+C:\Users\LAB02\Desktop\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.BusinessLogic.pdb
+C:\Users\LAB02\Desktop\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.DataAccess.dll
+C:\Users\LAB02\Desktop\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.Entities.dll
+C:\Users\LAB02\Desktop\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.DataAccess.pdb
+C:\Users\LAB02\Desktop\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.Entities.pdb
+C:\Users\LAB02\Desktop\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.csproj.AssemblyReference.cache
+C:\Users\LAB02\Desktop\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LAB02\Desktop\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.AssemblyInfoInputs.cache
+C:\Users\LAB02\Desktop\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.AssemblyInfo.cs
+C:\Users\LAB02\Desktop\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.csproj.CoreCompileInputs.cache
+C:\Users\LAB02\Desktop\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.csproj.CopyComplete
+C:\Users\LAB02\Desktop\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.dll
+C:\Users\LAB02\Desktop\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\ref\Jafouan.BusinessLogic.dll
+C:\Users\LAB02\Desktop\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.pdb
+C:\Users\LAB01\OneDrive\Escritorio\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.BusinessLogic.deps.json
+C:\Users\LAB01\OneDrive\Escritorio\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.BusinessLogic.dll
+C:\Users\LAB01\OneDrive\Escritorio\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\ref\Jafouan.BusinessLogic.dll
+C:\Users\LAB01\OneDrive\Escritorio\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.BusinessLogic.pdb
+C:\Users\LAB01\OneDrive\Escritorio\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.DataAccess.dll
+C:\Users\LAB01\OneDrive\Escritorio\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.Entities.dll
+C:\Users\LAB01\OneDrive\Escritorio\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.DataAccess.pdb
+C:\Users\LAB01\OneDrive\Escritorio\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.Entities.pdb
+C:\Users\LAB01\OneDrive\Escritorio\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.csproj.AssemblyReference.cache
+C:\Users\LAB01\OneDrive\Escritorio\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LAB01\OneDrive\Escritorio\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.AssemblyInfoInputs.cache
+C:\Users\LAB01\OneDrive\Escritorio\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.AssemblyInfo.cs
+C:\Users\LAB01\OneDrive\Escritorio\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.csproj.CoreCompileInputs.cache
+C:\Users\LAB01\OneDrive\Escritorio\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.csproj.CopyComplete
+C:\Users\LAB01\OneDrive\Escritorio\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.dll
+C:\Users\LAB01\OneDrive\Escritorio\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\ref\Jafouan.BusinessLogic.dll
+C:\Users\LAB01\OneDrive\Escritorio\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.pdb
+D:\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.BusinessLogic.deps.json
+D:\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.BusinessLogic.dll
+D:\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\ref\Jafouan.BusinessLogic.dll
+D:\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.BusinessLogic.pdb
+D:\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.DataAccess.dll
+D:\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.Entities.dll
+D:\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.DataAccess.pdb
+D:\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.Entities.pdb
+D:\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.csproj.AssemblyReference.cache
+D:\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.GeneratedMSBuildEditorConfig.editorconfig
+D:\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.AssemblyInfoInputs.cache
+D:\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.AssemblyInfo.cs
+D:\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.csproj.CoreCompileInputs.cache
+D:\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.csproj.CopyComplete
+D:\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.dll
+D:\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\ref\Jafouan.BusinessLogic.dll
+D:\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.pdb
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.BusinessLogic.deps.json
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.BusinessLogic.dll
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\ref\Jafouan.BusinessLogic.dll
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.BusinessLogic.pdb
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.DataAccess.dll
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.Entities.dll
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.DataAccess.pdb
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Debug\net5.0\Jafouan.Entities.pdb
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.csproj.AssemblyReference.cache
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.AssemblyInfoInputs.cache
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.AssemblyInfo.cs
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.csproj.CoreCompileInputs.cache
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.csproj.CopyComplete
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.dll
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\ref\Jafouan.BusinessLogic.dll
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Debug\net5.0\Jafouan.BusinessLogic.pdb

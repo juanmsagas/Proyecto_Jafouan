@@ -1,0 +1,17 @@
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Release\net5.0\Jafouan.BusinessLogic.deps.json
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Release\net5.0\Jafouan.BusinessLogic.dll
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Release\net5.0\ref\Jafouan.BusinessLogic.dll
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Release\net5.0\Jafouan.BusinessLogic.pdb
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Release\net5.0\Jafouan.DataAccess.dll
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Release\net5.0\Jafouan.Entities.dll
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Release\net5.0\Jafouan.DataAccess.pdb
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\bin\Release\net5.0\Jafouan.Entities.pdb
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Release\net5.0\Jafouan.BusinessLogic.csproj.AssemblyReference.cache
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Release\net5.0\Jafouan.BusinessLogic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Release\net5.0\Jafouan.BusinessLogic.AssemblyInfoInputs.cache
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Release\net5.0\Jafouan.BusinessLogic.AssemblyInfo.cs
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Release\net5.0\Jafouan.BusinessLogic.csproj.CoreCompileInputs.cache
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Release\net5.0\Jafouan.BusinessLogic.csproj.CopyComplete
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Release\net5.0\Jafouan.BusinessLogic.dll
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Release\net5.0\ref\Jafouan.BusinessLogic.dll
+C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.BusinessLogic\obj\Release\net5.0\Jafouan.BusinessLogic.pdb
