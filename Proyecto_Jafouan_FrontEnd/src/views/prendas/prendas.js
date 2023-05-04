@@ -19,12 +19,12 @@ const PrendasGaleria = () => {
 
     
     <Card>
-          <CardHeader className="header-big mb-5" style={{ fontFamily: "Arial" }}>Raaaasputiaaa</CardHeader>
+          <CardHeader className="header-big mb-5 text-center" style={{ fontFamily: "Comic sans", fontSize: 50 }}>Prendas Disponibles</CardHeader>
           
     <div className="container">
       <div className="row">
         {prendas.map((prenda) => (
-          <div className="col-md-3 mb-4" key={prenda.id}>
+          <div className="col-md-3 mb-5" key={prenda.id}>
             <Card className="h-100">
               <CardImg
                 top
