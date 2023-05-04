@@ -25,7 +25,7 @@ import {CButton,
 
 function Departamentos() {
   const [usuarios, setUsuarios] = useState([])
-  const [sortModel, setSortModel] = useState([{ field: 'user_Id', sort: 'asc' }])
+  const [sortModel, setSortModel] = useState([{ field: 'dept_Id', sort: 'asc' }])
   const [visible, setVisible] = useState(false)
   
   const [validated, setValidated] = useState(false)
@@ -37,6 +37,36 @@ function Departamentos() {
     }
     setValidated(true)
   }
+  const [nuevoDepartamento, setNuevoDepartamento] = useState({
+    dept_Id: '',
+    dept_Descripcion: ''
+})
+
+const handleSubmitI = (event) => {
+    event.preventDefault()
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    axios.post('api/Departamentos/Insert', nuevoDepartamento, config)
+        .then((response) => {
+            console.log(response.data)
+            setVisible(false)
+            setNuevoDepartamento({
+                dept_Id: '',
+                dept_Descripcion: ''
+            })
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+}
+
+
+
   //peticion a la api 
   useEffect(() => {
     axios.get('api/Departamentos/Index').then((response) => {
@@ -104,27 +134,41 @@ function Departamentos() {
           <h1 className='h3 text-center'>Nuevo Departamento</h1>
         </CCardHeader>
         <CCardBody>
-        <CForm
+      <CForm
     className="row g-3 needs-validation"
     noValidate
     validated={validated}
-    onSubmit={handleSubmit}
-  >
-        <CCol md={6} className='offset-3'>
+    onSubmit={handleSubmitI}
+>
+
+       <CCol md={6} className=''>
       <CFormInput
         type="text"
-        defaultValue=""
-        feedbackValid="Looks good!"
-        id="validationCustom01"
-        label="Departamento"
-        required
+    value={nuevoDepartamento.dept_Id}
+    onChange={(e) => setNuevoDepartamento({ ...nuevoDepartamento, dept_Id: e.target.value })}
+    id="validationCustom01"
+    label="Departamento"
+    required
       />
     </CCol>
+       <CCol md={6} className=''>
+
+        <CFormInput
+    type="text"
+    value={nuevoDepartamento.dept_Descripcion}
+    onChange={(e) => setNuevoDepartamento({ ...nuevoDepartamento, dept_Descripcion: e.target.value })}
+    id="validationCustom01"
+    label="Departamento"
+    required
+/>
+
+    </CCol>
+
     <CCol xs={12}>
       <CButton color="primary" type="submit">
         Guardar
       </CButton>
-      <CButton color="danger"  href="#" onClick={(event) => {
+      <CButton color="danger" className='m' href="#" onClick={(event) => {
       event.preventDefault()
       setVisible(!visible)
     }}>
