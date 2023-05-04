@@ -6,6 +6,8 @@ const Cargos = React.lazy(() => import('./views/cargos/cargos'))
 const Roles = React.lazy(() => import('./views/roles/roles'))
 const Departamentos = React.lazy(() => import('./views/departamentos/departamentos'))
 const Municipios = React.lazy(() => import('./views/municipios/municipios'))
+const Prendas = React.lazy(() => import('./views/prendas/prendas'))
+
 
 
 
@@ -18,6 +20,8 @@ const routes = [
   { path: '/roles', name: 'Roles', element: Roles },
   { path: '/departamentos', name: 'Departamentos', element: Departamentos },
   { path: '/municipios', name: 'Municipios', element: Municipios },
+  { path: '/prendas', name: 'Prendas', element: Prendas },
+
 
 ]
 

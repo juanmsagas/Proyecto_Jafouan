@@ -56,6 +56,12 @@ const _nav = [
     to: '/Municipios',
     icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
   },
+  {
+    component: CNavItem,
+    name: 'Prendas',
+    to: '/Prendas',
+    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
+  },
 ]
 
 export default _nav
