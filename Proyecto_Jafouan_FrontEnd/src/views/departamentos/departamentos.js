@@ -20,7 +20,12 @@ import {CButton,
         CFormSelect,
         CFormCheck,
         CFormFeedback,
-        CCardHeader}
+        CCardHeader,
+        CModal,
+        CModalHeader,
+        CModalTitle,
+        CModalBody,
+        CModalFooter}
         from '@coreui/react'
 
 function Departamentos() {
@@ -28,7 +33,7 @@ function Departamentos() {
   const [sortModel, setSortModel] = useState([{ field: 'dept_Id', sort: 'asc' }])
   const [visible, setVisible] = useState(false)
   const [visible2, setVisible2] = useState(false)
-
+  const [Modal, setModal] = useState(false)
   const [visibleEnca, setvisibleEnca   ] = useState(false)
 
   const [validated, setValidated] = useState(false)
@@ -45,7 +50,9 @@ function Departamentos() {
     dept_Descripcion: '',
     dept_UserCrea:1
 })
-
+const [ElimDepartamento, setElimDepartamento] = useState({
+  dept_Id: ''
+})
 const [EditarDepartamento, setEditarDepartamento] = useState({
   dept_Id: '',
   dept_Descripcion: '',
@@ -63,8 +70,8 @@ const abrireditar = (params,event) => {
     dept_Id: params.dept_Id,
     dept_Descripcion:  params.dept_Descripcion,
     dept_UserModifica:1
-})
 }
+)}
 
 const cerrarEditar = (event) => {
   event.preventDefault()
@@ -74,8 +81,8 @@ const cerrarEditar = (event) => {
     dept_Id: '',
     dept_Descripcion: '',
     dept_UserModifica:1
-})
 }
+)}
 
 const abrirycerrarInsert = (event) => {
   event.preventDefault()
@@ -85,9 +92,21 @@ const abrirycerrarInsert = (event) => {
     dept_Id: '',
     dept_Descripcion: '',
     dept_UserCrea:1
-})
-
 }
+)}
+
+
+const ModalFun = (params,event) => {
+  if (event) {
+    event.preventDefault()
+  }
+  setModal(!visible)
+  setElimDepartamento({
+    dept_Id: params,
+   
+}
+)}
+
 
   //peticion a la api insert   
 const handleSubmitI = (event) => {
@@ -157,6 +176,31 @@ const form = event.currentTarget
 }
 
 
+//peticion a la api Eliminar   
+const handleSubmitD = (event) => {
+  event.preventDefault()
+
+  const config = {
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  }
+  axios.put('api/Departamentos/Delete', ElimDepartamento, config)
+      .then((response) => {
+          console.log(response.data)
+          setModal(!Modal)
+          setElimDepartamento({
+            dept_Id: '',
+        })
+        console.log(response.data)
+      })
+      .catch((error) => {
+          console.log(error)
+      })
+    
+}
+
+
   //peticion a la api listado   
   useEffect(() => {
     axios.get('api/Departamentos/Index').then((response) => {
@@ -174,10 +218,8 @@ const form = event.currentTarget
   }
 
   const columns = [
-    { field: 'dept_Id', headerName: 'ID', 
-      flex:1, },
-    { field: 'dept_Descripcion', headerName: 'Departamento', 
-      flex:2, },
+    { field: 'dept_Id', headerName: 'ID', flex:1, },
+    { field: 'dept_Descripcion', headerName: 'Departamento', flex:2, },
     {
       field: 'acciones',
       headerName: 'Acciones',
@@ -194,7 +236,7 @@ const form = event.currentTarget
         <EditIcon />
         </CButton>
           
-            <CButton color="danger ms-2" variant="outline">
+            <CButton color="danger ms-2" variant="outline" onClick={() => ModalFun(params.row.dept_Id)}>
             <DeleteIcon />
             </CButton>
         
@@ -223,6 +265,39 @@ const form = event.currentTarget
           </div>
       </div>
     </CCollapse>
+
+ {/*Modal Eliminar*/}
+
+    <CModal alignment="center"  visible={Modal} onClose={() => setModal(false)}>
+      
+      <CModalBody className='pt-5 pb-5' style={{boxShadow:5}}>
+      <CForm
+    className="row g-3 needs-validation"
+    noValidate
+    validated={validated}
+    onSubmit={handleSubmitD}
+>
+      <CFormInput
+      minLength={2} maxLength={2}
+        type="hidden"
+    value={ElimDepartamento.dept_Id}
+    id="validationCustom01"
+    disabled
+    required/>
+            <center>
+        <CModalTitle>Esta seguro que desea Eliminar este registro?</CModalTitle>
+        </center>
+    <center>
+     <CButton color="light" type='submit' className='col-5 me-3' onClick={() => setModal(false)}>
+          Cancelar
+        </CButton>
+        <CButton color="danger text-light" type='submit' className='col-5'>Eliminar</CButton>
+    </center>
+    </CForm>
+      </CModalBody>
+      
+    </CModal>
+
 
  {/*Formulario Insertar*/}
  
