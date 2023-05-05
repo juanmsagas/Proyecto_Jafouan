@@ -22,7 +22,7 @@ namespace Jafouan.API.Controllers
             _accessService = accessService;
             _mapper = mapper;
         }
-     
+
 
         [HttpGet("Index")]
         public IActionResult ListUsuario()

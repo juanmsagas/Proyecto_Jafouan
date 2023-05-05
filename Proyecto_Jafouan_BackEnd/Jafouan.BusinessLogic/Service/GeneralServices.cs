@@ -46,9 +46,7 @@ namespace Jafouan.BusinessLogic.Service
             }
             catch (Exception e)
             {
-                _ = e.Message;
-                return Enumerable.Empty<VW_Cargos>();
-
+                return (IEnumerable<VW_Cargos>)result.Error(e.Message);
             }
         }
 
@@ -163,9 +161,7 @@ namespace Jafouan.BusinessLogic.Service
             }
             catch (Exception e)
             {
-                _ = e.Message;
-                return Enumerable.Empty<VW_Departamentos>();
-
+                return (IEnumerable<VW_Departamentos>)result.Error(e.Message);
             }
         }
 
@@ -280,9 +276,7 @@ namespace Jafouan.BusinessLogic.Service
             }
             catch (Exception e)
             {
-                _ = e.Message;
-                return Enumerable.Empty<VW_EstadosCiviles>();
-
+                return (IEnumerable<VW_EstadosCiviles>)result.Error(e.Message);
             }
         }
 
@@ -397,9 +391,7 @@ namespace Jafouan.BusinessLogic.Service
             }
             catch (Exception e)
             {
-                _ = e.Message;
-                return Enumerable.Empty<VW_Municipios>();
-
+                return (IEnumerable<VW_Municipios>)result.Error(e.Message);
             }
         }
 

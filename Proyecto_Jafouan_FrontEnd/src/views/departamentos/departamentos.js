@@ -27,7 +27,10 @@ function Departamentos() {
   const [usuarios, setUsuarios] = useState([])
   const [sortModel, setSortModel] = useState([{ field: 'dept_Id', sort: 'asc' }])
   const [visible, setVisible] = useState(false)
-  
+  const [visible2, setVisible2] = useState(false)
+
+  const [visibleEnca, setvisibleEnca   ] = useState(false)
+
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
     const form = event.currentTarget
@@ -39,9 +42,54 @@ function Departamentos() {
   }
   const [nuevoDepartamento, setNuevoDepartamento] = useState({
     dept_Id: '',
-    dept_Descripcion: ''
+    dept_Descripcion: '',
+    dept_UserCrea:1
 })
 
+const [EditarDepartamento, setEditarDepartamento] = useState({
+  dept_Id: '',
+  dept_Descripcion: '',
+  dept_UserModifica:1
+})
+
+const abrireditar = (params,event) => {
+  if (event) {
+    event.preventDefault()
+  }
+  setVisible2(!visible2)
+  setvisibleEnca(!visibleEnca)
+  console.log(params)
+  setEditarDepartamento({
+    dept_Id: params.dept_Id,
+    dept_Descripcion:  params.dept_Descripcion,
+    dept_UserModifica:1
+})
+}
+
+const cerrarEditar = (event) => {
+  event.preventDefault()
+  setVisible2(!visible2)
+  setvisibleEnca(!visibleEnca)
+  setEditarDepartamento({
+    dept_Id: '',
+    dept_Descripcion: '',
+    dept_UserModifica:1
+})
+}
+
+const abrirycerrarInsert = (event) => {
+  event.preventDefault()
+  setVisible(!visible)
+  setvisibleEnca(!visibleEnca)
+  setNuevoDepartamento({
+    dept_Id: '',
+    dept_Descripcion: '',
+    dept_UserCrea:1
+})
+
+}
+
+  //peticion a la api insert   
 const handleSubmitI = (event) => {
     event.preventDefault()
 
@@ -50,24 +98,66 @@ const handleSubmitI = (event) => {
             'Content-Type': 'application/json'
         }
     }
-
+ const form = event.currentTarget
+  if (form.checkValidity() === false) {
+    event.preventDefault()
+    event.stopPropagation()
+  }
+  setValidated(true)
+  if(form.checkValidity() != false){
     axios.post('api/Departamentos/Insert', nuevoDepartamento, config)
         .then((response) => {
             console.log(response.data)
             setVisible(false)
+            setvisibleEnca(!visibleEnca)
             setNuevoDepartamento({
                 dept_Id: '',
-                dept_Descripcion: ''
+                dept_Descripcion: '',
+                dept_UserCrea:1
             })
         })
         .catch((error) => {
             console.log(error)
         })
+      }
+}
+
+//peticion a la api Editar   
+const handleSubmitE = (event) => {
+  event.preventDefault()
+
+  const config = {
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  }
+const form = event.currentTarget
+  if (form.checkValidity() === false) {
+    event.preventDefault()
+    event.stopPropagation()
+  }
+  setValidated(true)
+  if(form.checkValidity() != false){
+  axios.put('api/Departamentos/Update', EditarDepartamento, config)
+      .then((response) => {
+          console.log(response.data)
+          setVisible2(!visible2)
+          setvisibleEnca(!visibleEnca)
+          setEditarDepartamento({
+            dept_Id: '',
+            dept_Descripcion: '',
+            dept_UserModifica:1
+        })
+        console.log(response.data)
+      })
+      .catch((error) => {
+          console.log(error)
+      })
+    }
 }
 
 
-
-  //peticion a la api 
+  //peticion a la api listado   
   useEffect(() => {
     axios.get('api/Departamentos/Index').then((response) => {
       console.log('entra')
@@ -77,30 +167,37 @@ const handleSubmitI = (event) => {
       }))
       setUsuarios(insertarid)
     })
-  }, [])
+  }, [usuarios])
 
   const handleSortModelChange = (model) => {
     setSortModel(model)
   }
 
   const columns = [
-    { field: 'dept_Id', headerName: 'ID', width: 1 },
-    { field: 'dept_Descripcion', headerName: 'Departamento', width: 300 },
+    { field: 'dept_Id', headerName: 'ID', 
+      flex:1, },
+    { field: 'dept_Descripcion', headerName: 'Departamento', 
+      flex:2, },
     {
       field: 'acciones',
       headerName: 'Acciones',
-      width: 300,
+      flex:1,
       renderCell: (params) => (
         <div>
-          <IconButton color="secondary">
-            <DeleteIcon />
-          </IconButton>
-          <IconButton color="primary">
-            <EditIcon />
-          </IconButton>
-          <IconButton>
+      
+        
+            <CButton  color="info ms-2" variant="outline">
             <VisibilityIcon />
-          </IconButton>
+          </CButton>
+
+          <CButton color="warning ms-2" variant="outline" onClick={() => abrireditar(params.row)}>
+        <EditIcon />
+        </CButton>
+          
+            <CButton color="danger ms-2" variant="outline">
+            <DeleteIcon />
+            </CButton>
+        
         </div>
       ),
     },
@@ -109,25 +206,27 @@ const handleSubmitI = (event) => {
   return (
     <div style={{ width: '100%' }}>
       <div className='col-12'>
-      <CCollapse visible={!visible}>
+    <CCard className="p-5">
+
+      <CCollapse visible={!visibleEnca}>
 
       <h1 className='h4 text-center'>Departamentos</h1>
 
       <div className='col-2 offset-5 mb-4'>
       <div className="d-grid gap-1">
 
-    <CButton color="primary" variant="outline" href="#" onClick={(event) => {
-      event.preventDefault()
-      setVisible(!visible)
-    }}>
+    <CButton color="primary" variant="outline" href="#"        
+    onClick={abrirycerrarInsert}
+      >
       Nuevo
     </CButton>
           </div>
       </div>
     </CCollapse>
 
-
-    <CCollapse visible={visible}>
+ {/*Formulario Insertar*/}
+ 
+    <CCollapse visible={visible} className='col-6 offset-3'>
     
       <CCard className="mt-3">
         <CCardHeader>
@@ -143,13 +242,15 @@ const handleSubmitI = (event) => {
 
        <CCol md={6} className=''>
       <CFormInput
+      pattern="[0-9]*"
+      minLength={2} maxLength={2}
         type="text"
     value={nuevoDepartamento.dept_Id}
     onChange={(e) => setNuevoDepartamento({ ...nuevoDepartamento, dept_Id: e.target.value })}
     id="validationCustom01"
-    label="Departamento"
-    required
-      />
+    label="ID"
+    required/>
+
     </CCol>
        <CCol md={6} className=''>
 
@@ -159,19 +260,15 @@ const handleSubmitI = (event) => {
     onChange={(e) => setNuevoDepartamento({ ...nuevoDepartamento, dept_Descripcion: e.target.value })}
     id="validationCustom01"
     label="Departamento"
-    required
-/>
+    required/>
 
     </CCol>
 
-    <CCol xs={12}>
-      <CButton color="primary" type="submit">
+    <CCol xs={12} className='offset-7'>
+      <CButton color="primary"  type="submit">
         Guardar
       </CButton>
-      <CButton color="danger" className='m' href="#" onClick={(event) => {
-      event.preventDefault()
-      setVisible(!visible)
-    }}>
+      <CButton color="danger text-light"  className='ms-2' href="#" onClick={abrirycerrarInsert}>
       Cancelar
     </CButton>
     </CCol>
@@ -181,7 +278,61 @@ const handleSubmitI = (event) => {
     </CCollapse>
 
 
-      <CCollapse visible={!visible}>
+ {/*Formulario Editar*/}
+    <CCollapse visible={visible2} className='col-6 offset-3'>
+    
+    <CCard className="mt-3">
+      <CCardHeader>
+        <h1 className='h3 text-center'>Editar Departamento</h1>
+      </CCardHeader>
+      <CCardBody>
+    <CForm
+  className="row g-3 needs-validation"
+  noValidate
+  validated={validated}
+  onSubmit={handleSubmitE}
+>
+
+     <CCol md={6} className=''>
+    <CFormInput
+      type="hidden"
+  value={EditarDepartamento.dept_Id}
+  onChange={(e) => setEditarDepartamento({ ...EditarDepartamento, dept_Id: e.target.value })}
+  id="validationCustom01"
+  required
+    />
+  </CCol>
+     <CCol md={12} className=''>
+
+      <CFormInput
+  type="text"
+  minLength={2}
+  value={EditarDepartamento.dept_Descripcion}
+  onChange={(e) => setEditarDepartamento({ ...EditarDepartamento, dept_Descripcion: e.target.value })}
+  id="validationCustom01"
+  label="Departamento"
+  required
+/>
+
+  </CCol>
+
+  <CCol xs={12} className='offset-7'>
+    <CButton color="primary" type="submit">
+      Guardar
+    </CButton>
+    <CButton color="danger text-light" className='ms-2' href="#"  onClick={cerrarEditar}>
+      Cancelar
+    </CButton>
+  </CCol>
+</CForm>
+      </CCardBody>
+    </CCard>
+  </CCollapse>
+
+
+      <CCollapse visible={!visibleEnca}>
+    <CCard className="mt-3 p-1">
+
       <DataGrid
         rows={usuarios}
         columns={columns}
@@ -193,7 +344,9 @@ const handleSubmitI = (event) => {
         }}
         localeText={esES.components.MuiDataGrid.defaultProps.localeText}
       />
+      </CCard>
       </CCollapse>
+      </CCard>
       </div>
     </div>
   )

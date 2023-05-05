@@ -107,7 +107,7 @@ namespace Jafouan.BusinessLogic.Service
                 {
                     return result.SetMessage(map.MessageStatus, ServiceResultType.Error);
                 }
-              
+
             }
             catch (Exception ex)
             {

@@ -3,6 +3,304 @@ USE db_VERA
 GO
 
 --*****************************************************************ACCE************************************************************************--
+--**************************************************************Tabla Roles********************************************************************--
+CREATE OR ALTER PROC acce.UDP_tbRoles_INDEX
+AS BEGIN
+
+SELECT * FROM acce.VW_Roles
+WHERE role_Estado = 1;
+
+END
+GO
+
+CREATE OR ALTER PROC acce.UDP_tbRoles_FIND
+@role_Id INT
+AS BEGIN
+
+SELECT * FROM acce.tbRoles 
+WHERE role_Id = @role_Id;
+
+END
+GO
+
+CREATE OR ALTER PROC acce.UDP_tbRoles_INSERT
+@role_Descripcion NVARCHAR(100),
+@role_UserCrea INT
+AS BEGIN
+
+	BEGIN TRY
+	--si existe
+		IF EXISTS (SELECT * FROM acce.tbRoles WHERE role_Descripcion = @role_Descripcion AND role_Estado  = 1)
+	     BEGIN
+            SELECT 409 AS codeStatus, 'El Rol ya existe' AS messageStatus
+         END
+	--si no existe
+		 ELSE IF NOT EXISTS (SELECT * FROM acce.tbRoles WHERE role_Descripcion = @role_Descripcion)
+		 BEGIN
+			
+
+
+			INSERT INTO acce.tbRoles
+			(role_Descripcion, role_UserCrea)
+			VALUES
+			(@role_Descripcion, @role_UserCrea)
+
+			SELECT 200 AS codeStatus, 'Rol Creado con éxito' AS messageStatus
+		END
+
+	END TRY
+	BEGIN CATCH
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+
+END
+GO
+
+CREATE OR ALTER PROC acce.UDP_tbRoles_UPDATE
+@role_Id INT,
+@role_Descripcion NVARCHAR(100),
+@role_UserModifica INT
+AS BEGIN
+
+	BEGIN TRY
+	--si existe
+		IF EXISTS (SELECT * FROM acce.tbRoles WHERE role_Descripcion = @role_Descripcion AND role_Estado  = 1)
+	     BEGIN
+            SELECT 409 AS codeStatus, 'El Rol ya existe' AS messageStatus
+         END
+	--si no existe
+		 ELSE IF NOT EXISTS (SELECT * FROM acce.tbRoles WHERE role_Descripcion = @role_Descripcion)
+		 BEGIN
+			
+
+
+	UPDATE acce.tbRoles
+	SET role_Descripcion	= @role_Descripcion,
+		role_UserModifica	= @role_UserModifica
+		WHERE role_Id = @role_Id
+
+			SELECT 200 AS codeStatus, 'Rol Modificado con éxito' AS messageStatus
+		END
+
+	END TRY
+	BEGIN CATCH
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+
+END
+GO
+
+CREATE OR ALTER PROC acce.UDP_tbRoles_DELETE
+@role_Id INT
+AS BEGIN
+
+	BEGIN TRY
+			UPDATE acce.tbRoles
+			SET
+				role_Estado		=	0
+				WHERE role_Id	=	@role_Id
+
+			SELECT 200 AS codeStatus, 'Rol Eliminado con éxito' AS messageStatus
+
+	END TRY
+	BEGIN CATCH
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+
+END
+GO
+--*************************************************************/Tabla Roles********************************************************************--
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+--*************************************************************Tabla Pantallas*****************************************************************--
+CREATE OR ALTER PROC acce.UDP_tbPantallas_INDEX
+AS BEGIN
+
+SELECT * FROM acce.tbPantallas
+WHERE pant_Estado = 1;
+
+END
+GO
+
+CREATE OR ALTER PROC acce.UDP_tbPantallas_FIND
+@pant_Id INT
+AS BEGIN
+
+SELECT * FROM acce.VW_Pantallas
+WHERE pant_Id = @pant_Id;
+
+END
+GO
+
+CREATE OR ALTER PROC acce.UDP_tbPantallas_INSERT
+@pant_Nombre NVARCHAR(100),
+@pant_Identificador CHAR(8),
+@pant_Href NVARCHAR(70),
+@pant_UserCrea INT
+AS BEGIN
+
+	BEGIN TRY
+	--si existe
+		IF EXISTS (SELECT * FROM acce.tbPantallas WHERE pant_Nombre = @pant_Nombre OR pant_Identificador = @pant_Identificador OR pant_href = @pant_Href AND pant_Estado  = 1)
+	     BEGIN
+            SELECT 409 AS codeStatus, 'La Pantalla ya existe' AS messageStatus
+         END
+	--si no existe
+		 ELSE IF NOT EXISTS (SELECT * FROM acce.tbPantallas WHERE pant_Nombre = @pant_Nombre OR pant_Identificador = @pant_Identificador OR pant_href = @pant_Href)
+		 BEGIN
+			
+
+
+			INSERT INTO acce.tbPantallas
+			(pant_Nombre, pant_Identificador, pant_href, pant_UserCrea)
+			VALUES
+			(@pant_Nombre, @pant_Identificador, @pant_Href, @pant_UserCrea)
+
+			SELECT 200 AS codeStatus, 'Pantalla Creado con éxito' AS messageStatus
+		END
+
+	END TRY
+	BEGIN CATCH
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+
+END
+GO
+
+CREATE OR ALTER PROC acce.UDP_tbPantallas_UPDATE
+@pant_Id INT,
+@pant_Nombre NVARCHAR(100),
+@pant_Identificador CHAR(8),
+@pant_Href NVARCHAR(70),
+@pant_UserModifica INT
+AS BEGIN
+
+	BEGIN TRY
+	--si existe
+		IF EXISTS (SELECT * FROM acce.tbPantallas WHERE pant_Nombre = @pant_Nombre OR pant_Identificador = @pant_Identificador OR pant_href = @pant_Href AND pant_Estado  = 1)
+	     BEGIN
+            SELECT 409 AS codeStatus, 'La Pantalla ya existe' AS messageStatus
+         END
+	--si no existe
+		 ELSE IF NOT EXISTS (SELECT * FROM acce.tbPantallas WHERE pant_Nombre = @pant_Nombre OR pant_Identificador = @pant_Identificador OR pant_href = @pant_Href)
+		 BEGIN
+			
+
+	UPDATE acce.tbPantallas
+	SET pant_Nombre	= @pant_Nombre,
+		pant_Identificador	= @pant_Identificador,
+		pant_href =  @pant_Href
+		WHERE pant_Id=@pant_Id
+
+			SELECT 200 AS codeStatus, 'Pantalla Modificada con éxito' AS messageStatus
+		END
+
+	END TRY
+	BEGIN CATCH
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+
+
+
+END
+GO
+
+CREATE OR ALTER PROC acce.UDP_tbPantallas_DELETE
+@pant_Id INT
+AS BEGIN
+
+	BEGIN TRY
+			UPDATE acce.tbPantallas
+			SET
+				pant_Estado		=	0
+				WHERE pant_Id	=	@pant_Id
+
+			SELECT 200 AS codeStatus, 'Pantalla Modificada con éxito' AS messageStatus
+
+	END TRY
+	BEGIN CATCH
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+
+END
+GO
+--************************************************************/Tabla Pantallas*****************************************************************--
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+--*********************************************************Tabla Pantallas Por Rol**************************************************************--
+CREATE OR ALTER PROC acce.UDP_tbPantallasPorRol_Check 
+@pant_Identificador NVARCHAR(100)
+AS BEGIN
+
+SELECT  [pantrol_Id], 
+		T1.[role_Id], 
+		role_Descripcion,
+		T1.[pant_Id],
+		pant_Nombre,
+		[pantrol_Estado], 
+		[pantrol_UserCrea], 
+		T6.empl_Nombres + ' '+ T6.empl_ApellIdos AS empl_NombreCrea,
+		[pantrol_FechaCrea], 
+		T7.empl_Nombres + ' '+ T7.empl_ApellIdos AS empl_NombreModifica,
+		[pantrol_UserModifica], 
+		[pantrol_FechaModifica] 
+		FROM acce.tbPantallasPorRol T1
+		INNER JOIN acce.tbRoles T2
+		ON T1.role_Id = T2.role_Id
+		INNER JOIN acce.tbPantallas T3
+		ON T1.pant_Id = T3.pant_Id
+		INNER JOIN acce.tbUsuarios T4
+		ON T1.pantrol_UserCrea = T4.user_Id
+		LEFT JOIN acce.tbUsuarios T5
+		ON T1.pantrol_UserModifica = T5.user_Id
+		INNER JOIN vera.tbEmpleados T6
+		ON T4.empl_Id = T6.empl_Id
+		LEFT JOIN vera.tbEmpleados T7
+		ON T5.empl_Id = T7.empl_Id
+		WHERE SUBSTRING(pant_Identificador,0,5)= @pant_Identificador
+
+
+END
+GO
+
+CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_Checked 
+@role_Id INT
+AS BEGIN
+	SELECT Pant_Id FROM acce.tbPantallasPorRol
+	WHERE role_Id = @role_Id
+END
+
+GO
+
+CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_INSERT
+@role_Id INT,
+@pant_Id INT,
+@pantrol_UserCrea INT
+AS
+BEGIN
+	INSERT INTO [acce].[tbPantallasPorRol]
+	(role_Id, pant_Id, pantrol_UserCrea)
+	VALUES
+	(@role_Id,@pant_Id,@pantrol_UserCrea)
+END
+
+GO
+
+CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_DELETE
+@role_Id INT,
+@pant_Id INT
+AS
+BEGIN
+DELETE FROM  [acce].[tbPantallasPorRol]
+WHERE role_Id=@role_Id AND pant_Id=@pant_Id
+END
+GO
+--********************************************************/Tabla Pantallas Por Rol**************************************************************--
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
 --*************************************************************Tabla Usuarios******************************************************************--
 CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_INDEX
 AS
@@ -12,7 +310,8 @@ WHERE user_Estado = 1
 END
 
 GO
-GO
+
+
 CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_FIND 
 @user_Id					INT
 AS
@@ -107,10 +406,23 @@ BEGIN
 	END CATCH
 END
 GO
+
+CREATE OR ALTER PROCEDURE acce.UDP_tbUsuarios_LOGIN 
+@user_NombreUsuario					NVARCHAR(MAX),
+@user_Contraseña					NVARCHAR(MAX)
+AS
+BEGIN
+
+DECLARE @Encrypt NVARCHAR(MAX) = (HASHBYTES('SHA2_512',@user_Contraseña))
+
+SELECT * FROM acce.VW_Usuarios
+WHERE user_NombreUsuario = @user_NombreUsuario AND user_Contraseña = @Encrypt
+END
+
+GO
 --************************************************************/Tabla Usuarios******************************************************************--
 
 --*****************************************************************ACCE************************************************************************--
-
 
 
 --*****************************************************************MANT************************************************************************--
@@ -122,8 +434,6 @@ AS BEGIN
  WHERE carg_Estado = 1;
 
 END
-GO
-EXEC acce.UDP_tbUsuarios_INDEX
 GO
 
 CREATE OR ALTER PROC mant.UDP_tbCargos_FIND
@@ -1983,3 +2293,12 @@ END
 
 --*******************************************************/Tabla Facturas Detalles***************************************************************--
 
+GO
+ 	DECLARE @user_NombreUsuario			NVARCHAR(200) = 'IsHatake'
+	DECLARE @empl_Id					INT = 2
+	DECLARE @user_Contraseña			NVARCHAR(MAX)='123'
+	DECLARE @user_Admin					BIT = 0
+	DECLARE @role_Id					INT	= 1
+	DECLARE @user_UserCrea				INT = 1
+
+	EXEC  acce.UDP_tbUsuarios_INSERT @user_NombreUsuario,@empl_Id,@user_Contraseña,@user_Admin,@role_Id,@user_UserCrea
