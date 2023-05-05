@@ -756,12 +756,12 @@ AS BEGIN
 
  	BEGIN TRY
 	--si existe
-		IF EXISTS (SELECT * FROM mant.tbMunicipios WHERE muni_Descripcion = @muni_Descripcion AND muni_Estado  = 1)
+		IF EXISTS (SELECT * FROM mant.tbMunicipios WHERE muni_Descripcion = @muni_Descripcion OR muni_Id = @muni_Id AND muni_Estado  = 1)
 	     BEGIN
             SELECT 409 AS codeStatus, 'El Municipio ya existe' AS messageStatus
          END
 	--si no existe
-		 ELSE IF NOT EXISTS (SELECT * FROM  mant.tbMunicipios WHERE muni_Descripcion = @muni_Descripcion)
+		 ELSE IF NOT EXISTS (SELECT * FROM  mant.tbMunicipios WHERE muni_Descripcion = @muni_Descripcion  OR muni_Id = @muni_Id)
 		 BEGIN
 			
 			INSERT INTO  mant.tbMunicipios
@@ -1238,7 +1238,7 @@ AS BEGIN
 			INSERT INTO  vera.tbEmpleados
 			(empl_Nombres, empl_ApellIdos, empl_Identidad, empl_FechaNacimiento, empl_Sexo, estc_Id, empl_Telefeno, muni_Id, carg_Id, sucu_Id, empl_Direccion, empl_UserCrea)
 			VALUES
-			(@empl_Nombres, @empl_Apellidos, @empl_Identidad, @empl_FechaNacimiento, @empl_Sexo, @estc_Id, @empl_Telefono, @muni_Id, @carg_Id, @sucu_Id, @empl_Direccion, @empl_UserCrea)
+	       (@empl_Nombres, @empl_Apellidos, @empl_Identidad, @empl_FechaNacimiento, @empl_Sexo, @estc_Id, @empl_Telefono, @muni_Id, @carg_Id, @sucu_Id, @empl_Direccion, @empl_UserCrea)
 
 			SELECT 200 AS codeStatus, 'Empleado creado con éxito' AS messageStatus
 		END
@@ -1752,7 +1752,7 @@ GO
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
 --**********************************************************Tabla Proveedores******************************************************************--
-CREATE OR ALTER PROC vera.UDP_tbProveedores_INDE
+CREATE OR ALTER PROC vera.UDP_tbProveedores_INDEX
 AS BEGIN
 
  SELECT * FROM vera.VW_Proveedores
@@ -1761,7 +1761,7 @@ AS BEGIN
 END
 GO
 
-CREATE OR ALTER PROC vera.UDP_tbPrendas_FIND
+CREATE OR ALTER PROC vera.UDP_tbProveedores_FIND
 @prov_Id INT
 AS BEGIN
 
