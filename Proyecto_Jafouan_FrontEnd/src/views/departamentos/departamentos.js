@@ -189,7 +189,7 @@ const handleSubmitD = (event) => {
   axios.put('api/Departamentos/Delete', ElimDepartamento, config)
       .then((response) => {
           console.log(response.data)
-          setModal(!Modal)
+          setModal(false)
           setElimDepartamento({
             dept_Id: '',
         })
