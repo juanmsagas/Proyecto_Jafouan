@@ -1,0 +1,201 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "Db_VERAContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Entities",
+   "ProjectRootNamespace": "Jafouan.Entities",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 2,
+   "Tables": [
+      {
+         "Name": "[acce].[tbPantallas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[acce].[tbPantallasPorRol]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[acce].[tbRoles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[acce].[tbUsuarios]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[fact].[tbFacturaDetalles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[fact].[tbFacturas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[fact].[tbMetodosPagos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[mant].[tbCargos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[mant].[tbDepartamentos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[mant].[tbEstadosCiviles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[mant].[tbMunicipios]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[vera].[tbCategorias]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[vera].[tbClientes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[vera].[tbDescuentos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[vera].[tbEmpleados]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[vera].[tbFardos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[vera].[tbFardosProveedor]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[vera].[tbMarcas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[vera].[tbPrendas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[vera].[tbProveedores]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[vera].[tbSucursales]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[acce].[VW_Pantallas]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[acce].[VW_Roles]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[acce].[VW_Usuarios]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[fact].[VW_FacturaDetalles]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[fact].[VW_Facturas]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[fact].[VW_MetodosPago]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[fact].[VW_MetodosPagos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[mant].[VW_Cargos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[mant].[VW_Departamentos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[mant].[VW_EstadosCiviles]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[mant].[VW_Municipios]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[vera].[VW_Categorias]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[vera].[VW_Clientes]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[vera].[VW_Descuentos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[vera].[VW_Empleados]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[vera].[VW_Fardos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[vera].[VW_FardosProveedores]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[vera].[VW_Marcas]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[vera].[VW_Prendas]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[vera].[VW_Proveedores]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[vera].[VW_Sucursales]",
+         "ObjectType": 3
+      }
+   ],
+   "UiHint": "DESKTOP-BSILECU\\SQLEXPRESS.db_VERA",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}
