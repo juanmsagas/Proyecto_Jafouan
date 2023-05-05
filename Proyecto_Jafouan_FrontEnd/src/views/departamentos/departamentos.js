@@ -27,7 +27,10 @@ function Departamentos() {
   const [usuarios, setUsuarios] = useState([])
   const [sortModel, setSortModel] = useState([{ field: 'dept_Id', sort: 'asc' }])
   const [visible, setVisible] = useState(false)
-  
+  const [visible2, setVisible2] = useState(false)
+
+  const [visibleEnca, setvisibleEnca   ] = useState(false)
+
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
     const form = event.currentTarget
@@ -39,9 +42,54 @@ function Departamentos() {
   }
   const [nuevoDepartamento, setNuevoDepartamento] = useState({
     dept_Id: '',
-    dept_Descripcion: ''
+    dept_Descripcion: '',
+    dept_UserCrea:1
 })
 
+const [EditarDepartamento, setEditarDepartamento] = useState({
+  dept_Id: '',
+  dept_Descripcion: '',
+  dept_UserModifica:1
+})
+
+const abrireditar = (params,event) => {
+  if (event) {
+    event.preventDefault()
+  }
+  setVisible2(!visible2)
+  setvisibleEnca(!visibleEnca)
+  console.log(params)
+  setEditarDepartamento({
+    dept_Id: params.dept_Id,
+    dept_Descripcion:  params.dept_Descripcion,
+    dept_UserModifica:1
+})
+}
+
+const cerrarEditar = (event) => {
+  event.preventDefault()
+  setVisible2(!visible2)
+  setvisibleEnca(!visibleEnca)
+  setEditarDepartamento({
+    dept_Id: '',
+    dept_Descripcion: '',
+    dept_UserModifica:1
+})
+}
+
+const abrirycerrarInsert = (event) => {
+  event.preventDefault()
+  setVisible(!visible)
+  setvisibleEnca(!visibleEnca)
+  setNuevoDepartamento({
+    dept_Id: '',
+    dept_Descripcion: '',
+    dept_UserCrea:1
+})
+
+}
+
+  //peticion a la api insert   
 const handleSubmitI = (event) => {
     event.preventDefault()
 
@@ -57,7 +105,8 @@ const handleSubmitI = (event) => {
             setVisible(false)
             setNuevoDepartamento({
                 dept_Id: '',
-                dept_Descripcion: ''
+                dept_Descripcion: '',
+                dept_UserCrea:1
             })
         })
         .catch((error) => {
@@ -65,9 +114,35 @@ const handleSubmitI = (event) => {
         })
 }
 
+//peticion a la api Editar   
+const handleSubmitE = (event) => {
+  event.preventDefault()
+
+  const config = {
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  }
+
+  axios.put('api/Departamentos/Update', EditarDepartamento, config)
+      .then((response) => {
+          console.log(response.data)
+          setVisible2(!visible2)
+          setvisibleEnca(!visibleEnca)
+          setEditarDepartamento({
+            dept_Id: '',
+            dept_Descripcion: '',
+            dept_UserModifica:1
+        })
+        console.log(response.data)
+      })
+      .catch((error) => {
+          console.log(error)
+      })
+}
 
 
-  //peticion a la api 
+  //peticion a la api listado   
   useEffect(() => {
     axios.get('api/Departamentos/Index').then((response) => {
       console.log('entra')
@@ -95,9 +170,12 @@ const handleSubmitI = (event) => {
           <IconButton color="secondary">
             <DeleteIcon />
           </IconButton>
-          <IconButton color="primary">
-            <EditIcon />
-          </IconButton>
+        
+          <IconButton color="primary" onClick={() => abrireditar(params.row)}>
+        <EditIcon />
+        </IconButton>
+
+          
           <IconButton>
             <VisibilityIcon />
           </IconButton>
@@ -109,24 +187,23 @@ const handleSubmitI = (event) => {
   return (
     <div style={{ width: '100%' }}>
       <div className='col-12'>
-      <CCollapse visible={!visible}>
+      <CCollapse visible={!visibleEnca}>
 
       <h1 className='h4 text-center'>Departamentos</h1>
 
       <div className='col-2 offset-5 mb-4'>
       <div className="d-grid gap-1">
 
-    <CButton color="primary" variant="outline" href="#" onClick={(event) => {
-      event.preventDefault()
-      setVisible(!visible)
-    }}>
+    <CButton color="primary" variant="outline" href="#"        
+    onClick={abrirycerrarInsert}
+      >
       Nuevo
     </CButton>
           </div>
       </div>
     </CCollapse>
 
-
+ {/*Formulario Insertar*/}
     <CCollapse visible={visible}>
     
       <CCard className="mt-3">
@@ -147,7 +224,7 @@ const handleSubmitI = (event) => {
     value={nuevoDepartamento.dept_Id}
     onChange={(e) => setNuevoDepartamento({ ...nuevoDepartamento, dept_Id: e.target.value })}
     id="validationCustom01"
-    label="Departamento"
+    label="ID"
     required
       />
     </CCol>
@@ -168,10 +245,7 @@ const handleSubmitI = (event) => {
       <CButton color="primary" type="submit">
         Guardar
       </CButton>
-      <CButton color="danger" className='m' href="#" onClick={(event) => {
-      event.preventDefault()
-      setVisible(!visible)
-    }}>
+      <CButton color="danger" className='m' href="#" onClick={abrirycerrarInsert}>
       Cancelar
     </CButton>
     </CCol>
@@ -181,7 +255,59 @@ const handleSubmitI = (event) => {
     </CCollapse>
 
 
-      <CCollapse visible={!visible}>
+ {/*Formulario Editar*/}
+    <CCollapse visible={visible2}>
+    
+    <CCard className="mt-3">
+      <CCardHeader>
+        <h1 className='h3 text-center'>Editar Departamento</h1>
+      </CCardHeader>
+      <CCardBody>
+    <CForm
+  className="row g-3 needs-validation"
+  noValidate
+  validated={validated}
+  onSubmit={handleSubmitE}
+>
+
+     <CCol md={6} className=''>
+    <CFormInput
+      type="hidden"
+  value={EditarDepartamento.dept_Id}
+  onChange={(e) => setEditarDepartamento({ ...EditarDepartamento, dept_Id: e.target.value })}
+  id="validationCustom01"
+  required
+    />
+  </CCol>
+     <CCol md={12} className=''>
+
+      <CFormInput
+  type="text"
+  value={EditarDepartamento.dept_Descripcion}
+  onChange={(e) => setEditarDepartamento({ ...EditarDepartamento, dept_Descripcion: e.target.value })}
+  id="validationCustom01"
+  label="Departamento"
+  required
+/>
+
+  </CCol>
+
+  <CCol xs={12}>
+    <CButton color="primary" type="submit">
+      Guardar
+    </CButton>
+    <CButton color="danger" className='m' href="#"  onClick={cerrarEditar}
+  >
+    Cancelar
+  </CButton>
+  </CCol>
+</CForm>
+      </CCardBody>
+    </CCard>
+  </CCollapse>
+
+
+      <CCollapse visible={!visibleEnca}>
       <DataGrid
         rows={usuarios}
         columns={columns}
