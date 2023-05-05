@@ -540,7 +540,7 @@ END
 GO
 
 CREATE OR ALTER PROC mant.UDP_tbDepartamentos_FIND
-@dept_Id INT
+@dept_Id CHAR(2)
 AS BEGIN
 
  SELECT * FROM mant.VW_Departamentos
@@ -583,7 +583,7 @@ END
 GO
 
 CREATE OR ALTER PROC mant.UDP_tbDepartamentos_UPDATE
-@dept_Id INT,
+@dept_Id CHAR(2),
 @dept_Descripcion NVARCHAR(100),
 @dept_UserModifica INT
 AS BEGIN
@@ -607,7 +607,7 @@ END
 GO
 
 CREATE OR ALTER PROC mant.UDP_tbDepartamentos_DELETE
-@dept_Id INT
+@dept_Id CHAR(2)
 AS BEGIN
 
  	BEGIN TRY
