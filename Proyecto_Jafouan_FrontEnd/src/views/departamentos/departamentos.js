@@ -81,8 +81,11 @@ const abrirycerrarInsert = (event) => {
   event.preventDefault()
   setVisible(!visible)
   setvisibleEnca(!visibleEnca)
-  
-  
+  setNuevoDepartamento({
+    dept_Id: '',
+    dept_Descripcion: '',
+    dept_UserCrea:1
+})
 
 }
 
