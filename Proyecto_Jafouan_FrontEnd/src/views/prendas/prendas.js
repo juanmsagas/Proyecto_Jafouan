@@ -23,7 +23,11 @@ import {CButton,
         CFormSelect,
         CFormCheck,
         CFormFeedback,
-        CCardHeader}
+        CCardHeader,
+        CModal,
+        CModalHeader,
+        CModalTitle,
+        CModalBody,}
         from '@coreui/react'
 import { CardHeader } from 'reactstrap'
 
@@ -31,6 +35,7 @@ function Prendas() {
   const [prendas, setPrendas] = useState([])
   const [sortModel, setSortModel] = useState([{ field: 'pren_Id', sort: 'asc' }])
   const [visible, setVisible] = useState(false)
+  const [Modal, setModal] = useState(false)
   const [visible2, setVisible2] = useState(false)
   const [descuentos, setDescuentoDDL] = useState([]);  
   const [marcas, setMarcasDDL] = useState([]);
@@ -60,6 +65,9 @@ function Prendas() {
     pren_Imagen: '',
     pren_UserCrea: 1
 
+})
+const [ElimPrenda, setElimPrenda] = useState({
+  pren_Id: 0
 })
 
 const [editarPrenda, seteditarPrenda] = useState({
@@ -131,6 +139,18 @@ const abrirycerrarInsert = (event) => {
 })
 
 }
+
+const ModalFun = (params,event) => {
+  if (event) {
+    event.preventDefault()
+  }
+  setModal(!visible)
+  setElimPrenda({
+    pren_Id: params,
+   
+}
+)}
+
 
   //peticion a la api insert   
 const handleSubmitI = (event) => {
@@ -229,6 +249,30 @@ const form = event.currentTarget
     setSortModel(model)
   }
 
+  /*Peticion pa eliminar */
+  const handleSubmitD = (event) => {
+    event.preventDefault()
+  
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    axios.put('api/Prendas/Delete', ElimPrenda, config)
+        .then((response) => {
+            console.log(response.data)
+            setModal(false)
+            setElimPrenda({
+              pren_Id: 0,
+          })
+          console.log(response.data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+      
+  }
+
   const columns = [
     { field: 'pren_Id', headerName: 'ID',  width: 90},
     { field: 'pren_Descripcion', headerName: 'Descripcion',  width: 450},
@@ -253,7 +297,7 @@ const form = event.currentTarget
         <EditIcon />
         </CButton>
           
-            <CButton color="danger ms-2" variant="outline">
+        <CButton color="danger ms-2" variant="outline" onClick={() => ModalFun(params.row.pren_Id)}>
             <DeleteIcon />
             </CButton>
         
@@ -321,6 +365,38 @@ const form = event.currentTarget
           </div>
       </div>
     </CCollapse>
+
+    {/*Modal pa eliminar*/}
+
+    <CModal alignment="center"  visible={Modal} onClick={() => setModal(false)}>
+   
+   <CModalBody className='pt-5 pb-5' style={{boxShadow:5}}>
+   <CForm
+ className="row g-3 needs-validation"
+ noValidate
+ validated={validated}
+ onSubmit={handleSubmitD}
+>
+   <CFormInput
+   minLength={2} maxLength={2}
+     type="hidden"
+ value={ElimPrenda.pren_Id}
+ id="validationCustom01"
+ disabled
+ required/>
+         <center>
+     <CModalTitle>Esta seguro que desea Eliminar este registro?</CModalTitle>
+     </center>
+ <center>
+  <CButton color="light"  className='col-5 me-3' onClick={() => setModal(false)}>
+       Cancelar
+     </CButton>
+     <CButton color="danger text-light" type='submit' className='col-5'>Eliminar</CButton>
+ </center>
+ </CForm>
+   </CModalBody>
+   
+ </CModal>
 
  {/*Formulario Insertar*/}
  

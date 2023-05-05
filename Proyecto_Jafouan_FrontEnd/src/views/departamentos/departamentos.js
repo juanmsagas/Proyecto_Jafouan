@@ -189,7 +189,7 @@ const handleSubmitD = (event) => {
   axios.put('api/Departamentos/Delete', ElimDepartamento, config)
       .then((response) => {
           console.log(response.data)
-          setModal(!Modal)
+          setModal(false )
           setElimDepartamento({
             dept_Id: '',
         })
@@ -270,7 +270,7 @@ const handleSubmitD = (event) => {
 
  {/*Modal Eliminar*/}
 
-    <CModal alignment="center"  visible={Modal} onClick={() => setModal(!Modal)}>
+    <CModal alignment="center"  visible={Modal} onClick={() => setModal(false)}>
       
       <CModalBody className='pt-5 pb-5' style={{boxShadow:5}}>
       <CForm
@@ -290,7 +290,7 @@ const handleSubmitD = (event) => {
         <CModalTitle>Esta seguro que desea Eliminar este registro?</CModalTitle>
         </center>
     <center>
-     <CButton color="light"  className='col-5 me-3' onClick={() => setModal(!Modal)}>
+     <CButton color="light"  className='col-5 me-3' onClick={() => setModal(false)}>
           Cancelar
         </CButton>
         <CButton color="danger text-light" type='submit' className='col-5'>Eliminar</CButton>
