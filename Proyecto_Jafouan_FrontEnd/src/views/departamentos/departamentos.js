@@ -167,7 +167,7 @@ const form = event.currentTarget
             dept_Id: '',
             dept_Descripcion: '',
             dept_UserModifica:1
-        })
+        })  
         console.log(response.data)
       })
       .catch((error) => {
@@ -270,7 +270,7 @@ const handleSubmitD = (event) => {
 
  {/*Modal Eliminar*/}
 
-    <CModal alignment="center"  visible={Modal} onClose={() => setModal(false)}>
+    <CModal alignment="center"  visible={Modal} onClick={() => setModal(!Modal)}>
       
       <CModalBody className='pt-5 pb-5' style={{boxShadow:5}}>
       <CForm
@@ -290,7 +290,7 @@ const handleSubmitD = (event) => {
         <CModalTitle>Esta seguro que desea Eliminar este registro?</CModalTitle>
         </center>
     <center>
-     <CButton color="light" type='submit' className='col-5 me-3' onClick={() => setModal(false)}>
+     <CButton color="light"  className='col-5 me-3' onClick={() => setModal(!Modal)}>
           Cancelar
         </CButton>
         <CButton color="danger text-light" type='submit' className='col-5'>Eliminar</CButton>
