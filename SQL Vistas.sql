@@ -1,5 +1,4 @@
---************************************************************* VISTAS ******************************************************************--
-USE db_VERA
+--************************************************************* VISTAS ******************************************************************--USE db_VERA
 GO
 CREATE OR ALTER VIEW acce.VW_Usuarios
 AS
@@ -8,6 +7,7 @@ SELECT	user_Id,
 		T1.empl_Id,
 		nombreEmpleado = CONVERT(VARCHAR,T2.empl_Nombres+' '+T2.empl_ApellIdos),
 		user_Admin,
+		user_Contraseña,
 		CASE WHEN user_Admin  = 1 THEN 'SI'
 		ELSE 'NO' END AS EsAdmin,
 		T1.role_Id,
@@ -324,7 +324,8 @@ SELECT	pren_Id,
 		T2.marc_Descripcion,
 		T1.cate_Id,
 		T3.cate_Descripcion,
-		fard_Id, 
+		T1.fard_Id, 
+		T5.fard_Descripcion,
 		pren_Imagen, 
 		prend_EstadoTienda, 
 		pren_Estado,
@@ -341,6 +342,8 @@ SELECT	pren_Id,
 		ON T1.cate_Id = T3.cate_Id
 		INNER JOIN vera.tbDescuentos T4
 		ON T1.desc_Id = T4.desc_Id
+		INNER JOIN vera.tbFardos  T5
+		ON T1.fard_Id = T5.fard_Id
 
 GO
 

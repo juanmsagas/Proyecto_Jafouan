@@ -27,7 +27,14 @@ function Prendas() {
   const [prendas, setPrendas] = useState([])
   const [sortModel, setSortModel] = useState([{ field: 'pren_Id', sort: 'asc' }])
   const [visible, setVisible] = useState(false)
-  
+  const [visible2, setVisible2] = useState(false)
+  const [descuentos, setDescuentoDDL] = useState([]);  
+  const [marcas, setMarcasDDL] = useState([]);
+  const [fardos, setFardosDDL] = useState([]);
+  const [categorias, setCategoriasDDL] = useState([]);
+
+  const [visibleEnca, setvisibleEnca   ] = useState(false)
+
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
     const form = event.currentTarget
@@ -37,7 +44,172 @@ function Prendas() {
     }
     setValidated(true)
   }
-  //peticion a la api 
+  const [nuevaPrendas, setNuevaPrenda] = useState({
+    pren_Descripcion: '',
+    pren_Talla: '',
+    desc_Id: '',
+    desc_Descuento: 0,
+    pren_Precio: 0,
+    marc_Id: '',
+    cate_Id: '',
+    fard_Id: '',
+    pren_Imagen: '',
+    pren_UserCrea: 1
+
+})
+
+const [editarPrenda, seteditarPrenda] = useState({
+  pren_Id: 0,
+  pren_Descripcion: '',
+  pren_Talla: '',
+  desc_Id: '',
+  pren_Precio: 0,
+  marc_Id: '',
+  cate_Id: '',
+  fard_Id: '',
+  pren_Imagen: '',
+  pren_UserModifica: 1
+})
+
+const abrirPrenda = (params,event) => {
+  if (event) {
+    event.preventDefault()
+  }
+  setVisible2(!visible2)
+  setvisibleEnca(!visibleEnca)
+  console.log(params)
+  seteditarPrenda({
+    pren_Id: params.pren_Id,
+    pren_Descripcion: params.pren_Descripcion,
+    pren_Talla: params.pren_Talla,
+    desc_Id: params.desc_Id,
+    pren_Precio: params.pren_Precio,
+    marc_Id: params.marc_Id,
+    cate_Id: params.cate_Id,
+    fard_Id: params.fard_Id,
+    pren_Imagen: params.pren_Imagen,
+    pren_UserModifica: params.pren_UserModifica
+})
+}
+
+const cerrarEditar = (event) => {
+  event.preventDefault()
+  setVisible2(!visible2)
+  setvisibleEnca(!visibleEnca)
+  seteditarPrenda({
+    pren_Id: 0,
+    pren_Descripcion: '',
+    pren_Talla: '',
+    desc_Id: '',
+    pren_Precio: 0,
+    marc_Id: '',
+    cate_Id: '',
+    fard_Id: '',
+    pren_Imagen: '',
+    pren_UserModifica: 1
+})
+}
+
+const abrirycerrarInsert = (event) => {
+  event.preventDefault()
+  setVisible(!visible)
+  setvisibleEnca(!visibleEnca)
+  setNuevaPrenda({
+    pren_Descripcion: '',
+    pren_Talla: '',
+    desc_Id: '',
+    pren_Precio: 0,
+    marc_Id: '',
+    cate_Id: '',
+    fard_Id: '',
+    pren_Imagen: '',
+    pren_UserCrea: 1
+})
+
+}
+
+  //peticion a la api insert   
+const handleSubmitI = (event) => {
+    event.preventDefault()
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+ const form = event.currentTarget
+  if (form.checkValidity() === false) {
+    event.preventDefault()
+    event.stopPropagation()
+  }
+  setValidated(true)
+  if(form.checkValidity() != false){
+    axios.post('api/Prendas/Insert', nuevaPrendas, config)
+        .then((response) => {
+            console.log(response.data)
+            setVisible(false)
+            setvisibleEnca(!visibleEnca)
+            nuevaPrendas({
+              pren_Descripcion: '',
+              pren_Talla: '',
+              desc_Id: '',
+              pren_Precio: 0,
+              marc_Id: '',
+              cate_Id: '',
+              fard_Id: '',
+              pren_Imagen: '',
+              pren_UserCrea: 1
+            })
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+      }
+}
+
+//peticion a la api Editar   
+const handleSubmitE = (event) => {
+  event.preventDefault()
+
+  const config = {
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  }
+const form = event.currentTarget
+  if (form.checkValidity() === false) {
+    event.preventDefault()
+    event.stopPropagation()
+  }
+  setValidated(true)
+  if(form.checkValidity() != false){
+  axios.put('api/Prendas/Update', editarPrenda, config)
+      .then((response) => {
+          console.log(response.data)
+          setVisible2(!visible2)
+          setvisibleEnca(!visibleEnca)
+          seteditarPrenda({
+            pren_Id: 0,
+            pren_Descripcion: '',
+            pren_Talla: '',
+            desc_Id: '',
+            pren_Precio: 0,
+            marc_Id: '',
+            cate_Id: '',
+            fard_Id: '',
+            pren_Imagen: '',
+            pren_UserModifica: 1
+        })
+        console.log(response.data)
+      })
+      .catch((error) => {
+          console.log(error)
+      })
+    }
+}
+
+
+  //peticion a la api listado   
   useEffect(() => {
     axios.get('api/Prendas/Index').then((response) => {
       console.log('entra')
@@ -47,94 +219,268 @@ function Prendas() {
       }))
       setPrendas(insertarid)
     })
-  }, [])
+  }, [prendas])
 
   const handleSortModelChange = (model) => {
     setSortModel(model)
   }
 
   const columns = [
-    { field: 'pren_Id', headerName: 'ID', width: 1 },
-    { field: 'pren_Descripcion', headerName: 'Descripción', width: 450 },
-    { field: 'pren_Talla', headerName: 'Talla', width: 20 },
-    { field: 'desc_Descuento', headerName: 'Descuento', width: 100 },
-    { field: 'pren_Precio', headerName: 'Precio', width: 100 },
-    { field: 'marc_Descripcion', headerName: 'Marca', width: 100 },
-    { field: 'cate_Descripcion', headerName: 'Categorías', width: 120 },
-
+    { field: 'pren_Id', headerName: 'ID',  width: 25},
+    { field: 'pren_Descripcion', headerName: 'Descripcion',  width: 450},
+    { field: 'pren_Talla', headerName: 'Talla',  width: 10},
+    { field: 'desc_Descuento', headerName: 'Descuento',  width: 100},
+    { field: 'pren_Precio', headerName: 'Precio',  width: 75},
+    { field: 'marc_Descripcion', headerName: 'Marca',  width: 75},
+    { field: 'cate_Descripcion', headerName: 'Categoría',  width: 100},
+    { field: 'fard_Descripcion', headerName: 'Fardo',  width: 150},
     {
       field: 'acciones',
       headerName: 'Acciones',
       width: 300,
       renderCell: (params) => (
         <div>
-          <IconButton color="secondary">
-            <DeleteIcon />
-          </IconButton>
-          <IconButton color="primary">
-            <EditIcon />
-          </IconButton>
-          <IconButton>
+      
+        
+            <CButton  color="info ms-2" variant="outline">
             <VisibilityIcon />
-          </IconButton>
+          </CButton>
+
+          <CButton color="warning ms-2" variant="outline" onClick={() => abrirPrenda(params.row)}>
+        <EditIcon />
+        </CButton>
+          
+            <CButton color="danger ms-2" variant="outline">
+            <DeleteIcon />
+            </CButton>
+        
         </div>
       ),
     },
   ]
 
+
+
+  useEffect(() => {
+    axios.get('api/Descuentos/Index')
+    .then(response => {
+      setDescuentoDDL(response.data);
+    })
+    .catch(error => { 
+      console.error('Error fetching data from API:', error);
+    });
+  
+    axios.get('api/Marcas/Index')
+    .then(response => {
+      setMarcasDDL(response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching data from API:', error);
+    });
+
+    axios.get('api/Categorias/Index')
+    .then(response => {
+      setCategoriasDDL(response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching data from API:', error);
+    });
+
+    axios.get('api/Fardos/Index')
+    .then(response => {
+      setFardosDDL(response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching data from API:', error);
+    });
+
+
+  }, []);
+
+
+
   return (
     <div style={{ width: '100%' }}>
       <div className='col-12'>
-      <CCollapse visible={!visible}>
+    <CCard className="p-5">
+
+      <CCollapse visible={!visibleEnca}>
 
       <h1 className='h4 text-center'>Prendas</h1>
 
       <div className='col-2 offset-5 mb-4'>
       <div className="d-grid gap-1">
 
-    <CButton color="primary" variant="outline" href="#" onClick={(event) => {
-      event.preventDefault()
-      setVisible(!visible)
-    }}>
+    <CButton color="primary" variant="outline" href="#"        
+    onClick={abrirycerrarInsert}
+      >
       Nuevo
     </CButton>
           </div>
       </div>
     </CCollapse>
 
-
-    <CCollapse visible={visible}>
+ {/*Formulario Insertar*/}
+ 
+    <CCollapse visible={visible} className='col-6 offset-3'>
     
       <CCard className="mt-3">
         <CCardHeader>
           <h1 className='h3 text-center'>Nueva Prenda</h1>
         </CCardHeader>
         <CCardBody>
-        <CForm
+      <CForm
     className="row g-3 needs-validation"
     noValidate
     validated={validated}
-    onSubmit={handleSubmit}
-  >
-    <CCol md={6} className='offset-3'>
-      <CFormInput
-        type="text"
-        defaultValue=""
-        feedbackValid="Looks good!"
-        id="validationCustom01"
-        label="Prenda Descripción"
-        required
-      />
+    onSubmit={handleSubmitI}
+>
+
+
+       <CCol md={6} className=''>
+
+        <CFormInput
+    type="text"
+    value={nuevaPrendas.pren_Descripcion}
+    onChange={(e) => setNuevaPrenda({ ...nuevaPrendas, pren_Descripcion: e.target.value })}
+    id="validationCustom01"
+    label="Nombre"
+    required/>
+
     </CCol>
+
+    <CCol md={6} className=''>
+
+    <CFormInput
+    type="text"
+    value={nuevaPrendas.pren_Talla}
+    onChange={(e) => setNuevaPrenda({ ...nuevaPrendas, pren_Talla: e.target.value })}
+    id="validationCustom01"
+    label="Talla"
+    required/>
+
+    </CCol>
+
     
-    <CCol xs={12}>
-      <CButton color="primary" type="submit">
+
+    <CCol md={6} className="">
+  <CFormSelect
+    value={nuevaPrendas.desc_Id}
+    onChange={(e) =>
+      setNuevaPrenda({ ...nuevaPrendas, desc_Id: e.target.value })
+    }
+    id="validationCustom01"
+    label="Descuentos"
+    required>
+    <option value="">Seleccione un Descuento</option>
+    {descuentos.map((opcion) => (
+      <option key={opcion.desc_Id} value={opcion.desc_Id}>
+        {opcion.desc_Color}
+      </option>
+    ))}
+  </CFormSelect>
+
+</CCol>
+
+        <CCol md={6} className=''>
+
+    <CFormInput
+    type="text"
+    value={nuevaPrendas.pren_Precio}
+    onChange={(e) => setNuevaPrenda({ ...nuevaPrendas, pren_Precio: e.target.value })}
+    id="validationCustom01"
+    label="Precio"
+    required/>
+
+    </CCol>
+
+    <CCol md={6} className="">
+  <CFormSelect
+    value={nuevaPrendas.marc_Id}
+    onChange={(e) =>
+      setNuevaPrenda({ ...nuevaPrendas, marc_Id: e.target.value })
+    }
+    id="validationCustom01"
+    label="Marca"
+    required>
+    <option value="">Seleccione una Marca</option>
+    {marcas.map((opcion) => (
+      <option key={opcion.marc_Id} value={opcion.marc_Id}>
+        {opcion.marc_Descripcion}
+      </option>
+    ))}
+  </CFormSelect>
+
+</CCol>
+
+<CCol md={6} className="">
+  <CFormSelect
+    value={nuevaPrendas.cate_Id}
+    onChange={(e) =>
+      setNuevaPrenda({ ...nuevaPrendas, cate_Id: e.target.value })
+    }
+    id="validationCustom01"
+    label="Categorías"
+    required>
+    <option value="">Seleccione una Categoría</option>
+    {categorias.map((opcion) => (
+      <option key={opcion.cate_Id} value={opcion.cate_Id}>
+      {opcion.cate_Descripcion}
+      </option>
+    ))}
+  </CFormSelect>
+
+</CCol>
+
+
+
+
+
+<CCol md={6} className="">
+  <CFormSelect
+    value={nuevaPrendas.fard_Id}
+    onChange={(e) =>
+      setNuevaPrenda({ ...nuevaPrendas, fard_Id: e.target.value })
+    }
+    id="validationCustom01"
+    label="Fardo"
+    required>
+    <option value="">Seleccione un Fardo</option>
+    {fardos.map((opcion) => (
+      <option key={opcion.fard_Id} value={opcion.fard_Id}>
+        {opcion.fard_Descripcion}
+      </option>
+    ))}
+  </CFormSelect>
+
+</CCol>
+
+
+    <CCol md={6} className=''>
+
+    <CFormInput
+    type="text"
+    value={nuevaPrendas.pren_Imagen}
+    onChange={(e) => setNuevaPrenda({ ...nuevaPrendas, pren_Imagen: e.target.value })}
+    id="validationCustom01"
+    label="Imagen"
+    required/>
+
+    </CCol>
+
+
+
+
+
+
+    
+    
+
+    <CCol xs={12} className='offset-7'>
+      <CButton color="primary"  type="submit">
         Guardar
       </CButton>
-      <CButton color="danger"  href="#" onClick={(event) => {
-      event.preventDefault()
-      setVisible(!visible)
-    }}>
+      <CButton color="danger text-light"  className='ms-2' href="#" onClick={abrirycerrarInsert}>
       Cancelar
     </CButton>
     </CCol>
@@ -144,7 +490,165 @@ function Prendas() {
     </CCollapse>
 
 
-      <CCollapse visible={!visible}>
+ {/*Formulario Editar*/}
+    <CCollapse visible={visible2} className='col-6 offset-3'>
+    
+    <CCard className="mt-3">
+      <CCardHeader>
+        <h1 className='h3 text-center'>Editar Prenda</h1>
+      </CCardHeader>
+      <CCardBody>
+    <CForm
+  className="row g-3 needs-validation"
+  noValidate
+  validated={validated}
+  onSubmit={handleSubmitE}
+>
+
+     <CCol md={6} className=''>
+    <CFormInput
+      type="hidden"
+  value={nuevaPrendas.dept_Id}
+  onChange={(e) => seteditarPrenda({ ...editarPrenda, pren_Id: e.target.value })}
+  id="validationCustom01"
+  required
+    />
+  </CCol>
+
+
+       <CCol md={6} className=''>
+
+        <CFormInput
+    type="text"
+    value={nuevaPrendas.pren_Descripcion}
+    onChange={(e) => seteditarPrenda({ ...nuevaPrendas, pren_Descripcion: e.target.value })}
+    id="validationCustom01"
+    label="Nombre"
+    required/>
+
+    </CCol>
+
+    <CCol md={6} className=''>
+
+    <CFormInput
+    type="text"
+    value={nuevaPrendas.pren_Talla}
+    onChange={(e) => seteditarPrenda({ ...nuevaPrendas, pren_Talla: e.target.value })}
+    id="validationCustom01"
+    label="Talla"
+    required/>
+
+    </CCol>
+
+
+
+
+        <CCol md={6} className=''>
+
+    <CFormInput
+    type="text"
+    value={nuevaPrendas.pren_Precio}
+    onChange={(e) => seteditarPrenda({ ...nuevaPrendas, pren_Precio: e.target.value })}
+    id="validationCustom01"
+    label="Precio"
+    required/>
+
+    </CCol>
+
+    <CCol md={6} className="">
+  <CFormSelect
+    value={nuevaPrendas.marc_Id}
+    onChange={(e) =>
+      seteditarPrenda({ ...nuevaPrendas, marc_Id: e.target.value })
+    }
+    id="validationCustom01"
+    label="Marca"
+    required>
+    <option value="">Seleccione una Marca</option>
+    {marcas.map((opcion) => (
+      <option key={opcion.id} value={opcion.valor}>
+        {opcion.texto}
+      </option>
+    ))}
+  </CFormSelect>
+
+</CCol>
+
+<CCol md={6} className="">
+  <CFormSelect
+    value={nuevaPrendas.cate_Id}
+    onChange={(e) =>
+      seteditarPrenda({ ...nuevaPrendas, cate_Id: e.target.value })
+    }
+    id="validationCustom01"
+    label="Categorías"
+    required>
+    <option value="">Seleccione una Categoría</option>
+    {categorias.map((opcion) => (
+      <option key={opcion.id} value={opcion.valor}>
+        {opcion.texto}
+      </option>
+    ))}
+  </CFormSelect>
+
+</CCol>
+
+
+
+
+
+<CCol md={6} className="">
+  <CFormSelect
+    value={nuevaPrendas.fard_Id}
+    onChange={(e) =>
+      seteditarPrenda({ ...nuevaPrendas, fard_Id: e.target.value })
+    }
+    id="validationCustom01"
+    label="Fardo"
+    required>
+    <option value="">Seleccione un Fardo</option>
+    {fardos.map((opcion) => (
+      <option key={opcion.id} value={opcion.valor}>
+        {opcion.texto}
+      </option>
+    ))}
+  </CFormSelect>
+
+</CCol>
+
+
+    <CCol md={6} className=''>
+
+    <CFormInput
+    type="text"
+    value={nuevaPrendas.pren_Imagen}
+    onChange={(e) => seteditarPrenda({ ...nuevaPrendas, pren_Imagen: e.target.value })}
+    id="validationCustom01"
+    label="Imagen"
+    required/>
+
+    </CCol>
+
+
+
+
+  <CCol xs={12} className='offset-7'>
+    <CButton color="primary" type="submit">
+      Guardar
+    </CButton>
+    <CButton color="danger text-light" className='ms-2' href="#"  onClick={cerrarEditar}>
+      Cancelar
+    </CButton>
+  </CCol>
+</CForm>
+      </CCardBody>
+    </CCard>
+  </CCollapse>
+
+
+      <CCollapse visible={!visibleEnca}>
+    <CCard className="mt-3 p-1">
+
       <DataGrid
         rows={prendas}
         columns={columns}
@@ -156,7 +660,9 @@ function Prendas() {
         }}
         localeText={esES.components.MuiDataGrid.defaultProps.localeText}
       />
+      </CCard>
       </CCollapse>
+      </CCard>
       </div>
     </div>
   )
