@@ -31,8 +31,7 @@ namespace Jafouan.DataAccess.Context
         public virtual DbSet<VW_Fardos> VW_Fardos { get; set; }
         public virtual DbSet<VW_FardosProveedores> VW_FardosProveedores { get; set; }
         public virtual DbSet<VW_Marcas> VW_Marcas { get; set; }
-        public virtual DbSet<VW_MetodosPago> VW_MetodosPago { get; set; }
-        public virtual DbSet<VW_MetodosPagos> VW_MetodosPagos { get; set; }
+        public virtual DbSet<VW_MetodosPago> VW_MetodosPagos { get; set; }
         public virtual DbSet<VW_Municipios> VW_Municipios { get; set; }
         public virtual DbSet<VW_Pantallas> VW_Pantallas { get; set; }
         public virtual DbSet<VW_Prendas> VW_Prendas { get; set; }
@@ -488,23 +487,6 @@ namespace Jafouan.DataAccess.Context
             {
                 entity.HasNoKey();
 
-                entity.ToView("VW_MetodosPago", "fact");
-
-                entity.Property(e => e.meto_Descripcion)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.meto_FechaCreacion).HasColumnType("datetime");
-
-                entity.Property(e => e.meto_FechaModificacion).HasColumnType("datetime");
-
-                entity.Property(e => e.meto_Id).ValueGeneratedOnAdd();
-            });
-
-            modelBuilder.Entity<VW_MetodosPagos>(entity =>
-            {
-                entity.HasNoKey();
-
                 entity.ToView("VW_MetodosPagos", "fact");
 
                 entity.Property(e => e.empl_Modifica)
@@ -617,6 +599,10 @@ namespace Jafouan.DataAccess.Context
                 entity.Property(e => e.empl_crea)
                     .HasMaxLength(30)
                     .IsUnicode(false);
+
+                entity.Property(e => e.fard_Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(200);
 
                 entity.Property(e => e.marc_Descripcion)
                     .IsRequired()
@@ -771,6 +757,10 @@ namespace Jafouan.DataAccess.Context
                 entity.Property(e => e.role_Descripcion)
                     .HasMaxLength(150)
                     .IsUnicode(false);
+
+                entity.Property(e => e.user_Contraseña)
+                    .IsRequired()
+                    .HasMaxLength(150);
 
                 entity.Property(e => e.user_FechaCrea).HasColumnType("datetime");
 

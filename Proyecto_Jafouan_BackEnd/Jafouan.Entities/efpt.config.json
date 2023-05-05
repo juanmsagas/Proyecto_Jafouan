@@ -118,10 +118,6 @@
          "ObjectType": 3
       },
       {
-         "Name": "[fact].[VW_MetodosPago]",
-         "ObjectType": 3
-      },
-      {
          "Name": "[fact].[VW_MetodosPagos]",
          "ObjectType": 3
       },
@@ -182,7 +178,7 @@
          "ObjectType": 3
       }
    ],
-   "UiHint": "DESKTOP-BSILECU\\SQLEXPRESS.db_VERA",
+   "UiHint": "DESKTOP-QEULE6U\\SQLEXPRESSLOCAL.db_VERA",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

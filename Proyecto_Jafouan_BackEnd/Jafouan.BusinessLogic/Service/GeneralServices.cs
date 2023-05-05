@@ -394,6 +394,20 @@ namespace Jafouan.BusinessLogic.Service
                 return (IEnumerable<VW_Municipios>)result.Error(e.Message);
             }
         }
+        public IEnumerable<tbMunicipios> ListarMunicipiosPorDepto(tbMunicipios item)
+        {
+            try
+            {
+                var list = _municipiosRepository.ListarMunisDeptos(item);
+                return list;
+            }
+            catch (Exception ex)
+            {
+
+                return Enumerable.Empty<tbMunicipios>();
+            }
+        }
+
 
 
         //INSERT

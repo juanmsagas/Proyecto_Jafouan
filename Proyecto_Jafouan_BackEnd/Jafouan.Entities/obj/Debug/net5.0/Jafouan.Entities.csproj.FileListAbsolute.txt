@@ -58,3 +58,15 @@ C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.Entities\obj
 C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.Entities\obj\Debug\net5.0\Jafouan.Entities.dll
 C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.Entities\obj\Debug\net5.0\ref\Jafouan.Entities.dll
 C:\Users\isaac\OneDrive\Escritorio\complete\Proyecto_Jafuan\Jafouan.Entities\obj\Debug\net5.0\Jafouan.Entities.pdb
+C:\Users\LAB02\Desktop\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\bin\Debug\net5.0\Jafouan.Entities.deps.json
+C:\Users\LAB02\Desktop\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\bin\Debug\net5.0\Jafouan.Entities.dll
+C:\Users\LAB02\Desktop\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\bin\Debug\net5.0\ref\Jafouan.Entities.dll
+C:\Users\LAB02\Desktop\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\bin\Debug\net5.0\Jafouan.Entities.pdb
+C:\Users\LAB02\Desktop\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\obj\Debug\net5.0\Jafouan.Entities.csproj.AssemblyReference.cache
+C:\Users\LAB02\Desktop\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\obj\Debug\net5.0\Jafouan.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LAB02\Desktop\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\obj\Debug\net5.0\Jafouan.Entities.AssemblyInfoInputs.cache
+C:\Users\LAB02\Desktop\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\obj\Debug\net5.0\Jafouan.Entities.AssemblyInfo.cs
+C:\Users\LAB02\Desktop\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\obj\Debug\net5.0\Jafouan.Entities.csproj.CoreCompileInputs.cache
+C:\Users\LAB02\Desktop\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\obj\Debug\net5.0\Jafouan.Entities.dll
+C:\Users\LAB02\Desktop\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\obj\Debug\net5.0\ref\Jafouan.Entities.dll
+C:\Users\LAB02\Desktop\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\obj\Debug\net5.0\Jafouan.Entities.pdb

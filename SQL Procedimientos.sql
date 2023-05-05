@@ -737,6 +737,17 @@ AS BEGIN
 END
 GO
 
+CREATE OR ALTER PROC mant.UDP_tbMunicipios_FILTER
+@dept_Id INT
+AS BEGIN
+
+SELECT * FROM mant.VW_Municipios
+WHERE dept_Id = @dept_Id
+
+END
+GO
+
+
 CREATE OR ALTER PROC mant.UDP_tbMunicipios_FIND
 @muni_Id CHAR(4)
 AS BEGIN
@@ -1655,7 +1666,7 @@ AS BEGIN
 
   	BEGIN TRY
 	--si existe
-		IF EXISTS (SELECT * FROM vera.tbPrendas WHERE @pren_Descripcion = @pren_Descripcion AND pren_Estado  = 1)
+		IF EXISTS (SELECT * FROM vera.tbPrendas WHERE pren_Descripcion = @pren_Descripcion AND pren_Estado  = 1)
 	     BEGIN
             SELECT 409 AS codeStatus, 'El nombre de la prenda ya existe' AS messageStatus
          END
@@ -1693,14 +1704,8 @@ CREATE OR ALTER PROC vera.UDP_tbPrendas_UPDATE
 AS BEGIN
 
   	BEGIN TRY
-	--si existe
-		IF EXISTS (SELECT * FROM vera.tbPrendas WHERE pren_Descripcion = @pren_Descripcion AND pren_Estado  = 1)
-	     BEGIN
-            SELECT 409 AS codeStatus, 'El nombre de la prenda ya existe' AS messageStatus
-         END
-	--si no existe
-		 ELSE IF NOT EXISTS (SELECT * FROM  vera.tbPrendas WHERE pren_Descripcion = @pren_Descripcion)
-		 BEGIN
+
+
 			
 			UPDATE vera.tbPrendas
 			SET
@@ -1717,7 +1722,7 @@ AS BEGIN
 				WHERE pren_Id =	@pren_Id
 
 			SELECT 200 AS codeStatus, 'Prenda Modificada con éxito' AS messageStatus
-		END
+		
 
 	END TRY
 	BEGIN CATCH

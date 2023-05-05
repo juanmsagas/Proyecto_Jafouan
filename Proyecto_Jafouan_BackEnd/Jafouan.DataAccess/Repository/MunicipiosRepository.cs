@@ -55,6 +55,16 @@ namespace Jafouan.DataAccess.Repository
             return result;
         }
 
+        public IEnumerable<tbMunicipios> ListarMunisDeptos(tbMunicipios tbMunicipios)
+        {
+            using var db = new SqlConnection(Jafouan_Context.ConnectionString);
+
+            var parametros = new DynamicParameters();
+            parametros.Add("@dept_Id", tbMunicipios.dept_Id, DbType.String, ParameterDirection.Input);
+            return db.Query<tbMunicipios>(ScriptsDataBase.FILTRAR_MUNICIPIOS, parametros, commandType: CommandType.StoredProcedure);
+
+        }
+
 
         public IEnumerable<VW_Municipios> List()
         {

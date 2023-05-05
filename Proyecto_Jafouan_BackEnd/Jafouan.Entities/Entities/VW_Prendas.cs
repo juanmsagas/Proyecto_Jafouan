@@ -20,6 +20,7 @@ namespace Jafouan.Entities.Entities
         public int cate_Id { get; set; }
         public string cate_Descripcion { get; set; }
         public int fard_Id { get; set; }
+        public string fard_Descripcion { get; set; }
         public string pren_Imagen { get; set; }
         public bool? prend_EstadoTienda { get; set; }
         public bool? pren_Estado { get; set; }

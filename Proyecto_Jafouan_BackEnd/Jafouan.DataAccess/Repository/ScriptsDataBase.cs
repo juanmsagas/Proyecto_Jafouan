@@ -116,11 +116,12 @@ namespace Jafouan.DataAccess.Repository
         #endregion
 
         #region Municipios
-        public static string  INDEX_MUNICIPIOS = "mant.UDP_tbMunicipios_INDEX";
-        public static string   FIND_MUNICIPIOS = "mant.UDP_tbMunicipios_FIND";
-        public static string INSERT_MUNICIPIOS = "mant.UDP_tbMunicipios_INSERT";
-        public static string UPDATE_MUNICIPIOS = "mant.UDP_tbMunicipios_UPDATE";
-        public static string DELETE_MUNICIPIOS = "mant.UDP_tbMunicipios_DELETE";
+        public static string  INDEX_MUNICIPIOS   = "mant.UDP_tbMunicipios_INDEX";
+        public static string   FIND_MUNICIPIOS   = "mant.UDP_tbMunicipios_FIND";
+        public static string INSERT_MUNICIPIOS   = "mant.UDP_tbMunicipios_INSERT";
+        public static string UPDATE_MUNICIPIOS   = "mant.UDP_tbMunicipios_UPDATE";
+        public static string DELETE_MUNICIPIOS   = "mant.UDP_tbMunicipios_DELETE";
+        public static string FILTRAR_MUNICIPIOS  = "mant.UDP_tbMunicipios_FILTER";
         #endregion
 
         #region Pantallas

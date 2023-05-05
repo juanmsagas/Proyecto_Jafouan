@@ -13,6 +13,7 @@ namespace Jafouan.Entities.Entities
         public int empl_Id { get; set; }
         public string nombreEmpleado { get; set; }
         public bool user_Admin { get; set; }
+        public string user_Contraseña { get; set; }
         public string EsAdmin { get; set; }
         public int? role_Id { get; set; }
         public string role_Descripcion { get; set; }
