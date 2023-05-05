@@ -6,6 +6,7 @@ import { IconButton} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import VisibilityIcon from '@material-ui/icons/Visibility'
+import AddIcon  from '@material-ui/icons/Add'
 import SearchIcon from '@material-ui/icons/Search'
 import {CButton,
         CCollapse,
@@ -260,6 +261,7 @@ const handleSubmitD = (event) => {
     <CButton color="primary" variant="outline" href="#"        
     onClick={abrirycerrarInsert}
       >
+      <AddIcon className='nav-icon  mb-1'></AddIcon>
       Nuevo
     </CButton>
           </div>
