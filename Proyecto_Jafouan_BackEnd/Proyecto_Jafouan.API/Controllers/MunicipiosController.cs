@@ -32,6 +32,14 @@ namespace Jafouan.API.Controllers
             return Ok(list);
         }
 
+        [HttpPost("ListarMunisDeptos")]
+        public IActionResult ListarMunisDeptos(MunicipiosViewModel municipiosViewModel)
+        {
+            var item2 = _mapper.Map<tbMunicipios>(municipiosViewModel);
+            var list = _generalServices.ListarMunicipiosPorDepto(item2);
+            return Ok(list);
+        }
+
         [HttpPost("Insert")]
         public IActionResult InsertMunicipios([FromBody] MunicipiosViewModel municipios)
         {

@@ -7,6 +7,9 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import SearchIcon from '@material-ui/icons/Search'
+import AddIcon from '@material-ui/icons/Add'
+
+
 import {CButton,
         CCollapse,
         CCard,
@@ -22,6 +25,7 @@ import {CButton,
         CFormFeedback,
         CCardHeader}
         from '@coreui/react'
+import { CardHeader } from 'reactstrap'
 
 function Prendas() {
   const [prendas, setPrendas] = useState([])
@@ -226,14 +230,13 @@ const form = event.currentTarget
   }
 
   const columns = [
-    { field: 'pren_Id', headerName: 'ID',  width: 25},
+    { field: 'pren_Id', headerName: 'ID',  width: 90},
     { field: 'pren_Descripcion', headerName: 'Descripcion',  width: 450},
-    { field: 'pren_Talla', headerName: 'Talla',  width: 10},
+    { field: 'pren_Talla', headerName: 'Talla',  width: 65},
     { field: 'desc_Descuento', headerName: 'Descuento',  width: 100},
-    { field: 'pren_Precio', headerName: 'Precio',  width: 75},
-    { field: 'marc_Descripcion', headerName: 'Marca',  width: 75},
+    { field: 'pren_Precio', headerName: 'Precio',  width: 70},
+    { field: 'marc_Descripcion', headerName: 'Marca',  width: 90},
     { field: 'cate_Descripcion', headerName: 'Categoría',  width: 100},
-    { field: 'fard_Descripcion', headerName: 'Fardo',  width: 150},
     {
       field: 'acciones',
       headerName: 'Acciones',
@@ -303,17 +306,16 @@ const form = event.currentTarget
     <div style={{ width: '100%' }}>
       <div className='col-12'>
     <CCard className="p-5">
-
+      <CardHeader className=' mb-4' style={{ fontFamily: "Ubuntu",  textAlign: 'center', fontSize: 50   }}>Prendas</CardHeader>
       <CCollapse visible={!visibleEnca}>
 
-      <h1 className='h4 text-center'>Prendas</h1>
 
-      <div className='col-2 offset-5 mb-4'>
+      <div className='col-2  mb-4'>
       <div className="d-grid gap-1">
 
     <CButton color="primary" variant="outline" href="#"        
-    onClick={abrirycerrarInsert}
-      >
+    onClick={abrirycerrarInsert}  className="ml-auto">
+       <AddIcon  className="nav-icon ms-2 mb-1" />
       Nuevo
     </CButton>
           </div>
@@ -322,7 +324,7 @@ const form = event.currentTarget
 
  {/*Formulario Insertar*/}
  
-    <CCollapse visible={visible} className='col-6 offset-3'>
+    <CCollapse visible={visible} className='col-12'>
     
       <CCard className="mt-3">
         <CCardHeader>
@@ -491,11 +493,11 @@ const form = event.currentTarget
 
 
  {/*Formulario Editar*/}
-    <CCollapse visible={visible2} className='col-6 offset-3'>
+    <CCollapse visible={visible2} className='col-12 '>
     
     <CCard className="mt-3">
       <CCardHeader>
-        <h1 className='h3 text-center'>Editar Prenda</h1>
+        <h1 className='h3 text-center'>Editar</h1>
       </CCardHeader>
       <CCardBody>
     <CForm
@@ -508,7 +510,7 @@ const form = event.currentTarget
      <CCol md={6} className=''>
     <CFormInput
       type="hidden"
-  value={nuevaPrendas.dept_Id}
+  value={editarPrenda.pren_Id}
   onChange={(e) => seteditarPrenda({ ...editarPrenda, pren_Id: e.target.value })}
   id="validationCustom01"
   required
@@ -516,12 +518,12 @@ const form = event.currentTarget
   </CCol>
 
 
-       <CCol md={6} className=''>
+       <CCol md={12 } className=''>
 
         <CFormInput
     type="text"
-    value={nuevaPrendas.pren_Descripcion}
-    onChange={(e) => seteditarPrenda({ ...nuevaPrendas, pren_Descripcion: e.target.value })}
+    value={editarPrenda.pren_Descripcion}
+    onChange={(e) => seteditarPrenda({ ...editarPrenda, pren_Descripcion: e.target.value })}
     id="validationCustom01"
     label="Nombre"
     required/>
@@ -532,13 +534,15 @@ const form = event.currentTarget
 
     <CFormInput
     type="text"
-    value={nuevaPrendas.pren_Talla}
-    onChange={(e) => seteditarPrenda({ ...nuevaPrendas, pren_Talla: e.target.value })}
+    value={editarPrenda.pren_Talla}
+    onChange={(e) => seteditarPrenda({ ...editarPrenda, pren_Talla: e.target.value })}
     id="validationCustom01"
     label="Talla"
     required/>
 
     </CCol>
+
+    
 
 
 
@@ -547,8 +551,8 @@ const form = event.currentTarget
 
     <CFormInput
     type="text"
-    value={nuevaPrendas.pren_Precio}
-    onChange={(e) => seteditarPrenda({ ...nuevaPrendas, pren_Precio: e.target.value })}
+    value={editarPrenda.pren_Precio}
+    onChange={(e) => seteditarPrenda({ ...editarPrenda, pren_Precio: e.target.value })}
     id="validationCustom01"
     label="Precio"
     required/>
@@ -557,17 +561,37 @@ const form = event.currentTarget
 
     <CCol md={6} className="">
   <CFormSelect
-    value={nuevaPrendas.marc_Id}
+    value={editarPrenda.desc_Id}
     onChange={(e) =>
-      seteditarPrenda({ ...nuevaPrendas, marc_Id: e.target.value })
+      seteditarPrenda({ ...editarPrenda, desc_Id: e.target.value })
+    }
+    id="validationCustom01"
+    label="Descuentos"
+    required>
+    <option value="">Seleccione un Descuento</option>
+    {descuentos.map((opcion) => (
+      <option key={opcion.desc_Id} value={opcion.desc_Id}>
+        {opcion.desc_Color}
+      </option>
+    ))}
+  </CFormSelect>
+
+</CCol>
+
+
+<CCol md={6} className="">
+  <CFormSelect
+    value={editarPrenda.marc_Id}
+    onChange={(e) =>
+      seteditarPrenda({ ...editarPrenda, marc_Id: e.target.value })
     }
     id="validationCustom01"
     label="Marca"
     required>
     <option value="">Seleccione una Marca</option>
     {marcas.map((opcion) => (
-      <option key={opcion.id} value={opcion.valor}>
-        {opcion.texto}
+      <option key={opcion.marc_Id} value={opcion.marc_Id}>
+        {opcion.marc_Descripcion}
       </option>
     ))}
   </CFormSelect>
@@ -576,17 +600,17 @@ const form = event.currentTarget
 
 <CCol md={6} className="">
   <CFormSelect
-    value={nuevaPrendas.cate_Id}
+    value={editarPrenda.cate_Id}
     onChange={(e) =>
-      seteditarPrenda({ ...nuevaPrendas, cate_Id: e.target.value })
+      seteditarPrenda({ ...editarPrenda, cate_Id: e.target.value })
     }
     id="validationCustom01"
     label="Categorías"
     required>
     <option value="">Seleccione una Categoría</option>
     {categorias.map((opcion) => (
-      <option key={opcion.id} value={opcion.valor}>
-        {opcion.texto}
+      <option key={opcion.cate_Id} value={opcion.cate_Id}>
+      {opcion.cate_Descripcion}
       </option>
     ))}
   </CFormSelect>
@@ -599,17 +623,17 @@ const form = event.currentTarget
 
 <CCol md={6} className="">
   <CFormSelect
-    value={nuevaPrendas.fard_Id}
+    value={editarPrenda.fard_Id}
     onChange={(e) =>
-      seteditarPrenda({ ...nuevaPrendas, fard_Id: e.target.value })
+      seteditarPrenda({ ...editarPrenda, fard_Id: e.target.value })
     }
     id="validationCustom01"
     label="Fardo"
     required>
     <option value="">Seleccione un Fardo</option>
     {fardos.map((opcion) => (
-      <option key={opcion.id} value={opcion.valor}>
-        {opcion.texto}
+      <option key={opcion.fard_Id} value={opcion.fard_Id}>
+        {opcion.fard_Descripcion}
       </option>
     ))}
   </CFormSelect>
@@ -617,12 +641,13 @@ const form = event.currentTarget
 </CCol>
 
 
-    <CCol md={6} className=''>
+
+    <CCol md={12} className=''>
 
     <CFormInput
     type="text"
-    value={nuevaPrendas.pren_Imagen}
-    onChange={(e) => seteditarPrenda({ ...nuevaPrendas, pren_Imagen: e.target.value })}
+    value={editarPrenda.pren_Imagen}
+    onChange={(e) => seteditarPrenda({ ...editarPrenda, pren_Imagen: e.target.value })}
     id="validationCustom01"
     label="Imagen"
     required/>
