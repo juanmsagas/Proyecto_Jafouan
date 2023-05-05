@@ -98,11 +98,18 @@ const handleSubmitI = (event) => {
             'Content-Type': 'application/json'
         }
     }
-
+ const form = event.currentTarget
+  if (form.checkValidity() === false) {
+    event.preventDefault()
+    event.stopPropagation()
+  }
+  setValidated(true)
+  if(form.checkValidity() != false){
     axios.post('api/Departamentos/Insert', nuevoDepartamento, config)
         .then((response) => {
             console.log(response.data)
             setVisible(false)
+            setvisibleEnca(!visibleEnca)
             setNuevoDepartamento({
                 dept_Id: '',
                 dept_Descripcion: '',
@@ -112,6 +119,7 @@ const handleSubmitI = (event) => {
         .catch((error) => {
             console.log(error)
         })
+      }
 }
 
 //peticion a la api Editar   
@@ -123,7 +131,13 @@ const handleSubmitE = (event) => {
           'Content-Type': 'application/json'
       }
   }
-
+const form = event.currentTarget
+  if (form.checkValidity() === false) {
+    event.preventDefault()
+    event.stopPropagation()
+  }
+  setValidated(true)
+  if(form.checkValidity() != false){
   axios.put('api/Departamentos/Update', EditarDepartamento, config)
       .then((response) => {
           console.log(response.data)
@@ -139,6 +153,7 @@ const handleSubmitE = (event) => {
       .catch((error) => {
           console.log(error)
       })
+    }
 }
 
 
@@ -152,33 +167,37 @@ const handleSubmitE = (event) => {
       }))
       setUsuarios(insertarid)
     })
-  }, [])
+  }, [usuarios])
 
   const handleSortModelChange = (model) => {
     setSortModel(model)
   }
 
   const columns = [
-    { field: 'dept_Id', headerName: 'ID', width: 1 },
-    { field: 'dept_Descripcion', headerName: 'Departamento', width: 300 },
+    { field: 'dept_Id', headerName: 'ID', 
+      flex:1, },
+    { field: 'dept_Descripcion', headerName: 'Departamento', 
+      flex:2, },
     {
       field: 'acciones',
       headerName: 'Acciones',
-      width: 300,
+      flex:1,
       renderCell: (params) => (
         <div>
-          <IconButton color="secondary">
-            <DeleteIcon />
-          </IconButton>
+      
         
-          <IconButton color="primary" onClick={() => abrireditar(params.row)}>
-        <EditIcon />
-        </IconButton>
-
-          
-          <IconButton>
+            <CButton  color="info ms-2" variant="outline">
             <VisibilityIcon />
-          </IconButton>
+          </CButton>
+
+          <CButton color="warning ms-2" variant="outline" onClick={() => abrireditar(params.row)}>
+        <EditIcon />
+        </CButton>
+          
+            <CButton color="danger ms-2" variant="outline">
+            <DeleteIcon />
+            </CButton>
+        
         </div>
       ),
     },
@@ -187,6 +206,8 @@ const handleSubmitE = (event) => {
   return (
     <div style={{ width: '100%' }}>
       <div className='col-12'>
+    <CCard className="p-5">
+
       <CCollapse visible={!visibleEnca}>
 
       <h1 className='h4 text-center'>Departamentos</h1>
@@ -204,7 +225,8 @@ const handleSubmitE = (event) => {
     </CCollapse>
 
  {/*Formulario Insertar*/}
-    <CCollapse visible={visible}>
+ 
+    <CCollapse visible={visible} className='col-6 offset-3'>
     
       <CCard className="mt-3">
         <CCardHeader>
@@ -220,13 +242,15 @@ const handleSubmitE = (event) => {
 
        <CCol md={6} className=''>
       <CFormInput
+      pattern="[0-9]*"
+      minLength={2} maxLength={2}
         type="text"
     value={nuevoDepartamento.dept_Id}
     onChange={(e) => setNuevoDepartamento({ ...nuevoDepartamento, dept_Id: e.target.value })}
     id="validationCustom01"
     label="ID"
-    required
-      />
+    required/>
+
     </CCol>
        <CCol md={6} className=''>
 
@@ -236,16 +260,15 @@ const handleSubmitE = (event) => {
     onChange={(e) => setNuevoDepartamento({ ...nuevoDepartamento, dept_Descripcion: e.target.value })}
     id="validationCustom01"
     label="Departamento"
-    required
-/>
+    required/>
 
     </CCol>
 
-    <CCol xs={12}>
-      <CButton color="primary" type="submit">
+    <CCol xs={12} className='offset-7'>
+      <CButton color="primary"  type="submit">
         Guardar
       </CButton>
-      <CButton color="danger" className='m' href="#" onClick={abrirycerrarInsert}>
+      <CButton color="danger text-light"  className='ms-2' href="#" onClick={abrirycerrarInsert}>
       Cancelar
     </CButton>
     </CCol>
@@ -256,7 +279,7 @@ const handleSubmitE = (event) => {
 
 
  {/*Formulario Editar*/}
-    <CCollapse visible={visible2}>
+    <CCollapse visible={visible2} className='col-6 offset-3'>
     
     <CCard className="mt-3">
       <CCardHeader>
@@ -283,6 +306,7 @@ const handleSubmitE = (event) => {
 
       <CFormInput
   type="text"
+  minLength={2}
   value={EditarDepartamento.dept_Descripcion}
   onChange={(e) => setEditarDepartamento({ ...EditarDepartamento, dept_Descripcion: e.target.value })}
   id="validationCustom01"
@@ -292,14 +316,13 @@ const handleSubmitE = (event) => {
 
   </CCol>
 
-  <CCol xs={12}>
+  <CCol xs={12} className='offset-7'>
     <CButton color="primary" type="submit">
       Guardar
     </CButton>
-    <CButton color="danger" className='m' href="#"  onClick={cerrarEditar}
-  >
-    Cancelar
-  </CButton>
+    <CButton color="danger text-light" className='ms-2' href="#"  onClick={cerrarEditar}>
+      Cancelar
+    </CButton>
   </CCol>
 </CForm>
       </CCardBody>
@@ -308,6 +331,8 @@ const handleSubmitE = (event) => {
 
 
       <CCollapse visible={!visibleEnca}>
+    <CCard className="mt-3 p-1">
+
       <DataGrid
         rows={usuarios}
         columns={columns}
@@ -319,7 +344,9 @@ const handleSubmitE = (event) => {
         }}
         localeText={esES.components.MuiDataGrid.defaultProps.localeText}
       />
+      </CCard>
       </CCollapse>
+      </CCard>
       </div>
     </div>
   )
