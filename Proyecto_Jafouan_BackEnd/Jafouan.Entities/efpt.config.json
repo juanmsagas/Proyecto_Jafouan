@@ -178,7 +178,7 @@
          "ObjectType": 3
       }
    ],
-   "UiHint": "DESKTOP-QEULE6U\\SQLEXPRESSLOCAL.db_VERA",
+   "UiHint": "ISAAC\\SQLEXPRESS.db_VERA",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

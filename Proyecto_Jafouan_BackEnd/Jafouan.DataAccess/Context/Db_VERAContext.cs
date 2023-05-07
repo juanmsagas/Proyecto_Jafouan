@@ -31,7 +31,7 @@ namespace Jafouan.DataAccess.Context
         public virtual DbSet<VW_Fardos> VW_Fardos { get; set; }
         public virtual DbSet<VW_FardosProveedores> VW_FardosProveedores { get; set; }
         public virtual DbSet<VW_Marcas> VW_Marcas { get; set; }
-        public virtual DbSet<VW_MetodosPago> VW_MetodosPagos { get; set; }
+        public virtual DbSet<VW_MetodosPagos> VW_MetodosPagos { get; set; }
         public virtual DbSet<VW_Municipios> VW_Municipios { get; set; }
         public virtual DbSet<VW_Pantallas> VW_Pantallas { get; set; }
         public virtual DbSet<VW_Prendas> VW_Prendas { get; set; }
@@ -141,6 +141,10 @@ namespace Jafouan.DataAccess.Context
                 entity.Property(e => e.clie_FechaModificacion).HasColumnType("datetime");
 
                 entity.Property(e => e.clie_FechaNacimiento).HasColumnType("date");
+
+                entity.Property(e => e.clie_Identidad)
+                    .IsRequired()
+                    .HasMaxLength(25);
 
                 entity.Property(e => e.clie_Nombres)
                     .IsRequired()
@@ -285,6 +289,10 @@ namespace Jafouan.DataAccess.Context
                 entity.Property(e => e.empl_FechaModificacion).HasColumnType("datetime");
 
                 entity.Property(e => e.empl_FechaNacimiento).HasColumnType("date");
+
+                entity.Property(e => e.empl_Identidad)
+                    .IsRequired()
+                    .HasMaxLength(25);
 
                 entity.Property(e => e.empl_Modifica)
                     .HasMaxLength(30)
@@ -483,7 +491,7 @@ namespace Jafouan.DataAccess.Context
                 entity.Property(e => e.marc_Id).ValueGeneratedOnAdd();
             });
 
-            modelBuilder.Entity<VW_MetodosPago>(entity =>
+            modelBuilder.Entity<VW_MetodosPagos>(entity =>
             {
                 entity.HasNoKey();
 
@@ -513,6 +521,10 @@ namespace Jafouan.DataAccess.Context
                 entity.HasNoKey();
 
                 entity.ToView("VW_Municipios", "mant");
+
+                entity.Property(e => e.dept_Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(200);
 
                 entity.Property(e => e.dept_Id)
                     .IsRequired()

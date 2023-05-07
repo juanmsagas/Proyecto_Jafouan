@@ -83,7 +83,7 @@ CREATE OR ALTER VIEW mant.VW_Municipios
 AS
 SELECT	muni_Id, 
 		T1.dept_Id,
-		T2.dept_Descripcion 
+		T2.dept_Descripcion, 
 		muni_Descripcion,
 		muni_Estado, 
 		muni_UserCrea,
@@ -181,6 +181,7 @@ AS
 SELECT	empl_Id, 
 		empl_Nombres, 
 		empl_Apellidos,
+		empl_Identidad,
 		NombreCliente = CAST(empl_Nombres+' '+empl_Apellidos AS VARCHAR (150)),
 		T1.carg_Id,
 		T5.carg_Descripcion, 
@@ -227,6 +228,7 @@ SELECT	clie_Id,
 		NombreCliente = CAST(clie_Nombres+' '+clie_ApellIdos AS VARCHAR (150)), 
 		clie_FechaNacimiento,
 		clie_Sexo,
+		clie_Identidad,
 		CASE WHEN clie_Sexo = 'M' THEN 'Masculino'
 		ELSE 'Femenino' END AS clieSexo, 
 		T1.estc_Id,

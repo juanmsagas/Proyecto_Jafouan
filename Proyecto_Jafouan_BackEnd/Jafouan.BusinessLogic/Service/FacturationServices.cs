@@ -266,7 +266,7 @@ namespace Jafouan.BusinessLogic.Service
 
 
         //INDEX
-        public IEnumerable<VW_MetodosPago> ListMetodosPagos()
+        public IEnumerable<VW_MetodosPagos> ListMetodosPagos()
         {
             var result = new ServiceResult();
             try
@@ -276,7 +276,7 @@ namespace Jafouan.BusinessLogic.Service
             }
             catch (Exception e)
             {
-                return (IEnumerable<VW_MetodosPago>)result.Error(e.Message);
+                return (IEnumerable<VW_MetodosPagos>)result.Error(e.Message);
             }
         }
 
@@ -309,7 +309,7 @@ namespace Jafouan.BusinessLogic.Service
         }
 
         //FIND
-        public VW_MetodosPago FindMetodosPagos(int id)
+        public VW_MetodosPagos FindMetodosPagos(int id)
         {
             var result = new ServiceResult();
 

@@ -14,6 +14,7 @@ namespace Jafouan.Entities.Entities
         public string NombreCliente { get; set; }
         public DateTime clie_FechaNacimiento { get; set; }
         public string clie_Sexo { get; set; }
+        public string clie_Identidad { get; set; }
         public string clieSexo { get; set; }
         public int estc_Id { get; set; }
         public string estc_Descripcion { get; set; }

@@ -10,6 +10,7 @@ namespace Jafouan.Entities.Entities
     {
         public string muni_Id { get; set; }
         public string dept_Id { get; set; }
+        public string dept_Descripcion { get; set; }
         public string muni_Descripcion { get; set; }
         public bool? muni_Estado { get; set; }
         public int muni_UserCrea { get; set; }
