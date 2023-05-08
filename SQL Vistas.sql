@@ -282,7 +282,7 @@ SELECT	prov_Id,
 		T3.dept_Id,
 		T3.dept_Descripcion,
 		T1.muni_Id,
-		T2.muni_Descripcion 
+		T2.muni_Descripcion, 
 		prov_Direccion, 
 		prov_Estado, 
 		prov_UserCrea,

@@ -1780,7 +1780,7 @@ CREATE OR ALTER PROC vera.UDP_tbProveedores_INSERT
 @prov_Nombres NVARCHAR(100),
 @prov_Apellidos NVARCHAR(100),
 @prov_Telefono VARCHAR(25),
-@muni_Id INT,
+@muni_Id CHAR(4),
 @prov_Direccion NVARCHAR(100),
 @prov_UserCrea INT
 AS BEGIN
@@ -1809,7 +1809,7 @@ CREATE OR ALTER PROC vera.UDP_tbProveedores_UPDATE
 @prov_Nombres NVARCHAR(100),
 @prov_Apellidos NVARCHAR(100),
 @prov_Telefono VARCHAR(25),
-@muni_Id INT,
+@muni_Id CHAR(4),
 @prov_Direccion NVARCHAR(100),
 @prov_UserModifica INT
 AS BEGIN
@@ -1885,7 +1885,7 @@ GO
 
 CREATE OR ALTER PROC vera.UDP_tbSucursales_INSERT
 @sucu_Nombre NVARCHAR(100),
-@muni_Id INT,
+@muni_Id CHAR(4),
 @sucu_Direcion NVARCHAR(100),
 @sucu_UserCrea INT
 AS BEGIN
@@ -1901,9 +1901,9 @@ AS BEGIN
 		 BEGIN
 			
 			INSERT INTO  vera.tbSucursales
-			(sucu_Nombre, muni_Id, sucu_Direccion)
+			(sucu_Nombre, muni_Id, sucu_Direccion, sucu_UserCrea)
 			VALUES
-			(@sucu_Nombre, @muni_Id, @sucu_Direcion)
+			(@sucu_Nombre, @muni_Id, @sucu_Direcion, @sucu_UserCrea)
 
 			SELECT 200 AS codeStatus, 'Sucursal creado con éxito' AS messageStatus
 		END
@@ -1919,7 +1919,7 @@ GO
 CREATE OR ALTER PROC vera.UDP_tbSucursales_UPDATE
 @sucu_Id INT,
 @sucu_Nombre NVARCHAR(100),
-@muni_Id INT,
+@muni_Id CHAR(4),
 @sucu_Direcion NVARCHAR(100),
 @sucu_UserModifica INT
 AS BEGIN

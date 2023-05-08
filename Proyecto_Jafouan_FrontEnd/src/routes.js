@@ -14,6 +14,8 @@ const EstadosCiviles = React.lazy(() => import('./views/estadosciviles/estadosci
 const Marcas = React.lazy(() => import('./views/marcas/marcas'))
 const MetodosPagos = React.lazy(() => import('./views/metodospago/metodospago'))
 const Fardos = React.lazy(() => import('./views/fardos/fardos'))
+const Proveedores = React.lazy(() => import('./views/proveedores/proveedores'))
+const Sucursales = React.lazy(() => import('./views/sucursales/sucursales'))
 
 
 
@@ -36,9 +38,9 @@ const routes = [
   { path: '/descuentos', name: 'Descuentos', element: Descuentos },
   { path: '/estadosciviles', name: 'EstadosCiviles', element: EstadosCiviles },
   { path: '/metodospago', name: 'MetodosPagos', element: MetodosPagos },
+  { path: '/proveedores', name: 'Proveedores', element: Proveedores },
+  { path: '/sucursales', name: 'Sucursales', element: Sucursales },
   { path: '/fardos', name: 'Fardos', element: Fardos },
-
-
 ]
 
 export default routes

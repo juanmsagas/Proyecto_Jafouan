@@ -661,6 +661,10 @@ namespace Jafouan.DataAccess.Context
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
+                entity.Property(e => e.muni_Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
                 entity.Property(e => e.muni_Id)
                     .IsRequired()
                     .HasMaxLength(4)
@@ -671,9 +675,7 @@ namespace Jafouan.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(200);
 
-                entity.Property(e => e.prov_Direccion)
-                    .IsRequired()
-                    .HasMaxLength(200);
+                entity.Property(e => e.prov_Direccion).HasMaxLength(200);
 
                 entity.Property(e => e.prov_FechaCreacion).HasColumnType("datetime");
 

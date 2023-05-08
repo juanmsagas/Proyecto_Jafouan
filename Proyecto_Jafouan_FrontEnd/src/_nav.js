@@ -105,6 +105,18 @@ const _nav = [
     to: '/Fardos',
     icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
   },
+  {
+    component: CNavItem,
+    name: 'Proveedores',
+    to: '/Proveedores',
+    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Sucursales',
+    to: '/Sucursales',
+    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
+  },
 
 
 

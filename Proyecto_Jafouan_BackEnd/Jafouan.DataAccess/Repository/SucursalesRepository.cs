@@ -42,7 +42,7 @@ namespace Jafouan.DataAccess.Repository
 
             parametros.Add("@sucu_Nombre", item.sucu_Nombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@muni_Id", item.muni_Id, DbType.String, ParameterDirection.Input);
-            parametros.Add("@sucu_Direccion", item.sucu_Direccion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@sucu_Direcion", item.sucu_Direccion, DbType.String, ParameterDirection.Input);
             parametros.Add("@sucu_UserCrea", item.sucu_UserCrea, DbType.Int32, ParameterDirection.Input);
 
             var result = db.QueryFirst<RequestStatus>(ScriptsDataBase.INSERT_SUCURSALES, parametros, commandType: System.Data.CommandType.StoredProcedure);
@@ -64,7 +64,7 @@ namespace Jafouan.DataAccess.Repository
             parametros.Add("@sucu_Id", item.sucu_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@sucu_Nombre", item.sucu_Nombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@muni_Id", item.muni_Id, DbType.String, ParameterDirection.Input);
-            parametros.Add("@sucu_Direccion", item.sucu_Direccion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@sucu_Direcion", item.sucu_Direccion, DbType.String, ParameterDirection.Input);
             parametros.Add("@sucu_UserModifica", item.sucu_UserModifica, DbType.Int32, ParameterDirection.Input);
 
             var result = db.QueryFirst<RequestStatus>(ScriptsDataBase.UPDATE_SUCURSALES, parametros, commandType: System.Data.CommandType.StoredProcedure);
