@@ -66,12 +66,6 @@ namespace Jafouan.API.Controllers
         }
 
 
-        [HttpGet("Login")]
-        public IActionResult Login(string username, string password)
-        {
-            var list = _accessService.Login(username, password);
-            return Ok(list);
-        }
     }
 }
-}
+

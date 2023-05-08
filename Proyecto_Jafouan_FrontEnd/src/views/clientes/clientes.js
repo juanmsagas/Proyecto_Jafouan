@@ -146,6 +146,7 @@ const cerrarEditar = (event) => {
 const abrirycerrarInsert = (event) => {
   event.preventDefault()
   setVisible(!visible)
+  setValidated(false)
   setvisibleEnca(!visibleEnca)
   setEditarCliente({
     clie_Nombres: '',

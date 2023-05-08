@@ -1,4 +1,6 @@
-﻿using Jafouan.Entities.Entities;
+﻿using Dapper;
+using Jafouan.Entities.Entities;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +28,9 @@ namespace Jafouan.DataAccess.Repository
 
         public IEnumerable<VW_Roles> List()
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(Jafouan_Context.ConnectionString);
+            return db.Query<VW_Roles>(ScriptsDataBase.INDEX_ROLES, null, commandType: System.Data.CommandType.StoredProcedure);
+
         }
 
         public RequestStatus Update(tbRoles item)
