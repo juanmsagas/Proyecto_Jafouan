@@ -30,9 +30,9 @@ import {CButton,
         }
         from '@coreui/react'
 
-function Cargos() {
-  const [cargos, setCargos] = useState([])
-  const [sortModel, setSortModel] = useState([{ field: 'carg_Id', sort: 'asc' }])
+function EstadosCiviles() {
+  const [estados, setEstadosCiviles] = useState([])
+  const [sortModel, setSortModel] = useState([{ field: 'estc_Id', sort: 'asc' }])
   const [visible, setVisible] = useState(false)
   const [visible2, setVisible2] = useState(false)
   const [Modal, setModal] = useState(false)
@@ -47,17 +47,17 @@ function Cargos() {
     }
     setValidated(true)
   }
-  const [nuevoCargo, setNuevoCargo] = useState({
-    carg_Descripcion: '',
-    carg_UserCrea: 1
+  const [nuevoEstado, setNuevoEstado] = useState({
+    estc_Descripcion: '',
+    estc_UserCrea: 1
 })
-const [ElimCargo, setEliminarCargo] = useState({
-  carg_Id: 0
+const [ElimEstado, setEliminarEstado] = useState({
+  estc_Id: 0
 })
-const [EditarCargo, setEditarCargo] = useState({
-  carg_Id: '',
-  carg_Descripcion: '',
-  carg_UserModifica:1
+const [EditarEstado, setEditarEstado] = useState({
+  estc_Id: '',
+  estc_Descripcion: '',
+  estc_UserModifica:1
 })
 
 const abrireditar = (params,event) => {
@@ -67,10 +67,10 @@ const abrireditar = (params,event) => {
   setVisible2(!visible2)
   setvisibleEnca(!visibleEnca)
   console.log(params)
-  setEditarCargo({
-    carg_Id: params.carg_Id,
-    carg_Descripcion:  params.carg_Descripcion,
-    carg_UserModifica:1
+  setEditarEstado({
+    estc_Id: params.estc_Id,
+    estc_Descripcion:  params.estc_Descripcion,
+    estc_UserModifica:1
 }
 )}
 
@@ -78,10 +78,10 @@ const cerrarEditar = (event) => {
   event.preventDefault()
   setVisible2(!visible2)
   setvisibleEnca(!visibleEnca)
-  setEditarCargo({
-    carg_Id: '',
-    carg_Descripcion:  '',
-    carg_UserModifica:1
+  setEditarEstado({
+    estc_Id: '',
+    estc_Descripcion:  '',
+    estc_UserModifica:1
 }
 )}
 
@@ -89,9 +89,9 @@ const abrirycerrarInsert = (event) => {
   event.preventDefault()
   setVisible(!visible)
   setvisibleEnca(!visibleEnca)
-  setNuevoCargo({
-    carg_Descripcion: '',
-    carg_UserCrea:1
+  setNuevoEstado({
+    estc_Descripcion: '',
+    estc_UserCrea:1
 }
 )}
 
@@ -101,8 +101,8 @@ const ModalFun = (params,event) => {
     event.preventDefault()
   }
   setModal(!visible)
-  setEliminarCargo({
-    carg_Id: params,
+  setEliminarEstado({
+    estc_Id: params,
    
 }
 )}
@@ -124,14 +124,14 @@ const handleSubmitI = (event) => {
   }
   setValidated(true)
   if(form.checkValidity() != false){
-    axios.post('api/Cargos/Insert', nuevoCargo, config)
+    axios.post('api/EstadosCiviles/Insert', nuevoEstado, config)
         .then((response) => {
             console.log(response.data)
             setVisible(false)
             setvisibleEnca(!visibleEnca)
-            setNuevoCargo({
-                carg_Descripcion: '',
-                carg_UserCrea:1
+            setNuevoEstado({
+                estc_Descripcion: '',
+                estc_UserCrea:1
             })
         })
         .catch((error) => {
@@ -156,15 +156,15 @@ const form = event.currentTarget
   }
   setValidated(true)
   if(form.checkValidity() != false){
-  axios.put('api/Cargos/Update', EditarCargo, config)
+  axios.put('api/EstadosCiviles/Update', EditarEstado, config)
       .then((response) => {
           console.log(response.data)
           setVisible2(!visible2)
           setvisibleEnca(!visibleEnca)
-          setEditarCargo({
-            carg_Id: '',
-            carg_Descripcion: '',
-            carg_UserModifica:1
+          setEditarEstado({
+            estc_Id: '',
+            estc_Descripcion: '',
+            estc_UserModifica:1
         })  
         console.log(response.data)
       })
@@ -184,12 +184,12 @@ const handleSubmitD = (event) => {
           'Content-Type': 'application/json'
       }
   }
-  axios.put('api/Cargos/Delete', ElimCargo, config)
+  axios.put('api/EstadosCiviles/Delete', ElimEstado, config)
       .then((response) => {
           console.log(response.data)
           setModal(false)
-          setEliminarCargo({
-            carg_Id: '',
+          setEliminarEstado({
+            estc_Id: '',
         })
         console.log(response.data)
       })
@@ -202,23 +202,23 @@ const handleSubmitD = (event) => {
 
   //peticion a la api listado   
   useEffect(() => {
-    axios.get('api/Cargos/Index').then((response) => {
+    axios.get('api/EstadosCiviles/Index').then((response) => {
       console.log('entra')
       const insertarid = response.data.map((row) => ({
         ...row,
-        id: row.carg_Id,
+        id: row.estc_Id,
       }))
-      setCargos(insertarid)
+      setEstadosCiviles(insertarid)
     })
-  }, [cargos])
+  }, [estados])
 
   const handleSortModelChange = (model) => {
     setSortModel(model)
   }
 
   const columns = [
-    { field: 'carg_Id', headerName: 'ID', flex:1, },
-    { field: 'carg_Descripcion', headerName: 'Cargo', flex:2, },
+    { field: 'estc_Id', headerName: 'ID', flex:1, },
+    { field: 'estc_Descripcion', headerName: 'Estado Civil', flex:2, },
     {
       field: 'acciones',
       headerName: 'Acciones',
@@ -235,7 +235,7 @@ const handleSubmitD = (event) => {
         <EditIcon />
         </CButton>
           
-            <CButton color="danger ms-2" variant="outline" onClick={() => ModalFun(params.row.carg_Id)}>
+            <CButton color="danger ms-2" variant="outline" onClick={() => ModalFun(params.row.estc_Id)}>
             <DeleteIcon />
             </CButton>
         
@@ -249,7 +249,7 @@ const handleSubmitD = (event) => {
       <div className='col-12'>
     <CCard className="p-5">
 
-      <CCardHeader className='rounded-top mb-4' style={{ fontFamily: "revert-layer",  textAlign: 'center', fontSize: 50   }}>Departamentos</CCardHeader>
+      <CCardHeader className='rounded-top mb-4' style={{ fontFamily: "revert-layer",  textAlign: 'center', fontSize: 50   }}>Estados Civiles</CCardHeader>
       <CCollapse visible={!visibleEnca}>
 
 
@@ -280,7 +280,7 @@ const handleSubmitD = (event) => {
       <CFormInput
       minLength={2} maxLength={2}
         type="hidden"
-    value={ElimCargo.carg_Id}
+    value={ElimEstado.estc_Id}
     id="validationCustom01"
     disabled
     required/>
@@ -305,7 +305,7 @@ const handleSubmitD = (event) => {
     
       <CCard className="mt-3">
         <CCardHeader>
-          <h1 className='h4 text-center' style={{ fontFamily: "revert-layer"}}>Nuevo Cargo</h1>
+          <h1 className='h4 text-center' style={{ fontFamily: "revert-layer"}}>Nuevo Estado Civil</h1>
         </CCardHeader>
         <CCardBody>
       <CForm
@@ -320,10 +320,10 @@ const handleSubmitD = (event) => {
 
         <CFormInput
     type="text"
-    value={nuevoCargo.carg_Descripcion}
-    onChange={(e) => setNuevoCargo({ ...nuevoCargo, carg_Descripcion: e.target.value })}
+    value={nuevoEstado.estc_Descripcion}
+    onChange={(e) => setNuevoEstado({ ...nuevoEstado, estc_Descripcion: e.target.value })}
     id="validationCustom01"
-    label="Cargo"
+    label="Estado Civil"
     required/>
 
     </CCol>
@@ -347,7 +347,7 @@ const handleSubmitD = (event) => {
     
     <CCard className="mt-3">
       <CCardHeader>
-        <h1 className='h3 text-center'>Editar Cargo</h1>
+        <h1 className='h3 text-center'>Editar Estado Civil</h1>
       </CCardHeader>
       <CCardBody>
     <CForm
@@ -360,8 +360,8 @@ const handleSubmitD = (event) => {
      <CCol md={6} className=''>
     <CFormInput
       type="hidden"
-  value={EditarCargo.carg_Id}
-  onChange={(e) => setEditarCargo({ ...EditarCargo, carg_Id: e.target.value })}
+  value={EditarEstado.estc_Id}
+  onChange={(e) => setEditarEstado({ ...EditarEstado, estc_Id: e.target.value })}
   id="validationCustom01"
   required
     />
@@ -371,10 +371,10 @@ const handleSubmitD = (event) => {
       <CFormInput
   type="text"
   minLength={2}
-  value={EditarCargo.carg_Descripcion}
-  onChange={(e) => setEditarCargo({ ...EditarCargo, carg_Descripcion: e.target.value })}
+  value={EditarEstado.estc_Descripcion}
+  onChange={(e) => setEditarEstado({ ...EditarEstado, estc_Descripcion: e.target.value })}
   id="validationCustom01"
-  label="Departamento"
+  label="Estado Civil"
   required
 />
 
@@ -398,7 +398,7 @@ const handleSubmitD = (event) => {
     <CCard className="mt-3 p-1">
 
       <DataGrid
-        rows={cargos}
+        rows={estados}
         columns={columns}
         sortModel={sortModel}
         onSortModelChange={handleSortModelChange}
@@ -416,4 +416,4 @@ const handleSubmitD = (event) => {
   )
 }
 
-export default Cargos
+export default EstadosCiviles
