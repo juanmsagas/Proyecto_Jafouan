@@ -261,7 +261,7 @@ CREATE OR ALTER VIEW vera.VW_Descuentos
 AS
 SELECT	desc_Id, 
 		desc_Color, 
-		desc_Estado
+		desc_Estado,
 		desc_Descuento, 
 		desc_UserCrea,
 		empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE [user_Id] = desc_UserCrea),       

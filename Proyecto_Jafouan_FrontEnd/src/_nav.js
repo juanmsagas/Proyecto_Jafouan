@@ -70,10 +70,44 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'Clientes',
-    to: '/Clientes',
+    name: 'Categorias',
+    to: '/Categorias',
     icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
   },
+  {
+    component: CNavItem,
+    name: 'Marcas',
+    to: '/Marcas',
+    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Descuentos',
+    to: '/Descuentos',
+    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Métodos de Pago',
+    to: '/MetodosPago',
+    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Estados Civiles',
+    to: '/EstadosCiviles',
+    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
+  },
+
+  {
+    component: CNavItem,
+    name: 'Fardos',
+    to: '/Fardos',
+    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
+  },
+
+
+
 ]
 
 export default _nav
