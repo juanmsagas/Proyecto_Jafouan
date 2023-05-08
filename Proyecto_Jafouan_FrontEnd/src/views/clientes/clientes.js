@@ -411,7 +411,7 @@ const handleSubmitD = (event) => {
     <div style={{ width: '100%' }}>
       <div className='col-12'>
     <CCard className="p-5">
-      <CardHeader className=' mb-4' style={{ fontFamily: "Ubuntu",  textAlign: 'center', fontSize: 50   }}>Clientes</CardHeader>
+    <CCardHeader className='rounded-top mb-4' style={{ fontFamily: "revert-layer",  textAlign: 'center', fontSize: 50   }}>Clientes</CCardHeader>
       <CCollapse visible={!visibleEnca}>
 
     {/*Modal Eliminar*/}
@@ -427,7 +427,7 @@ const handleSubmitD = (event) => {
 >
       <CFormInput
       minLength={2} maxLength={2}
-        type="text"
+        type="hidden"
     value={ElimCliente.clie_Id}
     id="validationCustom01"
     disabled
@@ -501,24 +501,6 @@ required/>
 
 </CCol>
     
-<CCol md={4} className="">
-    <CFormSelect
-  value={nuevoCliente.carg_Id}
-  onChange={(e) =>
-    setnuevoCliente({ ...nuevoCliente, carg_Id: e.target.value })
-  }
-  id="validationCustom01"
-  label="Cargos"
-  required
->
-  <option value="">Seleccione un Cargo</option>
-  {Cargos.map((opcion) => (
-    <option key={opcion.carg_Id} value={opcion.carg_Id}>
-      {opcion.carg_Descripcion}
-    </option>
-  ))}
-</CFormSelect>
-</CCol>
 
 <CCol md={4} className="">
 <CFormInput
@@ -530,6 +512,28 @@ label="Identidad"
 required/>
 
 </CCol>
+
+
+
+<CCol md={4} className="">
+  <CFormSelect
+    value={nuevoCliente.estc_Id}
+    onChange={(e) =>
+        setnuevoCliente({ ...nuevoCliente, estc_Id: e.target.value })
+    }
+    id="validationCustom01"
+    label="Estado Civil"
+    required>
+    <option value="">Seleccione un Estado Civil</option>
+    {EstCivil.map((opcion) => (
+      <option key={opcion.estc_Id} value={opcion.estc_Id}>
+        {opcion.estc_Descripcion}
+      </option>
+    ))}
+  </CFormSelect>
+
+</CCol>
+
 
 <CCol md={4} className="">
   <label>Sexo</label>
@@ -594,45 +598,6 @@ required/>
     id="validationCustom01"
     label="Fecha de Nacimiento"
     required/>
-
-</CCol>
-
-
-    <CCol md={6} className="">
-  <CFormSelect
-    value={nuevoCliente.estc_Id}
-    onChange={(e) =>
-        setnuevoCliente({ ...nuevoCliente, estc_Id: e.target.value })
-    }
-    id="validationCustom01"
-    label="Estado Civil"
-    required>
-    <option value="">Seleccione un Estado Civil</option>
-    {EstCivil.map((opcion) => (
-      <option key={opcion.estc_Id} value={opcion.estc_Id}>
-        {opcion.estc_Descripcion}
-      </option>
-    ))}
-  </CFormSelect>
-
-</CCol>
-
-<CCol md={6} className="">
-  <CFormSelect
-    value={nuevoCliente.sucu_Id}
-    onChange={(e) =>
-        setnuevoCliente({ ...nuevoCliente, sucu_Id: e.target.value })
-    }
-    id="validationCustom01"
-    label="Sucursal"
-    required>
-    <option value="">Seleccione una Sucursal</option>
-    {sucursal.map((opcion) => (
-      <option key={opcion.sucu_Id} value={opcion.sucu_Id}>
-      {opcion.sucu_Nombre}
-      </option>
-    ))}
-  </CFormSelect>
 
 </CCol>
 
@@ -728,24 +693,6 @@ required/>
 
 </CCol>
 
-<CCol md={4} className="">
-<CFormSelect
-value={EditarCliente.carg_Id}
-onChange={(e) =>
-setEditarCliente({ ...EditarCliente, carg_Id: e.target.value })
-}
-id="validationCustom01"
-label="Cargos"
-required
->
-<option value="">Seleccione un Cargo</option>
-{Cargos.map((opcion) => (
-<option key={opcion.carg_Id} value={opcion.carg_Id}>
-{opcion.carg_Descripcion}
-</option>
-))}
-</CFormSelect>
-</CCol>
 
 
 <CCol md={4} className="">
@@ -759,6 +706,25 @@ required/>
 
 </CCol>
 
+
+<CCol md={4} className="">
+<CFormSelect
+value={EditarCliente.estc_Id}
+onChange={(e) =>
+setEditarCliente({ ...EditarCliente, estc_Id: e.target.value })
+}
+id="validationCustom01"
+label="Estado Civil"
+required>
+<option value="">Seleccione un Estado Civil</option>
+{EstCivil.map((opcion) => (
+<option key={opcion.estc_Id} value={opcion.estc_Id}>
+{opcion.estc_Descripcion}
+</option>
+))}
+</CFormSelect>
+
+</CCol>
 
 <CCol md={4} className="">
 <label>Sexo</label>
@@ -825,47 +791,6 @@ label="Fecha de Nacimiento"
 required/>
 
 </CCol>
-
-
-<CCol md={6} className="">
-<CFormSelect
-value={EditarCliente.estc_Id}
-onChange={(e) =>
-setEditarCliente({ ...EditarCliente, estc_Id: e.target.value })
-}
-id="validationCustom01"
-label="Estado Civil"
-required>
-<option value="">Seleccione un Estado Civil</option>
-{EstCivil.map((opcion) => (
-<option key={opcion.estc_Id} value={opcion.estc_Id}>
-{opcion.estc_Descripcion}
-</option>
-))}
-</CFormSelect>
-
-</CCol>
-
-<CCol md={6} className="">
-<CFormSelect
-value={EditarCliente.sucu_Id}
-onChange={(e) =>
-setEditarCliente({ ...EditarCliente, sucu_Id: e.target.value })
-}
-id="validationCustom01"
-label="Sucursal"
-required>
-<option value="">Seleccione una Sucursal</option>
-{sucursal.map((opcion) => (
-<option key={opcion.sucu_Id} value={opcion.sucu_Id}>
-{opcion.sucu_Nombre}
-</option>
-))}
-</CFormSelect>
-
-</CCol>
-
-
 
 <CCol md={6} className=''>
 

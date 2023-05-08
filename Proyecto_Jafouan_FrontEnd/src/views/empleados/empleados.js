@@ -416,8 +416,19 @@ const handleSubmitD = (event) => {
     <div style={{ width: '100%' }}>
       <div className='col-12'>
     <CCard className="p-5">
-      <CardHeader className=' mb-4' style={{ fontFamily: "Ubuntu",  textAlign: 'center', fontSize: 50   }}>Empleados</CardHeader>
-      <CCollapse visible={!visibleEnca}>
+    <CCardHeader
+  className='rounded-top mb-4'
+  style={{
+    fontFamily: "revert-layer",
+    textAlign: 'center',
+    fontSize: 50,
+    backgroundPosition:'',
+  }}
+>
+  Empleados
+</CCardHeader>
+
+    <CCollapse visible={!visibleEnca}>
 
     {/*Modal Eliminar*/}
 

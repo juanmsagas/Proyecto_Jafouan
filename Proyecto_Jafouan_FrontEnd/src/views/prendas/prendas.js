@@ -243,7 +243,7 @@ const form = event.currentTarget
       }))
       setPrendas(insertarid)
     })
-  }, [prendas])
+  }, [])
 
   const handleSortModelChange = (model) => {
     setSortModel(model)
@@ -350,7 +350,8 @@ const form = event.currentTarget
     <div style={{ width: '100%' }}>
       <div className='col-12'>
     <CCard className="p-5">
-      <CardHeader className=' mb-4' style={{ fontFamily: "Ubuntu",  textAlign: 'center', fontSize: 50   }}>Prendas</CardHeader>
+    <CCardHeader className='rounded-top mb-4' style={{ fontFamily: "revert-layer",  textAlign: 'center', fontSize: 50   }}>Prendas</CCardHeader>
+
       <CCollapse visible={!visibleEnca}>
 
 
@@ -378,7 +379,6 @@ const form = event.currentTarget
  onSubmit={handleSubmitD}
 >
    <CFormInput
-   minLength={2} maxLength={2}
      type="hidden"
  value={ElimPrenda.pren_Id}
  id="validationCustom01"

@@ -26,7 +26,8 @@ import {CButton,
         CModalHeader,
         CModalTitle,
         CModalBody,
-        CModalFooter}
+        CModalFooter,
+        }
         from '@coreui/react'
 
 function Departamentos() {
@@ -251,11 +252,11 @@ const handleSubmitD = (event) => {
       <div className='col-12'>
     <CCard className="p-5">
 
+      <CCardHeader className='rounded-top mb-4' style={{ fontFamily: "revert-layer",  textAlign: 'center', fontSize: 50   }}>Departamentos</CCardHeader>
       <CCollapse visible={!visibleEnca}>
 
-      <h1 className='h4 text-center'>Departamentos</h1>
 
-      <div className='col-2 offset-5 mb-4'>
+      <div className='col-2  mb-4'>
       <div className="d-grid gap-1">
 
     <CButton color="primary" variant="outline" href="#"        
@@ -307,7 +308,7 @@ const handleSubmitD = (event) => {
     
       <CCard className="mt-3">
         <CCardHeader>
-          <h1 className='h3 text-center'>Nuevo Departamento</h1>
+          <h1 className='h4 text-center' style={{ fontFamily: "revert-layer"}}>Nuevo Departamento</h1>
         </CCardHeader>
         <CCardBody>
       <CForm
