@@ -8,6 +8,7 @@ const Departamentos = React.lazy(() => import('./views/departamentos/departament
 const Municipios = React.lazy(() => import('./views/municipios/municipios'))
 const Prendas = React.lazy(() => import('./views/prendas/prendas'))
 const Empleados = React.lazy(() => import('./views/empleados/empleados'))
+const Clientes = React.lazy(() => import('./views/clientes/clientes'))
 const Categorias = React.lazy(() => import('./views/categorias/categorias'))
 const Descuentos = React.lazy(() => import('./views/descuentos/descuentos'))
 const EstadosCiviles = React.lazy(() => import('./views/estadosciviles/estadosciviles'))
@@ -37,6 +38,8 @@ const routes = [
   { path: '/estadosciviles', name: 'EstadosCiviles', element: EstadosCiviles },
   { path: '/metodospago', name: 'MetodosPagos', element: MetodosPagos },
   { path: '/fardos', name: 'Fardos', element: Fardos },
+  { path: '/clientes', name: 'Clientes', element: Clientes },
+
 
 
 ]
