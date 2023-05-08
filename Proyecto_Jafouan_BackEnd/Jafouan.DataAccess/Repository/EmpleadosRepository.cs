@@ -42,7 +42,7 @@ namespace Jafouan.DataAccess.Repository
 
             parametros.Add("@empl_Nombres", item.empl_Nombres, DbType.String, ParameterDirection.Input);
             parametros.Add("@empl_Apellidos", item.empl_ApellIdos, DbType.String, ParameterDirection.Input);
-            parametros.Add("@empl_Identidad", item.empl_Identidad, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@empl_Identidad", item.empl_Identidad, DbType.String, ParameterDirection.Input);
             parametros.Add("@empl_FechaNacimiento", item.empl_FechaNacimiento, DbType.Date, ParameterDirection.Input);
             parametros.Add("@empl_Sexo", item.empl_Sexo, DbType.String, ParameterDirection.Input);
             parametros.Add("@estc_Id", item.estc_Id, DbType.Int32, ParameterDirection.Input);
@@ -71,7 +71,7 @@ namespace Jafouan.DataAccess.Repository
             parametros.Add("@empl_Id", item.empl_Id, DbType.String, ParameterDirection.Input);
             parametros.Add("@empl_Nombres", item.empl_Nombres, DbType.String, ParameterDirection.Input);
             parametros.Add("@empl_Apellidos", item.empl_ApellIdos, DbType.String, ParameterDirection.Input);
-            parametros.Add("@empl_Identidad", item.empl_Identidad, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@empl_Identidad", item.empl_Identidad, DbType.String, ParameterDirection.Input);
             parametros.Add("@empl_FechaNacimiento", item.empl_FechaNacimiento, DbType.Date, ParameterDirection.Input);
             parametros.Add("@empl_Sexo", item.empl_Sexo, DbType.String, ParameterDirection.Input);
             parametros.Add("@estc_Id", item.estc_Id, DbType.Int32, ParameterDirection.Input);

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Jafouan.Entities.Entities
 {
-    public partial class VW_MetodosPago
+    public partial class VW_MetodosPagos
     {
         public int meto_Id { get; set; }
         public string meto_Descripcion { get; set; }

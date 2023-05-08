@@ -10,7 +10,7 @@ namespace Jafouan.API.Models
         public int empl_Id { get; set; }
         public string empl_Nombres { get; set; }
         public string empl_Apellidos { get; set; }
-        public int empl_Identidad { get; set; }
+        public string empl_Identidad { get; set; }
         public string NombreCliente { get; set; }
         public int carg_Id { get; set; }
         public string carg_Descripcion { get; set; }

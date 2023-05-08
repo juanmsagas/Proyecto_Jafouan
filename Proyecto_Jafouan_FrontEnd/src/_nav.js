@@ -62,6 +62,18 @@ const _nav = [
     to: '/Prendas',
     icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
   },
+  {
+    component: CNavItem,
+    name: 'Empleados',
+    to: '/Empleados',
+    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Clientes',
+    to: '/Clientes',
+    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
+  },
 ]
 
 export default _nav

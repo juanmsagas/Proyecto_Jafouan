@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Jafouan.DataAccess.Repository
 {
-    public class MetodosPagosRepository : IRepository<tbMetodosPagos, VW_MetodosPago>
+    public class MetodosPagosRepository : IRepository<tbMetodosPagos, VW_MetodosPagos>
     {
         public RequestStatus Delete(tbMetodosPagos item)
         {
@@ -23,14 +23,14 @@ namespace Jafouan.DataAccess.Repository
             return result;
         }
 
-        public VW_MetodosPago Find(int? id)
+        public VW_MetodosPagos Find(int? id)
         {
             using var db = new SqlConnection(Jafouan_Context.ConnectionString);
             var parametros = new DynamicParameters();
             parametros.Add("@meto_Id", id, DbType.Int32, ParameterDirection.Input);
 
 
-            var result = db.QueryFirst<VW_MetodosPago>(ScriptsDataBase.FIND_METODOS, parametros, commandType: System.Data.CommandType.StoredProcedure);
+            var result = db.QueryFirst<VW_MetodosPagos>(ScriptsDataBase.FIND_METODOS, parametros, commandType: System.Data.CommandType.StoredProcedure);
             return result;
         }
 
@@ -47,10 +47,10 @@ namespace Jafouan.DataAccess.Repository
             return result;
         }
 
-        public IEnumerable<VW_MetodosPago> List()
+        public IEnumerable<VW_MetodosPagos> List()
         {
             using var db = new SqlConnection(Jafouan_Context.ConnectionString);
-            return db.Query<VW_MetodosPago>(ScriptsDataBase.INDEX_METODOS, null, commandType: System.Data.CommandType.StoredProcedure);
+            return db.Query<VW_MetodosPagos>(ScriptsDataBase.INDEX_METODOS, null, commandType: System.Data.CommandType.StoredProcedure);
         }
 
         public RequestStatus Update(tbMetodosPagos item)
@@ -67,14 +67,5 @@ namespace Jafouan.DataAccess.Repository
             return result;
         }
 
-        VW_MetodosPago IRepository<tbMetodosPagos, VW_MetodosPago>.Find(int? id)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<VW_MetodosPago> IRepository<tbMetodosPagos, VW_MetodosPago>.List()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
