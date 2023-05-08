@@ -403,7 +403,7 @@ namespace Jafouan.BusinessLogic.Service
             }
             catch (Exception ex)
             {
-
+                _ = ex.Message;
                 return Enumerable.Empty<tbMunicipios>();
             }
         }

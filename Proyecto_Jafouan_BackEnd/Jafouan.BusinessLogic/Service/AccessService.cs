@@ -171,7 +171,7 @@ namespace Jafouan.BusinessLogic.Service
 
 
         //INSERT
-        public ServiceResult InsertUsuario(tbRoles item)
+        public ServiceResult InsertRol(tbRoles item)
         {
             var result = new ServiceResult();
             try
@@ -206,7 +206,7 @@ namespace Jafouan.BusinessLogic.Service
             return list;
         }
 
-        public ServiceResult UpdateUsuario(tbRoles item)
+        public ServiceResult UpdateRol(tbRoles item)
         {
             var result = new ServiceResult();
 
@@ -236,7 +236,7 @@ namespace Jafouan.BusinessLogic.Service
             }
         }
 
-        public ServiceResult DeleteUsuario(tbRoles item)
+        public ServiceResult DeleteRol(tbRoles item)
         {
             var result = new ServiceResult();
             try

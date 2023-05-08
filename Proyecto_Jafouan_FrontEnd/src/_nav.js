@@ -74,39 +74,6 @@ const _nav = [
     to: '/Clientes',
     icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
   },
-  {
-    component: CNavItem,
-    name: 'Categorias',
-    to: '/Categorias',
-    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Descuentos',
-    to: '/Descuentos',
-    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
-  },
-
-  {
-    component: CNavItem,
-    name: 'Estados Civiles',
-    to: '/EstadosCiviles',
-    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
-  },
-
-  {
-    component: CNavItem,
-    name: 'Marcas',
-    to: '/Marcas',
-    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Metodos de Pago',
-    to: '/MetodosPago',
-    icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
-  },
 ]
-
 
 export default _nav

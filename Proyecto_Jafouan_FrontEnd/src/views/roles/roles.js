@@ -6,6 +6,8 @@ import { IconButton} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import VisibilityIcon from '@material-ui/icons/Visibility'
+import MonitorIcon from '@mui/icons-material/Monitor';
+import AddIcon  from '@material-ui/icons/Add'
 import SearchIcon from '@material-ui/icons/Search'
 import {CButton,
         CCollapse,
@@ -20,14 +22,23 @@ import {CButton,
         CFormSelect,
         CFormCheck,
         CFormFeedback,
-        CCardHeader}
+        CCardHeader,
+        CModal,
+        CModalHeader,
+        CModalTitle,
+        CModalBody,
+        CModalFooter,
+        }
         from '@coreui/react'
 
 function Roles() {
-  const [usuarios, setUsuarios] = useState([])
-  const [sortModel, setSortModel] = useState([{ field: 'user_Id', sort: 'asc' }])
+  const [roles, setRoles] = useState([])
+  const [sortModel, setSortModel] = useState([{ field: 'role_Id', sort: 'asc' }])
   const [visible, setVisible] = useState(false)
-  
+  const [visible2, setVisible2] = useState(false)
+  const [Modal, setModal] = useState(false)
+  const [visibleEnca, setvisibleEnca   ] = useState(false)
+
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
     const form = event.currentTarget
@@ -37,7 +48,169 @@ function Roles() {
     }
     setValidated(true)
   }
-  //peticion a la api 
+
+  const [Role_Id_Pant, set_Role_Id_Pant] = useState({
+    role_Id: 0,
+    pant_Id: 0
+})
+
+  const [nuevoRol, setNuevoRol] = useState({
+    role_Id: '',
+    role_Descripcion: '',
+    role_UserCrea:1
+})
+const [ElimRol, setElimRol] = useState({
+  role_Id: ''
+})
+const [EditarRol, setEditarRol] = useState({
+  role_Id: '',
+  role_Descripcion: '',
+  role_UserModifica:1
+})
+
+const abrireditar = (params,event) => {
+  if (event) {
+    event.preventDefault()
+  }
+  setVisible2(!visible2)
+  setvisibleEnca(!visibleEnca)
+  console.log(params)
+  setEditarRol({
+    role_Id: params.role_Id,
+    role_Descripcion:  params.role_Descripcion,
+    role_UserModifica:1
+}
+)}
+
+const cerrarEditar = (event) => {
+  event.preventDefault()
+  setVisible2(!visible2)
+  setvisibleEnca(!visibleEnca)
+  setEditarRol({
+    role_Id: '',
+    role_Descripcion: '',
+    role_UserModifica:1
+}
+)}
+
+const abrirycerrarInsert = (event) => {
+  event.preventDefault()
+  setVisible(!visible)
+  setvisibleEnca(!visibleEnca)
+  setNuevoRol({
+    role_Id: '',
+    role_Descripcion: '',
+    role_UserCrea:1
+}
+)}
+
+
+const ModalFun = (params,event) => {
+  if (event) {
+    event.preventDefault()
+  }
+  setModal(!visible)
+  setElimRol({
+    role_Id: params,
+   
+}
+)}
+
+
+  //peticion a la api insert   
+const handleSubmitI = (event) => {
+    event.preventDefault()
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+ const form = event.currentTarget
+  if (form.checkValidity() === false) {
+    event.preventDefault()
+    event.stopPropagation()
+  }
+  setValidated(true)
+  if(form.checkValidity() != false){
+    axios.post('api/Roles/Insert', nuevoRol, config)
+        .then((response) => {
+            console.log(response.data)
+            setVisible(false)
+            setvisibleEnca(!visibleEnca)
+            setNuevoRol({
+                role_Id: '',
+                role_Descripcion: '',
+                role_UserCrea:1
+            })
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+      }
+}
+
+//peticion a la api Editar   
+const handleSubmitE = (event) => {
+  event.preventDefault()
+
+  const config = {
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  }
+const form = event.currentTarget
+  if (form.checkValidity() === false) {
+    event.preventDefault()
+    event.stopPropagation()
+  }
+  setValidated(true)
+  if(form.checkValidity() != false){
+  axios.put('api/Roles/Update', EditarRol, config)
+      .then((response) => {
+          console.log(response.data)
+          setVisible2(!visible2)
+          setvisibleEnca(!visibleEnca)
+          setEditarRol({
+            role_Id: '',
+            role_Descripcion: '',
+            role_UserModifica:1
+        })  
+        console.log(response.data)
+      })
+      .catch((error) => {
+          console.log(error)
+      })
+    }
+}
+
+
+//peticion a la api Eliminar   
+const handleSubmitD = (event) => {
+  event.preventDefault()
+
+  const config = {
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  }
+  axios.put('api/Roles/Delete', ElimRol, config)
+      .then((response) => {
+          console.log(response.data)
+          setModal(false)
+          setElimRol({
+            role_Id: '',
+        })
+        console.log(response.data)
+      })
+      .catch((error) => {
+          console.log(error)
+      })
+    
+}
+
+
+  //peticion a la api listado   
   useEffect(() => {
     axios.get('api/Roles/Index').then((response) => {
       console.log('entra')
@@ -45,7 +218,7 @@ function Roles() {
         ...row,
         id: row.role_Id,
       }))
-      setUsuarios(insertarid)
+      setRoles(insertarid)
     })
   }, [])
 
@@ -54,23 +227,32 @@ function Roles() {
   }
 
   const columns = [
-    { field: 'role_Id', headerName: 'ID', width: 1 },
-    { field: 'role_Descripcion', headerName: 'Descripción', width: 300 },
+    { field: 'role_Id', headerName: 'ID', flex:1, },
+    { field: 'role_Descripcion', headerName: 'Rol', flex:2, },
     {
       field: 'acciones',
       headerName: 'Acciones',
-      width: 300,
+      flex:1,
       renderCell: (params) => (
         <div>
-          <IconButton color="secondary">
-            <DeleteIcon />
-          </IconButton>
-          <IconButton color="primary">
-            <EditIcon />
-          </IconButton>
-          <IconButton>
-            <VisibilityIcon />
-          </IconButton>
+      
+            <CButton  color="info ms-2" variant="outline">
+              <VisibilityIcon />
+            </CButton>
+
+            <CButton color="warning ms-2" variant="outline" onClick={() => abrireditar(params.row)}>
+              <EditIcon />
+            </CButton>
+          
+            <CButton color="dark ms-2" variant="outline" >
+              <MonitorIcon/>
+            </CButton>
+
+            <CButton color="danger ms-2" variant="outline" onClick={() => ModalFun(params.row.role_Id)}>
+              <DeleteIcon />
+            </CButton>
+
+        
         </div>
       ),
     },
@@ -79,56 +261,92 @@ function Roles() {
   return (
     <div style={{ width: '100%' }}>
       <div className='col-12'>
-      <CCollapse visible={!visible}>
+    <CCard className="p-5">
 
-      <h1 className='h4 text-center'>Roles</h1>
+      <CCardHeader className='rounded-top mb-4' style={{ fontFamily: "revert-layer",  textAlign: 'center', fontSize: 50   }}>Roles</CCardHeader>
+      <CCollapse visible={!visibleEnca}>
 
-      <div className='col-2 offset-5 mb-4'>
+
+      <div className='col-2  mb-4'>
       <div className="d-grid gap-1">
 
-    <CButton color="primary" variant="outline" href="#" onClick={(event) => {
-      event.preventDefault()
-      setVisible(!visible)
-    }}>
+    <CButton color="primary" variant="outline" href="#"        
+    onClick={abrirycerrarInsert}
+      >
+      <AddIcon className='nav-icon  mb-1'></AddIcon>
       Nuevo
     </CButton>
           </div>
       </div>
     </CCollapse>
 
+ {/*Modal Eliminar*/}
 
-    <CCollapse visible={visible}>
-    
-      <CCard className="mt-3">
-        <CCardHeader>
-          <h1 className='h3 text-center'>Nuevo Rol</h1>
-        </CCardHeader>
-        <CCardBody>
-        <CForm
+    <CModal alignment="center"  visible={Modal} onClick={() => setModal(false)}>
+      
+      <CModalBody className='pt-5 pb-5' style={{boxShadow:5}}>
+      <CForm
     className="row g-3 needs-validation"
     noValidate
     validated={validated}
-    onSubmit={handleSubmit}
-  >
-    <CCol md={6} className='offset-3'>
+    onSubmit={handleSubmitD}
+>
       <CFormInput
-        type="text"
-        defaultValue=""
-        feedbackValid="Looks good!"
-        id="validationCustom01"
-        label="Rol Descripción"
-        required
-      />
-    </CCol>
+      minLength={2} maxLength={2}
+        type="hidden"
+    value={ElimRol.role_Id}
+    id="validationCustom01"
+    disabled
+    required/>
+            <center>
+        <CModalTitle>Esta seguro que desea Eliminar este registro?</CModalTitle>
+        </center>
+    <center>
+     <CButton color="light"  className='col-5 me-3' onClick={() => setModal(false)}>
+          Cancelar
+        </CButton>
+        <CButton color="danger text-light" type='submit' className='col-5'>Eliminar</CButton>
+    </center>
+    </CForm>
+      </CModalBody>
+      
+    </CModal>
+
+
+ {/*Formulario Insertar*/}
+ 
+    <CCollapse visible={visible} className='col-6 offset-3'>
     
-    <CCol xs={12}>
-      <CButton color="primary" type="submit">
+      <CCard className="mt-3">
+        <CCardHeader>
+          <h1 className='h4 text-center' style={{ fontFamily: "revert-layer"}}>Nuevo Rol</h1>
+        </CCardHeader>
+        <CCardBody>
+      <CForm
+    className="row g-3 needs-validation"
+    noValidate
+    validated={validated}
+    onSubmit={handleSubmitI}
+>
+
+      
+       <CCol md={12} className=''>
+
+        <CFormInput
+    type="text"
+    value={nuevoRol.role_Descripcion}
+    onChange={(e) => setNuevoRol({ ...nuevoRol, role_Descripcion: e.target.value })}
+    id="validationCustom01"
+    label="Nombre Rol"
+    required/>
+
+    </CCol>
+
+    <CCol xs={12} className='offset-7'>
+      <CButton color="primary"  type="submit">
         Guardar
       </CButton>
-      <CButton color="danger"  href="#" onClick={(event) => {
-      event.preventDefault()
-      setVisible(!visible)
-    }}>
+      <CButton color="danger text-light"  className='ms-2' href="#" onClick={abrirycerrarInsert}>
       Cancelar
     </CButton>
     </CCol>
@@ -138,9 +356,63 @@ function Roles() {
     </CCollapse>
 
 
-      <CCollapse visible={!visible}>
+ {/*Formulario Editar*/}
+    <CCollapse visible={visible2} className='col-6 offset-3'>
+    
+    <CCard className="mt-3">
+      <CCardHeader>
+        <h1 className='h3 text-center'>Editar Rol</h1>
+      </CCardHeader>
+      <CCardBody>
+    <CForm
+  className="row g-3 needs-validation"
+  noValidate
+  validated={validated}
+  onSubmit={handleSubmitE}
+>
+
+     <CCol md={6} className=''>
+    <CFormInput
+      type="hidden"
+  value={EditarRol.role_Id}
+  onChange={(e) => setEditarRol({ ...EditarRol, role_Id: e.target.value })}
+  id="validationCustom01"
+  required
+    />
+  </CCol>
+     <CCol md={12} className=''>
+
+      <CFormInput
+  type="text"
+  minLength={2}
+  value={EditarRol.role_Descripcion}
+  onChange={(e) => setEditarRol({ ...EditarRol, role_Descripcion: e.target.value })}
+  id="validationCustom01"
+  label="Nombre Rol"
+  required
+/>
+
+  </CCol>
+
+  <CCol xs={12} className='offset-7'>
+    <CButton color="primary" type="submit">
+      Guardar
+    </CButton>
+    <CButton color="danger text-light" className='ms-2' href="#"  onClick={cerrarEditar}>
+      Cancelar
+    </CButton>
+  </CCol>
+</CForm>
+      </CCardBody>
+    </CCard>
+  </CCollapse>
+
+
+      <CCollapse visible={!visibleEnca}>
+    <CCard className="mt-3 p-1">
+
       <DataGrid
-        rows={usuarios}
+        rows={roles}
         columns={columns}
         sortModel={sortModel}
         onSortModelChange={handleSortModelChange}
@@ -150,7 +422,9 @@ function Roles() {
         }}
         localeText={esES.components.MuiDataGrid.defaultProps.localeText}
       />
+      </CCard>
       </CCollapse>
+      </CCard>
       </div>
     </div>
   )
