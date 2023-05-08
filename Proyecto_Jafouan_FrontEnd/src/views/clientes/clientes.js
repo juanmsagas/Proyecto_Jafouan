@@ -101,8 +101,8 @@ const abrirPrenda = (params,event) => {
   setvisibleEnca(!visibleEnca)
   console.log(params)
   const fecha = new Date(params.clie_FechaNacimiento);
-const fechaFormateada = fecha.toISOString().slice(0, 10);
-console.log(fechaFormateada); // '2005-02-01'
+  const fechaFormateada = fecha.toISOString().slice(0, 10);
+  setValidated(false)
 
   setEditarCliente({
     clie_Id:params.clie_Id,
