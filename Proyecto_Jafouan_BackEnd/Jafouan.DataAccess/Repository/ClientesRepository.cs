@@ -42,7 +42,7 @@ namespace Jafouan.DataAccess.Repository
 
             parametros.Add("@clie_Nombres", item.clie_Nombres, DbType.String, ParameterDirection.Input);
             parametros.Add("@clie_Apellidos", item.clie_ApellIdos, DbType.String, ParameterDirection.Input);
-            parametros.Add("@clie_Identidad", item.clie_Identidad, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@clie_Identidad", item.clie_Identidad, DbType.String, ParameterDirection.Input);
             parametros.Add("@clie_FechaNacimiento", item.clie_FechaNacimiento, DbType.Date, ParameterDirection.Input);
             parametros.Add("@clie_Sexo", item.clie_Sexo, DbType.String, ParameterDirection.Input);
             parametros.Add("@estc_Id", item.estc_Id, DbType.Int32, ParameterDirection.Input);

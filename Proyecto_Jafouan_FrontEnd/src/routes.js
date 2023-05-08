@@ -8,6 +8,8 @@ const Departamentos = React.lazy(() => import('./views/departamentos/departament
 const Municipios = React.lazy(() => import('./views/municipios/municipios'))
 const Prendas = React.lazy(() => import('./views/prendas/prendas'))
 const Empleados = React.lazy(() => import('./views/empleados/empleados'))
+const Clientes = React.lazy(() => import('./views/clientes/clientes'))
+
 
 
 
@@ -24,6 +26,7 @@ const routes = [
   { path: '/municipios', name: 'Municipios', element: Municipios },
   { path: '/prendas', name: 'Prendas', element: Prendas },
   { path: '/empleados', name: 'Empleados', element: Empleados },
+  { path: '/clientes', name: 'Clientes', element: Clientes },
 
 
 ]

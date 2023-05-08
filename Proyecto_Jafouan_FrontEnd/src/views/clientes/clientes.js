@@ -34,8 +34,8 @@ import {CButton,
         from '@coreui/react'
 import { CardHeader } from 'reactstrap'
 
-function Empleados() {
-  const [empleados, setempleados] = useState([])
+function Clientes() {
+  const [Clientes, setClientes] = useState([])
   const [sortModel, setSortModel] = useState([{ field: 'pren_Id', sort: 'asc' }])
   const [visible, setVisible] = useState(false)
   const [visible2, setVisible2] = useState(false)
@@ -56,43 +56,41 @@ function Empleados() {
     }
     setValidated(true)
   }
-  const [nuevoEmpleado, setnuevoEmpleado] = useState({
-    empl_Nombres: '',
-    empl_Apellidos: '',
-    carg_Id: 0,
-    empl_FechaNacimiento: '',
-    empl_Identidad:'',
-    empl_Sexo: '',
+  const [nuevoCliente, setnuevoCliente] = useState({
+    clie_Nombres: '',
+    clie_Apellidos: '',
+    clie_FechaNacimiento: '',
+    clie_Identidad:'',
+    clie_Sexo: '',
     estc_Id: 0,
-    empl_Telefeno: '',
+    clie_Telefeno: '',
     muni_Id: '',
-    sucu_Id: 0,
-    empl_Direccion: '',
-    empl_UserCrea:1,
+    clie_Direccion: '',
+    clie_UserCrea:1,
 })
 
 const [dept_Id, setdept_Id] = useState({
     dept_Id: ''
 })
 
-const [ElimEmpleado, setElimEmpleado] = useState({
-    empl_Id: 0
+const [ElimCliente, setElimCliente] = useState({
+    clie_Id: 0
   })
 
-const [EditarEmpleado, setEditarEmpleado] = useState({
-    empl_Id:0,
-    empl_Nombres: '',
-    empl_Apellidos: '',
+const [EditarCliente, setEditarCliente] = useState({
+    clie_Id:0,
+    clie_Nombres: '',
+    clie_Apellidos: '',
     carg_Id: 0,
-    empl_FechaNacimiento: '',
-    empl_Identidad:'',
-    empl_Sexo: '',
+    clie_FechaNacimiento: '',
+    clie_Identidad:'',
+    clie_Sexo: '',
     estc_Id: 0,
-    empl_Telefeno: '',
+    clie_Telefeno: '',
     muni_Id: '',
     sucu_Id: 0,
-    empl_Direccion: '',
-    empl_UserModifica:1,
+    clie_Direccion: '',
+    clie_UserModifica:1,
 })
 
 const abrirPrenda = (params,event) => {
@@ -102,25 +100,25 @@ const abrirPrenda = (params,event) => {
   setVisible2(!visible2)
   setvisibleEnca(!visibleEnca)
   console.log(params)
-  const fecha = new Date(params.empl_FechaNacimiento);
+  const fecha = new Date(params.clie_FechaNacimiento);
 const fechaFormateada = fecha.toISOString().slice(0, 10);
 console.log(fechaFormateada); // '2005-02-01'
 
-  setEditarEmpleado({
-    empl_Id:params.empl_Id,
-    empl_Nombres: params.empl_Nombres,
-    empl_Apellidos: params.empl_Apellidos,
+  setEditarCliente({
+    clie_Id:params.clie_Id,
+    clie_Nombres: params.clie_Nombres,
+    clie_ApellIdos: params.clie_ApellIdos,
     carg_Id: params.carg_Id,
-    empl_FechaNacimiento: fechaFormateada,
-    empl_Identidad:params.empl_Identidad,
-    empl_Sexo: params.empl_Sexo,
+    clie_FechaNacimiento: fechaFormateada,
+    clie_Identidad:params.clie_Identidad,
+    clie_Sexo: params.clie_Sexo,
     estc_Id: params.estc_Id,
-    empl_Telefeno: params.empl_Telefeno,
+    clie_Telefeno: params.clie_Telefeno,
     dept_Id: params.dept_Id,
     muni_Id: params.muni_Id,
     sucu_Id: params.sucu_Id,
-    empl_Direccion: params.empl_Direccion,
-    empl_UserModifica:1,    
+    clie_Direccion: params.clie_Direccion,
+    clie_UserModifica:1,    
 })
 }
 
@@ -129,19 +127,19 @@ const cerrarEditar = (event) => {
   event.preventDefault()
   setVisible2(!visible2)
   setvisibleEnca(!visibleEnca)
-  setEditarEmpleado({
-    empl_Id:0,
-    empl_Nombres: '',
-    empl_Apellidos: '',
+  setEditarCliente({
+    clie_Id:0,
+    clie_Nombres: '',
+    clie_Apellidos: '',
     carg_Id: 0,
-    empl_FechaNacimiento: '',
-    empl_Sexo: 0,
+    clie_FechaNacimiento: '',
+    clie_Sexo: 0,
     estc_Id: 0,
-    empl_Telefeno: '',
+    clie_Telefeno: '',
     muni_Id: '',
     sucu_Id: '',
-    empl_Direccion: '',
-    empl_UserModifica:1,    
+    clie_Direccion: '',
+    clie_UserModifica:1,    
 })
 }
 
@@ -149,18 +147,18 @@ const abrirycerrarInsert = (event) => {
   event.preventDefault()
   setVisible(!visible)
   setvisibleEnca(!visibleEnca)
-  setEditarEmpleado({
-    empl_Nombres: '',
-    empl_Apellidos: '',
+  setEditarCliente({
+    clie_Nombres: '',
+    clie_Apellidos: '',
     carg_Id: 0,
-    empl_FechaNacimiento: '',
-    empl_Sexo: '',
+    clie_FechaNacimiento: '',
+    clie_Sexo: '',
     estc_Id: 0,
-    empl_Telefeno: '',
+    clie_Telefeno: '',
     muni_Id: '',
     sucu_Id: 0,
-    empl_Direccion: '',
-    empl_UserCrea:1,
+    clie_Direccion: '',
+    clie_UserCrea:1,
 })
 
 }
@@ -181,24 +179,21 @@ const handleSubmitI = (event) => {
   }
   setValidated(true)
   if(form.checkValidity() != false){
-    axios.post('/api/Empleados/Insert', nuevoEmpleado, config)
+    axios.post('api/Clientes/Insert', nuevoCliente, config)
         .then((response) => {
             console.log(response.data)
             setVisible(false)
             setvisibleEnca(!visibleEnca)
-            setnuevoEmpleado({
-                empl_Nombres: '',
-                empl_Apellidos: '',
-                carg_Id: 0,
-                empl_FechaNacimiento: '',
-                empl_Identidad:'',
-                empl_Sexo: '',
-                estc_Id: 0,
-                empl_Telefeno: '',
-                muni_Id: '',
-                sucu_Id: 0,
-                empl_Direccion: '',
-                empl_UserCrea:1,
+            setnuevoCliente({
+              pren_Descripcion: '',
+              pren_Talla: '',
+              desc_Id: '',
+              pren_Precio: 0,
+              marc_Id: '',
+              cate_Id: '',
+              fard_Id: '',
+              pren_Imagen: '',
+              pren_UserCrea: 1
             })
         })
         .catch((error) => {
@@ -223,24 +218,24 @@ const form = event.currentTarget
   }
   setValidated(true)
   if(form.checkValidity() != false){
-  axios.put('api/Empleados/Update', EditarEmpleado, config)
+  axios.put('api/Clientes/Update', EditarCliente, config)
       .then((response) => {
           console.log(response.data)
           setVisible2(!visible2)
           setvisibleEnca(!visibleEnca)
-          setEditarEmpleado({
-            empl_Nombres: '',
-            empl_Apellidos: '',
+          setEditarCliente({
+            clie_Nombres: '',
+            clie_Apellidos: '',
             carg_Id: 0,
-            empl_FechaNacimiento: '',
-            empl_Identidad:'',
-            empl_Sexo: '',
+            clie_FechaNacimiento: '',
+            clie_Identidad:'',
+            clie_Sexo: '',
             estc_Id: 0,
-            empl_Telefeno: '',
+            clie_Telefeno: '',
             muni_Id: '',
             sucu_Id: 0,
-            empl_Direccion: '',
-            empl_UserCrea:1,
+            clie_Direccion: '',
+            clie_UserCrea:1,
         })
         console.log(response.data)
       })
@@ -260,12 +255,12 @@ const handleSubmitD = (event) => {
             'Content-Type': 'application/json'
         }
     }
-    axios.put('api/Empleados/Delete', ElimEmpleado, config)
+    axios.put('api/Clientes/Delete', ElimCliente, config)
         .then((response) => {
             console.log(response.data)
             setModal(false)
-            setElimEmpleado({
-              empl_Id: 0,
+            setElimCliente({
+              clie_Id: '',
           })
           console.log(response.data)
         })
@@ -300,13 +295,13 @@ const handleSubmitD = (event) => {
       
   //peticion a la api listado   
   useEffect(() => {
-    axios.get('api/Empleados/Index').then((response) => {
+    axios.get('api/Clientes/Index').then((response) => {
       console.log('entra')
       const insertarid = response.data.map((row) => ({
         ...row,
-        id: row.empl_Id,
+        id: row.clie_Id,
       }))
-      setempleados(insertarid)
+      setClientes(insertarid)
     })
   }, [])
 
@@ -315,10 +310,10 @@ const handleSubmitD = (event) => {
   }
 
   const columns = [
-    { field: 'empl_Id', headerName: 'ID',  width: 90},
-    { field: 'nombreCliente', headerName: 'Empleado',  width: 150},
-    { field: 'carg_Descripcion', headerName: 'Cargo',  width: 150},
-    { field: 'emplSexo', headerName: 'Sexo',  width: 150},
+    { field: 'clie_Id', headerName: 'ID',  width: 90},
+    { field: 'nombreCliente', headerName: 'Cliente',  width: 150},
+    { field: 'clie_Identidad', headerName: 'IDENTIDAD',  width: 150},
+    { field: 'clieSexo', headerName: 'Sexo',  width: 150},
     { field: 'dept_Descripcion', headerName: 'Departamento',  width: 150},
     { field: 'muni_Descripcion', headerName: 'Municipio',  width: 150},
     {
@@ -345,7 +340,7 @@ const handleSubmitD = (event) => {
         </CButton>
 
           
-        <CButton color="danger ms-2" variant="outline" onClick={() => ModalFun(params.row.empl_Id)}>
+        <CButton color="danger ms-2" variant="outline" onClick={() => ModalFun(params.row.clie_Id)}>
             <DeleteIcon />
             </CButton>
         
@@ -359,8 +354,8 @@ const handleSubmitD = (event) => {
       event.preventDefault()
     }
     setModal(!visible)
-    setElimEmpleado({
-      empl_Id: params,
+    setElimCliente({
+      clie_Id: params,
      
   })
   }
@@ -416,7 +411,7 @@ const handleSubmitD = (event) => {
     <div style={{ width: '100%' }}>
       <div className='col-12'>
     <CCard className="p-5">
-      <CardHeader className=' mb-4' style={{ fontFamily: "Ubuntu",  textAlign: 'center', fontSize: 50   }}>Empleados</CardHeader>
+      <CardHeader className=' mb-4' style={{ fontFamily: "Ubuntu",  textAlign: 'center', fontSize: 50   }}>Clientes</CardHeader>
       <CCollapse visible={!visibleEnca}>
 
     {/*Modal Eliminar*/}
@@ -432,8 +427,8 @@ const handleSubmitD = (event) => {
 >
       <CFormInput
       minLength={2} maxLength={2}
-        type="hidden"
-    value={ElimEmpleado.empl_Id}
+        type="text"
+    value={ElimCliente.clie_Id}
     id="validationCustom01"
     disabled
     required/>
@@ -469,7 +464,7 @@ const handleSubmitD = (event) => {
     
       <CCard className="mt-3">
         <CCardHeader>
-          <h1 className='h3 text-center'>Nuevo Empleado</h1>
+          <h1 className='h3 text-center'>Nuevo Cliente</h1>
         </CCardHeader>
         <CCardBody>
       <CForm
@@ -484,8 +479,8 @@ const handleSubmitD = (event) => {
 
         <CFormInput
     type="text"
-    value={nuevoEmpleado.empl_Nombres}
-    onChange={(e) => setnuevoEmpleado({ ...nuevoEmpleado, empl_Nombres: e.target.value })}
+    value={nuevoCliente.clie_Nombres}
+    onChange={(e) => setnuevoCliente({ ...nuevoCliente, clie_Nombres: e.target.value })}
     id="validationCustom01"
     label="Nombres"
     required/>
@@ -498,8 +493,8 @@ const handleSubmitD = (event) => {
 
 <CFormInput
 type="text"
-value={nuevoEmpleado.empl_Apellidos}
-onChange={(e) => setnuevoEmpleado({ ...nuevoEmpleado, empl_Apellidos: e.target.value })}
+value={nuevoCliente.clie_Apellidos}
+onChange={(e) => setnuevoCliente({ ...nuevoCliente, clie_Apellidos: e.target.value })}
 id="validationCustom01"
 label="Apellidos"
 required/>
@@ -508,9 +503,9 @@ required/>
     
 <CCol md={4} className="">
     <CFormSelect
-  value={nuevoEmpleado.carg_Id}
+  value={nuevoCliente.carg_Id}
   onChange={(e) =>
-    setnuevoEmpleado({ ...nuevoEmpleado, carg_Id: e.target.value })
+    setnuevoCliente({ ...nuevoCliente, carg_Id: e.target.value })
   }
   id="validationCustom01"
   label="Cargos"
@@ -528,8 +523,8 @@ required/>
 <CCol md={4} className="">
 <CFormInput
 type="text"
-value={nuevoEmpleado.empl_Identidad}
-onChange={(e) => setnuevoEmpleado({ ...nuevoEmpleado, empl_Identidad: e.target.value })}
+value={nuevoCliente.clie_Identidad}
+onChange={(e) => setnuevoCliente({ ...nuevoCliente, clie_Identidad: e.target.value })}
 id="validationCustom01"
 label="Identidad"
 required/>
@@ -538,8 +533,8 @@ required/>
 
 <CCol md={4} className="">
   <label>Sexo</label>
-  <CFormCheck type="radio" name="sexo" id="Femenino" value="F" label="Femenino" required checked={nuevoEmpleado.empl_Sexo === "F"} onChange={(e) => setnuevoEmpleado({ ...nuevoEmpleado, empl_Sexo: e.target.value })}/> 
-  <CFormCheck type="radio" name="sexo" id="Masculino" value="M" label="Masculino" required checked={nuevoEmpleado.empl_Sexo === "M"} onChange={(e) => setnuevoEmpleado({ ...nuevoEmpleado, empl_Sexo: e.target.value })}/>
+  <CFormCheck type="radio" name="sexo" id="Femenino" value="F" label="Femenino" required checked={nuevoCliente.clie_Sexo === "F"} onChange={(e) => setnuevoCliente({ ...nuevoCliente, clie_Sexo: e.target.value })}/> 
+  <CFormCheck type="radio" name="sexo" id="Masculino" value="M" label="Masculino" required checked={nuevoCliente.clie_Sexo === "M"} onChange={(e) => setnuevoCliente({ ...nuevoCliente, clie_Sexo: e.target.value })}/>
 </CCol>
 
 
@@ -573,9 +568,9 @@ required/>
 
 <CCol md={6} className="">
   <CFormSelect
-    value={nuevoEmpleado.muni_Id}
+    value={nuevoCliente.muni_Id}
     onChange={(e) =>
-        setnuevoEmpleado({ ...nuevoEmpleado, muni_Id: e.target.value })
+        setnuevoCliente({ ...nuevoCliente, muni_Id: e.target.value })
     }
     id="validationCustom01"
     label="Municipio"
@@ -594,8 +589,8 @@ required/>
 <CCol md={6} className="">
 <CFormInput
     type="date"
-    value={nuevoEmpleado.empl_FechaNacimiento}
-    onChange={(e) => setnuevoEmpleado({ ...nuevoEmpleado, empl_FechaNacimiento: e.target.value })}
+    value={nuevoCliente.clie_FechaNacimiento}
+    onChange={(e) => setnuevoCliente({ ...nuevoCliente, clie_FechaNacimiento: e.target.value })}
     id="validationCustom01"
     label="Fecha de Nacimiento"
     required/>
@@ -605,9 +600,9 @@ required/>
 
     <CCol md={6} className="">
   <CFormSelect
-    value={nuevoEmpleado.estc_Id}
+    value={nuevoCliente.estc_Id}
     onChange={(e) =>
-        setnuevoEmpleado({ ...nuevoEmpleado, estc_Id: e.target.value })
+        setnuevoCliente({ ...nuevoCliente, estc_Id: e.target.value })
     }
     id="validationCustom01"
     label="Estado Civil"
@@ -624,9 +619,9 @@ required/>
 
 <CCol md={6} className="">
   <CFormSelect
-    value={nuevoEmpleado.sucu_Id}
+    value={nuevoCliente.sucu_Id}
     onChange={(e) =>
-        setnuevoEmpleado({ ...nuevoEmpleado, sucu_Id: e.target.value })
+        setnuevoCliente({ ...nuevoCliente, sucu_Id: e.target.value })
     }
     id="validationCustom01"
     label="Sucursal"
@@ -647,8 +642,8 @@ required/>
 
 <CFormInput
 type="text"
-value={nuevoEmpleado.empl_Telefeno}
-onChange={(e) => setnuevoEmpleado({ ...nuevoEmpleado, empl_Telefeno: e.target.value })}
+value={nuevoCliente.clie_Telefeno}
+onChange={(e) => setnuevoCliente({ ...nuevoCliente, clie_Telefeno: e.target.value })}
 id="validationCustom01"
 label="Telefono"
 required/>
@@ -659,8 +654,8 @@ required/>
 
 <CFormInput
 type="text"
-value={nuevoEmpleado.empl_Direccion}
-onChange={(e) => setnuevoEmpleado({ ...nuevoEmpleado, empl_Direccion: e.target.value })}
+value={nuevoCliente.clie_Direccion}
+onChange={(e) => setnuevoCliente({ ...nuevoCliente, clie_Direccion: e.target.value })}
 id="validationCustom01"
 label="Dirección"
 required/>
@@ -700,8 +695,8 @@ required/>
 <CCol md={0} className=''>
 <CFormInput
 type="hidden"
-value={EditarEmpleado.empl_Id}
-onChange={(e) => setEditarEmpleado({ ...EditarEmpleado, empl_Id: e.target.value })}
+value={EditarCliente.clie_Id}
+onChange={(e) => setEditarCliente({ ...EditarCliente, clie_Id: e.target.value })}
 required/>
 
 </CCol>
@@ -711,8 +706,8 @@ required/>
 
 <CFormInput
 type="text"
-value={EditarEmpleado.empl_Nombres}
-onChange={(e) => setEditarEmpleado({ ...EditarEmpleado, empl_Nombres: e.target.value })}
+value={EditarCliente.clie_Nombres}
+onChange={(e) => setEditarCliente({ ...EditarCliente, clie_Nombres: e.target.value })}
 id="validationCustom01"
 label="Nombres"
 required/>
@@ -725,8 +720,8 @@ required/>
 
 <CFormInput
 type="text"
-value={EditarEmpleado.empl_Apellidos}
-onChange={(e) => setEditarEmpleado({ ...EditarEmpleado, empl_Apellidos: e.target.value })}
+value={EditarCliente.clie_ApellIdos}
+onChange={(e) => setEditarCliente({ ...EditarCliente, clie_Apellidos: e.target.value })}
 id="validationCustom01"
 label="Apellidos"
 required/>
@@ -735,9 +730,9 @@ required/>
 
 <CCol md={4} className="">
 <CFormSelect
-value={EditarEmpleado.carg_Id}
+value={EditarCliente.carg_Id}
 onChange={(e) =>
-setEditarEmpleado({ ...EditarEmpleado, carg_Id: e.target.value })
+setEditarCliente({ ...EditarCliente, carg_Id: e.target.value })
 }
 id="validationCustom01"
 label="Cargos"
@@ -756,8 +751,8 @@ required
 <CCol md={4} className="">
 <CFormInput
 type="text"
-value={EditarEmpleado.empl_Identidad}
-onChange={(e) => setEditarEmpleado({ ...EditarEmpleado, empl_Identidad: e.target.value })}
+value={EditarCliente.clie_Identidad}
+onChange={(e) => setEditarCliente({ ...EditarCliente, clie_Identidad: e.target.value })}
 id="validationCustom01"
 label="Identidad"
 required/>
@@ -767,8 +762,8 @@ required/>
 
 <CCol md={4} className="">
 <label>Sexo</label>
-<CFormCheck type="radio" name="sexo" id="Femenino" value="F" label="Femenino" required checked={EditarEmpleado.empl_Sexo === "F"} onChange={(e) => setEditarEmpleado({ ...EditarEmpleado, empl_Sexo: e.target.value })}/> 
-<CFormCheck type="radio" name="sexo" id="Masculino" value="M" label="Masculino" required checked={EditarEmpleado.empl_Sexo === "M"} onChange={(e) => setEditarEmpleado({ ...EditarEmpleado, empl_Sexo: e.target.value })}/>
+<CFormCheck type="radio" name="sexo" id="Femenino" value="F" label="Femenino" required checked={EditarCliente.clie_Sexo === "F"} onChange={(e) => setEditarCliente({ ...EditarCliente, clie_Sexo: e.target.value })}/> 
+<CFormCheck type="radio" name="sexo" id="Masculino" value="M" label="Masculino" required checked={EditarCliente.clie_Sexo === "M"} onChange={(e) => setEditarCliente({ ...EditarCliente, clie_Sexo: e.target.value })}/>
 </CCol>
 
 
@@ -777,7 +772,7 @@ required/>
 
 <CCol md={6} className="">
 <CFormSelect
-value={EditarEmpleado.dept_Id}
+value={EditarCliente.dept_Id}
 onChange={(e) => {
 setdept_Id(prevDept_Id => {
 const newDept_Id = { ...prevDept_Id, dept_Id:  e.target.value };
@@ -802,9 +797,9 @@ required
 
 <CCol md={6} className="">
 <CFormSelect
-value={EditarEmpleado.muni_Id}
+value={EditarCliente.muni_Id}
 onChange={(e) =>
-setEditarEmpleado({ ...EditarEmpleado, muni_Id: e.target.value })
+setEditarCliente({ ...EditarCliente, muni_Id: e.target.value })
 }
 id="validationCustom01"
 label="Municipio"
@@ -823,8 +818,8 @@ required>
 <CCol md={6} className="">
 <CFormInput
 type="date"
-value={EditarEmpleado.empl_FechaNacimiento}
-onChange={(e) => setEditarEmpleado({ ...EditarEmpleado, empl_FechaNacimiento: e.target.value })}
+value={EditarCliente.clie_FechaNacimiento}
+onChange={(e) => setEditarCliente({ ...EditarCliente, clie_FechaNacimiento: e.target.value })}
 id="validationCustom01"
 label="Fecha de Nacimiento"
 required/>
@@ -834,9 +829,9 @@ required/>
 
 <CCol md={6} className="">
 <CFormSelect
-value={EditarEmpleado.estc_Id}
+value={EditarCliente.estc_Id}
 onChange={(e) =>
-setEditarEmpleado({ ...EditarEmpleado, estc_Id: e.target.value })
+setEditarCliente({ ...EditarCliente, estc_Id: e.target.value })
 }
 id="validationCustom01"
 label="Estado Civil"
@@ -853,9 +848,9 @@ required>
 
 <CCol md={6} className="">
 <CFormSelect
-value={EditarEmpleado.sucu_Id}
+value={EditarCliente.sucu_Id}
 onChange={(e) =>
-setEditarEmpleado({ ...EditarEmpleado, sucu_Id: e.target.value })
+setEditarCliente({ ...EditarCliente, sucu_Id: e.target.value })
 }
 id="validationCustom01"
 label="Sucursal"
@@ -876,8 +871,8 @@ required>
 
 <CFormInput
 type="text"
-value={EditarEmpleado.empl_Telefeno}
-onChange={(e) => setEditarEmpleado({ ...EditarEmpleado, empl_Telefeno: e.target.value })}
+value={EditarCliente.clie_Telefeno}
+onChange={(e) => setEditarCliente({ ...EditarCliente, clie_Telefeno: e.target.value })}
 id="validationCustom01"
 label="Telefono"
 required/>
@@ -888,8 +883,8 @@ required/>
 
 <CFormInput
 type="text"
-value={EditarEmpleado.empl_Direccion}
-onChange={(e) => setEditarEmpleado({ ...EditarEmpleado, empl_Direccion: e.target.value })}
+value={EditarCliente.clie_Direccion}
+onChange={(e) => setEditarCliente({ ...EditarCliente, clie_Direccion: e.target.value })}
 id="validationCustom01"
 label="Dirección"
 required/>
@@ -918,7 +913,7 @@ required/>
     <CCard className="mt-3 p-1">
 
       <DataGrid
-        rows={empleados}
+        rows={Clientes}
         columns={columns}
         sortModel={sortModel}
         onSortModelChange={handleSortModelChange}
@@ -936,4 +931,4 @@ required/>
   )
 }
 
-export default Empleados
+export default Clientes
