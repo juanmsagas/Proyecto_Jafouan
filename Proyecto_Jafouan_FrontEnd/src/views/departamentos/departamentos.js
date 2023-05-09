@@ -6,6 +6,9 @@ import { IconButton} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import VisibilityIcon from '@material-ui/icons/Visibility'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import AddIcon  from '@material-ui/icons/Add'
 import SearchIcon from '@material-ui/icons/Search'
 import {CButton,
@@ -66,6 +69,7 @@ const abrireditar = (params,event) => {
     event.preventDefault()
   }
   setVisible2(!visible2)
+  setValidated(false)
   setvisibleEnca(!visibleEnca)
   console.log(params)
   setEditarDepartamento({
@@ -89,6 +93,7 @@ const cerrarEditar = (event) => {
 const abrirycerrarInsert = (event) => {
   event.preventDefault()
   setVisible(!visible)
+  setValidated(false)
   setvisibleEnca(!visibleEnca)
   setNuevoDepartamento({
     dept_Id: '',
@@ -123,6 +128,8 @@ const handleSubmitI = (event) => {
   if (form.checkValidity() === false) {
     event.preventDefault()
     event.stopPropagation()
+    toast.error('No se permiten campos vacíos.');
+
   }
   setValidated(true)
   if(form.checkValidity() != false){
@@ -136,6 +143,8 @@ const handleSubmitI = (event) => {
                 dept_Descripcion: '',
                 dept_UserCrea:1
             })
+            toast.success('Departamento insertado correctamente.');
+
         })
         .catch((error) => {
             console.log(error)
@@ -156,6 +165,8 @@ const form = event.currentTarget
   if (form.checkValidity() === false) {
     event.preventDefault()
     event.stopPropagation()
+    toast.error('No se permiten campos vacíos.');
+
   }
   setValidated(true)
   if(form.checkValidity() != false){
@@ -169,6 +180,8 @@ const form = event.currentTarget
             dept_Descripcion: '',
             dept_UserModifica:1
         })  
+        toast.success('Departamento editado correctamente.');
+
         console.log(response.data)
       })
       .catch((error) => {
@@ -194,6 +207,8 @@ const handleSubmitD = (event) => {
           setElimDepartamento({
             dept_Id: '',
         })
+        toast.success('Departamento eliminado correctamente.');
+
         console.log(response.data)
       })
       .catch((error) => {
@@ -426,6 +441,8 @@ const handleSubmitD = (event) => {
       </CCollapse>
       </CCard>
       </div>
+      <ToastContainer />
+
     </div>
   )
 }

@@ -36,7 +36,6 @@ namespace Jafouan.DataAccess.Repository
 
             parametros.Add("@clie_Id", item.clie_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@empl_Id", item.empl_Id, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@fact_Fecha", item.fact_Fecha, DbType.Date, ParameterDirection.Input);
             parametros.Add("@sucu_Id", item.sucu_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@meto_Id", item.meto_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@fact_UserCrea", item.fact_UserCrea, DbType.Int32, ParameterDirection.Input);
@@ -59,7 +58,6 @@ namespace Jafouan.DataAccess.Repository
             parametros.Add("@fact_Id", item.fact_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@clie_Id", item.clie_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@empl_Id", item.empl_Id, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@fact_Fecha", item.fact_Fecha, DbType.Date, ParameterDirection.Input);
             parametros.Add("@sucu_Id", item.sucu_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@meto_Id", item.meto_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@fact_UserModifica", item.fact_UserModificacion, DbType.Int32, ParameterDirection.Input);

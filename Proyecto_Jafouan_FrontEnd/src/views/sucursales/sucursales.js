@@ -6,6 +6,9 @@ import { IconButton} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import VisibilityIcon from '@material-ui/icons/Visibility'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import SearchIcon from '@material-ui/icons/Search'
 import AddIcon from '@material-ui/icons/Add'
 
@@ -137,6 +140,8 @@ const handleSubmitI = (event) => {
   if (form.checkValidity() === false) {
     event.preventDefault()
     event.stopPropagation()
+    toast.error('No se permiten campos vacíos.');
+
   }
   setValidated(true)
   if(form.checkValidity() != false){
@@ -151,6 +156,8 @@ const handleSubmitI = (event) => {
                 sucu_Direccion: '',
                 sucu_UserCrea:1,
             })
+            toast.success('Sucursal insertada correctamente.');
+
         })
         .catch((error) => {
             console.log(error)
@@ -171,6 +178,8 @@ const form = event.currentTarget
   if (form.checkValidity() === false) {
     event.preventDefault()
     event.stopPropagation()
+    toast.error('No se permiten campos vacíos.');
+
   }
   setValidated(true)
   if(form.checkValidity() != false){
@@ -186,6 +195,8 @@ const form = event.currentTarget
             sucu_Direccion: '',
             sucu_UserModifica:1,
         })
+        toast.success('Sucursal editada correctamente.');
+
         console.log(response.data)
       })
       .catch((error) => {
@@ -211,6 +222,8 @@ const handleSubmitD = (event) => {
             setElimSucursales({
               sucu_Id: '',
           })
+          toast.success('Sucursal eliminada correctamente.');
+
           console.log(response.data)
         })
         .catch((error) => {
@@ -630,6 +643,8 @@ required/>
       </CCollapse>
       </CCard>
       </div>
+      <ToastContainer />
+
     </div>
   )
 }

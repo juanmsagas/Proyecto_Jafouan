@@ -4,6 +4,9 @@ import axios from 'axios'
 import { DataGrid, GridToolbar, esES } from '@mui/x-data-grid'
 import { IconButton} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import EditIcon from '@material-ui/icons/Edit'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import AddIcon  from '@material-ui/icons/Add'
@@ -123,6 +126,8 @@ const handleSubmitI = (event) => {
   if (form.checkValidity() === false) {
     event.preventDefault()
     event.stopPropagation()
+    toast.error('No se permiten campos vacíos.');
+
   }
   setValidated(true)
   if(form.checkValidity() != false){
@@ -135,6 +140,8 @@ const handleSubmitI = (event) => {
                 fard_Descripcion: '',
                 fard_UserCrea:1
             })
+            toast.success('Fardo insertado correctamente.');
+
         })
         .catch((error) => {
             console.log(error)
@@ -155,6 +162,8 @@ const form = event.currentTarget
   if (form.checkValidity() === false) {
     event.preventDefault()
     event.stopPropagation()
+    toast.error('No se permiten campos vacíos.');
+
   }
   setValidated(true)
   if(form.checkValidity() != false){
@@ -168,6 +177,8 @@ const form = event.currentTarget
             fard_Descripcion: '',
             fard_UserModifica:1
         })  
+        toast.success('Fardo editado correctamente.');
+
         console.log(response.data)
       })
       .catch((error) => {
@@ -193,6 +204,8 @@ const handleSubmitD = (event) => {
           setEliminarFardo({
             fard_Id: '',
         })
+        toast.success('Fardo eliminado correctamente.');
+
         console.log(response.data)
       })
       .catch((error) => {
@@ -414,6 +427,8 @@ const handleSubmitD = (event) => {
       </CCollapse>
       </CCard>
       </div>
+      <ToastContainer />
+
     </div>
   )
 }

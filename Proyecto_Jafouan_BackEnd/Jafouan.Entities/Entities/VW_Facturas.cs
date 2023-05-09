@@ -11,8 +11,10 @@ namespace Jafouan.Entities.Entities
         public int fact_Id { get; set; }
         public int clie_Id { get; set; }
         public string clie_Nombres { get; set; }
+        public string clie_Nombre { get; set; }
         public string clie_ApellIdos { get; set; }
         public int empl_Id { get; set; }
+        public string empl_Nombre { get; set; }
         public string empl_Nombres { get; set; }
         public string empl_ApellIdos { get; set; }
         public DateTime fact_Fecha { get; set; }

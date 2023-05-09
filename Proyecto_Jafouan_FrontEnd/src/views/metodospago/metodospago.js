@@ -7,6 +7,9 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import AddIcon  from '@material-ui/icons/Add'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import SearchIcon from '@material-ui/icons/Search'
 import {CButton,
         CCollapse,
@@ -65,6 +68,7 @@ const abrireditar = (params,event) => {
     event.preventDefault()
   }
   setVisible2(!visible2)
+  setValidated(false)
   setvisibleEnca(!visibleEnca)
   console.log(params)
   setEditarMetodos({
@@ -89,6 +93,7 @@ const abrirycerrarInsert = (event) => {
   event.preventDefault()
   setVisible(!visible)
   setvisibleEnca(!visibleEnca)
+  setValidated(false)
   setNuevoMetodos({
     meto_Descripcion: '',
     meto_UserCrea:1
@@ -121,6 +126,8 @@ const handleSubmitI = (event) => {
   if (form.checkValidity() === false) {
     event.preventDefault()
     event.stopPropagation()
+    toast.error('No se permiten campos vacíos.');
+
   }
   setValidated(true)
   if(form.checkValidity() != false){
@@ -133,6 +140,8 @@ const handleSubmitI = (event) => {
                 meto_Descripcion: '',
                 meto_UserCrea:1
             })
+            toast.success('Método de pago insertado correctamente.');
+
         })
         .catch((error) => {
             console.log(error)
@@ -153,6 +162,8 @@ const form = event.currentTarget
   if (form.checkValidity() === false) {
     event.preventDefault()
     event.stopPropagation()
+    toast.error('No se permiten campos vacíos.');
+
   }
   setValidated(true)
   if(form.checkValidity() != false){
@@ -166,6 +177,8 @@ const form = event.currentTarget
             meto_Descripcion: '',
             meto_UserModifica:1
         })  
+        toast.success('Método de pago editado correctamente.');
+
         console.log(response.data)
       })
       .catch((error) => {
@@ -191,6 +204,8 @@ const handleSubmitD = (event) => {
           setEliminarMetodo({
             meto_Id: '',
         })
+        toast.success('Método de pago eliminado correctamente.');
+
         console.log(response.data)
       })
       .catch((error) => {
@@ -412,6 +427,8 @@ const handleSubmitD = (event) => {
       </CCollapse>
       </CCard>
       </div>
+      <ToastContainer />
+
     </div>
   )
 }

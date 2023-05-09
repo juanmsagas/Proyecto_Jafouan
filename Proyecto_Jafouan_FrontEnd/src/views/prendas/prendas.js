@@ -5,6 +5,9 @@ import { DataGrid, GridToolbar, esES } from '@mui/x-data-grid'
 import { IconButton} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import SearchIcon from '@material-ui/icons/Search'
 import AddIcon from '@material-ui/icons/Add'
@@ -88,6 +91,7 @@ const abrirPrenda = (params,event) => {
     event.preventDefault()
   }
   setVisible2(!visible2)
+  setValidated(false)
   setvisibleEnca(!visibleEnca)
   console.log(params)
   seteditarPrenda({
@@ -126,6 +130,7 @@ const abrirycerrarInsert = (event) => {
   event.preventDefault()
   setVisible(!visible)
   setvisibleEnca(!visibleEnca)
+  setValidated(false)
   setNuevaPrenda({
     pren_Descripcion: '',
     pren_Talla: '',
@@ -165,6 +170,7 @@ const handleSubmitI = (event) => {
   if (form.checkValidity() === false) {
     event.preventDefault()
     event.stopPropagation()
+    toast.error('No se permiten campos vacíos.');
   }
   setValidated(true)
   if(form.checkValidity() != false){
@@ -184,6 +190,8 @@ const handleSubmitI = (event) => {
               pren_Imagen: '',
               pren_UserCrea: 1
             })
+            toast.error('Prenda insertada correctamente.');
+
         })
         .catch((error) => {
             console.log(error)
@@ -204,6 +212,8 @@ const form = event.currentTarget
   if (form.checkValidity() === false) {
     event.preventDefault()
     event.stopPropagation()
+    toast.error('No se permiten campos vacíos.');
+
   }
   setValidated(true)
   if(form.checkValidity() != false){
@@ -224,6 +234,8 @@ const form = event.currentTarget
             pren_Imagen: '',
             pren_UserModifica: 1
         })
+        toast.success('Prenda editada correctamente.');
+
         console.log(response.data)
       })
       .catch((error) => {
@@ -243,7 +255,7 @@ const form = event.currentTarget
       }))
       setPrendas(insertarid)
     })
-  }, [])
+  }, [prendas])
 
   const handleSortModelChange = (model) => {
     setSortModel(model)
@@ -265,6 +277,8 @@ const form = event.currentTarget
             setElimPrenda({
               pren_Id: 0,
           })
+          toast.success('Prenda eliminada correctamente.');
+
           console.log(response.data)
         })
         .catch((error) => {
@@ -765,6 +779,8 @@ const form = event.currentTarget
       </CCollapse>
       </CCard>
       </div>
+      <ToastContainer />
+
     </div>
   )
 }

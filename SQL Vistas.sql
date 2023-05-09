@@ -16,6 +16,8 @@ SELECT	user_Id,
 		ELSE role_Descripcion END AS role_Descripcion,
 		T1.user_Estado,
 		T1.user_UserCrea,
+		T4.sucu_Id,
+		sucu_Nombre,
 		(SELECT empl_Nombres+' '+empl_ApellIdos FROM vera.tbEmpleados
 		WHERE empl_Id IN (SELECT empl_Id FROM acce.tbUsuarios WHERE [user_Id] = [user_UserCrea])) AS empl_Crea,
 		[user_FechaCrea],
@@ -26,6 +28,8 @@ SELECT	user_Id,
 		FROM acce.tbUsuarios T1
 		INNER JOIN vera.tbEmpleados T2
 		ON T1.empl_Id = T2.empl_Id
+		INNER JOIN vera.tbSucursales T4
+		ON T4.sucu_Id = T2.sucu_Id
 		LEFT JOIN acce.tbRoles T3
 		ON T1.role_Id = T3.role_Id
 	
@@ -132,7 +136,10 @@ CREATE OR ALTER VIEW vera.VW_Sucursales
 AS
 SELECT	sucu_Id, 
 		sucu_Nombre, 
-		muni_Id, 
+		muni_Descripcion,
+		T1.muni_Id, 
+		T3.dept_Id,
+		T3.dept_Descripcion,
 		sucu_Direccion, 
 		sucu_Estado, 
 		sucu_UserCrea,
@@ -141,7 +148,11 @@ SELECT	sucu_Id,
 		sucu_UserModifica,
 		empl_Modifica = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE [user_Id] = sucu_UserModifica),     
 		sucu_FechaModificacion
-		FROM vera.tbSucursales
+		FROM vera.tbSucursales T1
+		INNER JOIN mant.tbMunicipios T2
+		 ON T1.muni_Id = T2.muni_Id
+		 INNER JOIN mant.tbDepartamentos T3
+		 ON T2.dept_Id = T3.dept_Id
 
 GO
 
@@ -370,8 +381,10 @@ AS
 SELECT	fact_Id, 
 		T1.clie_Id,
 		T2.clie_Nombres,
+		clie_Nombres + ' ' + clie_Apellidos AS clie_Nombre,
 		T2.clie_ApellIdos,
 		T1.empl_Id,
+		empl_Nombres + ' ' + empl_Apellidos AS empl_Nombre,
 		T3.empl_Nombres,
 		T3.empl_ApellIdos,
 		fact_Fecha, 

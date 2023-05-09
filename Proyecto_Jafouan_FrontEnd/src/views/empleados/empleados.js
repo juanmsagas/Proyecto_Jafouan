@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { DataGrid, GridToolbar, esES } from '@mui/x-data-grid'
 import { IconButton} from '@material-ui/core'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import VisibilityIcon from '@material-ui/icons/Visibility'
@@ -100,6 +103,7 @@ const abrirPrenda = (params,event) => {
     event.preventDefault()
   }
   setVisible2(!visible2)
+  setValidated(false)
   setvisibleEnca(!visibleEnca)
   console.log(params)
   const fecha = new Date(params.empl_FechaNacimiento);
@@ -148,6 +152,7 @@ const cerrarEditar = (event) => {
 const abrirycerrarInsert = (event) => {
   event.preventDefault()
   setVisible(!visible)
+  setValidated(false)
   setvisibleEnca(!visibleEnca)
   setEditarEmpleado({
     empl_Nombres: '',
@@ -178,6 +183,8 @@ const handleSubmitI = (event) => {
   if (form.checkValidity() === false) {
     event.preventDefault()
     event.stopPropagation()
+    toast.error('No se permiten campos vacíos.');
+
   }
   setValidated(true)
   if(form.checkValidity() != false){
@@ -200,6 +207,8 @@ const handleSubmitI = (event) => {
                 empl_Direccion: '',
                 empl_UserCrea:1,
             })
+            toast.success('Empleado insertado correctamente.');
+
         })
         .catch((error) => {
             console.log(error)
@@ -220,6 +229,8 @@ const form = event.currentTarget
   if (form.checkValidity() === false) {
     event.preventDefault()
     event.stopPropagation()
+    toast.error('No se permiten campos vacíos.');
+
   }
   setValidated(true)
   if(form.checkValidity() != false){
@@ -242,10 +253,14 @@ const form = event.currentTarget
             empl_Direccion: '',
             empl_UserCrea:1,
         })
+        toast.success('Empleado editado correctamente.');
+
         console.log(response.data)
       })
       .catch((error) => {
           console.log(error)
+          toast.success(error);
+
       })
     }
 }
@@ -308,7 +323,7 @@ const handleSubmitD = (event) => {
       }))
       setempleados(insertarid)
     })
-  }, [])
+  }, [empleados])
 
   const handleSortModelChange = (model) => {
     setSortModel(model)
@@ -943,6 +958,8 @@ required/>
       </CCollapse>
       </CCard>
       </div>
+      <ToastContainer />
+
     </div>
   )
 }

@@ -19,6 +19,8 @@ namespace Jafouan.Entities.Entities
         public string role_Descripcion { get; set; }
         public bool? user_Estado { get; set; }
         public int user_UserCrea { get; set; }
+        public int sucu_Id { get; set; }
+        public string sucu_Nombre { get; set; }
         public string empl_Crea { get; set; }
         public DateTime? user_FechaCrea { get; set; }
         public int? user_UserModifica { get; set; }

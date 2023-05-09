@@ -387,6 +387,10 @@ namespace Jafouan.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(200);
 
+                entity.Property(e => e.clie_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(401);
+
                 entity.Property(e => e.clie_Nombres)
                     .IsRequired()
                     .HasMaxLength(200);
@@ -398,6 +402,10 @@ namespace Jafouan.DataAccess.Context
                 entity.Property(e => e.empl_Modifica)
                     .HasMaxLength(30)
                     .IsUnicode(false);
+
+                entity.Property(e => e.empl_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(401);
 
                 entity.Property(e => e.empl_Nombres)
                     .IsRequired()
@@ -722,6 +730,16 @@ namespace Jafouan.DataAccess.Context
 
                 entity.ToView("VW_Sucursales", "vera");
 
+                entity.Property(e => e.dept_Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.dept_Id)
+                    .IsRequired()
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
                 entity.Property(e => e.empl_Modifica)
                     .HasMaxLength(30)
                     .IsUnicode(false);
@@ -729,6 +747,10 @@ namespace Jafouan.DataAccess.Context
                 entity.Property(e => e.empl_crea)
                     .HasMaxLength(30)
                     .IsUnicode(false);
+
+                entity.Property(e => e.muni_Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(200);
 
                 entity.Property(e => e.muni_Id)
                     .IsRequired()
@@ -741,8 +763,6 @@ namespace Jafouan.DataAccess.Context
                 entity.Property(e => e.sucu_FechaCreacion).HasColumnType("datetime");
 
                 entity.Property(e => e.sucu_FechaModificacion).HasColumnType("datetime");
-
-                entity.Property(e => e.sucu_Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.sucu_Nombre)
                     .IsRequired()
@@ -771,6 +791,10 @@ namespace Jafouan.DataAccess.Context
                 entity.Property(e => e.role_Descripcion)
                     .HasMaxLength(150)
                     .IsUnicode(false);
+
+                entity.Property(e => e.sucu_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(200);
 
                 entity.Property(e => e.user_Contraseña)
                     .IsRequired()

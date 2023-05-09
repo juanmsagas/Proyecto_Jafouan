@@ -1038,14 +1038,7 @@ AS BEGIN
 
  
    	BEGIN TRY
-	--si existe
-		IF EXISTS (SELECT * FROM vera.tbClientes WHERE clie_Identidad = @clie_Identidad AND clie_Estado  = 1)
-	     BEGIN
-            SELECT 409 AS codeStatus, 'El número de identidad del cliente ya existe' AS messageStatus
-         END
-	--si no existe
-		 ELSE IF NOT EXISTS (SELECT * FROM  vera.tbClientes WHERE clie_Identidad = @clie_Identidad)
-		 BEGIN
+
 			
 					UPDATE vera.tbClientes
 			SET
@@ -1063,7 +1056,7 @@ AS BEGIN
 
 			SELECT 200 AS codeStatus, 'Cliente Modificado con éxito' AS messageStatus
 
-		END
+
 
 	END TRY
 	BEGIN CATCH
@@ -1925,14 +1918,7 @@ CREATE OR ALTER PROC vera.UDP_tbSucursales_UPDATE
 AS BEGIN
 
    	BEGIN TRY
-	--si existe
-		IF EXISTS (SELECT * FROM vera.tbSucursales WHERE sucu_Nombre = @sucu_Nombre AND sucu_Estado  = 1)
-	     BEGIN
-            SELECT 409 AS codeStatus, 'La sucursal ya existe' AS messageStatus
-         END
-	--si no existe
-		 ELSE IF NOT EXISTS (SELECT * FROM  vera.tbSucursales WHERE sucu_Nombre = @sucu_Nombre)
-		 BEGIN
+
 			
 			UPDATE vera.tbSucursales
 			SET
@@ -1944,7 +1930,7 @@ AS BEGIN
 				WHERE sucu_Id =	@sucu_Id
 
 			SELECT 200 AS codeStatus, 'Sucursal Modificada con éxito' AS messageStatus
-		END
+	
 
 	END TRY
 	BEGIN CATCH
@@ -2134,7 +2120,6 @@ GO
 CREATE OR ALTER PROC fact.UDP_tbFacturas_INSERT
 @clie_Id INT,
 @empl_Id INT,
-@fact_Fecha DATETIME,
 @sucu_Id INT,
 @meto_Id INT,
 @fact_UserCrea INT
@@ -2146,7 +2131,7 @@ AS BEGIN
 			INSERT INTO  fact.tbFacturas
 			(clie_Id, empl_Id, fact_Fecha, sucu_Id, meto_Id, fact_UserCrea)
 			VALUES
-			(@clie_Id, @empl_Id, @fact_Fecha, @sucu_Id, @meto_Id, @fact_UserCrea)
+			(@clie_Id, @empl_Id, GETDATE(), @sucu_Id, @meto_Id, @fact_UserCrea)
 
 			SELECT 200 AS codeStatus, 'Factura creado con éxito' AS messageStatus
 		
@@ -2164,7 +2149,6 @@ CREATE OR ALTER PROC fact.UDP_tbFacturas_UPDATE
 @fact_Id INT,
 @clie_Id INT,
 @empl_Id INT,
-@fact_Fecha DATETIME,
 @sucu_Id INT,
 @meto_Id INT,
 @fact_UserModifica INT
@@ -2177,7 +2161,7 @@ AS BEGIN
 			SET
 				clie_Id = @clie_Id,
 				empl_Id = @empl_Id,
-				fact_Fecha = @fact_Fecha,
+				fact_Fecha = GETDATE(),
 				sucu_Id = @sucu_Id,
 			    meto_Id = @meto_Id,
 				fact_UserModificacion = @fact_UserModifica

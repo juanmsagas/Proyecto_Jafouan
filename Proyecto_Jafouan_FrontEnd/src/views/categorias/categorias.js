@@ -4,6 +4,8 @@ import axios from 'axios'
 import { DataGrid, GridToolbar, esES } from '@mui/x-data-grid'
 import { IconButton} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import EditIcon from '@material-ui/icons/Edit'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import AddIcon  from '@material-ui/icons/Add'
@@ -65,6 +67,7 @@ const abrireditar = (params,event) => {
     event.preventDefault()
   }
   setVisible2(!visible2)
+  setValidated(false)
   setvisibleEnca(!visibleEnca)
   console.log(params)
   setEditarCategoria({
@@ -88,6 +91,7 @@ const cerrarEditar = (event) => {
 const abrirycerrarInsert = (event) => {
   event.preventDefault()
   setVisible(!visible)
+  setValidated(false)
   setvisibleEnca(!visibleEnca)
   setNuevaCategorias({
     cate_Descripcion: '',
@@ -122,6 +126,9 @@ const handleSubmitI = (event) => {
     event.preventDefault()
     event.stopPropagation()
   }
+  if (form.checkValidity() === false){
+    toast.error('No se permiten campos vacíos.');
+  }
   setValidated(true)
   if(form.checkValidity() != false){
     axios.post('api/Categorias/Insert', nuevaCategoria, config)
@@ -133,6 +140,7 @@ const handleSubmitI = (event) => {
                 cate_Descripcion: '',
                 cate_UserCrea:1
             })
+            toast.success('Categoría insertada correctamente.');
         })
         .catch((error) => {
             console.log(error)
@@ -154,6 +162,9 @@ const form = event.currentTarget
     event.preventDefault()
     event.stopPropagation()
   }
+  if (form.checkValidity() === false){
+    toast.error('No se permiten campos vacíos.');
+  }
   setValidated(true)
   if(form.checkValidity() != false){
   axios.put('api/Categorias/Update', EditarCategoria, config)
@@ -166,6 +177,8 @@ const form = event.currentTarget
             cate_Descripcion: '',
             cate_UserModifica:1
         })  
+        toast.success('Categoría editada correctamente.');
+
         console.log(response.data)
       })
       .catch((error) => {
@@ -191,6 +204,7 @@ const handleSubmitD = (event) => {
           setEliminarCategorias({
             cate_Id: 0,
         })
+        toast.success('Categoría eliminada correctamente.');
         console.log(response.data)
       })
       .catch((error) => {
@@ -412,6 +426,8 @@ const handleSubmitD = (event) => {
       </CCollapse>
       </CCard>
       </div>
+      <ToastContainer />
+
     </div>
   )
 }

@@ -7,6 +7,9 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import SearchIcon from '@material-ui/icons/Search'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import AddIcon from '@material-ui/icons/Add'
 
 
@@ -150,6 +153,8 @@ const handleSubmitI = (event) => {
   if (form.checkValidity() === false) {
     event.preventDefault()
     event.stopPropagation()
+    toast.error('No se permiten campos vacíos.');
+
   }
   setValidated(true)
   if(form.checkValidity() != false){
@@ -166,6 +171,8 @@ const handleSubmitI = (event) => {
                 prov_Direccion: '',
                 prov_UserCrea:1,
             })
+            toast.success('Proveedor insertado correctamente.');
+
         })
         .catch((error) => {
             console.log(error)
@@ -186,6 +193,8 @@ const form = event.currentTarget
   if (form.checkValidity() === false) {
     event.preventDefault()
     event.stopPropagation()
+    toast.error('No se permiten campos vacíos.');
+
   }
   setValidated(true)
   if(form.checkValidity() != false){
@@ -202,6 +211,8 @@ const form = event.currentTarget
             prov_Direccion: '',
             prov_UserCrea:1,
         })
+        toast.success('Proveedor editado correctamente.');
+
         console.log(response.data)
       })
       .catch((error) => {
@@ -227,6 +238,8 @@ const handleSubmitD = (event) => {
             setEditarProveedores({
               prov_Id: '',
           })
+          toast.success('Proveedor eliminado correctamente.');
+
           console.log(response.data)
         })
         .catch((error) => {
@@ -693,6 +706,8 @@ required/>
       </CCollapse>
       </CCard>
       </div>
+            <ToastContainer />
+
     </div>
   )
 }

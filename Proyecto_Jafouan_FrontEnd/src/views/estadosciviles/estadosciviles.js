@@ -5,6 +5,9 @@ import { DataGrid, GridToolbar, esES } from '@mui/x-data-grid'
 import { IconButton} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import AddIcon  from '@material-ui/icons/Add'
 import SearchIcon from '@material-ui/icons/Search'
@@ -65,6 +68,7 @@ const abrireditar = (params,event) => {
     event.preventDefault()
   }
   setVisible2(!visible2)
+  setValidated(false)
   setvisibleEnca(!visibleEnca)
   console.log(params)
   setEditarEstado({
@@ -87,6 +91,7 @@ const cerrarEditar = (event) => {
 
 const abrirycerrarInsert = (event) => {
   event.preventDefault()
+  setValidated(false)
   setVisible(!visible)
   setvisibleEnca(!visibleEnca)
   setNuevoEstado({
@@ -121,6 +126,8 @@ const handleSubmitI = (event) => {
   if (form.checkValidity() === false) {
     event.preventDefault()
     event.stopPropagation()
+    toast.error('No se permiten campos vacíos.');
+
   }
   setValidated(true)
   if(form.checkValidity() != false){
@@ -133,6 +140,8 @@ const handleSubmitI = (event) => {
                 estc_Descripcion: '',
                 estc_UserCrea:1
             })
+            toast.success('Estado civil insertado correctamente.');
+
         })
         .catch((error) => {
             console.log(error)
@@ -153,6 +162,8 @@ const form = event.currentTarget
   if (form.checkValidity() === false) {
     event.preventDefault()
     event.stopPropagation()
+    toast.error('No se permiten campos vacíos.');
+
   }
   setValidated(true)
   if(form.checkValidity() != false){
@@ -166,6 +177,8 @@ const form = event.currentTarget
             estc_Descripcion: '',
             estc_UserModifica:1
         })  
+        toast.success('Estado civil editado correctamente.');
+
         console.log(response.data)
       })
       .catch((error) => {
@@ -191,6 +204,8 @@ const handleSubmitD = (event) => {
           setEliminarEstado({
             estc_Id: '',
         })
+        toast.success('Estado civil eliminado correctamente.');
+
         console.log(response.data)
       })
       .catch((error) => {
@@ -412,6 +427,8 @@ const handleSubmitD = (event) => {
       </CCollapse>
       </CCard>
       </div>
+      <ToastContainer />
+
     </div>
   )
 }
