@@ -1,4 +1,6 @@
-﻿using Jafouan.Entities.Entities;
+﻿using Dapper;
+using Jafouan.Entities.Entities;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +28,8 @@ namespace Jafouan.DataAccess.Repository
 
         public IEnumerable<VW_Pantallas> List()
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(Jafouan_Context.ConnectionString);
+            return db.Query<VW_Pantallas>(ScriptsDataBase.INDEX_PANTALLAS, null, commandType: System.Data.CommandType.StoredProcedure);
         }
 
         public RequestStatus Update(tbPantallas item)

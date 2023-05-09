@@ -10,21 +10,22 @@ namespace Jafouan.BusinessLogic.Service
 {
     public class AccessService
     {
-        private readonly UsuariosRepository _usuarioRepository;
-        private readonly RolesRepository    _rolesRepository;
+        private readonly UsuariosRepository     _usuarioRepository;
+        private readonly RolesRepository        _rolesRepository;
+        private readonly PantallasRepository    _pantallasRepository;
+
 
 
         public AccessService
         (
             UsuariosRepository usuarioRepository,
-            RolesRepository rolesRepository
-
-
+            RolesRepository rolesRepository,
+            PantallasRepository pantallasRepository
         )
         {
             _usuarioRepository  = usuarioRepository;
             _rolesRepository = rolesRepository;
-
+            _pantallasRepository = pantallasRepository;
         }
 
         #region LOGIN
@@ -150,8 +151,6 @@ namespace Jafouan.BusinessLogic.Service
         }
         #endregion
 
-
-
         #region Roles
 
         //INDEX
@@ -165,35 +164,25 @@ namespace Jafouan.BusinessLogic.Service
             }
             catch (Exception e)
             {
-                return (IEnumerable<VW_Roles>)result.Error(e.Message);
+                _ = e.Message;
+                return Enumerable.Empty<VW_Roles>();
             }
         }
 
 
         //INSERT
-        public ServiceResult InsertRol(tbRoles item)
+        public IEnumerable<RequestStatus> InsertRol(tbRoles item)
         {
             var result = new ServiceResult();
             try
             {
-                var map = _rolesRepository.Insert(item);
-                if (map.CodeStatus == 200)
-                {
-                    return result.SetMessage(map.MessageStatus, ServiceResultType.Success);
-
-                }
-                else if (map.CodeStatus == 409)
-                {
-                    return result.SetMessage(map.MessageStatus, ServiceResultType.Conflict);
-                }
-                else
-                {
-                    return result.SetMessage(map.MessageStatus, ServiceResultType.Error);
-                }
+                var list = _rolesRepository.InsertYId(item);
+                return (IEnumerable<RequestStatus>)list;
             }
             catch (Exception ex)
             {
-                return result.Error(ex.Message);
+                _ = ex.Message;
+                return Enumerable.Empty<RequestStatus>();
             }
         }
 
@@ -265,5 +254,26 @@ namespace Jafouan.BusinessLogic.Service
         }
         #endregion
 
+
+        #region Pantallas
+
+
+        //INDEX
+        public IEnumerable<VW_Pantallas> ListPantallas()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _pantallasRepository.List();
+                return (IEnumerable<VW_Pantallas>)list;
+            }
+            catch (Exception e)
+            {
+                _ = e.Message;
+                return Enumerable.Empty<VW_Pantallas>();
+            }
+        }
+
+        #endregion
     }
 }
