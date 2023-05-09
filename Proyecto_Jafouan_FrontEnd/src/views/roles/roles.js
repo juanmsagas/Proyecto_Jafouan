@@ -28,26 +28,27 @@ import {CButton,
         CModalTitle,
         CModalBody,
         CModalFooter,
+        CAccordion,
+        CAccordionHeader,
+        CAccordionItem,
+        CAccordionBody,
         }
         from '@coreui/react'
+        import MultiSelect from 'react-multiselect-checkboxes';
+
 
 function Roles() {
   const [roles, setRoles] = useState([])
   const [sortModel, setSortModel] = useState([{ field: 'role_Id', sort: 'asc' }])
   const [visible, setVisible] = useState(false)
+  const [insertado, setinsertado] = useState(false)
   const [visible2, setVisible2] = useState(false)
   const [Modal, setModal] = useState(false)
   const [visibleEnca, setvisibleEnca   ] = useState(false)
-
+  const [Pantallas, setPantallasDDL] = useState([]);  
   const [validated, setValidated] = useState(false)
-  const handleSubmit = (event) => {
-    const form = event.currentTarget
-    if (form.checkValidity() === false) {
-      event.preventDefault()
-      event.stopPropagation()
-    }
-    setValidated(true)
-  }
+  const [selected, setSelected] = useState([]);
+
 
   const [Role_Id_Pant, set_Role_Id_Pant] = useState({
     role_Id: 0,
@@ -55,7 +56,6 @@ function Roles() {
 })
 
   const [nuevoRol, setNuevoRol] = useState({
-    role_Id: '',
     role_Descripcion: '',
     role_UserCrea:1
 })
@@ -74,6 +74,7 @@ const abrireditar = (params,event) => {
   }
   setVisible2(!visible2)
   setvisibleEnca(!visibleEnca)
+  setValidated(false)
   console.log(params)
   setEditarRol({
     role_Id: params.role_Id,
@@ -85,6 +86,7 @@ const abrireditar = (params,event) => {
 const cerrarEditar = (event) => {
   event.preventDefault()
   setVisible2(!visible2)
+  setValidated(false)
   setvisibleEnca(!visibleEnca)
   setEditarRol({
     role_Id: '',
@@ -96,9 +98,10 @@ const cerrarEditar = (event) => {
 const abrirycerrarInsert = (event) => {
   event.preventDefault()
   setVisible(!visible)
+  setValidated(false)
   setvisibleEnca(!visibleEnca)
+  setinsertado(!insertado)
   setNuevoRol({
-    role_Id: '',
     role_Descripcion: '',
     role_UserCrea:1
 }
@@ -115,6 +118,17 @@ const ModalFun = (params,event) => {
    
 }
 )}
+
+useEffect(() => {
+  axios.get('api/Pantallas/Index')
+    .then(response => {
+      setPantallasDDL(response.data);
+    })
+    .catch(error => { 
+      console.error('Error fetching data from API:', error);
+    });
+}, []);
+const options = Pantallas.map(pantalla => ({ label: pantalla.pant_Nombre, value: pantalla.pant_Id }));
 
 
   //peticion a la api insert   
@@ -135,11 +149,14 @@ const handleSubmitI = (event) => {
   if(form.checkValidity() != false){
     axios.post('api/Roles/Insert', nuevoRol, config)
         .then((response) => {
-            console.log(response.data)
-            setVisible(false)
-            setvisibleEnca(!visibleEnca)
+
+          set_Role_Id_Pant({
+            role_Id:response.data[1].codeStatus
+          })
+            console.log(Role_Id_Pant.role_Id)
+            console.log(response.data[1].codeStatus)
+            setinsertado(!insertado)
             setNuevoRol({
-                role_Id: '',
                 role_Descripcion: '',
                 role_UserCrea:1
             })
@@ -315,8 +332,8 @@ const handleSubmitD = (event) => {
 
  {/*Formulario Insertar*/}
  
-    <CCollapse visible={visible} className='col-6 offset-3'>
-    
+    <CCollapse visible={visible} className=''>
+ <CCol md={8} className='offset-2'>
       <CCard className="mt-3">
         <CCardHeader>
           <h1 className='h4 text-center' style={{ fontFamily: "revert-layer"}}>Nuevo Rol</h1>
@@ -330,8 +347,7 @@ const handleSubmitD = (event) => {
 >
 
       
-       <CCol md={12} className=''>
-
+       <CCol md={12}>
         <CFormInput
     type="text"
     value={nuevoRol.role_Descripcion}
@@ -341,8 +357,40 @@ const handleSubmitD = (event) => {
     required/>
 
     </CCol>
+  <CCollapse visible={!insertado} className=''>
+    <CAccordion flush className='mt-5'>
+  <CAccordionItem itemKey={1}>
+    <CAccordionHeader>Permisos</CAccordionHeader>
+    <CAccordionBody>
+      
+<CCol md={10}  className='offset-1 mt-5'>
+    
+  
+<CFormInput
+type="hidden"
+value={Role_Id_Pant.role_Id}
+id="validationCustom01"
+required/>
 
-    <CCol xs={12} className='offset-7'>
+</CCol>
+<CCol className='offset-4 mt-1'>
+  <MultiSelect 
+    key={options}
+    options={options}
+    value={selected}
+    onChange={setSelected}
+    labelledBy="Pantallas"
+  />
+</CCol>
+
+
+    </CAccordionBody>
+  </CAccordionItem>
+  </CAccordion>
+</CCollapse>
+
+    <CCollapse visible={insertado} className=''>
+    <CCol xs={12} className='offset-4 '>
       <CButton color="primary"  type="submit">
         Guardar
       </CButton>
@@ -350,14 +398,21 @@ const handleSubmitD = (event) => {
       Cancelar
     </CButton>
     </CCol>
+    </CCollapse>
   </CForm>
+
+  
+
         </CCardBody>
       </CCard>
+</CCol>
     </CCollapse>
 
 
+    
+
  {/*Formulario Editar*/}
-    <CCollapse visible={visible2} className='col-6 offset-3'>
+    <CCollapse visible={visible2}>
     
     <CCard className="mt-3">
       <CCardHeader>
@@ -405,8 +460,9 @@ const handleSubmitD = (event) => {
 </CForm>
       </CCardBody>
     </CCard>
+    
   </CCollapse>
-
+  
 
       <CCollapse visible={!visibleEnca}>
     <CCard className="mt-3 p-1">

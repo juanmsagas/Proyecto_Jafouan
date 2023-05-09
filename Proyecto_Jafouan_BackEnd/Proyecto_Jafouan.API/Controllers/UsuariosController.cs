@@ -56,8 +56,8 @@ namespace Jafouan.API.Controllers
             return Ok(list);
         }
 
-        [HttpPut("DeleteUsuario")]
-        public IActionResult DeleteUsuario([FromBody] UsuariosViewModel Usuario)
+        [HttpPut("Delete")]
+        public IActionResult Delete([FromBody] UsuariosViewModel Usuario)
         {
             var item = _mapper.Map<tbUsuarios>(Usuario);
             var result = _accessService.DeleteUsuario(item);

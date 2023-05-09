@@ -3,6 +3,7 @@ using Jafouan.Entities.Entities;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,18 @@ namespace Jafouan.DataAccess.Repository
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<RequestStatus> InsertYId(tbRoles item)
+        {
+            using var db = new SqlConnection(Jafouan_Context.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@role_Descripcion", item.role_Descripcion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@role_UserCrea", item.role_UserCrea, DbType.Int32, ParameterDirection.Input);
+            return db.Query<RequestStatus>(ScriptsDataBase.INSERT_ROLES, parametros, commandType: System.Data.CommandType.StoredProcedure);
+
+        }
+
 
         public IEnumerable<VW_Roles> List()
         {

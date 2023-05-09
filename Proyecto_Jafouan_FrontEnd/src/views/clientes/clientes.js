@@ -427,7 +427,6 @@ const handleSubmitD = (event) => {
     onSubmit={handleSubmitD}
 >
       <CFormInput
-      minLength={2} maxLength={2}
         type="hidden"
     value={ElimCliente.clie_Id}
     id="validationCustom01"
@@ -536,12 +535,14 @@ required/>
 </CCol>
 
 
-<CCol md={4} className="">
+<CCol md={1} className="">
   <label>Sexo</label>
   <CFormCheck type="radio" name="sexo" id="Femenino" value="F" label="Femenino" required checked={nuevoCliente.clie_Sexo === "F"} onChange={(e) => setnuevoCliente({ ...nuevoCliente, clie_Sexo: e.target.value })}/> 
+</CCol>
+<CCol md={1} className="">
+<label></label>
   <CFormCheck type="radio" name="sexo" id="Masculino" value="M" label="Masculino" required checked={nuevoCliente.clie_Sexo === "M"} onChange={(e) => setnuevoCliente({ ...nuevoCliente, clie_Sexo: e.target.value })}/>
 </CCol>
-
 
 
     
@@ -727,13 +728,14 @@ required>
 
 </CCol>
 
-<CCol md={4} className="">
+<CCol md={1} className="">
 <label>Sexo</label>
 <CFormCheck type="radio" name="sexo" id="Femenino" value="F" label="Femenino" required checked={EditarCliente.clie_Sexo === "F"} onChange={(e) => setEditarCliente({ ...EditarCliente, clie_Sexo: e.target.value })}/> 
+</CCol>
+<CCol md={1} className="">
+<label>Sexo</label>
 <CFormCheck type="radio" name="sexo" id="Masculino" value="M" label="Masculino" required checked={EditarCliente.clie_Sexo === "M"} onChange={(e) => setEditarCliente({ ...EditarCliente, clie_Sexo: e.target.value })}/>
 </CCol>
-
-
 
 
 
