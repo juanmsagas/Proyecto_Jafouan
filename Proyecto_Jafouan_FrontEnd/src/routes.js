@@ -17,10 +17,13 @@ const Fardos = React.lazy(() => import('./views/fardos/fardos'))
 const Proveedores = React.lazy(() => import('./views/proveedores/proveedores'))
 const Sucursales = React.lazy(() => import('./views/sucursales/sucursales'))
 const Clientes = React.lazy(() => import('./views/clientes/clientes'))
+<<<<<<< HEAD
 const Facturas = React.lazy(() => import('./views/facturas/facturas'))
 
 
 
+=======
+>>>>>>> 857583a57431bd4072f7fb1a7f7df6721f8fc9fc
 
 
 
@@ -44,7 +47,11 @@ const routes = [
   { path: '/sucursales', name: 'Sucursales', element: Sucursales },
   { path: '/clientes', name: 'Clientes', element: Clientes },
   { path: '/fardos', name: 'Fardos', element: Fardos },
+<<<<<<< HEAD
   { path: '/facturas', name: 'Facturas', element: Facturas },
+=======
+  { path: '/clientes', name: 'Clientes', element: Clientes },
+>>>>>>> 857583a57431bd4072f7fb1a7f7df6721f8fc9fc
 
 ]
 
