@@ -13,6 +13,7 @@ namespace Jafouan.Entities.Entities
         public string pren_Talla { get; set; }
         public int desc_Id { get; set; }
         public string desc_Color { get; set; }
+        public string desc_ColorHexa { get; set; }
         public int desc_Descuento { get; set; }
         public decimal pren_Precio { get; set; }
         public int marc_Id { get; set; }

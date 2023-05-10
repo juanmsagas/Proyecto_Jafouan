@@ -22,6 +22,17 @@ namespace Jafouan.DataAccess.Repository
             var result = db.QueryFirst<RequestStatus>(ScriptsDataBase.DELETE_PRENDAS, parametros, commandType: System.Data.CommandType.StoredProcedure);
             return result;
         }
+        public RequestStatus Activar(tbPrendas item)
+        {
+            using var db = new SqlConnection(Jafouan_Context.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@pren_Id", item.pren_Id, DbType.Int32, ParameterDirection.Input);
+
+            var result = db.QueryFirst<RequestStatus>(ScriptsDataBase.ACTIVAR_PRENDAS, parametros, commandType: System.Data.CommandType.StoredProcedure);
+            return result;
+        }
+
 
         public VW_Prendas Find(int? id)
         {

@@ -271,7 +271,7 @@ SELECT  [pantrol_Id],
 END
 GO
 
-CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_Checked 27
+CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_Checked 
 @role_Id INT
 AS BEGIN
 	SELECT Pant_Id FROM acce.tbPantallasPorRol
@@ -1121,6 +1121,7 @@ GO
 
 CREATE OR ALTER PROC vera.UDP_tbDescuentos_INSERT
 @desc_Color NVARCHAR(100),
+@desc_ColorHexa NVARCHAR(100),
 @desc_Descuento INT,
 @desc_UserCrea INT
 AS BEGIN
@@ -1136,9 +1137,9 @@ AS BEGIN
 		 BEGIN
 			
 			INSERT INTO  vera.tbDescuentos
-			(desc_Color, desc_Descuento, desc_UserCrea)
+			(desc_Color, desc_ColorHexa, desc_Descuento, desc_UserCrea)
 			VALUES
-			(@desc_Color, @desc_Descuento, @desc_UserCrea)
+			(@desc_Color, @desc_ColorHexa, @desc_Descuento, @desc_UserCrea)
 
 			SELECT 200 AS codeStatus, 'Descuento creado con éxito' AS messageStatus
 		END
@@ -1155,6 +1156,7 @@ GO
 CREATE OR ALTER PROC vera.UDP_tbDescuentos_UPDATE
 @desc_Id INT,
 @desc_Color NVARCHAR(100),
+@desc_ColorHexa NVARCHAR(100),
 @desc_Descuento INT,
 @desc_UserModifica INT
 AS BEGIN
@@ -1165,6 +1167,7 @@ AS BEGIN
 			UPDATE vera.tbDescuentos
 			SET
 				desc_Color = @desc_Color,
+				desc_ColorHexa = @desc_ColorHexa,
 				desc_Descuento = @desc_Descuento,
 				desc_UserModificacion = @desc_UserModifica
 				WHERE desc_Id		=	@desc_Id
@@ -1746,6 +1749,26 @@ AS BEGIN
 				WHERE pren_Id	=	@pren_Id
 
 			SELECT 200 AS codeStatus, 'Prenda Eliminada con éxito' AS messageStatus
+
+	END TRY
+	BEGIN CATCH
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+
+END
+GO
+
+CREATE OR ALTER PROC vera.UDP_tbPrendas_ACTIVAR
+@pren_Id INT
+AS BEGIN
+
+     	BEGIN TRY
+			UPDATE vera.tbPrendas
+			SET
+				pren_Estado		=	1
+				WHERE pren_Id	=	@pren_Id
+
+			SELECT 200 AS codeStatus, 'Prenda Activada con éxito' AS messageStatus
 
 	END TRY
 	BEGIN CATCH

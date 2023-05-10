@@ -334,6 +334,7 @@ GO
 CREATE TABLE vera.tbDescuentos(
  desc_Id				INT IDENTITY (1,1)	NOT NULL,
  desc_Color				NVARCHAR(100)		NOT NULL,
+ desc_ColorHexa         NVARCHAR(100)       NOT NULL,
  desc_Descuento			INT					NOT NULL,
  
  /********Campos de Auditoria*********/
@@ -346,6 +347,8 @@ CREATE TABLE vera.tbDescuentos(
  );
 
  GO
+
+
 --***************************************************************/Tabla Descuentos*********************************************************************--
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1075,13 +1078,13 @@ GO
 
 --**************************************************************Tabla Descuentos*********************************************************************--
  INSERT INTO vera.tbDescuentos
- VALUES  ('Rojo', 50, 1,		GETDATE(), NULL, NULL, 1),
-		('Amarillo', 15, 1, GETDATE(), NULL, NULL, 1),
-		('Naranja', 10, 1,	GETDATE(), NULL, NULL, 1), 
-		('Azul', 40, 1,		GETDATE(), NULL, NULL, 1),
-		('Verde', 30, 1,	GETDATE(), NULL, NULL, 1),
-		('Negro', 25, 1,	GETDATE(), NULL, NULL, 1),
-		('Blanco', 35, 1,	GETDATE(), NULL, NULL, 1);
+ VALUES  ('Rojo', '#F80000', 50, 1,		GETDATE(), NULL, NULL, 1),
+		('Amarillo', '#FECA00', 15, 1, GETDATE(), NULL, NULL, 1),
+		('Naranja', '#F29A26',  10, 1,	GETDATE(), NULL, NULL, 1), 
+		('Azul', '#0000FF', 40, 1,		GETDATE(), NULL, NULL, 1),
+		('Verde', '#008D00', 30, 1,	GETDATE(), NULL, NULL, 1),
+		('Negro', '#000000', 25, 1,	GETDATE(), NULL, NULL, 1),
+		('Café', '#663300',  35, 1,	GETDATE(), NULL, NULL, 1);
 		GO
 --***************************************************************/Tabla Descuentos*********************************************************************--
 
@@ -1121,25 +1124,25 @@ GO
 
 --****************************************************************Tabla Prendas************************************************************************--
 INSERT INTO vera.tbPrendas
-VALUES  ('Cazadora con bolsillos oblicuos con cremallera','S', 1, 120.00, 2, 1, 3, 'https://img.ltwebstatic.com/images3_pi/2022/06/02/1654151432d5bddc8cd2ab4c90608456ec1fa61910_thumbnail_600x.webp',						1, 1, GETDATE(), NULL, NULL, 1),
-		('Abrigo de peluche de cuello esmoquin con doble bolsillo', 'M', 1, 230.00, 3, 1, 1, 'https://img.ltwebstatic.com/images3_pi/2021/09/19/163206063888a16a4ec0710f27c5082f91c88b61a7_thumbnail_600x.webp',			1, 1, GETDATE(), NULL, NULL, 1),
-		('Camisa con estampado de cuadros con parche de bolsillo', 'L', 2, 100.00, 2, 2, 2, 'https://img.ltwebstatic.com/images3_pi/2022/10/13/1665650496d3e572d7bf9cbf2e1b442c0c288120fa_thumbnail_600x.webp',				1, 1, GETDATE(), NULL, NULL, 1),
+VALUES  ('Cazadora con bolsillos','S', 1, 120.00, 2, 1, 3, 'https://img.ltwebstatic.com/images3_pi/2022/06/02/1654151432d5bddc8cd2ab4c90608456ec1fa61910_thumbnail_600x.webp',						1, 1, GETDATE(), NULL, NULL, 1),
+		('Abrigo de peluche ', 'M', 1, 230.00, 3, 1, 1, 'https://img.ltwebstatic.com/images3_pi/2021/09/19/163206063888a16a4ec0710f27c5082f91c88b61a7_thumbnail_600x.webp',			1, 1, GETDATE(), NULL, NULL, 1),
+		('Camisa con estampado de cuadros', 'L', 2, 100.00, 2, 2, 2, 'https://img.ltwebstatic.com/images3_pi/2022/10/13/1665650496d3e572d7bf9cbf2e1b442c0c288120fa_thumbnail_600x.webp',				1, 1, GETDATE(), NULL, NULL, 1),
 		('Camisa de color combinado', 'S', 2, 150.00, 10, 2, 3, 'https://img.ltwebstatic.com/images3_pi/2023/01/09/16732519016575d27fcb58ebd8b0d14d2ca5713c10_thumbnail_600x.webp',											1, 1, GETDATE(), NULL, NULL, 1),
-		('Camiseta con estampado slogan & foto', 'XS', 3, 450.00, 5, 3, 5, 'https://img.ltwebstatic.com/images3_pi/2023/02/01/1675238027d7de2502dde1553cc6cd2e58ba894c75_thumbnail_600x.webp',								1, 1, GETDATE(), NULL, NULL, 1),
-		('Camiseta con estampado de dibujos animados', 'L', 3, 100.00, 4, 3, 4,'https://img.ltwebstatic.com/images3_pi/2022/11/17/1668672213eb593e1a2a3ac007680a4bf068ebd398_thumbnail_600x.webp',							1, 1, GETDATE(), NULL, NULL, 1),
-		('Cazadora de universidad con estampado de slogan ribete de rayas', 'M', 4, 500.00, 3, 3, 2, ' Cazadora de universidad con estampado de slogan ribete de rayas',													1, 1, GETDATE(), NULL, NULL, 1),
-		('Vestido smock con estampado de cuello notch bajo con fruncido', 'S', 4, 500.00, 8, 4, 2, 'https://img.ltwebstatic.com/images3_pi/2023/02/14/1676340888fdb8ed97794ce40ac1e86cbdd5825309_thumbnail_600x.webp',		1, 1, GETDATE(), NULL, NULL, 1),
-		('Vestido con cinturón con estampado geométrico', 'XS', 7, 200.00, 7, 4, 3, 'https://img.ltwebstatic.com/images3_pi/2022/04/18/16502480808bc9410df8b3339d2c53e162a2ab8c63_thumbnail_600x.webp',						1, 1, GETDATE(), NULL, NULL, 1),
-		('Pantalones cargo con estampado de letra con cordón', 'S', 6, 150.00, 5, 5, 2, 'https://img.ltwebstatic.com/images3_pi/2022/08/29/1661758713ea2c4fac513c936d49651c8dc53aba66_thumbnail_600x.webp',					1, 1, GETDATE(), NULL, NULL, 1),
+		('Camiseta con estampado slogan ', 'XS', 3, 450.00, 5, 3, 5, 'https://img.ltwebstatic.com/images3_pi/2023/02/01/1675238027d7de2502dde1553cc6cd2e58ba894c75_thumbnail_600x.webp',								1, 1, GETDATE(), NULL, NULL, 1),
+		('Camiseta de dibujos animados', 'L', 3, 100.00, 4, 3, 4,'https://img.ltwebstatic.com/images3_pi/2022/11/17/1668672213eb593e1a2a3ac007680a4bf068ebd398_thumbnail_600x.webp',							1, 1, GETDATE(), NULL, NULL, 1),
+		('Cazadora de universidad ', 'M', 4, 500.00, 3, 3, 2, 'https://img.ltwebstatic.com/images3_pi/2022/12/05/1670211040fe8fd4d85c315c22c94246fd450af658_thumbnail_405x552.jpg',													1, 1, GETDATE(), NULL, NULL, 1),
+		('Vestido smock ', 'S', 4, 500.00, 8, 4, 2, 'https://img.ltwebstatic.com/images3_pi/2023/02/14/1676340888fdb8ed97794ce40ac1e86cbdd5825309_thumbnail_600x.webp',		1, 1, GETDATE(), NULL, NULL, 1),
+		('Vestido con cinturón', 'XS', 7, 200.00, 7, 4, 3, 'https://img.ltwebstatic.com/images3_pi/2022/04/18/16502480808bc9410df8b3339d2c53e162a2ab8c63_thumbnail_600x.webp',						1, 1, GETDATE(), NULL, NULL, 1),
+		('Pantalones cargo con estampado ', 'S', 6, 150.00, 5, 5, 2, 'https://img.ltwebstatic.com/images3_pi/2022/08/29/1661758713ea2c4fac513c936d49651c8dc53aba66_thumbnail_600x.webp',					1, 1, GETDATE(), NULL, NULL, 1),
 		('Pantalones acampanados unicolor', 'L', 6,  200.00, 4, 5, 4, 'https://img.ltwebstatic.com/images3_pi/2021/07/12/16260538828be59d10a0001200b1269cb905dfa747_thumbnail_600x.webp',									1, 1, GETDATE(), NULL, NULL, 1),
 		('Short bajo con abertura', 'M', 5, 70.00, 11, 6, 4, 'https://img.ltwebstatic.com/images3_pi/2021/07/15/1626330467342689c952b9e1edbe70dc2eb3dfc4ab_thumbnail_600x.webp',											1, 1, GETDATE(), NULL, NULL, 1),
-		('Shorts deportivos de mármol de moldeador cadera', 'S', 3, 90.00, 12, 6, 3, 'https://img.ltwebstatic.com/images3_pi/2022/01/07/164153668891c3b1e4cb20a215967cf64c74f6db54_thumbnail_600x.webp',					1, 1, GETDATE(), NULL, NULL, 1),
+		('Shorts deportivos de mármol', 'S', 3, 90.00, 12, 6, 3, 'https://img.ltwebstatic.com/images3_pi/2022/01/07/164153668891c3b1e4cb20a215967cf64c74f6db54_thumbnail_600x.webp',					1, 1, GETDATE(), NULL, NULL, 1),
 		('Falda fruncido unicolor', 'S', 4, 120.00, 13, 7, 3, 'https://img.ltwebstatic.com/images3_pi/2022/05/26/16535643237641817084ae23f0f6fe0971c885e53a_thumbnail_600x.webp',											1, 1, GETDATE(), NULL, NULL, 1),
-		('Chicas adolescentes Falda en mezclilla desgarro bajo crudo', 'XS', 7, 230.00, 1, 7, 1, 'https://img.ltwebstatic.com/images3_pi/2023/02/01/167523805095e48c1dbdf81289f666b4c969f6d0eb_thumbnail_600x.webp',		1, 1, GETDATE(), NULL, NULL, 1),
-		('Camisa sin manga con estampado de cuello alto', 'M',5,  200.00, 8, 8, 1, 'https://img.ltwebstatic.com/images3_pi/2023/02/20/16768554068ed78d0c27cc448c7e8eedaedae05990_thumbnail_600x.webp',						1, 1, GETDATE(), NULL, NULL, 1),
-		('Blusa dorado con estampado de rombo de cuello', 'S', 3, 100.00, 1, 8, 2, 'https://img.ltwebstatic.com/images3_pi/2022/04/15/164999304495626cec8cd867e16fe3abb12c999fa5_thumbnail_600x.webp',						1, 1, GETDATE(), NULL, NULL, 1),
-		('Niños Zuecos con estampado de unicornio de dibujos animados', 'EUR23', 2, 230.00, 2, 9, 1, 'https://img.ltwebstatic.com/images3_pi/2022/06/01/1654047477ed38d15bb074568bc1688c27ee464b81_thumbnail_600x.webp',	1, 1, GETDATE(), NULL, NULL, 1),
-		('Hombres Zapatillas deportivas arriba alta con cordón delantero', 'EUR43', 5, 230.00, 3, 9, 1, 'https://img.ltwebstatic.com/images3_pi/2022/11/08/16678925783c4d86a05454d421619f293cdd4ce2b8_thumbnail_600x.webp', 1 ,1, GETDATE(), NULL, NULL, 1);
+		('Falda en mezclilla ', 'XS', 7, 230.00, 1, 7, 1, 'https://img.ltwebstatic.com/images3_pi/2023/02/01/167523805095e48c1dbdf81289f666b4c969f6d0eb_thumbnail_600x.webp',		1, 1, GETDATE(), NULL, NULL, 1),
+		('Camisa sin manga ', 'M',5,  200.00, 8, 8, 1, 'https://img.ltwebstatic.com/images3_pi/2023/02/20/16768554068ed78d0c27cc448c7e8eedaedae05990_thumbnail_600x.webp',						1, 1, GETDATE(), NULL, NULL, 1),
+		('Blusa dorado ', 'S', 3, 100.00, 1, 8, 2, 'https://img.ltwebstatic.com/images3_pi/2022/04/15/164999304495626cec8cd867e16fe3abb12c999fa5_thumbnail_600x.webp',						1, 1, GETDATE(), NULL, NULL, 1),
+		('Niños Zuecos con estampado ', 'EUR23', 2, 230.00, 2, 9, 1, 'https://img.ltwebstatic.com/images3_pi/2022/06/01/1654047477ed38d15bb074568bc1688c27ee464b81_thumbnail_600x.webp',	1, 1, GETDATE(), NULL, NULL, 1),
+		('Zapatillas deportivas ', 'EUR43', 5, 230.00, 3, 9, 1, 'https://img.ltwebstatic.com/images3_pi/2022/11/08/16678925783c4d86a05454d421619f293cdd4ce2b8_thumbnail_600x.webp', 1 ,1, GETDATE(), NULL, NULL, 1);
  GO
 --***************************************************************/Tabla Prendas************************************************************************--
 

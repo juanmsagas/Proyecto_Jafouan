@@ -41,6 +41,7 @@ namespace Jafouan.DataAccess.Repository
 
 
             parametros.Add("@desc_Color", item.desc_Color, DbType.String, ParameterDirection.Input);
+            parametros.Add("@desc_ColorHexa", item.desc_ColorHexa, DbType.String, ParameterDirection.Input);
             parametros.Add("@desc_Descuento", item.desc_Descuento, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@desc_UserCrea", item.desc_UserCrea, DbType.Int32, ParameterDirection.Input);
 
@@ -62,6 +63,7 @@ namespace Jafouan.DataAccess.Repository
 
             parametros.Add("@desc_Id", item.desc_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@desc_Color", item.desc_Color, DbType.String, ParameterDirection.Input);
+            parametros.Add("@desc_ColorHexa", item.desc_ColorHexa, DbType.String, ParameterDirection.Input);
             parametros.Add("@desc_Descuento", item.desc_Descuento, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@desc_UserModifica", item.desc_UserModificacion, DbType.Int32, ParameterDirection.Input);
 

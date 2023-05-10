@@ -63,5 +63,13 @@ namespace Jafouan.API.Controllers
             var result = _ventaRopaServices.DeletePrendas(item);
             return Ok(result);
         }
+        [HttpPut("Activar")]
+        public IActionResult AtivarPrenda([FromBody] PrendasViewModel prendas)
+        {
+            var item = _mapper.Map<tbPrendas>(prendas);
+            var result = _ventaRopaServices.ActivarPrenda(item);
+            return Ok(result);
+        }
+
     }
 }

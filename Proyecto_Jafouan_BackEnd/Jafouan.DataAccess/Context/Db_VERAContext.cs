@@ -232,6 +232,10 @@ namespace Jafouan.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(100);
 
+                entity.Property(e => e.desc_ColorHexa)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
                 entity.Property(e => e.desc_FechaCreacion).HasColumnType("datetime");
 
                 entity.Property(e => e.desc_FechaModificacion).HasColumnType("datetime");
@@ -612,6 +616,10 @@ namespace Jafouan.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(100);
 
+                entity.Property(e => e.desc_ColorHexa)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
                 entity.Property(e => e.empl_Modifica)
                     .HasMaxLength(30)
                     .IsUnicode(false);
@@ -957,6 +965,10 @@ namespace Jafouan.DataAccess.Context
                 entity.ToTable("tbDescuentos", "vera");
 
                 entity.Property(e => e.desc_Color)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.desc_ColorHexa)
                     .IsRequired()
                     .HasMaxLength(100);
 
