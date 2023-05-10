@@ -254,7 +254,6 @@ namespace Jafouan.BusinessLogic.Service
         }
         #endregion
 
-
         #region Pantallas
 
 
@@ -274,6 +273,43 @@ namespace Jafouan.BusinessLogic.Service
             }
         }
 
+        #endregion
+
+        #region PantallasPorRol
+        public ServiceResult PantallasAgg(tbPantallasPorRol pantrole)
+        {
+            var result = new ServiceResult();
+
+            try
+            {
+                var list = _pantallasRepository.InsertP(pantrole);
+    
+                return result.Ok(list);
+              
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult PantallasElim(int role_Id, int pant_Id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _pantallasRepository.DeleteP(role_Id, pant_Id);
+      
+                    return result.Ok(list);
+    
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
         #endregion
     }
 }

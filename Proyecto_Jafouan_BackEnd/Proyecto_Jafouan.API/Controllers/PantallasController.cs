@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Jafouan.API.Models;
 using Jafouan.BusinessLogic.Service;
+using Jafouan.Entities.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -31,5 +33,20 @@ namespace Jafouan.API.Controllers
             return Ok(list);
         }
 
+        [HttpPost("PantallasAgg")]
+        public IActionResult PantallasAgg([FromBody] PantallasPorRolViewModel pr)
+        {
+            var item = _mapper.Map<tbPantallasPorRol>(pr);
+            var result = _accessService.PantallasAgg(item);
+            return Ok(result);
+        }
+
+        [HttpPost("PantallasElim")]
+        public IActionResult PantallasElim([FromBody] PantallasPorRolViewModel pr)
+        {
+
+            var result = _accessService.PantallasElim((int)pr.role_Id, (int)pr.pant_Id);
+            return Ok(result);
+        }
     }
 }

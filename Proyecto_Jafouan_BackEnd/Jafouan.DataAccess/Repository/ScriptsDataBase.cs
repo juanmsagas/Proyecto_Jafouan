@@ -138,6 +138,9 @@ namespace Jafouan.DataAccess.Repository
         public static string INSERT_PANTALLASROL = "acce.UDP_tbPantallasPorRol_INSERT";
         public static string UPDATE_PANTALLASROL = "acce.UDP_tbPantallasPorRol_UPDATE";
         public static string DELETE_PANTALLASROL = "acce.UDP_tbPantallasPorRol_DELETE";
+
+        public static string UDP_tbPantallasPorRol_Check = "acce.UDP_tbPantallasPorRol_Check";
+        public static string UDP_tbPantallasPorRol_Checked = "acce.UDP_tbPantallasPorRol_Checked";
         #endregion
 
         #region Prendas

@@ -47,12 +47,22 @@ function Roles() {
   const [visibleEnca, setvisibleEnca   ] = useState(false)
   const [Pantallas, setPantallasDDL] = useState([]);  
   const [validated, setValidated] = useState(false)
-  const [selected, setSelected] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [rolId, setrolId] = useState(0)
 
 
   const [Role_Id_Pant, set_Role_Id_Pant] = useState({
     role_Id: 0,
-    pant_Id: 0
+    pant_Id: 0,
+    pantrol_UserCrea:1,
+    role_Descripcion:''
+})
+
+
+const [Role_Id_PantEnvio, set_Role_Id_Pant_Envio] = useState({
+  role_Id: 0,
+  pant_Id: 0,
+  pantrol_UserCrea:1,
 })
 
   const [nuevoRol, setNuevoRol] = useState({
@@ -100,7 +110,6 @@ const abrirycerrarInsert = (event) => {
   setVisible(!visible)
   setValidated(false)
   setvisibleEnca(!visibleEnca)
-  setinsertado(!insertado)
   setNuevoRol({
     role_Descripcion: '',
     role_UserCrea:1
@@ -149,23 +158,68 @@ const handleSubmitI = (event) => {
   if(form.checkValidity() != false){
     axios.post('api/Roles/Insert', nuevoRol, config)
         .then((response) => {
+          console.log(response.data)
 
           set_Role_Id_Pant({
-            role_Id:response.data[1].codeStatus
+            role_Id:response.data[1].codeStatus,
+            role_Descripcion:response.data[1].messageStatus
           })
-            console.log(Role_Id_Pant.role_Id)
-            console.log(response.data[1].codeStatus)
+          sessionStorage.setItem('id', response.data[1].codeStatus);
+          console.log(Role_Id_Pant.role_Id)
+          if (response.data[0].codeStatus==200) {
             setinsertado(!insertado)
+            console.log(response.data[1].codeStatus)
+            console.log(Role_Id_Pant.role_Id)
             setNuevoRol({
-                role_Descripcion: '',
-                role_UserCrea:1
-            })
+              role_Descripcion: '',
+              role_UserCrea:1
+          })
+          setVisible(!visible)
+          }
+          
         })
         .catch((error) => {
             console.log(error)
         })
       }
 }
+
+
+
+  //peticion a la api insert pantallas al rol
+  const PantallasPorRol = (pant_Id) => {
+
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    axios.post('api/Pantallas/PantallasAgg', Role_Id_PantEnvio, config)
+        .then((response) => {
+          console.log(response.data)
+
+          console.log(Role_Id_PantEnvio)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+}
+
+
+const handleOptionChange = (selected) => {
+  setSelectedOptions(selected);
+  const id = selectedOptions[selectedOptions.lastIndex].value
+  const rol=  sessionStorage.getItem('id');
+
+  
+  set_Role_Id_Pant_Envio({
+    pant_Id:id,
+    role_Id:rol,
+    pantrol_UserCrea:1
+  })
+  PantallasPorRol(id);
+};
 
 //peticion a la api Editar   
 const handleSubmitE = (event) => {
@@ -330,6 +384,66 @@ const handleSubmitD = (event) => {
     </CModal>
 
 
+
+  <CCollapse visible={insertado} className='col-8 offset-2'>
+    <CCard className="mt-3">
+        <CCardHeader>
+          <h1 className='h4 text-center' style={{ fontFamily: "revert-layer"}}>Asignacion de accesos</h1>
+        </CCardHeader>
+        <CCardBody>
+      <CForm
+    className="row g-3 needs-validation"
+    noValidate
+    validated={validated}
+    onSubmit={handleSubmitI}
+>
+   
+      
+<CCol md={0}  className='offset-1 mt-5'>
+<CFormInput
+type="hidden"
+value={Role_Id_Pant.role_Id}
+id="validationCustom01"
+required/>
+</CCol>
+   
+<CCol md={7} className='offset-1'>
+<CFormInput
+type="text"
+label='Rol'
+value={Role_Id_Pant.role_Descripcion}
+id="validationCustom01"
+disabled
+required/>
+
+</CCol>
+
+<CCol md={3}>
+  <label className='label mb-2'>Pantallas Asignadas</label>
+  <MultiSelect 
+    key={options}
+    options={options}
+    value={selectedOptions}
+    onChange={handleOptionChange}
+    labelledBy="Pantallas"
+  />
+</CCol>
+
+<center>
+  <CCol xs={12}>
+      <CButton color="primary"  type="submit">
+        Guardar
+      </CButton>
+    </CCol>
+</center>
+  </CForm>
+
+  
+
+        </CCardBody>
+      </CCard>
+</CCollapse>
+
  {/*Formulario Insertar*/}
  
     <CCollapse visible={visible} className=''>
@@ -357,39 +471,8 @@ const handleSubmitD = (event) => {
     required/>
 
     </CCol>
-  <CCollapse visible={!insertado} className=''>
-    <CAccordion flush className='mt-5'>
-  <CAccordionItem itemKey={1}>
-    <CAccordionHeader>Permisos</CAccordionHeader>
-    <CAccordionBody>
-      
-<CCol md={10}  className='offset-1 mt-5'>
-    
   
-<CFormInput
-type="hidden"
-value={Role_Id_Pant.role_Id}
-id="validationCustom01"
-required/>
 
-</CCol>
-<CCol className='offset-4 mt-1'>
-  <MultiSelect 
-    key={options}
-    options={options}
-    value={selected}
-    onChange={setSelected}
-    labelledBy="Pantallas"
-  />
-</CCol>
-
-
-    </CAccordionBody>
-  </CAccordionItem>
-  </CAccordion>
-</CCollapse>
-
-    <CCollapse visible={insertado} className=''>
     <CCol xs={12} className='offset-4 '>
       <CButton color="primary"  type="submit">
         Guardar
@@ -398,7 +481,6 @@ required/>
       Cancelar
     </CButton>
     </CCol>
-    </CCollapse>
   </CForm>
 
   

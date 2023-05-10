@@ -45,7 +45,13 @@ AS BEGIN
 			VALUES
 			(@role_Descripcion, @role_UserCrea)
 
+			DECLARE @id INT= (SELECT CAST(IDENT_CURRENT('acce.tbRoles')AS INT))
+			DECLARE @Rol NVARCHAR(MAX) = (SELECT role_Descripcion FROM acce.tbRoles WHERE role_Id = @id)
+
 			SELECT 200 AS codeStatus, 'Rol Creado con éxito' AS messageStatus
+			UNION ALL
+			SELECT @id,@Rol
+
 		END
 
 	END TRY
