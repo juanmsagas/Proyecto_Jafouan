@@ -570,7 +570,7 @@ required/>
       const newDept_Id = { ...prevDept_Id, dept_Id:  e.target.value };
       enviarDeptId(e, newDept_Id); // llamada a la función que envía el dept_Id a la API
       return newDept_Id;
-    });
+    }); 
   }}
   id="validationCustom01"
   label="Departamento"

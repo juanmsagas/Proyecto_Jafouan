@@ -37,6 +37,7 @@ import {
 import MultiSelect from "react-multiselect-checkboxes";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { parse } from "date-fns";
 
 function Roles() {
   const [roles, setRoles] = useState([]);
@@ -51,7 +52,11 @@ function Roles() {
   const [Pantallas, setPantallasDDL] = useState([]);
   const [validated, setValidated] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedDeOptions, setSelectedDeOptions] = useState([]);
+
   const [array, setarray] = useState(false);
+  const [abrirPants, setabrirPants] = useState(false);
+  
 
   const [Role_Id_Pant, set_Role_Id_Pant] = useState({
     role_Id: 0,
@@ -246,15 +251,45 @@ function Roles() {
     toast.success("El Rol y sus Permisos fueron Agregados con exito");
   };
 
+  
+  
+  const abrirPantallas = (params, event) => {
+    if (event) {
+      event.preventDefault();
+    }
+    setabrirPants(!abrirPants);
+    setvisibleEnca(!visibleEnca);
+    set_Role_Id_Pant({
+      role_Id: params.role_Id,
+      role_Descripcion: params.role_Descripcion
+    });
+    
+  };
 
-  const handleButtonClick = (roleId) => {
-    axios.post('/api/Pantallas/PantallasPorRol_Checked/', { params: { roleId }})
+
+  const handleButtonClick = (role_Id) => {
+   
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const data = {
+      role_id: role_Id,
+    };
+
+    axios
+      .post("/api/Pantallas/PantallasPorRol_Checked", data, config)
       .then((response) => {
-        console.log(response.data)
+        const selectedData = response.data.map((item) => ({
+          value: item.pant_Id,
+        }));
+        setSelectedDeOptions(selectedData);
       })
       .catch((error) => {
         console.log(error);
-      })
+      });
 
   };
   
@@ -324,7 +359,6 @@ function Roles() {
   //peticion a la api listado
   useEffect(() => {
     axios.get("api/Roles/Index").then((response) => {
-      console.log("entra");
       const insertarid = response.data.map((row) => ({
         ...row,
         id: row.role_Id,
@@ -339,7 +373,7 @@ function Roles() {
 
   const columns = [
     { field: "role_Id", headerName: "ID", flex: 1 },
-    { field: "role_Descripcion", headerName: "Rol", flex: 2 },
+    { field: "role_Descripcion", headerName: "Rol", flex: 1 },
     {
       field: "acciones",
       headerName: "Acciones",
@@ -359,12 +393,16 @@ function Roles() {
           </CButton>
 
           <CButton 
-            color="dark ms-2" 
-            variant="outline"
-            onClick={() => handleButtonClick(params.row.role_Id)}
-          >
-            <MonitorIcon />
-          </CButton>
+  color="dark ms-2" 
+  variant="outline"
+  onClick={() => {
+    abrirPantallas(params.row);
+    handleButtonClick(params.row.role_Id);
+  }}
+>
+  <MonitorIcon />
+</CButton>
+
 
           <CButton
             color="danger ms-2"
@@ -518,6 +556,69 @@ function Roles() {
             </CCard>
           </CCollapse>
 
+
+          {/** edicion de pantallas*/}
+          <CCollapse visible={abrirPants} className="col-8 offset-2">
+            <CCard className="mt-3">
+              <CCardHeader>
+                <h1
+                  className="h4 text-center"
+                  style={{ fontFamily: "revert-layer" }}
+                >
+                  Edición de accesos
+                </h1>
+              </CCardHeader>
+              <CCardBody>
+                <CForm
+                  onSubmit={PantallasPorRol}
+                  className="row g-3 needs-validation"
+                  noValidate
+                  validated={validated}
+                >
+                  <CCol md={0} className=" mt-5">
+                    <CFormInput
+                      type="text"
+                      value={Role_Id_Pant.role_Id}
+                      id="validationCustom01"
+                      required
+                    />
+                  </CCol>
+
+                  <CCol md={6} className="offset-1">
+                    <CFormInput
+                      type="text"
+                      label="Rol"
+                      value={Role_Id_Pant.role_Descripcion}
+                      id="validationCustom01"
+                      disabled
+                      required
+                    />
+                  </CCol>
+
+                  <CCol md={4}>
+                    <label className="label mb-2">Pantallas Asignadas</label>
+                    <MultiSelect
+                      key={options}
+                      options={options}
+                      value={setSelectedDeOptions}
+                      onChange={handleOptionChange}
+                      labelledBy="Pantallas"
+                    />
+                  </CCol>
+
+                  <CCollapse visible={true} className="col-8 offset-2">
+                    <center>
+                      <CCol xs={12}>
+                        <CButton color="primary" type="submit">
+                          Guardar
+                        </CButton>
+                      </CCol>
+                    </center>
+                  </CCollapse>
+                </CForm>
+              </CCardBody>
+            </CCard>
+          </CCollapse>
           {/*Formulario Insertar*/}
 
           <CCollapse visible={visible} className="">
