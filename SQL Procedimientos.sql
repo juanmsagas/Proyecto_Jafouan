@@ -271,7 +271,7 @@ SELECT  [pantrol_Id],
 END
 GO
 
-CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_Checked 27
+CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_Checked 
 @role_Id INT
 AS BEGIN
 	SELECT Pant_Id FROM acce.tbPantallasPorRol

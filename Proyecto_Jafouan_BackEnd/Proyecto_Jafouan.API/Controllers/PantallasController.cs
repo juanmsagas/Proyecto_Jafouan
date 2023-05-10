@@ -54,7 +54,7 @@ namespace Jafouan.API.Controllers
         {
 
             var result = _accessService.PantallasPorRol_Checked(pr.role_Id);
-            return Ok(result);
+                return Ok(result);
         }
     }
 }
