@@ -27,6 +27,15 @@ namespace Jafouan.DataAccess.Repository
             throw new NotImplementedException();
         }
 
+        public IEnumerable<VW_Pantallas> PantallasPorRol_Checked(int role_Id)
+        {
+            using var db = new SqlConnection(Jafouan_Context.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@role_Id", role_Id, DbType.String, ParameterDirection.Input);
+            return db.Query<VW_Pantallas>(ScriptsDataBase.UDP_tbPantallasPorRol_Checked, parametros, commandType: System.Data.CommandType.StoredProcedure);
+        }
+
         public IEnumerable<VW_Pantallas> List()
         {
             using var db = new SqlConnection(Jafouan_Context.ConnectionString);

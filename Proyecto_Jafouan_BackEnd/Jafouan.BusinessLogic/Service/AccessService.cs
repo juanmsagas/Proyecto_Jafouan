@@ -310,6 +310,21 @@ namespace Jafouan.BusinessLogic.Service
                 return result.Error(ex.Message);
             }
         }
+
+        public IEnumerable<VW_Pantallas> PantallasPorRol_Checked(int role_Id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _pantallasRepository.PantallasPorRol_Checked(role_Id);
+                return (IEnumerable<VW_Pantallas>)list;
+            }
+            catch (Exception e)
+            {
+                _ = e.Message;
+                return Enumerable.Empty<VW_Pantallas>();
+            }
+        }
         #endregion
     }
 }

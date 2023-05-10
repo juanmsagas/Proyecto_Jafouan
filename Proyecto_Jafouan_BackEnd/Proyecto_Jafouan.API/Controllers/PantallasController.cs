@@ -48,5 +48,13 @@ namespace Jafouan.API.Controllers
             var result = _accessService.PantallasElim((int)pr.role_Id, (int)pr.pant_Id);
             return Ok(result);
         }
+
+        [HttpPost("PantallasPorRol_Checked")]
+        public IActionResult PantallasPorRol_Checked(int role_id)
+        {
+
+            var result = _accessService.PantallasPorRol_Checked(role_id);
+            return Ok(result);
+        }
     }
 }

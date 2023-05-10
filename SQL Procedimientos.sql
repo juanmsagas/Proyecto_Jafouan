@@ -271,7 +271,7 @@ SELECT  [pantrol_Id],
 END
 GO
 
-CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_Checked 
+CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_Checked 27
 @role_Id INT
 AS BEGIN
 	SELECT Pant_Id FROM acce.tbPantallasPorRol
@@ -290,6 +290,9 @@ BEGIN
 	(role_Id, pant_Id, pantrol_UserCrea)
 	VALUES
 	(@role_Id,@pant_Id,@pantrol_UserCrea)
+
+	SELECT 200 AS codeStatus, 'Acceso Agregado con éxito' AS messageStatus
+
 END
 
 GO
