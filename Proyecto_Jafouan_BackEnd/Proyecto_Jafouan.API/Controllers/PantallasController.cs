@@ -50,11 +50,11 @@ namespace Jafouan.API.Controllers
         }
 
         [HttpPost("PantallasPorRol_Checked")]
-        public IActionResult PantallasPorRol_Checked(int role_id)
+        public IActionResult PantallasPorRol_Checked([FromBody] PantallasPorRolViewModel pr)
         {
 
-            var result = _accessService.PantallasPorRol_Checked(role_id);
-            return Ok(result);
+            var result = _accessService.PantallasPorRol_Checked(pr.role_Id);
+                return Ok(result);
         }
     }
 }

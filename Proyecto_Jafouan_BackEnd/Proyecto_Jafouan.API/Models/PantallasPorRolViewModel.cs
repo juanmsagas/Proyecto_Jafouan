@@ -17,7 +17,5 @@ namespace Jafouan.API.Models
         public int? pantrol_UserModifica { get; set; }
         public DateTime? pantrol_FechaModifica { get; set; }
 
-        public virtual tbPantallas pant { get; set; }
-        public virtual tbRoles role { get; set; }
     }
 }
