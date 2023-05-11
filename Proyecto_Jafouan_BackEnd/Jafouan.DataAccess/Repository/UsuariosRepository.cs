@@ -83,5 +83,15 @@ namespace Jafouan.DataAccess.Repository
             var result = db.QueryFirst<VW_Usuarios>(ScriptsDataBase.UDP_Usuarios_LOGIN, parametros, commandType: System.Data.CommandType.StoredProcedure);
             return result;
         }
+
+        public IEnumerable<VW_Pantallas> Menu(int id)
+        {
+            using var db = new SqlConnection(Jafouan_Context.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@user_Id", id, DbType.String, ParameterDirection.Input);
+
+            var result = db.Query<VW_Pantallas>(ScriptsDataBase.UDP_Usuarios_MENU, parametros, commandType: System.Data.CommandType.StoredProcedure);
+            return result;
+        }
     }
 }

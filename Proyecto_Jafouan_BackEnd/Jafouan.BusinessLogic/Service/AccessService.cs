@@ -36,6 +36,14 @@ namespace Jafouan.BusinessLogic.Service
             var list = _usuarioRepository.Login(username, password);
             return list;
         }
+
+        public IEnumerable<VW_Pantallas> Menu(int id)
+        {
+            var result = new ServiceResult();
+
+            var list = _usuarioRepository.Menu(id);
+            return list;
+        }
         #endregion
 
         #region Usuarios

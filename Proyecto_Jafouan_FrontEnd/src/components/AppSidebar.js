@@ -11,6 +11,8 @@ import { sygnet } from 'src/assets/brand/sygnet'
 
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
+import axios from 'axios'
+import { useState, useEffect } from 'react'
 
 // sidebar nav config
 import navigation from '../_nav'
@@ -19,6 +21,31 @@ const AppSidebar = () => {
   const dispatch = useDispatch()
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
+
+  
+const Menu = () => {
+  const [menuDataAcce, setmenuDataAcce] = useState([]);
+  const [menuDataMant, setmenuDataMant] = useState([]);
+  const [menuDataVera, setmenuDataVera] = useState([]);
+
+  useEffect(() => {
+    const sessionId = sessionStorage.getItem('user_Id');
+    console.log(sessionId)
+    if (sessionId) {
+      axios
+        .get(`/api/Usuarios/menu?id=${sessionId}`)
+        .then((response) => {
+          menuDataAcce(response.data);
+          console.log(response.data)
+        })
+        .catch((error) => {
+          console.error('Error al obtener los datos del menú:', error);
+        });
+    }
+  }, []);
+}
+
+
 
   return (
     <CSidebar

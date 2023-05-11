@@ -221,6 +221,7 @@ function Roles() {
     });
 
     set_Role_Id_Pant_Envio(rolePantArray);
+    console.log(set_Role_Id_Pant_Envio)
   }, [selectedOptions]);
 
   {/*Edit Pantallas*/}
@@ -609,6 +610,7 @@ function Roles() {
                       value={selectedOptions}
                       onChange={handleOptionChange}
                       labelledBy="Pantallas"
+                      placeholder="Pantallas"
                     />
                   </CCol>
 
@@ -668,13 +670,18 @@ function Roles() {
                   <CCol md={4}>
                     <label className="label mb-2">Pantallas Asignadas</label>
                     <MultiSelect
+
                       key={options}
                       options={options}
                       value={selectedDeOptions}
                       onChange={handleOptionChangeEdit}
                       labelledBy="Pantallas"
+                      placeholder="Pantallas"
+                      _propTypes
                     />
                   </CCol>
+
+                  
 
                     <center>
                         <CButton disabled={!array} color="primary" type="submit">

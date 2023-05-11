@@ -31,6 +31,11 @@ const Login = () => {
     axios.get('/api/Usuarios/Login/', { params: { username, password }})
       .then((response) => {
         console.log(response.data)
+        sessionStorage.setItem("user_Id", response.data.user_Id);
+        sessionStorage.setItem("user_NombreUsuario", response.data.user_NombreUsuario);
+        sessionStorage.setItem("sucu_Id", response.data.sucu_Id);
+        sessionStorage.setItem("nombreEmpleado", response.data.nombreEmpleado);
+
         navigate('/home');
       })
       .catch((error) => {
@@ -39,6 +44,29 @@ const Login = () => {
       .finally(() => {
         setLoading(false);
       });
+
+      const user_Id = sessionStorage.getItem('user_Id');
+
+      axios
+      .get(`api/Usuarios/Menu?id=${user_Id}`)
+      .then((response) => {
+        const menu = response.data.map((item) => ({
+          name: item.pant_Nombre,
+          to: item.pant_href,
+          identificador: item.pant_Identificador.substring(0, 4),
+        }));
+      
+        console.log(menu);
+        const arregloJSON = JSON.stringify(menu);
+      
+        sessionStorage.setItem('miArreglo', arregloJSON);
+      
+
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    
   }, [loading, username, password, navigate]);
 
   const handleSubmit = (e) => {
