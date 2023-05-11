@@ -76,7 +76,7 @@ function Roles() {
     role_UserCrea: 1,
   });
   const [ElimRol, setElimRol] = useState({
-    role_Id: "",
+    role_Id: 0,
   });
   const [EditarRol, setEditarRol] = useState({
     role_Id: "",
@@ -395,7 +395,6 @@ function Roles() {
             role_Descripcion: "",
             role_UserModifica: 1,
           });
-          console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -418,9 +417,8 @@ function Roles() {
         console.log(response.data);
         setModal(false);
         setElimRol({
-          role_Id: "",
+          role_Id: 0,
         });
-        console.log(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -754,6 +752,7 @@ function Roles() {
 
           {/*Formulario Editar*/}
           <CCollapse visible={visible2}>
+          <CCol md={8} className="offset-2">
             <CCard className="mt-3">
               <CCardHeader>
                 <h1 className="h3 text-center">Editar Rol</h1>
@@ -792,8 +791,8 @@ function Roles() {
                       required
                     />
                   </CCol>
-
-                  <CCol xs={12} className="offset-7">
+                  <center>
+                  <CCol xs={12} className="">
                     <CButton color="primary" type="submit">
                       Guardar
                     </CButton>
@@ -806,9 +805,11 @@ function Roles() {
                       Cancelar
                     </CButton>
                   </CCol>
+                  </center>
                 </CForm>
               </CCardBody>
             </CCard>
+            </CCol>
           </CCollapse>
 
           <CCollapse visible={!visibleEnca}>

@@ -438,6 +438,35 @@ WHERE user_NombreUsuario = @user_NombreUsuario AND user_Contraseña = @Encrypt
 END
 
 GO
+
+
+CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_MENU 
+@user_Id INT
+AS
+BEGIN
+DECLARE @Admin BIT = (	SELECT user_Admin FROM acce.tbUsuarios 
+						WHERE user_Id = @user_Id)
+IF @Admin = 1
+BEGIN
+	SELECT DISTINCT pant_Nombre,pant_Identificador,pant_href
+	FROM acce.tbPantallasPorRol T1
+	INNER JOIN acce.tbPantallas T2
+	ON T1.pant_Id = T2.pant_Id
+	WHERE pant_Estado = 1
+END
+ELSE IF @Admin = 0
+BEGIN
+	SELECT DISTINCT (pant_Nombre),pant_Identificador,pant_href
+	FROM acce.tbPantallasPorRol T1
+	INNER JOIN acce.tbPantallas T2
+	ON T1.pant_Id = T2.pant_Id
+	WHERE role_Id = ( SELECT role_Id FROM acce.tbUsuarios 
+						WHERE user_Id = @user_Id)
+						AND pant_Estado = 1
+END
+END
+
+GO
 --************************************************************/Tabla Usuarios******************************************************************--
 
 --*****************************************************************ACCE************************************************************************--

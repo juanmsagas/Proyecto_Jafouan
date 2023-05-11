@@ -14,7 +14,10 @@ namespace Jafouan.DataAccess.Repository
     {
         public RequestStatus Delete(tbRoles item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(Jafouan_Context.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@role_Id", item.role_Id, DbType.String, ParameterDirection.Input);
+            return db.QueryFirst<RequestStatus>(ScriptsDataBase.DELETE_ROLES, parametros, commandType: System.Data.CommandType.StoredProcedure);
         }
 
         public VW_Roles Find(int? id)
@@ -48,7 +51,12 @@ namespace Jafouan.DataAccess.Repository
 
         public RequestStatus Update(tbRoles item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(Jafouan_Context.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@role_Id", item.role_Id, DbType.String, ParameterDirection.Input);
+            parametros.Add("@role_Descripcion", item.role_Descripcion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@role_UserModifica", item.role_UserModifica, DbType.Int32, ParameterDirection.Input);
+            return db.QueryFirst<RequestStatus>(ScriptsDataBase.UPDATE_ROLES, parametros, commandType: System.Data.CommandType.StoredProcedure);
         }
     }
 }

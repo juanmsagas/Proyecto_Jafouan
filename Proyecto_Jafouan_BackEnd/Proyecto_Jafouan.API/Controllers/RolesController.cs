@@ -43,7 +43,7 @@ namespace Jafouan.API.Controllers
         }
 
         [HttpPut("Update")]
-        public IActionResult UpdateRol([FromBody] RolesViewModel Rol)
+        public IActionResult Update([FromBody] RolesViewModel Rol)
         {
             var item = _mapper.Map<tbRoles>(Rol);
             var result = _accessService.UpdateRol(item);
@@ -57,8 +57,8 @@ namespace Jafouan.API.Controllers
             return Ok(list);
         }
 
-        [HttpPut("DeleteRol")]
-        public IActionResult DeleteRol([FromBody] RolesViewModel Rol)
+        [HttpPut("Delete")]
+        public IActionResult Delete([FromBody] RolesViewModel Rol)
         {
             var item = _mapper.Map<tbRoles>(Rol);
             var result = _accessService.DeleteRol(item);
