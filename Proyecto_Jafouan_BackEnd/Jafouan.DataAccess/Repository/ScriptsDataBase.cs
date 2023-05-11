@@ -10,6 +10,8 @@ namespace Jafouan.DataAccess.Repository
     {
         #region LOGIN
         public static string UDP_Usuarios_LOGIN = "acce.UDP_tbUsuarios_LOGIN";
+        public static string UDP_Usuarios_MENU  = "acce.UDP_tbPantallasPorRol_MENU";
+
         #endregion
 
         #region Usuarios

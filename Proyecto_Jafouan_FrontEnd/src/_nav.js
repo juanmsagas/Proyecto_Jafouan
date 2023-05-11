@@ -1,5 +1,5 @@
-import React from 'react'
-import CIcon from '@coreui/icons-react'
+import React from "react";
+import CIcon from "@coreui/icons-react";
 //import de los iconos a usar en la navbar
 import {
   cilBell,
@@ -35,175 +35,160 @@ import {
   cilAlignCenter,
   cilCasino,
   cilPaperclip,
-} from '@coreui/icons'
-import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
+} from "@coreui/icons";
+import { CNavGroup, CNavItem, CNavTitle } from "@coreui/react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
-const _nav = [
-  {
+const arregloJSONGET = sessionStorage.getItem("miArreglo");
+const miArreglo = JSON.parse(arregloJSONGET);
+console.log(miArreglo);
+
+// en estos 4 se guardan los arreglos dentro de un drop down list
+const Vera_Items = [];
+const Mant_Items = [];
+const Acce_Items = [];
+const Fact_Items = [];
+
+
+const MantDDL = [];
+const AcceDDL = [];
+const FactDDL = [];
+const VeraDDL = [];
+
+const Menu  = [];
+
+miArreglo.forEach((element) => {
+  if(element.identificador == "acce"){
+    Acce_Items.push({
     component: CNavItem,
-    name: 'Inicio',
-    to: '/home',
+    name: element.name,
+    to: element.to,
     icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
-  },
+    })
+  }
+  if(element.identificador == "mant"){
+    Mant_Items.push({
+    component: CNavItem,
+    name: element.name,
+    to: element.to,
+    icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
+    })
+  }
+  if(element.identificador == "vera"){
+    Vera_Items.push({
+    component: CNavItem,
+    name: element.name,
+    to: element.to,
+    icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
+    })
+  }
+  if(element.identificador == "fact"){
+    Fact_Items.push({
+    component: CNavItem,
+    name: element.name,
+    to: element.to,
+    icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
+    })
+  }
+});
+
+
+
+if(Acce_Items.length!=0){
+  
+ AcceDDL.push (
   {
     component: CNavTitle,
-    name: 'Tablas Generales',
+    name: 'Esquema de Seguridad',
   },
   {
+  component: CNavGroup,
+  name: 'Generales',
+  to: '/base',
+  icon: <CIcon icon={cilGlobeAlt} customClassName="nav-icon" />,
+  items: [...Acce_Items]
+})
+
+}
+if(Mant_Items.length!=0){
+
+  MantDDL.push (
+    {
+      component: CNavTitle,
+      name: 'Esquema Mantenimiento',
+    },
+    {
     component: CNavGroup,
-    name: 'Generales',
+    name: 'Mantenimiento',
     to: '/base',
     icon: <CIcon icon={cilGlobeAlt} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Cargos',
-        to: '/Cargos',
-        icon: <CIcon icon={cilTags} customClassName="nav-icon" />,
-      },  {
-        component: CNavItem,
-        name: 'Departamentos',
-        to: '/Departamentos',
-        icon: <CIcon icon={cilMap} customClassName="nav-icon" />,
-      },  {
-        component: CNavItem,
-        name: 'Municipios',
-        to: '/Municipios',
-        icon: <CIcon icon={cilStorage} customClassName="nav-icon" />,
-      },  {
-        component: CNavItem,
-        name: 'Estados Civiles',
-        to: '/EstadosCiviles',
-        icon: <CIcon icon={cilBadge} customClassName="nav-icon" />,
-      },
-]
-},
-{
-  component: CNavTitle,
-  name: 'Tablas de Facturación',
-},
-{
-  component: CNavGroup,
-  name: 'Facturación',
-  to: '/base',
-  icon: <CIcon icon={cilBank} customClassName="nav-icon" />,
-  items: [
-    {
-      component: CNavItem,
-      name: 'Métodos de Pago',
-      to: '/MetodosPago',
-      icon: <CIcon icon={cilMoney} customClassName="nav-icon" />,
-    },
-    {
-      component: CNavItem,
-      name: 'Facturas',
-      to: '/Facturas',
-      icon: <CIcon icon={cilPaperclip} customClassName="nav-icon" />,
-    },
-  
+    items: [...Mant_Items]
+  })
 
-]
-},
-{
-  component: CNavTitle,
-  name: 'Tablas de Venta de Ropa',
-},
-{
-  component: CNavGroup,
-  name: 'Venta de Ropa',
-  to: '/base',
-  icon: <CIcon icon={cilCasino} customClassName="nav-icon" />,
-  items: [
+}
+if(Vera_Items.length!=0){
+  VeraDDL.push (
     {
-      component: CNavItem,
-      name: 'Prendas',
-      to: '/Prendas',
-      icon: <CIcon icon={cilCamera } customClassName="nav-icon" />,
+      component: CNavTitle,
+      name: 'Esquema Tienda',
     },
     {
-      component: CNavItem,
-      name: 'Empleados',
-      to: '/Empleados',
-      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-    },
-    
+    component: CNavGroup,
+    name: 'Mantenimiento',
+    to: '/base',
+    icon: <CIcon icon={cilGlobeAlt} customClassName="nav-icon" />,
+    items: [...Vera_Items]
+  })
+}
+if(Fact_Items.length!=0){
+  FactDDL.push (
     {
-      component: CNavItem,
-      name: 'Clientes',
-      to: '/Clientes',
-      icon: <CIcon icon={cilMoney} customClassName="nav-icon" />,
-    },
-    {
-      component: CNavItem,
-      name: 'Categorias',
-      to: '/Categorias',
-      icon: <CIcon icon={cilLibrary} customClassName="nav-icon" />,
+      component: CNavTitle,
+      name: 'Esquema de Facturación',
     },
     {
-      component: CNavItem,
-      name: 'Marcas',
-      to: '/Marcas',
-      icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
-    },
-    {
-      component: CNavItem,
-      name: 'Descuentos',
-      to: '/Descuentos',
-      icon: <CIcon icon={cilMinus} customClassName="nav-icon" />,
-    },
-  
-  
-    {
-      component: CNavItem,
-      name: 'Fardos',
-      to: '/Fardos',
-      icon: <CIcon icon={cilPaintBucket} customClassName="nav-icon" />,
-    },
-    {
-      component: CNavItem,
-      name: 'Proveedores',
-      to: '/Proveedores',
-      icon: <CIcon icon={cilCarAlt} customClassName="nav-icon" />,
-    },
-    {
-      component: CNavItem,
-      name: 'Sucursales',
-      to: '/Sucursales',
-      icon: <CIcon icon={cilRestaurant} customClassName="nav-icon" />,
-    },
-  
-
-]
-},
-{
-  component: CNavTitle,
-  name: 'Tablas de Acceso',
-},
-{
-  component: CNavGroup,
-  name: 'Acceso',
-  to: '/base',
-  icon: <CIcon icon={cilCasino} customClassName="nav-icon" />,
-  items: [
-    {
-      component: CNavItem,
-      name: 'Usuarios',
-      to: '/Usuarios',
-      icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
-    },
-  
-    {
-      component: CNavItem,
-      name: 'Roles',
-      to: '/Roles',
-      icon: <CIcon icon={cilSettings} customClassName="nav-icon" />,
-    },
-  
-
-]
+    component: CNavGroup,
+    name: 'Facturación',
+    to: '/base',
+    icon: <CIcon icon={cilGlobeAlt} customClassName="nav-icon" />,
+    items: [...Mant_Items]
+  })
 }
 
 
-]
 
-export default _nav
+
+if (MantDDL.length!=0) {
+  Menu.push(MantDDL)
+}
+
+if (AcceDDL.length!=0) {
+  Menu.push(AcceDDL)
+  
+}
+if (FactDDL.length!=0) {
+  Menu.push(FactDDL)
+  
+}
+if (VeraDDL.length!=0) {
+  Menu.push(VeraDDL)  
+}
+
+
+const pantalla = [
+  {
+    component: CNavItem,
+    name: "Inicio",
+    to: "/home",
+    icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
+  },
+  ...Menu
+];
+
+
+
+
+const _nav = pantalla;
+
+export default _nav;

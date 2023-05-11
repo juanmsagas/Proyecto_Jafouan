@@ -21,9 +21,6 @@ const Facturas = React.lazy(() => import('./views/facturas/facturas'))
 
 
 
-
-
-
 const routes = [
   //aca van todas las rutas como tal
   { path: '/', exact: true, name: 'Home' },

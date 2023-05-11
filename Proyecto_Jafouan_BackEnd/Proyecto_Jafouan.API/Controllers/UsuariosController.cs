@@ -71,5 +71,12 @@ namespace Jafouan.API.Controllers
             var list = _accessService.Login(username, password);
             return Ok(list);
         }
+
+        [HttpGet("Menu")]
+        public IActionResult Menu(int id)
+        {
+            var list = _accessService.Menu(id);
+            return Ok(list);
+        }
     }
 }
