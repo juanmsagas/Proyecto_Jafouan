@@ -111,6 +111,12 @@ function Roles() {
     });
   };
 
+  const cerrarPantallas=(event)=>{
+    event.preventDefault();
+    setvisibleEnca(!visibleEnca);
+    setabrirPants(!abrirPants);
+  }
+
   const abrirycerrarInsert = (event) => {
     event.preventDefault();
     setVisible(!visible);
@@ -194,6 +200,10 @@ function Roles() {
   const handleOptionChange = (selected) => {
     setSelectedOptions(selected);
   };
+  {/*Edit Pantallas*/}
+  const handleOptionChangeEdit = (selected) => {
+    setSelectedDeOptions(selected);
+  };
 
   useEffect(() => {
     const rolePantArray = [];
@@ -212,8 +222,38 @@ function Roles() {
     set_Role_Id_Pant_Envio(rolePantArray);
   }, [selectedOptions]);
 
+  {/*Edit Pantallas*/}
   useEffect(() => {
-    console.log(Role_Id_PantEnvio);
+    const rolePantArrayEdit = [];
+
+    selectedDeOptions.forEach((option) => {
+      const role_Id = sessionStorage.getItem("role_IdEdit");
+      const rolePantObj = {
+        role_Id: role_Id,
+        pant_Id: option.value,
+        pantrol_UserCrea: 1,
+      };
+
+      rolePantArrayEdit.push(rolePantObj);
+    });
+
+    set_Role_Id_Pant_Envio(rolePantArrayEdit);
+  }, [selectedDeOptions]);
+
+
+  useEffect(() => {
+    if (Role_Id_PantEnvio.length > 0) {
+      setarray(true);
+    }
+    if (Role_Id_PantEnvio.length === 0) {
+      setarray(false);
+    }
+  }, [Role_Id_PantEnvio]);
+  
+  
+  {/*Edit Pantallas*/}
+  useEffect(() => {
+    console.log(Role_Id_PantEnvio)
     if (Role_Id_PantEnvio.length > 0) {
       setarray(true);
     }
@@ -251,6 +291,35 @@ function Roles() {
     toast.success("El Rol y sus Permisos fueron Agregados con exito");
   };
 
+
+  //peticion a la api insert pantallas al rol
+  const PantallasPorRolEdit = (event) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    Role_Id_PantEnvio.forEach((rolePant, index) => {
+      const postData = {
+        ...rolePant,
+        index: index + 1, 
+      };
+
+      axios
+        .post("api/Pantallas/PantallasElim", postData, config)
+        .then((response) => {
+          console.log(response.data);
+          console.log(`Request for index ${index + 1} completed.`);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+    setabrirPants(!abrirPants);
+    setvisibleEnca(!visibleEnca);
+    toast.success("Lo Permisos fueron Editados con exito");
+  };
   
   
   const abrirPantallas = (params, event) => {
@@ -259,6 +328,7 @@ function Roles() {
     }
     setabrirPants(!abrirPants);
     setvisibleEnca(!visibleEnca);
+    sessionStorage.setItem("role_IdEdit", params.role_Id);
     set_Role_Id_Pant({
       role_Id: params.role_Id,
       role_Descripcion: params.role_Descripcion
@@ -286,6 +356,7 @@ function Roles() {
           value: item.pant_Id,
         }));
         setSelectedDeOptions(selectedData);
+        console.log(selectedData)
       })
       .catch((error) => {
         console.log(error);
@@ -570,14 +641,14 @@ function Roles() {
               </CCardHeader>
               <CCardBody>
                 <CForm
-                  onSubmit={PantallasPorRol}
+                  onSubmit={PantallasPorRolEdit}
                   className="row g-3 needs-validation"
                   noValidate
                   validated={validated}
                 >
                   <CCol md={0} className=" mt-5">
                     <CFormInput
-                      type="text"
+                      type="hidden"
                       value={Role_Id_Pant.role_Id}
                       id="validationCustom01"
                       required
@@ -600,21 +671,28 @@ function Roles() {
                     <MultiSelect
                       key={options}
                       options={options}
-                      value={setSelectedDeOptions}
-                      onChange={handleOptionChange}
+                      value={selectedDeOptions}
+                      onChange={handleOptionChangeEdit}
                       labelledBy="Pantallas"
                     />
                   </CCol>
 
-                  <CCollapse visible={true} className="col-8 offset-2">
                     <center>
-                      <CCol xs={12}>
-                        <CButton color="primary" type="submit">
+                        <CButton disabled={!array} color="primary" type="submit">
                           Guardar
                         </CButton>
-                      </CCol>
-                    </center>
-                  </CCollapse>
+                        
+                  <CButton
+                        color="danger text-light"
+                        className="ms-2"
+                        href="#"
+                        onClick={
+                          cerrarPantallas
+                        }                        
+                        >
+                        Cancelar
+                      </CButton>
+                          </center>
                 </CForm>
               </CCardBody>
             </CCard>

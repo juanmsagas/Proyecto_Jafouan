@@ -56,14 +56,14 @@ namespace Jafouan.DataAccess.Repository
         }
 
 
-        public RequestStatus DeleteP(int role_Id, int pant_Id)
+        public RequestStatus DeleteP(int role_Id, int pant_Id, int pantrol_UserCrea)
         {
             using var db = new SqlConnection(Jafouan_Context.ConnectionString);
             var parametros = new DynamicParameters();
 
             parametros.Add("@role_Id", role_Id, DbType.String, ParameterDirection.Input);
             parametros.Add("@pant_Id", pant_Id, DbType.Int32, ParameterDirection.Input);
-
+            parametros.Add("@pantrol_UserCrea", pantrol_UserCrea, DbType.Int32, ParameterDirection.Input);
 
             return (RequestStatus)db.QueryFirst(ScriptsDataBase.DELETE_PANTALLASROL, parametros, commandType: CommandType.StoredProcedure);
         }

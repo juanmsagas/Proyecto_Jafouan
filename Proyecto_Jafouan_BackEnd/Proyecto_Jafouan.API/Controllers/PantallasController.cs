@@ -45,7 +45,7 @@ namespace Jafouan.API.Controllers
         public IActionResult PantallasElim([FromBody] PantallasPorRolViewModel pr)
         {
 
-            var result = _accessService.PantallasElim((int)pr.role_Id, (int)pr.pant_Id);
+            var result = _accessService.PantallasElim((int)pr.role_Id, (int)pr.pant_Id,(int)pr.pantrol_UserCrea);
             return Ok(result);
         }
 

@@ -23,7 +23,6 @@ namespace Jafouan.API.Controllers
             _mapper = mapper;
         }
 
-
         [HttpGet("Index")]
         public IActionResult ListPrendas()
         {
@@ -63,6 +62,7 @@ namespace Jafouan.API.Controllers
             var result = _ventaRopaServices.DeletePrendas(item);
             return Ok(result);
         }
+
         [HttpPut("Activar")]
         public IActionResult AtivarPrenda([FromBody] PrendasViewModel prendas)
         {

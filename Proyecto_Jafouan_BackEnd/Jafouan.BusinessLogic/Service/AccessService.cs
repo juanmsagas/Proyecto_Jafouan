@@ -294,12 +294,12 @@ namespace Jafouan.BusinessLogic.Service
             }
         }
 
-        public ServiceResult PantallasElim(int role_Id, int pant_Id)
+        public ServiceResult PantallasElim(int role_Id, int pant_Id, int pantrol_UserCrea)
         {
             var result = new ServiceResult();
             try
             {
-                var list = _pantallasRepository.DeleteP(role_Id, pant_Id);
+                var list = _pantallasRepository.DeleteP(role_Id, pant_Id, pantrol_UserCrea);
       
                     return result.Ok(list);
     

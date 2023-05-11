@@ -299,11 +299,20 @@ GO
 
 CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_DELETE
 @role_Id INT,
-@pant_Id INT
+@pant_Id INT,
+@pantrol_UserCrea INT
 AS
 BEGIN
 DELETE FROM  [acce].[tbPantallasPorRol]
-WHERE role_Id=@role_Id AND pant_Id=@pant_Id
+WHERE role_Id=@role_Id 
+
+INSERT INTO [acce].[tbPantallasPorRol]
+	(role_Id, pant_Id, pantrol_UserCrea)
+	VALUES
+	(@role_Id,@pant_Id,@pantrol_UserCrea)
+
+	SELECT 200 AS codeStatus, 'Acceso Editado con éxito' AS messageStatus
+
 END
 GO
 --********************************************************/Tabla Pantallas Por Rol**************************************************************--
