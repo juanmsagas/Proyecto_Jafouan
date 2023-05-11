@@ -49,7 +49,7 @@ function Proveedores() {
   const [sucursal, setsucursalDDL] = useState([]);
   const [Modal, setModal] = useState(false)
   const [visibleEnca, setvisibleEnca   ] = useState(false)
-
+  const user_Crea = localStorage.getItem('user_Id');
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
     const form = event.currentTarget
@@ -65,7 +65,7 @@ function Proveedores() {
     prov_Telefeno: '',
     muni_Id: '',
     prov_Direccion: '',
-    prov_UserCrea:1,
+    prov_UserCrea:user_Crea
 })
 
 const [dept_Id, setdept_Id] = useState({
@@ -83,7 +83,7 @@ const [EditarProveedores, setEditarProveedores] = useState({
     prov_Telefeno: '',
     muni_Id: '',
     prov_Direccion: '',
-    prov_UserModifica:1,
+    prov_UserModifica:user_Crea
 })
 
 const abrirPrenda = (params,event) => {
@@ -103,7 +103,7 @@ const abrirPrenda = (params,event) => {
     dept_Id: params.dept_Id,
     muni_Id: params.muni_Id,
     prov_Direccion: params.prov_Direccion,
-    prov_UserModifica:1,    
+    prov_UserModifica:user_Crea  
 })
 }
 
@@ -119,7 +119,7 @@ const cerrarEditar = (event) => {
     prov_Telefeno: '',
     muni_Id: '',
     prov_Direccion: '',
-    prov_UserModifica:1, 
+    prov_UserModifica:user_Crea
 })
 }
 
@@ -135,7 +135,7 @@ const abrirycerrarInsert = (event) => {
     prov_Telefeno: '',
     muni_Id: '',
     prov_Direccion: '',
-    prov_UserModifica:1,
+    prov_UserModifica:user_Crea
 })
 
 }
@@ -169,7 +169,7 @@ const handleSubmitI = (event) => {
                 prov_Telefeno: '',
                 muni_Id: '',
                 prov_Direccion: '',
-                prov_UserCrea:1,
+                prov_UserCrea:user_Crea
             })
             toast.success('Proveedor insertado correctamente.');
 
@@ -209,7 +209,7 @@ const form = event.currentTarget
             prov_Telefeno: '',
             muni_Id: '',
             prov_Direccion: '',
-            prov_UserCrea:1,
+            prov_UserCrea:user_Crea
         })
         toast.success('Proveedor editado correctamente.');
 

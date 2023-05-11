@@ -41,7 +41,7 @@ function Municipios() {
   const [Modal, setModal] = useState(false)
   const [visibleEnca, setvisibleEnca   ] = useState(false)
   const [Departamentos, setDepartamentosDDL] = useState([]);  
-
+  const user_Crea = localStorage.getItem('user_Id');
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
     const form = event.currentTarget
@@ -55,7 +55,7 @@ function Municipios() {
     muni_Id: '',
     muni_Descripcion: '',
     dept_Id:'',
-    muni_UserCrea:1
+    muni_UserCrea:user_Crea
 })
 const [ElimMunicipio, setElimMunicipio] = useState({
   muni_Id: ''
@@ -64,7 +64,7 @@ const [EditarMunicipio, setEditarMunicipio] = useState({
   muni_Id: '',
   muni_Descripcion: '',
   dept_Id:'',
-  muni_UserModifica:1
+  muni_UserModifica:user_Crea
 })
 
 useEffect(() => {
@@ -91,7 +91,7 @@ const abrireditar = (params,event) => {
     muni_Id: params.muni_Id,
     muni_Descripcion:  params.muni_Descripcion,
     dept_Id:params.dept_Id,
-    muni_UserModifica:1
+    muni_UserModifica:user_Crea
 }
 )}
 
@@ -103,7 +103,7 @@ const cerrarEditar = (event) => {
     muni_Id: '',
     muni_Descripcion: '',
     dept_Id:'',
-    muni_UserModifica:1
+    muni_UserModifica:user_Crea
 }
 )}
 
@@ -116,7 +116,7 @@ const abrirycerrarInsert = (event) => {
     muni_Id: '',
     muni_Descripcion: '',
     dept_Id:'',
-    muni_UserCrea:1
+    muni_UserCrea:user_Crea
 }
 )}
 
@@ -160,7 +160,7 @@ const handleSubmitI = (event) => {
                 muni_Id: '',
                 muni_Descripcion: '',
                 dept_Id:'',
-                muni_UserCrea:1
+                muni_UserCrea:user_Crea
             })
             toast.success('Municipio insertado correctamente.');
 
@@ -197,7 +197,7 @@ const form = event.currentTarget
           setEditarMunicipio({
             muni_Id: '',
             muni_Descripcion: '',
-            muni_UserModifica:1
+            muni_UserModifica:user_Crea
         })  
         toast.success('Municipio editado correctamente.');
 
@@ -247,7 +247,7 @@ const handleSubmitD = (event) => {
       }))
       setUsuarios(insertarid)
     })
-  }, [Municipios])
+  }, [usuarios])
 
   const handleSortModelChange = (model) => {
     setSortModel(model)

@@ -44,6 +44,7 @@ function Prendas() {
   const [marcas, setMarcasDDL] = useState([]);
   const [fardos, setFardosDDL] = useState([]);
   const [categorias, setCategoriasDDL] = useState([]);
+  const user_Crea = localStorage.getItem('user_Id');
 
   const [visibleEnca, setvisibleEnca   ] = useState(false)
 
@@ -66,7 +67,7 @@ function Prendas() {
     cate_Id: '',
     fard_Id: '',
     pren_Imagen: '',
-    pren_UserCrea: 1
+    pren_UserCrea: user_Crea
 
 })
 const [ElimPrenda, setElimPrenda] = useState({
@@ -83,7 +84,7 @@ const [editarPrenda, seteditarPrenda] = useState({
   cate_Id: '',
   fard_Id: '',
   pren_Imagen: '',
-  pren_UserModifica: 1
+  pren_UserModifica: user_Crea
 })
 
 const abrirPrenda = (params,event) => {
@@ -104,7 +105,7 @@ const abrirPrenda = (params,event) => {
     cate_Id: params.cate_Id,
     fard_Id: params.fard_Id,
     pren_Imagen: params.pren_Imagen,
-    pren_UserModifica: params.pren_UserModifica
+    pren_UserModifica: user_Crea
 })
 }
 
@@ -122,7 +123,7 @@ const cerrarEditar = (event) => {
     cate_Id: '',
     fard_Id: '',
     pren_Imagen: '',
-    pren_UserModifica: 1
+    pren_UserModifica: user_Crea
 })
 }
 
@@ -140,7 +141,7 @@ const abrirycerrarInsert = (event) => {
     cate_Id: '',
     fard_Id: '',
     pren_Imagen: '',
-    pren_UserCrea: 1
+    pren_UserCrea: user_Crea
 })
 
 }
@@ -188,7 +189,7 @@ const handleSubmitI = (event) => {
               cate_Id: '',
               fard_Id: '',
               pren_Imagen: '',
-              pren_UserCrea: 1
+              pren_UserCrea: user_Crea
             })
             toast.error('Prenda insertada correctamente.');
 
@@ -232,7 +233,7 @@ const form = event.currentTarget
             cate_Id: '',
             fard_Id: '',
             pren_Imagen: '',
-            pren_UserModifica: 1
+            pren_UserModifica: user_Crea
         })
         toast.success('Prenda editada correctamente.');
 

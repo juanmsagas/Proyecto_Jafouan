@@ -40,7 +40,7 @@ function Fardos() {
   const [visible2, setVisible2] = useState(false)
   const [Modal, setModal] = useState(false)
   const [visibleEnca, setvisibleEnca   ] = useState(false)
-
+  const user_Crea = localStorage.getItem('user_Id');
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
     const form = event.currentTarget
@@ -52,7 +52,7 @@ function Fardos() {
   }
   const [nuevoFardos, setNuevoFardos] = useState({
     fard_Descripcion: '',
-    fard_UserCrea: 1
+    fard_UserCrea: user_Crea
 })
 const [ElimFardo, setEliminarFardo] = useState({
   fard_Id: 0
@@ -60,7 +60,7 @@ const [ElimFardo, setEliminarFardo] = useState({
 const [EditarFardo, setEditarFardo] = useState({
   fard_Id: '',
   fard_Descripcion: '',
-  fard_UserModifica:1
+  fard_UserModifica:user_Crea
 })
 
 const abrireditar = (params,event) => {
@@ -74,7 +74,7 @@ const abrireditar = (params,event) => {
   setEditarFardo({
     fard_Id: params.fard_Id,
     fard_Descripcion:  params.fard_Descripcion,
-    fard_UserModifica:1
+    fard_UserModifica:user_Crea
 }
 )}
 
@@ -85,7 +85,7 @@ const cerrarEditar = (event) => {
   setEditarFardo({
     fard_Id: '',
     fard_Descripcion:  '',
-    fard_UserModifica:1
+    fard_UserModifica:user_Crea
 }
 )}
 
@@ -96,7 +96,7 @@ const abrirycerrarInsert = (event) => {
   setvisibleEnca(!visibleEnca)
   setNuevoFardos({
     fard_Descripcion: '',
-    fard_UserCrea:1
+    fard_UserCrea:user_Crea
 }
 )}
 
@@ -138,7 +138,7 @@ const handleSubmitI = (event) => {
             setvisibleEnca(!visibleEnca)
             setNuevoFardos({
                 fard_Descripcion: '',
-                fard_UserCrea:1
+                fard_UserCrea:user_Crea
             })
             toast.success('Fardo insertado correctamente.');
 
@@ -175,7 +175,7 @@ const form = event.currentTarget
           setEditarFardo({
             fard_Id: '',
             fard_Descripcion: '',
-            fard_UserModifica:1
+            fard_UserModifica:user_Crea
         })  
         toast.success('Fardo editado correctamente.');
 

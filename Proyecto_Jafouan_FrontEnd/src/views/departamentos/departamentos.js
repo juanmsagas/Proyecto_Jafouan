@@ -40,7 +40,7 @@ function Departamentos() {
   const [visible2, setVisible2] = useState(false)
   const [Modal, setModal] = useState(false)
   const [visibleEnca, setvisibleEnca   ] = useState(false)
-
+  const user_Crea = localStorage.getItem('user_Id');
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
     const form = event.currentTarget
@@ -53,7 +53,7 @@ function Departamentos() {
   const [nuevoDepartamento, setNuevoDepartamento] = useState({
     dept_Id: '',
     dept_Descripcion: '',
-    dept_UserCrea:1
+    dept_UserCrea: user_Crea
 })
 const [ElimDepartamento, setElimDepartamento] = useState({
   dept_Id: ''
@@ -61,7 +61,7 @@ const [ElimDepartamento, setElimDepartamento] = useState({
 const [EditarDepartamento, setEditarDepartamento] = useState({
   dept_Id: '',
   dept_Descripcion: '',
-  dept_UserModifica:1
+  dept_UserModifica:user_Crea
 })
 
 const abrireditar = (params,event) => {
@@ -75,7 +75,7 @@ const abrireditar = (params,event) => {
   setEditarDepartamento({
     dept_Id: params.dept_Id,
     dept_Descripcion:  params.dept_Descripcion,
-    dept_UserModifica:1
+    dept_UserModifica:user_Crea
 }
 )}
 
@@ -86,7 +86,7 @@ const cerrarEditar = (event) => {
   setEditarDepartamento({
     dept_Id: '',
     dept_Descripcion: '',
-    dept_UserModifica:1
+    dept_UserModifica:user_Crea
 }
 )}
 
@@ -98,7 +98,7 @@ const abrirycerrarInsert = (event) => {
   setNuevoDepartamento({
     dept_Id: '',
     dept_Descripcion: '',
-    dept_UserCrea:1
+    dept_UserCrea:user_Crea
 }
 )}
 
@@ -141,7 +141,7 @@ const handleSubmitI = (event) => {
             setNuevoDepartamento({
                 dept_Id: '',
                 dept_Descripcion: '',
-                dept_UserCrea:1
+                dept_UserCrea:user_Crea
             })
             toast.success('Departamento insertado correctamente.');
 
@@ -168,6 +168,7 @@ const form = event.currentTarget
     toast.error('No se permiten campos vacíos.');
 
   }
+  
   setValidated(true)
   if(form.checkValidity() != false){
   axios.put('api/Departamentos/Update', EditarDepartamento, config)
@@ -178,7 +179,7 @@ const form = event.currentTarget
           setEditarDepartamento({
             dept_Id: '',
             dept_Descripcion: '',
-            dept_UserModifica:1
+            dept_UserModifica:user_Crea
         })  
         toast.success('Departamento editado correctamente.');
 

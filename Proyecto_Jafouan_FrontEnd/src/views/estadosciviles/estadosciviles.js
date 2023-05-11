@@ -40,7 +40,7 @@ function EstadosCiviles() {
   const [visible2, setVisible2] = useState(false)
   const [Modal, setModal] = useState(false)
   const [visibleEnca, setvisibleEnca   ] = useState(false)
-
+  const user_Crea = localStorage.getItem('user_Id');
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
     const form = event.currentTarget
@@ -52,7 +52,7 @@ function EstadosCiviles() {
   }
   const [nuevoEstado, setNuevoEstado] = useState({
     estc_Descripcion: '',
-    estc_UserCrea: 1
+    estc_UserCrea: user_Crea
 })
 const [ElimEstado, setEliminarEstado] = useState({
   estc_Id: 0
@@ -60,7 +60,7 @@ const [ElimEstado, setEliminarEstado] = useState({
 const [EditarEstado, setEditarEstado] = useState({
   estc_Id: '',
   estc_Descripcion: '',
-  estc_UserModifica:1
+  estc_UserModifica:user_Crea
 })
 
 const abrireditar = (params,event) => {
@@ -74,7 +74,7 @@ const abrireditar = (params,event) => {
   setEditarEstado({
     estc_Id: params.estc_Id,
     estc_Descripcion:  params.estc_Descripcion,
-    estc_UserModifica:1
+    estc_UserModifica:user_Crea
 }
 )}
 
@@ -85,7 +85,7 @@ const cerrarEditar = (event) => {
   setEditarEstado({
     estc_Id: '',
     estc_Descripcion:  '',
-    estc_UserModifica:1
+    estc_UserModifica:user_Crea
 }
 )}
 
@@ -96,7 +96,7 @@ const abrirycerrarInsert = (event) => {
   setvisibleEnca(!visibleEnca)
   setNuevoEstado({
     estc_Descripcion: '',
-    estc_UserCrea:1
+    estc_UserCrea:user_Crea
 }
 )}
 
@@ -138,7 +138,7 @@ const handleSubmitI = (event) => {
             setvisibleEnca(!visibleEnca)
             setNuevoEstado({
                 estc_Descripcion: '',
-                estc_UserCrea:1
+                estc_UserCrea:user_Crea
             })
             toast.success('Estado civil insertado correctamente.');
 
@@ -175,7 +175,7 @@ const form = event.currentTarget
           setEditarEstado({
             estc_Id: '',
             estc_Descripcion: '',
-            estc_UserModifica:1
+            estc_UserModifica:user_Crea
         })  
         toast.success('Estado civil editado correctamente.');
 

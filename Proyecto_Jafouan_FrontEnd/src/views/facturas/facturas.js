@@ -48,10 +48,10 @@ function Facturas() {
   const [Clientes, setClientesDDL] = useState([]);
   const [tabla, setTabla] = useState([]);
   const [Modal, setModal] = useState(false)
-
+  const user_Crea = localStorage.getItem('user_Id');
+  const empl_Id = localStorage.getItem('empl_Id');
+  const sucu_Id = localStorage.getItem('sucu_Id');
   const [visibleEnca, setvisibleEnca] = useState(false)
-
-
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
     const form = event.currentTarget
@@ -63,10 +63,10 @@ function Facturas() {
   }
   const [nuevaFactura, setnuevaFactura] = useState({
     clie_Id: 0,
-    empl_Id: 0,
-    sucu_Id: 0,
+    empl_Id: empl_Id,
+    sucu_Id: sucu_Id,
     meto_Id: 0,
-    fact_UserCrea: 1
+    fact_UserCrea: user_Crea
 
   })
 
@@ -79,10 +79,10 @@ function Facturas() {
   const [EditarFactura, setEditarFactura] = useState({
     fact_Id: 0,
     clie_Id: 0,
-    empl_Id: 0,
-    sucu_Id: 0,
+    empl_Id: empl_Id,
+    sucu_Id: sucu_Id,
     meto_Id: 0,
-    fact_UserModifica: 1
+    fact_UserModifica: user_Crea
   })
 
   const abrirPrenda = (params, event) => {
@@ -97,10 +97,10 @@ function Facturas() {
     setEditarFactura({
       fact_Id: params.fact_Id,
       clie_Id: params.clie_Id,
-      empl_Id: params.empl_Id,
-      sucu_Id: params.sucu_Id,
+      empl_Id: empl_Id,
+      sucu_Id: sucu_Id,
       meto_Id: params.meto_Id,
-      fact_UserModifica: 1,
+      fact_UserModifica: user_Crea,
     })
   }
 
@@ -112,10 +112,10 @@ function Facturas() {
     setEditarFactura({
       fact_Id: 0,
       clie_Id: 0,
-      empl_Id: 0,
-      sucu_Id: 0,
+      empl_Id: empl_Id,
+      sucu_Id: sucu_Id,
       meto_Id: 0,
-      fact_UserModifica: 1
+      fact_UserModifica: user_Crea
     })
   }
 
@@ -127,10 +127,10 @@ function Facturas() {
     setEditarFactura({
       fact_Id: 0,
       clie_Id: 0,
-      empl_Id: 0,
-      sucu_Id: 0,
+      empl_Id: empl_Id,
+      sucu_Id: sucu_Id,
       meto_Id: 0,
-      fact_UserModifica: 1
+      fact_UserModifica: user_Crea
     })
 
   }
@@ -160,10 +160,10 @@ function Facturas() {
           setvisibleEnca(!visibleEnca)
           setnuevaFactura({
             clie_Id: 0,
-            empl_Id: 0,
-            sucu_Id: 0,
+            empl_Id: empl_Id,
+            sucu_Id: sucu_Id,
             meto_Id: 0,
-            fact_UserCrea: 1
+            fact_UserCrea: user_Crea
           })
           toast.success('Factura insertada correctamente.');
 
@@ -200,10 +200,10 @@ function Facturas() {
           setEditarFactura({
             fact_Id: 0,
             clie_Id: 0,
-            empl_Id: 0,
-            sucu_Id: 0,
+            empl_Id: empl_Id,
+            sucu_Id: sucu_Id,
             meto_Id: 0,
-            fact_UserModifica: 1
+            fact_UserModifica: user_Crea
           })
           toast.success('Factura editada correctamente.');
 

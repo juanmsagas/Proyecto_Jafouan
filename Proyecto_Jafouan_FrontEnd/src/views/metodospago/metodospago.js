@@ -40,7 +40,7 @@ function MetodosPago() {
   const [visible2, setVisible2] = useState(false)
   const [Modal, setModal] = useState(false)
   const [visibleEnca, setvisibleEnca   ] = useState(false)
-
+  const user_Crea = localStorage.getItem('user_Id');
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
     const form = event.currentTarget
@@ -52,7 +52,7 @@ function MetodosPago() {
   }
   const [nuevoMetodos, setNuevoMetodos] = useState({
     meto_Descripcion: '',
-    meto_UserCrea: 1
+    meto_UserCrea: user_Crea
 })
 const [ElimMetodo, setEliminarMetodo] = useState({
   meto_Id: 0
@@ -60,7 +60,7 @@ const [ElimMetodo, setEliminarMetodo] = useState({
 const [EditarMetodos, setEditarMetodos] = useState({
   meto_Id: '',
   meto_Descripcion: '',
-  meto_UserModifica:1
+  meto_UserModifica:user_Crea
 })
 
 const abrireditar = (params,event) => {
@@ -74,7 +74,7 @@ const abrireditar = (params,event) => {
   setEditarMetodos({
     meto_Id: params.meto_Id,
     meto_Descripcion:  params.meto_Descripcion,
-    meto_UserModifica:1
+    meto_UserModifica:user_Crea
 }
 )}
 
@@ -85,7 +85,7 @@ const cerrarEditar = (event) => {
   setEditarMetodos({
     meto_Id: '',
     meto_Descripcion:  '',
-    meto_UserModifica:1
+    meto_UserModifica:user_Crea
 }
 )}
 
@@ -96,7 +96,7 @@ const abrirycerrarInsert = (event) => {
   setValidated(false)
   setNuevoMetodos({
     meto_Descripcion: '',
-    meto_UserCrea:1
+    meto_UserCrea:user_Crea
 }
 )}
 
@@ -138,7 +138,7 @@ const handleSubmitI = (event) => {
             setvisibleEnca(!visibleEnca)
             setNuevoMetodos({
                 meto_Descripcion: '',
-                meto_UserCrea:1
+                meto_UserCrea:user_Crea
             })
             toast.success('Método de pago insertado correctamente.');
 
@@ -175,7 +175,7 @@ const form = event.currentTarget
           setEditarMetodos({
             meto_Id: '',
             meto_Descripcion: '',
-            meto_UserModifica:1
+            meto_UserModifica:user_Crea
         })  
         toast.success('Método de pago editado correctamente.');
 

@@ -49,7 +49,7 @@ function Empleados() {
   const [sucursal, setsucursalDDL] = useState([]);
   const [Modal, setModal] = useState(false)
   const [visibleEnca, setvisibleEnca   ] = useState(false)
-
+  const user_Crea = localStorage.getItem('user_Id');
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
     const form = event.currentTarget
@@ -71,7 +71,7 @@ function Empleados() {
     muni_Id: '',
     sucu_Id: 0,
     empl_Direccion: '',
-    empl_UserCrea:1,
+    empl_UserCrea:user_Crea
 })
 
 const [dept_Id, setdept_Id] = useState({
@@ -95,7 +95,7 @@ const [EditarEmpleado, setEditarEmpleado] = useState({
     muni_Id: '',
     sucu_Id: 0,
     empl_Direccion: '',
-    empl_UserModifica:1,
+    empl_UserModifica:user_Crea
 })
 
 const abrirPrenda = (params,event) => {
@@ -124,7 +124,7 @@ console.log(fechaFormateada); // '2005-02-01'
     muni_Id: params.muni_Id,
     sucu_Id: params.sucu_Id,
     empl_Direccion: params.empl_Direccion,
-    empl_UserModifica:1,    
+    empl_UserModifica:user_Crea  
 })
 }
 
@@ -145,7 +145,7 @@ const cerrarEditar = (event) => {
     muni_Id: '',
     sucu_Id: '',
     empl_Direccion: '',
-    empl_UserModifica:1,    
+    empl_UserModifica:user_Crea   
 })
 }
 
@@ -165,7 +165,7 @@ const abrirycerrarInsert = (event) => {
     muni_Id: '',
     sucu_Id: 0,
     empl_Direccion: '',
-    empl_UserCrea:1,
+    empl_UserCrea:user_Crea
 })
 
 }
@@ -205,7 +205,7 @@ const handleSubmitI = (event) => {
                 muni_Id: '',
                 sucu_Id: 0,
                 empl_Direccion: '',
-                empl_UserCrea:1,
+                empl_UserCrea:user_Crea
             })
             toast.success('Empleado insertado correctamente.');
 
@@ -251,7 +251,7 @@ const form = event.currentTarget
             muni_Id: '',
             sucu_Id: 0,
             empl_Direccion: '',
-            empl_UserCrea:1,
+            empl_UserCrea:user_Crea
         })
         toast.success('Empleado editado correctamente.');
 
@@ -316,14 +316,13 @@ const handleSubmitD = (event) => {
   //peticion a la api listado   
   useEffect(() => {
     axios.get('api/Empleados/Index').then((response) => {
-      console.log('entra')
       const insertarid = response.data.map((row) => ({
         ...row,
         id: row.empl_Id,
       }))
       setempleados(insertarid)
     })
-  }, [empleados])
+  }, [])
 
   const handleSortModelChange = (model) => {
     setSortModel(model)

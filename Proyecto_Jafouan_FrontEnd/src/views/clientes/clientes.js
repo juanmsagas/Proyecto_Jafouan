@@ -43,12 +43,10 @@ function Clientes() {
   const [visible2, setVisible2] = useState(false)
   const [Departamentos, setDepartamentosDDL] = useState([]);  
   const [Municipios, setMunicipiosDDL] = useState([]);  
-  const [Cargos, setCargosDDL] = useState([]);
   const [EstCivil, setEstCivilDDL] = useState([]);
-  const [sucursal, setsucursalDDL] = useState([]);
   const [Modal, setModal] = useState(false)
   const [visibleEnca, setvisibleEnca   ] = useState(false)
-
+  const user_Crea = localStorage.getItem('user_Id');
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
     const form = event.currentTarget
@@ -68,7 +66,7 @@ function Clientes() {
     clie_Telefeno: '',
     muni_Id: '',
     clie_Direccion: '',
-    clie_UserCrea:1,
+    clie_UserCrea:user_Crea
 })
 
 const [dept_Id, setdept_Id] = useState({
@@ -92,7 +90,7 @@ const [EditarCliente, setEditarCliente] = useState({
     muni_Id: '',
     sucu_Id: 0,
     clie_Direccion: '',
-    clie_UserModifica:1,
+    clie_UserModifica: user_Crea,
 })
 
 const abrirPrenda = (params,event) => {
@@ -120,7 +118,7 @@ const abrirPrenda = (params,event) => {
     muni_Id: params.muni_Id,
     sucu_Id: params.sucu_Id,
     clie_Direccion: params.clie_Direccion,
-    clie_UserModifica:1,    
+    clie_UserModifica:user_Crea,    
 })
 }
 
@@ -141,7 +139,7 @@ const cerrarEditar = (event) => {
     muni_Id: '',
     sucu_Id: '',
     clie_Direccion: '',
-    clie_UserModifica:1,    
+    clie_UserModifica:user_Crea,    
 })
 }
 
@@ -161,7 +159,7 @@ const abrirycerrarInsert = (event) => {
     muni_Id: '',
     sucu_Id: 0,
     clie_Direccion: '',
-    clie_UserCrea:1,
+    clie_UserCrea:user_Crea,
 })
 
 }
@@ -199,7 +197,7 @@ const handleSubmitI = (event) => {
               cate_Id: '',
               fard_Id: '',
               pren_Imagen: '',
-              pren_UserCrea: 1
+              pren_UserCrea: user_Crea
             })
             toast.success('Cliente insertado correctamente.');
 
@@ -247,7 +245,7 @@ const form = event.currentTarget
             muni_Id: '',
             sucu_Id: 0,
             clie_Direccion: '',
-            clie_UserCrea:1,
+            clie_UserCrea:user_Crea,
         })
         toast.success('Cliente editado correctamente.');
 
@@ -319,7 +317,7 @@ const handleSubmitD = (event) => {
       }))
       setClientes(insertarid)
     })
-  }, [Clientes])
+  }, [])
 
   const handleSortModelChange = (model) => {
     setSortModel(model)
@@ -388,15 +386,6 @@ const handleSubmitD = (event) => {
     });
 
 
-    axios.get('/api/Sucursales/Index')
-    .then(response => {
-      setsucursalDDL(response.data);
-      console.log(response.data)     
-
-    })
-    .catch(error => {
-      console.error('Error fetching data from API:', error);
-    });
 
     axios.get('/api/EstadosCiviles/Index')
     .then(response => {
@@ -408,15 +397,6 @@ const handleSubmitD = (event) => {
       console.error('Error fetching data from API:', error);
     });
 
-    axios.get('api/Cargos/Index')
-    .then(response => {
-      setCargosDDL(response.data);
-      console.log(response.data)     
-
-    })
-    .catch(error => {
-      console.error('Error fetching data from API:', error);
-    });
 
 
   }, []);

@@ -53,6 +53,7 @@ function Roles() {
   const [validated, setValidated] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [selectedDeOptions, setSelectedDeOptions] = useState([]);
+  const user_Crea = localStorage.getItem('user_Id');
 
   const [array, setarray] = useState(false);
   const [abrirPants, setabrirPants] = useState(false);
@@ -61,19 +62,19 @@ function Roles() {
   const [Role_Id_Pant, set_Role_Id_Pant] = useState({
     role_Id: 0,
     pant_Id: 0,
-    pantrol_UserCrea: 1,
+    pantrol_UserCrea: user_Crea,
     role_Descripcion: "",
   });
 
   const [Role_Id_PantEnvio, set_Role_Id_Pant_Envio] = useState({
     role_Id: 0,
     pant_Id: 0,
-    pantrol_UserCrea: 1,
+    pantrol_UserCrea: user_Crea
   });
 
   const [nuevoRol, setNuevoRol] = useState({
     role_Descripcion: "",
-    role_UserCrea: 1,
+    role_UserCrea: user_Crea
   });
   const [ElimRol, setElimRol] = useState({
     role_Id: 0,
@@ -81,7 +82,7 @@ function Roles() {
   const [EditarRol, setEditarRol] = useState({
     role_Id: "",
     role_Descripcion: "",
-    role_UserModifica: 1,
+    role_UserModifica: user_Crea
   });
 
   const abrireditar = (params, event) => {
@@ -95,7 +96,7 @@ function Roles() {
     setEditarRol({
       role_Id: params.role_Id,
       role_Descripcion: params.role_Descripcion,
-      role_UserModifica: 1,
+      role_UserModifica: user_Crea
     });
   };
 
@@ -107,7 +108,7 @@ function Roles() {
     setEditarRol({
       role_Id: "",
       role_Descripcion: "",
-      role_UserModifica: 1,
+      role_UserModifica: user_Crea
     });
   };
 
@@ -124,7 +125,7 @@ function Roles() {
     setvisibleEnca(!visibleEnca);
     setNuevoRol({
       role_Descripcion: "",
-      role_UserCrea: 1,
+      role_UserCrea: user_Crea
     });
   };
 
@@ -183,7 +184,7 @@ function Roles() {
             setinsertado(!insertado);
             setNuevoRol({
               role_Descripcion: "",
-              role_UserCrea: 1,
+              role_UserCrea: user_Crea
             });
             setVisible(!visible);
           }
@@ -213,7 +214,7 @@ function Roles() {
       const rolePantObj = {
         role_Id: role_Id,
         pant_Id: option.value,
-        pantrol_UserCrea: 1,
+        pantrol_UserCrea: user_Crea
       };
 
       rolePantArray.push(rolePantObj);
@@ -231,7 +232,7 @@ function Roles() {
       const rolePantObj = {
         role_Id: role_Id,
         pant_Id: option.value,
-        pantrol_UserCrea: 1,
+        pantrol_UserCrea: user_Crea
       };
 
       rolePantArrayEdit.push(rolePantObj);
@@ -393,7 +394,7 @@ function Roles() {
           setEditarRol({
             role_Id: "",
             role_Descripcion: "",
-            role_UserModifica: 1,
+            role_UserModifica: user_Crea  
           });
         })
         .catch((error) => {
