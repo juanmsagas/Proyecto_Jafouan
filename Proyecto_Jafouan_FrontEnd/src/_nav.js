@@ -37,24 +37,18 @@ import {
   cilPaperclip,
 } from "@coreui/icons";
 import { CNavGroup, CNavItem, CNavTitle } from "@coreui/react";
-import axios from "axios";
-import { useState, useEffect } from "react";
 
 const arregloJSONGET = sessionStorage.getItem("miArreglo");
 const miArreglo = JSON.parse(arregloJSONGET);
 console.log(miArreglo);
 
-// en estos 4 se guardan los arreglos dentro de un drop down list
+
 const Vera_Items = [];
 const Mant_Items = [];
 const Acce_Items = [];
 const Fact_Items = [];
 
 
-const MantDDL = [];
-const AcceDDL = [];
-const FactDDL = [];
-const VeraDDL = [];
 
 const Menu  = [];
 
@@ -97,23 +91,23 @@ miArreglo.forEach((element) => {
 
 if(Acce_Items.length!=0){
   
- AcceDDL.push (
+  Menu.push (
   {
     component: CNavTitle,
     name: 'Esquema de Seguridad',
   },
   {
   component: CNavGroup,
-  name: 'Generales',
+  name: 'Seguridad',
   to: '/base',
-  icon: <CIcon icon={cilGlobeAlt} customClassName="nav-icon" />,
+  icon: <CIcon icon={cilCasino} customClassName="nav-icon" />,
   items: [...Acce_Items]
 })
 
 }
 if(Mant_Items.length!=0){
 
-  MantDDL.push (
+  Menu.push (
     {
       component: CNavTitle,
       name: 'Esquema Mantenimiento',
@@ -128,7 +122,7 @@ if(Mant_Items.length!=0){
 
 }
 if(Vera_Items.length!=0){
-  VeraDDL.push (
+  Menu.push (
     {
       component: CNavTitle,
       name: 'Esquema Tienda',
@@ -137,12 +131,12 @@ if(Vera_Items.length!=0){
     component: CNavGroup,
     name: 'Mantenimiento',
     to: '/base',
-    icon: <CIcon icon={cilGlobeAlt} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilCasino} customClassName="nav-icon" />,
     items: [...Vera_Items]
   })
 }
 if(Fact_Items.length!=0){
-  FactDDL.push (
+  Menu.push (
     {
       component: CNavTitle,
       name: 'Esquema de Facturación',
@@ -151,31 +145,15 @@ if(Fact_Items.length!=0){
     component: CNavGroup,
     name: 'Facturación',
     to: '/base',
-    icon: <CIcon icon={cilGlobeAlt} customClassName="nav-icon" />,
-    items: [...Mant_Items]
+    icon: <CIcon icon={cilBank} customClassName="nav-icon" />,
+    items: [...Fact_Items]
   })
 }
 
 
 
 
-if (MantDDL.length!=0) {
-  Menu.push(MantDDL)
-}
-
-if (AcceDDL.length!=0) {
-  Menu.push(AcceDDL)
-  
-}
-if (FactDDL.length!=0) {
-  Menu.push(FactDDL)
-  
-}
-if (VeraDDL.length!=0) {
-  Menu.push(VeraDDL)  
-}
-
-
+console.log(Menu)
 const pantalla = [
   {
     component: CNavItem,

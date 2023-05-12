@@ -5746,23 +5746,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\LAB02\\.nuget\\packages\\": {},
+    "C:\\Users\\isaac\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LAB02\\Desktop\\Proyecto_Jafouan\\Proyecto_Jafouan_BackEnd\\Jafouan.DataAccess\\Jafouan.DataAccess.csproj",
+      "projectUniqueName": "C:\\Users\\isaac\\OneDrive\\Escritorio\\Proyecto_Jafouan\\Proyecto_Jafouan_BackEnd\\Jafouan.DataAccess\\Jafouan.DataAccess.csproj",
       "projectName": "Jafouan.DataAccess",
-      "projectPath": "C:\\Users\\LAB02\\Desktop\\Proyecto_Jafouan\\Proyecto_Jafouan_BackEnd\\Jafouan.DataAccess\\Jafouan.DataAccess.csproj",
-      "packagesPath": "C:\\Users\\LAB02\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LAB02\\Desktop\\Proyecto_Jafouan\\Proyecto_Jafouan_BackEnd\\Jafouan.DataAccess\\obj\\",
+      "projectPath": "C:\\Users\\isaac\\OneDrive\\Escritorio\\Proyecto_Jafouan\\Proyecto_Jafouan_BackEnd\\Jafouan.DataAccess\\Jafouan.DataAccess.csproj",
+      "packagesPath": "C:\\Users\\isaac\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\isaac\\OneDrive\\Escritorio\\Proyecto_Jafouan\\Proyecto_Jafouan_BackEnd\\Jafouan.DataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\LAB02\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\isaac\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -5777,8 +5777,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\LAB02\\Desktop\\Proyecto_Jafouan\\Proyecto_Jafouan_BackEnd\\Jafouan.Entities\\Jafouan.Entities.csproj": {
-              "projectPath": "C:\\Users\\LAB02\\Desktop\\Proyecto_Jafouan\\Proyecto_Jafouan_BackEnd\\Jafouan.Entities\\Jafouan.Entities.csproj"
+            "C:\\Users\\isaac\\OneDrive\\Escritorio\\Proyecto_Jafouan\\Proyecto_Jafouan_BackEnd\\Jafouan.Entities\\Jafouan.Entities.csproj": {
+              "projectPath": "C:\\Users\\isaac\\OneDrive\\Escritorio\\Proyecto_Jafouan\\Proyecto_Jafouan_BackEnd\\Jafouan.Entities\\Jafouan.Entities.csproj"
             }
           }
         }
@@ -5821,7 +5821,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.413\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
       }
     }
   }
