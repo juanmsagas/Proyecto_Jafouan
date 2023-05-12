@@ -433,8 +433,21 @@ BEGIN
 
 DECLARE @Encrypt NVARCHAR(MAX) = (HASHBYTES('SHA2_512',@user_Contraseña))
 
-SELECT * FROM acce.VW_Usuarios
-WHERE user_NombreUsuario = @user_NombreUsuario AND user_Contraseña = @Encrypt
+	IF EXISTS (SELECT * FROM acce.VW_Usuarios WHERE user_NombreUsuario = @user_NombreUsuario AND user_Contraseña = @Encrypt AND user_Estado = 1)
+	BEGIN
+            SELECT * FROM acce.VW_Usuarios
+			WHERE user_NombreUsuario = @user_NombreUsuario AND user_Contraseña = @Encrypt
+    END
+	IF EXISTS (SELECT * FROM acce.VW_Usuarios WHERE user_NombreUsuario = @user_NombreUsuario AND user_Contraseña = @Encrypt AND user_Estado = 0)
+	BEGIN
+			SELECT	user_Id = 0 ,
+					user_NombreUsuario = 'Usuario No Valido'
+	END
+	IF NOT EXISTS (SELECT * FROM acce.VW_Usuarios WHERE user_NombreUsuario = @user_NombreUsuario AND user_Contraseña = @Encrypt)
+	BEGIN
+			SELECT	user_Id = 0 ,
+					user_NombreUsuario = 'Usuario o Contraseña Incorrectos'
+	END
 END
 
 GO
@@ -448,10 +461,7 @@ DECLARE @Admin BIT = (	SELECT user_Admin FROM acce.tbUsuarios
 						WHERE user_Id = @user_Id)
 IF @Admin = 1
 BEGIN
-	SELECT DISTINCT pant_Nombre,pant_Identificador,pant_href
-	FROM acce.tbPantallasPorRol T1
-	INNER JOIN acce.tbPantallas T2
-	ON T1.pant_Id = T2.pant_Id
+	SELECT * FROM acce.VW_Pantallas
 	WHERE pant_Estado = 1
 END
 ELSE IF @Admin = 0
@@ -2315,13 +2325,18 @@ CREATE OR ALTER PROC fact.UDP_tbFacturaDetalles_INSERT
 AS BEGIN
 
   	BEGIN TRY
-
+			
+			DECLARE @Descuento DECIMAL(18,2) = (SELECT((SELECT desc_Descuento FROM vera.VW_Prendas WHERE @pren_Id = @pren_Id)/100.00))
+			DECLARE @TotalDescuento DECIMAL(18,2) = (SELECT @fade_Total * @Descuento)
+			DECLARE @Total_Final DECIMAL(18,2) = (SELECT @fade_Total - @TotalDescuento)
+		
+			
 			INSERT INTO  fact.tbFacturaDetalles
 			(fact_Id, pren_Id, fade_Cantidad, fade_Total, fade_UserCrea)
 			VALUES
-			(@fact_Id, @pren_Id, @fade_Cantidad, @fade_Total, @fade_UserCrea)
+			(@fact_Id, @pren_Id, @fade_Cantidad, @Total_Final, @fade_UserCrea)
 
-			SELECT 200 AS codeStatus, 'Sucursal creado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Detalle creado con éxito' AS messageStatus
 
 	END TRY
 	BEGIN CATCH
@@ -2381,14 +2396,26 @@ AS BEGIN
 
 END
 
+GO
 
 --*******************************************************/Tabla Facturas Detalles***************************************************************--
+
+--****************************************************************Reporte***************************************************************--
+
+CREATE OR ALTER PROC vera.UDP_tbFacturas_Reporte
+AS
+BEGIN
+	select * from vera.VW_Reporte
+END	
+
+--***************************************************************/Reporte***************************************************************--
+
 
 GO
  	DECLARE @user_NombreUsuario			NVARCHAR(200) = 'IsHatake'
 	DECLARE @empl_Id					INT = 2
 	DECLARE @user_Contraseña			NVARCHAR(MAX)='123'
-	DECLARE @user_Admin					BIT = 0
+	DECLARE @user_Admin					BIT = 1
 	DECLARE @role_Id					INT	= 1
 	DECLARE @user_UserCrea				INT = 1
 
