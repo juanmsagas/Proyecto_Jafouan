@@ -293,6 +293,7 @@ const form = event.currentTarget
     { field: 'pren_Descripcion', headerName: 'Descripcion',  width: 450},
     { field: 'pren_Talla', headerName: 'Talla',  width: 65},
     { field: 'desc_Descuento', headerName: 'Descuento',  width: 100},
+    { field: 'disponibilidad', headerName: 'Disponibilidad', width: 150 },
     { field: 'pren_Precio', headerName: 'Precio',  width: 70},
     { field: 'marc_Descripcion', headerName: 'Marca',  width: 90},
     { field: 'cate_Descripcion', headerName: 'Categoría',  width: 100},

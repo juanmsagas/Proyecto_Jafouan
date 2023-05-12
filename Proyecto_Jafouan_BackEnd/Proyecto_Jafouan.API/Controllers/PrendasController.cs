@@ -30,6 +30,14 @@ namespace Jafouan.API.Controllers
 
             return Ok(list);
         }
+        [HttpGet("PrendasDisponibles")]
+        public IActionResult PrendasDisponibles()
+        {
+            var list = _ventaRopaServices.ListaPrendasDisponibles();
+
+            return Ok(list);
+        }
+
 
         [HttpPost("Insert")]
         public IActionResult InsertPrendas([FromBody] PrendasViewModel prendas)
@@ -63,13 +71,23 @@ namespace Jafouan.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("Activar")]
-        public IActionResult AtivarPrenda([FromBody] PrendasViewModel prendas)
+
+        [HttpPut("Disponibles")]
+        public IActionResult Disponibles( int pren_Id)
         {
-            var item = _mapper.Map<tbPrendas>(prendas);
-            var result = _ventaRopaServices.ActivarPrenda(item);
+            var result = _ventaRopaServices.PrendasDisponibles(pren_Id);
             return Ok(result);
         }
+
+        [HttpPut("Vendidas")]
+        public IActionResult Vendidas(int pren_Id)
+        {
+            var result = _ventaRopaServices.PrendasVendidas(pren_Id);
+            return Ok(result);
+        }
+
+
+
 
     }
 }

@@ -409,6 +409,20 @@ namespace Jafouan.BusinessLogic.Service
             }
         }
 
+        public IEnumerable<VW_Prendas> ListaPrendasDisponibles()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _prendasRepository.PrendasDisponibles();
+                return list;
+            }
+            catch (Exception e)
+            {
+                return (IEnumerable<VW_Prendas>)result.Error(e.Message);
+            }
+        }
+
 
         //INSERT
         public ServiceResult InsertPrendas(tbPrendas item)
@@ -503,13 +517,12 @@ namespace Jafouan.BusinessLogic.Service
             }
 
         }
-
-        public ServiceResult ActivarPrenda(tbPrendas item)
+        public ServiceResult PrendasDisponibles(int pren_Id)
         {
             var result = new ServiceResult();
             try
             {
-                var map = _prendasRepository.Activar(item);
+                var map = _prendasRepository.Disponible(pren_Id);
                 if (map.CodeStatus == 200)
                 {
                     return result.SetMessage(map.MessageStatus, ServiceResultType.Success);
@@ -531,6 +544,37 @@ namespace Jafouan.BusinessLogic.Service
             }
 
         }
+
+        public ServiceResult PrendasVendidas(int pren_Id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var map = _prendasRepository.Vendida(pren_Id);
+                if (map.CodeStatus == 200)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Success);
+
+                }
+                else if (map.CodeStatus == 409)
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Conflict);
+                }
+                else
+                {
+                    return result.SetMessage(map.MessageStatus, ServiceResultType.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+
+        }
+
+
+
 
         #endregion
 

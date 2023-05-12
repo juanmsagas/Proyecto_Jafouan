@@ -151,7 +151,9 @@ namespace Jafouan.DataAccess.Repository
         public static string INSERT_PRENDAS = "vera.UDP_tbPrendas_INSERT";
         public static string UPDATE_PRENDAS = "vera.UDP_tbPrendas_UPDATE";
         public static string DELETE_PRENDAS = "vera.UDP_tbPrendas_DELETE";
-        public static string ACTIVAR_PRENDAS = "vera.UDP_tbPrendas_ACTIVAR";
+        public static string DISPONIBLE_PRENDAS = "vera.UDP_tbPrendas_DISPONIBLE";
+        public static string VENDIDA_PRENDAS = "vera.UDP_tbPrendas_VENDIDA";
+        public static string PRENDASDISPONIBLES = "vera.UDP_tbPrendas_PRENDASDISPONIBLES";
         #endregion
 
         #region Proveedores

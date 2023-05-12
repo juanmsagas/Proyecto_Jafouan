@@ -1685,6 +1685,15 @@ WHERE pren_Estado = 1;
 
 END
 GO
+CREATE OR ALTER PROC vera.UDP_tbPrendas_PRENDASDISPONIBLES
+AS BEGIN
+
+SELECT * FROM vera.VW_Prendas
+WHERE prend_EstadoTienda = 1;
+
+END
+GO
+
 
 CREATE OR ALTER PROC vera.UDP_tbPrendas_FIND
 @pren_Id INT
@@ -1796,17 +1805,17 @@ AS BEGIN
 END
 GO
 
-CREATE OR ALTER PROC vera.UDP_tbPrendas_ACTIVAR
+CREATE OR ALTER PROC vera.UDP_tbPrendas_DISPONIBLE
 @pren_Id INT
 AS BEGIN
 
      	BEGIN TRY
 			UPDATE vera.tbPrendas
 			SET
-				pren_Estado		=	1
+				prend_EstadoTienda =	1
 				WHERE pren_Id	=	@pren_Id
 
-			SELECT 200 AS codeStatus, 'Prenda Activada con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Prenda disponible' AS messageStatus
 
 	END TRY
 	BEGIN CATCH
@@ -1815,6 +1824,29 @@ AS BEGIN
 
 END
 GO
+
+CREATE OR ALTER PROC vera.UDP_tbPrendas_VENDIDA
+@pren_Id INT
+AS BEGIN
+
+     	BEGIN TRY
+			UPDATE vera.tbPrendas
+			SET
+				prend_EstadoTienda =	0
+				WHERE pren_Id	=	@pren_Id
+
+			SELECT 200 AS codeStatus, 'Prenda vendida' AS messageStatus
+
+	END TRY
+	BEGIN CATCH
+			SELECT 500 AS codeStatus, ERROR_MESSAGE ( ) AS messageStatus
+	END CATCH
+
+END
+GO
+
+
+
 --***********************************************************/Tabla Prendas********************************************************************--
 
 -------------------------------------------------------------------------------------------------------------------------------------------------

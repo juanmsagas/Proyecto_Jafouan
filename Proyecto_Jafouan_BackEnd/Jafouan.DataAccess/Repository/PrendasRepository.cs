@@ -22,14 +22,25 @@ namespace Jafouan.DataAccess.Repository
             var result = db.QueryFirst<RequestStatus>(ScriptsDataBase.DELETE_PRENDAS, parametros, commandType: System.Data.CommandType.StoredProcedure);
             return result;
         }
-        public RequestStatus Activar(tbPrendas item)
+        public RequestStatus Disponible(int pren_Id)
         {
             using var db = new SqlConnection(Jafouan_Context.ConnectionString);
             var parametros = new DynamicParameters();
 
-            parametros.Add("@pren_Id", item.pren_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@pren_Id", pren_Id, DbType.Int32, ParameterDirection.Input);
 
-            var result = db.QueryFirst<RequestStatus>(ScriptsDataBase.ACTIVAR_PRENDAS, parametros, commandType: System.Data.CommandType.StoredProcedure);
+            var result = db.QueryFirst<RequestStatus>(ScriptsDataBase.DISPONIBLE_PRENDAS, parametros, commandType: System.Data.CommandType.StoredProcedure);
+            return result;
+        }
+
+        public RequestStatus Vendida(int pren_Id)
+        {
+            using var db = new SqlConnection(Jafouan_Context.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@pren_Id", pren_Id, DbType.Int32, ParameterDirection.Input);
+
+            var result = db.QueryFirst<RequestStatus>(ScriptsDataBase.VENDIDA_PRENDAS, parametros, commandType: System.Data.CommandType.StoredProcedure);
             return result;
         }
 
@@ -69,6 +80,10 @@ namespace Jafouan.DataAccess.Repository
         {
             using var db = new SqlConnection(Jafouan_Context.ConnectionString);
             return db.Query<VW_Prendas>(ScriptsDataBase.INDEX_PRENDAS, null, commandType: System.Data.CommandType.StoredProcedure);
+        }        public IEnumerable<VW_Prendas> PrendasDisponibles()
+        {
+            using var db = new SqlConnection(Jafouan_Context.ConnectionString);
+            return db.Query<VW_Prendas>(ScriptsDataBase.PRENDASDISPONIBLES, null, commandType: System.Data.CommandType.StoredProcedure);
         }
 
         public RequestStatus Update(tbPrendas item)

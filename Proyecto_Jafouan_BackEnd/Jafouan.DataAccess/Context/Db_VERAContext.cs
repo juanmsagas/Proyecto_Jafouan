@@ -608,6 +608,11 @@ namespace Jafouan.DataAccess.Context
 
                 entity.ToView("VW_Prendas", "vera");
 
+                entity.Property(e => e.Disponibilidad)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.cate_Descripcion)
                     .IsRequired()
                     .HasMaxLength(100);
