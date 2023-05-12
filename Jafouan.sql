@@ -556,7 +556,7 @@ INSERT INTO [acce].[tbPantallas]
 			('Departamentos','mantdept','/departamentos',1),
 			('Municipios','mantmuni','/municipios',1),
 			('Estados Civiles','mantestc','/estadosciviles',1),
-			('Cargos','mantcarg','/Facturas',1),
+			('Cargos','mantcarg','/Cargos',1),
 			--Tienda
 			('Reporte','verarepo','/Reporte',1),
 			('Prendas','verapren','/Prendas',1),
@@ -570,7 +570,7 @@ INSERT INTO [acce].[tbPantallas]
 			('Sucursales','verasucu','/Sucursales',1),
 			--Facturación
 			('Metodos de Pago','factmeto','/MetodosPago',1),
-			('Facturas','factfact','/Facturas',1),
+			('Facturas','factfact','/Facturas',1)
 
 
 GO

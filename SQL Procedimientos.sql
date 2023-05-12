@@ -433,14 +433,27 @@ BEGIN
 
 DECLARE @Encrypt NVARCHAR(MAX) = (HASHBYTES('SHA2_512',@user_Contraseña))
 
-SELECT * FROM acce.VW_Usuarios
-WHERE user_NombreUsuario = @user_NombreUsuario AND user_Contraseña = @Encrypt
+	IF EXISTS (SELECT * FROM acce.VW_Usuarios WHERE user_NombreUsuario = @user_NombreUsuario AND user_Contraseña = @Encrypt AND user_Estado = 1)
+	BEGIN
+            SELECT * FROM acce.VW_Usuarios
+			WHERE user_NombreUsuario = @user_NombreUsuario AND user_Contraseña = @Encrypt
+    END
+	IF EXISTS (SELECT * FROM acce.VW_Usuarios WHERE user_NombreUsuario = @user_NombreUsuario AND user_Contraseña = @Encrypt AND user_Estado = 0)
+	BEGIN
+			SELECT	user_Id = 0 ,
+					user_NombreUsuario = 'Usuario No Valido'
+	END
+	IF NOT EXISTS (SELECT * FROM acce.VW_Usuarios WHERE user_NombreUsuario = @user_NombreUsuario AND user_Contraseña = @Encrypt)
+	BEGIN
+			SELECT	user_Id = 0 ,
+					user_NombreUsuario = 'Usuario o Contraseña Incorrectos'
+	END
 END
 
 GO
 
 
-CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_MENU 
+CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_MENU 2
 @user_Id INT
 AS
 BEGIN
@@ -448,10 +461,7 @@ DECLARE @Admin BIT = (	SELECT user_Admin FROM acce.tbUsuarios
 						WHERE user_Id = @user_Id)
 IF @Admin = 1
 BEGIN
-	SELECT DISTINCT pant_Nombre,pant_Identificador,pant_href
-	FROM acce.tbPantallasPorRol T1
-	INNER JOIN acce.tbPantallas T2
-	ON T1.pant_Id = T2.pant_Id
+	SELECT * FROM acce.VW_Pantallas
 	WHERE pant_Estado = 1
 END
 ELSE IF @Admin = 0

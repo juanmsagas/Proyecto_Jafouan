@@ -58,7 +58,10 @@ const user_Crea = parseInt(parseInt(sessionStorage.getItem('user_Id')));
 if (user_Crea==null ||  isNaN(user_Crea)) {
   window.location.href = '/';
 }
-
+if (miArreglo==null){
+  console.log("a")
+}
+else{
 miArreglo.forEach((element) => {
   if(element.identificador == "acce"){
     Acce_Items.push({
@@ -89,7 +92,7 @@ miArreglo.forEach((element) => {
     })
   }
 });
-
+}
 
 
 if(Acce_Items.length!=0){
@@ -132,7 +135,7 @@ if(Vera_Items.length!=0){
     },
     {
     component: CNavGroup,
-    name: 'Mantenimiento',
+    name: 'Tienda',
     to: '/base',
     icon: <CIcon icon={cilCasino} customClassName="nav-icon" />,
     items: [...Vera_Items]

@@ -17,6 +17,8 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import axios from 'axios'
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -30,13 +32,17 @@ const Login = () => {
 
     axios.get('/api/Usuarios/Login/', { params: { username, password }})
       .then((response) => {
-        console.log(response.data)
-        sessionStorage.setItem("user_Id", response.data.user_Id);
-        sessionStorage.setItem("user_NombreUsuario", response.data.user_NombreUsuario);
-        sessionStorage.setItem("sucu_Id", response.data.sucu_Id);
-        sessionStorage.setItem("nombreEmpleado", response.data.nombreEmpleado);
-
-        navigate('/home');
+        if(response.data.user_Id!=0){
+          console.log(response.data)
+          sessionStorage.setItem("user_Id", response.data.user_Id);
+          sessionStorage.setItem("user_NombreUsuario", response.data.user_NombreUsuario);
+          sessionStorage.setItem("sucu_Id", response.data.sucu_Id);
+          sessionStorage.setItem("nombreEmpleado", response.data.nombreEmpleado);
+          navigate('/home');
+        }
+        else{
+          toast.error(response.data.user_NombreUsuario);
+        }
       })
       .catch((error) => {
         setError(error.message); 
@@ -145,6 +151,7 @@ const Login = () => {
           </CCol>
         </CRow>
       </CContainer>
+      <ToastContainer />
     </div>
   )
 }
