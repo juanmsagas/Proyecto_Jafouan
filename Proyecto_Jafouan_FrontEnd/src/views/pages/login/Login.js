@@ -45,7 +45,7 @@ const Login = () => {
         setLoading(false);
       });
 
-      const user_Id = sessionStorage.getItem('user_Id');
+      const user_Id = parseInt(sessionStorage.getItem('user_Id'));
 
       axios
       .get(`api/Usuarios/Menu?id=${user_Id}`)

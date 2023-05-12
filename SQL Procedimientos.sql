@@ -304,7 +304,7 @@ CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_DELETE
 AS
 BEGIN
 DELETE FROM  [acce].[tbPantallasPorRol]
-WHERE role_Id=@role_Id 
+WHERE role_Id=@role_Id AND pant_Id = @pant_Id
 
 INSERT INTO [acce].[tbPantallasPorRol]
 	(role_Id, pant_Id, pantrol_UserCrea)

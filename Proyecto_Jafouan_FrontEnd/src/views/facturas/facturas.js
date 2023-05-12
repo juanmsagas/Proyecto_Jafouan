@@ -48,9 +48,9 @@ function Facturas() {
   const [Clientes, setClientesDDL] = useState([]);
   const [tabla, setTabla] = useState([]);
   const [Modal, setModal] = useState(false)
-  const user_Crea = localStorage.getItem('user_Id');
-  const empl_Id = localStorage.getItem('empl_Id');
-  const sucu_Id = localStorage.getItem('sucu_Id');
+  const user_Crea = parseInt(sessionStorage.getItem('user_Id'));
+  const empl_Id = sessionStorage.getItem('empl_Id');
+  const sucu_Id = sessionStorage.getItem('sucu_Id');
   const [visibleEnca, setvisibleEnca] = useState(false)
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {

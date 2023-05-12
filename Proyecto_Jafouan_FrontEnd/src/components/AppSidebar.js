@@ -29,7 +29,7 @@ const Menu = () => {
   const [menuDataVera, setmenuDataVera] = useState([]);
 
   useEffect(() => {
-    const sessionId = sessionStorage.getItem('user_Id');
+    const sessionId = parseInt(sessionStorage.getItem('user_Id'));
     console.log(sessionId)
     if (sessionId) {
       axios

@@ -44,7 +44,7 @@ function Prendas() {
   const [marcas, setMarcasDDL] = useState([]);
   const [fardos, setFardosDDL] = useState([]);
   const [categorias, setCategoriasDDL] = useState([]);
-  const user_Crea = localStorage.getItem('user_Id');
+  const user_Crea = parseInt(sessionStorage.getItem('user_Id'));
 
   const [visibleEnca, setvisibleEnca   ] = useState(false)
 

@@ -461,6 +461,7 @@ GO
 --SELECT * FROM mant.VW_Municipios
 --SELECT * FROM mant.VW_EstadosCiviles
 --SELECT * FROM mant.VW_Cargos
+
 --SELECT * FROM vera.VW_Sucursales
 --SELECT * FROM vera.VW_Categorias
 --SELECT * FROM vera.VW_Marcas

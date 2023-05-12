@@ -41,7 +41,7 @@ function Municipios() {
   const [Modal, setModal] = useState(false)
   const [visibleEnca, setvisibleEnca   ] = useState(false)
   const [Departamentos, setDepartamentosDDL] = useState([]);  
-  const user_Crea = localStorage.getItem('user_Id');
+  const user_Crea = parseInt(sessionStorage.getItem('user_Id'));
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
     const form = event.currentTarget

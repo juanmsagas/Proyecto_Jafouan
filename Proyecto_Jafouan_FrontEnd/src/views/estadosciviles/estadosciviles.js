@@ -40,7 +40,7 @@ function EstadosCiviles() {
   const [visible2, setVisible2] = useState(false)
   const [Modal, setModal] = useState(false)
   const [visibleEnca, setvisibleEnca   ] = useState(false)
-  const user_Crea = localStorage.getItem('user_Id');
+  const user_Crea = parseInt(sessionStorage.getItem('user_Id'));
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
     const form = event.currentTarget

@@ -549,12 +549,29 @@ CREATE TABLE fact.tbFacturaDetalles(
 INSERT INTO [acce].[tbPantallas]
 			(pant_Nombre, pant_Identificador, pant_href, pant_UserCrea)
 			VALUES
-			('Usuarios','acceuser','/Usuarios/Listado',1),
-			('Roles','accerole','/Roles/Listado',1),
-			('Reportes','verarepo','/Reportes',1),
-			('Clientes','veraclie','/Clientes/Listado',1),
-			('Productos','veraprod','/Productos/Listado',1),
-			('Facturación','verafact','/Facturas/Listado',1)
+			--Seguridad
+			('Usuarios','acceuser','/Usuarios',1),
+			('Roles','accerole','/Roles',1),
+			--Mantenimiento
+			('Departamentos','mantdept','/departamentos',1),
+			('Municipios','mantmuni','/municipios',1),
+			('Estados Civiles','mantestc','/estadosciviles',1),
+			('Cargos','mantcarg','/Facturas',1),
+			--Tienda
+			('Reporte','verarepo','/Reporte',1),
+			('Prendas','verapren','/Prendas',1),
+			('Empleados','veraempl','/Empleados',1),
+			('Clientes','veraclie','/Clientes',1),
+			('Categorias','veracate','/Categorias',1),
+			('Marcas','veramarc','/Marcas',1),
+			('Descuentos','veradesc','/Descuentos',1),
+			('Fardos','verafard','/Fardos',1),
+			('Proveedores','veraprov','/Proveedores',1),
+			('Sucursales','verasucu','/Sucursales',1),
+			--Facturación
+			('Metodos de Pago','factmeto','/MetodosPago',1),
+			('Facturas','factfact','/Facturas',1),
+
 
 GO
 --*************************************************************/Tabla Pantallas******************************************************************--

@@ -1,5 +1,6 @@
 import React from "react";
 import CIcon from "@coreui/icons-react";
+
 //import de los iconos a usar en la navbar
 import {
   cilBell,
@@ -38,6 +39,8 @@ import {
 } from "@coreui/icons";
 import { CNavGroup, CNavItem, CNavTitle } from "@coreui/react";
 
+
+
 const arregloJSONGET = sessionStorage.getItem("miArreglo");
 const miArreglo = JSON.parse(arregloJSONGET);
 console.log(miArreglo);
@@ -48,9 +51,13 @@ const Mant_Items = [];
 const Acce_Items = [];
 const Fact_Items = [];
 
-
-
 const Menu  = [];
+
+const user_Crea = parseInt(parseInt(sessionStorage.getItem('user_Id')));
+
+if (user_Crea==null ||  isNaN(user_Crea)) {
+  window.location.href = '/';
+}
 
 miArreglo.forEach((element) => {
   if(element.identificador == "acce"){
@@ -58,7 +65,6 @@ miArreglo.forEach((element) => {
     component: CNavItem,
     name: element.name,
     to: element.to,
-    icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
     })
   }
   if(element.identificador == "mant"){
@@ -66,7 +72,6 @@ miArreglo.forEach((element) => {
     component: CNavItem,
     name: element.name,
     to: element.to,
-    icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
     })
   }
   if(element.identificador == "vera"){
@@ -74,7 +79,6 @@ miArreglo.forEach((element) => {
     component: CNavItem,
     name: element.name,
     to: element.to,
-    icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
     })
   }
   if(element.identificador == "fact"){
@@ -82,7 +86,6 @@ miArreglo.forEach((element) => {
     component: CNavItem,
     name: element.name,
     to: element.to,
-    icon: <CIcon icon={cilHome} customClassName="nav-icon" />,
     })
   }
 });
@@ -153,7 +156,6 @@ if(Fact_Items.length!=0){
 
 
 
-console.log(Menu)
 const pantalla = [
   {
     component: CNavItem,

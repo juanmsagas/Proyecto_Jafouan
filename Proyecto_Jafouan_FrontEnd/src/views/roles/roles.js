@@ -53,7 +53,7 @@ function Roles() {
   const [validated, setValidated] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [selectedDeOptions, setSelectedDeOptions] = useState([]);
-  const user_Crea = localStorage.getItem('user_Id');
+  const user_Crea = parseInt(parseInt(sessionStorage.getItem('user_Id')));
 
   const [array, setarray] = useState(false);
   const [abrirPants, setabrirPants] = useState(false);
@@ -69,7 +69,7 @@ function Roles() {
   const [Role_Id_PantEnvio, set_Role_Id_Pant_Envio] = useState({
     role_Id: 0,
     pant_Id: 0,
-    pantrol_UserCrea: user_Crea
+    pantrol_UserCrea: parseInt(user_Crea)
   });
 
   const [nuevoRol, setNuevoRol] = useState({
@@ -80,7 +80,7 @@ function Roles() {
     role_Id: 0,
   });
   const [EditarRol, setEditarRol] = useState({
-    role_Id: "",
+    role_Id: 0,
     role_Descripcion: "",
     role_UserModifica: user_Crea
   });
@@ -94,7 +94,7 @@ function Roles() {
     setValidated(false);
     console.log(params);
     setEditarRol({
-      role_Id: params.role_Id,
+      role_Id: parseInt(params.role_Id),
       role_Descripcion: params.role_Descripcion,
       role_UserModifica: user_Crea
     });
@@ -106,7 +106,7 @@ function Roles() {
     setValidated(false);
     setvisibleEnca(!visibleEnca);
     setEditarRol({
-      role_Id: "",
+      role_Id: 0,
       role_Descripcion: "",
       role_UserModifica: user_Crea
     });
@@ -135,7 +135,7 @@ function Roles() {
     }
     setModal(!visible);
     setElimRol({
-      role_Id: params,
+      role_Id: parseInt(params),
     });
   };
 
@@ -176,7 +176,7 @@ function Roles() {
           console.log(response.data);
 
           set_Role_Id_Pant({
-            role_Id: response.data[1].codeStatus,
+            role_Id: parseInt(response.data[1].codeStatus) ,
             role_Descripcion: response.data[1].messageStatus,
           });
           sessionStorage.setItem("role_Id", response.data[1].codeStatus);
@@ -212,7 +212,7 @@ function Roles() {
     selectedOptions.forEach((option) => {
       const role_Id = sessionStorage.getItem("role_Id");
       const rolePantObj = {
-        role_Id: role_Id,
+        role_Id: parseInt(role_Id),
         pant_Id: option.value,
         pantrol_UserCrea: user_Crea
       };
@@ -231,9 +231,9 @@ function Roles() {
     selectedDeOptions.forEach((option) => {
       const role_Id = sessionStorage.getItem("role_IdEdit");
       const rolePantObj = {
-        role_Id: role_Id,
+        role_Id: parseInt(role_Id),
         pant_Id: option.value,
-        pantrol_UserCrea: user_Crea
+        pantrol_UserCrea: parseInt(user_Crea) 
       };
 
       rolePantArrayEdit.push(rolePantObj);
@@ -307,7 +307,7 @@ function Roles() {
         ...rolePant,
         index: index + 1, 
       };
-
+      console.log(postData)
       axios
         .post("api/Pantallas/PantallasElim", postData, config)
         .then((response) => {
@@ -332,7 +332,7 @@ function Roles() {
     setvisibleEnca(!visibleEnca);
     sessionStorage.setItem("role_IdEdit", params.role_Id);
     set_Role_Id_Pant({
-      role_Id: params.role_Id,
+      role_Id: parseInt(params.role_Id),
       role_Descripcion: params.role_Descripcion
     });
     
@@ -348,7 +348,7 @@ function Roles() {
     };
 
     const data = {
-      role_id: role_Id,
+      role_id: parseInt(role_Id),
     };
 
     axios
@@ -393,7 +393,7 @@ function Roles() {
           setVisible2(!visible2);
           setvisibleEnca(!visibleEnca);
           setEditarRol({
-            role_Id: "",
+            role_Id: 0,
             role_Descripcion: "",
             role_UserModifica: user_Crea  
           });
