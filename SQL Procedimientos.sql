@@ -453,7 +453,7 @@ END
 GO
 
 
-CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_MENU 2
+CREATE OR ALTER PROCEDURE acce.UDP_tbPantallasPorRol_MENU 
 @user_Id INT
 AS
 BEGIN
@@ -2293,13 +2293,18 @@ CREATE OR ALTER PROC fact.UDP_tbFacturaDetalles_INSERT
 AS BEGIN
 
   	BEGIN TRY
-
+			
+			DECLARE @Descuento DECIMAL(18,2) = (SELECT((SELECT desc_Descuento FROM vera.VW_Prendas WHERE @pren_Id = @pren_Id)/100.00))
+			DECLARE @TotalDescuento DECIMAL(18,2) = (SELECT @fade_Total * @Descuento)
+			DECLARE @Total_Final DECIMAL(18,2) = (SELECT @fade_Total - @TotalDescuento)
+		
+			
 			INSERT INTO  fact.tbFacturaDetalles
 			(fact_Id, pren_Id, fade_Cantidad, fade_Total, fade_UserCrea)
 			VALUES
-			(@fact_Id, @pren_Id, @fade_Cantidad, @fade_Total, @fade_UserCrea)
+			(@fact_Id, @pren_Id, @fade_Cantidad, @Total_Final, @fade_UserCrea)
 
-			SELECT 200 AS codeStatus, 'Sucursal creado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Detalle creado con éxito' AS messageStatus
 
 	END TRY
 	BEGIN CATCH
@@ -2359,14 +2364,26 @@ AS BEGIN
 
 END
 
+GO
 
 --*******************************************************/Tabla Facturas Detalles***************************************************************--
+
+--****************************************************************Reporte***************************************************************--
+
+CREATE OR ALTER PROC vera.UDP_tbFacturas_Reporte
+AS
+BEGIN
+	select * from vera.VW_Reporte
+END	
+
+--***************************************************************/Reporte***************************************************************--
+
 
 GO
  	DECLARE @user_NombreUsuario			NVARCHAR(200) = 'IsHatake'
 	DECLARE @empl_Id					INT = 2
 	DECLARE @user_Contraseña			NVARCHAR(MAX)='123'
-	DECLARE @user_Admin					BIT = 0
+	DECLARE @user_Admin					BIT = 1
 	DECLARE @role_Id					INT	= 1
 	DECLARE @user_UserCrea				INT = 1
 

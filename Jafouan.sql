@@ -1190,12 +1190,12 @@ VALUES  ('Cazadora con bolsillos','S', 1, 120.00, 2, 1, 3, 'https://img.ltwebsta
 
 --***********************************************************Tabla Factura Detalle*****************************************************************--
  INSERT INTO fact.tbFacturaDetalles
- VALUES  (1, 12, 1, 0.00, 1,GETDATE(), NULL, NULL, 1),
-		 (1, 3, 1, 0.00, 1, GETDATE(), NULL, NULL, 1),
-		 (2, 8, 1, 0.00, 1, GETDATE(), NULL, NULL, 1),
-		 (2, 13, 1, 0.00, 1, GETDATE(), NULL, NULL, 1),
-		 (3, 5, 1, 0.00, 1, GETDATE(), NULL, NULL, 1),
-		 (3, 3, 1, 0.00, 1, GETDATE(), NULL, NULL, 1);
+ VALUES  (1, 12, 2, 50.00, 1,GETDATE(), NULL, NULL, 1),
+		 (1, 3, 1, 70.00, 1, GETDATE(), NULL, NULL, 1),
+		 (2, 8, 2, 5.00, 1, GETDATE(), NULL, NULL, 1),
+		 (2, 13, 1, 20.00, 1, GETDATE(), NULL, NULL, 1),
+		 (3, 5, 2, 7.00, 1, GETDATE(), NULL, NULL, 1),
+		 (3, 3, 1, 2.00, 1, GETDATE(), NULL, NULL, 1);
  GO
 --**********************************************************/Tabla Factura Detalle*****************************************************************--
 

@@ -38,6 +38,8 @@ const Login = () => {
           sessionStorage.setItem("user_NombreUsuario", response.data.user_NombreUsuario);
           sessionStorage.setItem("sucu_Id", response.data.sucu_Id);
           sessionStorage.setItem("nombreEmpleado", response.data.nombreEmpleado);
+          sessionStorage.setItem("empl_Id", response.data.empl_Id);
+
           navigate('/home');
         }
         else{

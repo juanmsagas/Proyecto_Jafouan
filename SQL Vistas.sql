@@ -325,7 +325,6 @@ SELECT	fard_Id,
 		FROM vera.tbFardos
 
 GO
-
 CREATE OR ALTER VIEW vera.VW_Prendas
 AS
 SELECT	pren_Id, 
@@ -343,7 +342,10 @@ SELECT	pren_Id,
 		T1.fard_Id, 
 		T5.fard_Descripcion,
 		pren_Imagen, 
-		prend_EstadoTienda, 
+		prend_EstadoTienda,
+		CASE  WHEN prend_EstadoTienda = 1 THEN 'Disponible'
+		ELSE 'Vendida'
+		END AS Disponibilidad, 
 		pren_Estado,
 		pren_UserCrea, 
 		empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE [user_Id] = pren_UserCrea),
@@ -450,6 +452,18 @@ SELECT  fapr_Id,
 		INNER JOIN vera.tbProveedores T3
 		ON T1.prov_Id = T3.prov_Id
 GO
+
+CREATE OR ALTER VIEW vera.VW_Reporte
+AS
+	SELECT
+			Fecha = CONVERT(NVARCHAR, FORMAT(fade_FechaCreacion, 'D', 'es-HN')),
+			Total_Ventas_Al_Dia = CONVERT(NVARCHAR, COUNT(fade_FechaCreacion)),
+			Total_Dia = CONVERT(NVARCHAR, SUM(fade_Cantidad * fade_Total)) +' '+ 'L.'	
+			FROM fact.tbFacturaDetalles
+			GROUP BY CONVERT(NVARCHAR, FORMAT(fade_FechaCreacion, 'D', 'es-HN'));
+
+GO
+
 
 
 
