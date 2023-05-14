@@ -2245,7 +2245,7 @@ AS BEGIN
 			VALUES
 			(@clie_Id, @empl_Id, GETDATE(), @sucu_Id, @meto_Id, @fact_UserCrea)
 
-			SELECT 200 AS codeStatus, 'Factura creado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Factura creada con éxito' AS messageStatus
 		
 
 	END TRY
@@ -2316,27 +2316,30 @@ END
 GO
 
 
-CREATE OR ALTER PROC fact.UDP_tbFacturaDetalles_INSERT
-@fact_Id INT,
+CREATE OR ALTER PROC fact.UDP_tbFacturaDetalles_INSERT 
 @pren_Id INT,
-@fade_Cantidad INT,
-@fade_Total DECIMAL(8,2),
 @fade_UserCrea INT
 AS BEGIN
 
   	BEGIN TRY
-			
-			DECLARE @Descuento DECIMAL(18,2) = (SELECT((SELECT desc_Descuento FROM vera.VW_Prendas WHERE @pren_Id = @pren_Id)/100.00))
+			DECLARE @fact_Id INT= (SELECT CAST(IDENT_CURRENT('fact.tbFacturas')AS INT))
+			DECLARE @fade_Cantidad INT = 1
+			DECLARE @fade_Total DECIMAL(18,2) = (SELECT pren_Precio FROM vera.VW_Prendas WHERE pren_Id = @pren_Id)
+			DECLARE @Descuento DECIMAL(18,2) = (SELECT((SELECT desc_Descuento FROM vera.VW_Prendas WHERE pren_Id = @pren_Id)/100.00))
 			DECLARE @TotalDescuento DECIMAL(18,2) = (SELECT @fade_Total * @Descuento)
 			DECLARE @Total_Final DECIMAL(18,2) = (SELECT @fade_Total - @TotalDescuento)
-		
 			
 			INSERT INTO  fact.tbFacturaDetalles
 			(fact_Id, pren_Id, fade_Cantidad, fade_Total, fade_UserCrea)
 			VALUES
 			(@fact_Id, @pren_Id, @fade_Cantidad, @Total_Final, @fade_UserCrea)
 
-			SELECT 200 AS codeStatus, 'Detalle creado con éxito' AS messageStatus
+			SELECT 200 AS codeStatus, 'Detalle creada con éxito' AS messageStatus
+
+			UPDATE vera.tbPrendas
+			SET pren_Estado = 0,
+				prend_EstadoTienda = 0
+				WHERE pren_Id = @pren_Id
 
 	END TRY
 	BEGIN CATCH

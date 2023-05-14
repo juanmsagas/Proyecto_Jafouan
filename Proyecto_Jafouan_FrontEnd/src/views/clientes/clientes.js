@@ -346,7 +346,7 @@ const handleSubmitD = (event) => {
     abrirPrenda(params.row, e);
     setdept_Id(prevDept_Id => {
         const newDept_Id = { ...prevDept_Id, dept_Id:  params.row.dept_Id };
-        enviarDeptId(e, newDept_Id); // llamada a la función que envía el dept_Id a la API
+        enviarDeptId(e, newDept_Id); 
         return newDept_Id;
     });
     }}>

@@ -40,10 +40,7 @@ namespace Jafouan.DataAccess.Repository
             var parametros = new DynamicParameters();
 
 
-            parametros.Add("@fact_Id", item.fact_Id, DbType.String, ParameterDirection.Input);
             parametros.Add("@pren_Id", item.pren_Id, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@fade_Cantidad", item.fade_Cantidad, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@fade_Total", item.fade_Total, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@fade_UserCrea", item.fade_UserCrea, DbType.Int32, ParameterDirection.Input);
 
             var result = db.QueryFirst<RequestStatus>(ScriptsDataBase.INSERT_FACTURADETALLES, parametros, commandType: System.Data.CommandType.StoredProcedure);

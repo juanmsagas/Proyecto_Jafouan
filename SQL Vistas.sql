@@ -389,7 +389,7 @@ SELECT	fact_Id,
 		empl_Nombres + ' ' + empl_Apellidos AS empl_Nombre,
 		T3.empl_Nombres,
 		T3.empl_ApellIdos,
-		fact_Fecha, 
+		FORMAT(fact_Fecha, 'D', 'es-HN')fact_Fecha, 
 		T1.sucu_Id,
 		T4.sucu_Nombre,
 		T1.meto_Id,
@@ -451,6 +451,16 @@ SELECT  fapr_Id,
 		ON T1.prov_Id = T3.prov_Id
 GO
 
+CREATE OR ALTER VIEW vera.VW_Reporte
+AS
+	SELECT
+			Fecha = CONVERT(NVARCHAR, FORMAT(fade_FechaCreacion, 'D', 'es-HN')),
+			Total_Ventas_Al_Dia = CONVERT(NVARCHAR, COUNT(fade_FechaCreacion)),
+			Total_Dia = CONVERT(NVARCHAR, SUM(fade_Cantidad * fade_Total)) +' '+ 'L.'	
+			FROM fact.tbFacturaDetalles
+			GROUP BY CONVERT(NVARCHAR, FORMAT(fade_FechaCreacion, 'D', 'es-HN'));
+
+GO
 
 
 --SELECT * FROM acce.VW_Usuarios

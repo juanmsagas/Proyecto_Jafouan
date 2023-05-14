@@ -570,11 +570,7 @@ INSERT INTO [acce].[tbPantallas]
 			('Sucursales','verasucu','/Sucursales',1),
 			--Facturación
 			('Metodos de Pago','factmeto','/MetodosPago',1),
-<<<<<<< HEAD
 			('Facturas','factfact','/Facturas',1);
-=======
-			('Facturas','factfact','/Facturas',1)
->>>>>>> 42896c3323a2a410fceb37074cf2718f706b9790
 
 
 GO
@@ -606,7 +602,7 @@ INSERT INTO [acce].[tbPantallasPorRol]
 			(3,4,1),
 			(3,5,1),
 			(2,6,1)
-
+			 
  GO
  --*********************************************************/Tabla Roles Por Pantallas**************************************************************--
 

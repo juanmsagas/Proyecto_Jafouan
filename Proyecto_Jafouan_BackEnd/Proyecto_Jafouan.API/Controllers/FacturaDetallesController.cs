@@ -33,10 +33,12 @@ namespace Jafouan.API.Controllers
         }
 
         [HttpPost("Insert")]
-        public IActionResult InsertFacturaDetalles([FromBody] FacturaDetallesViewModel facturas)
+        public IActionResult InsertFacturaDetalles(int pren_Id, int fade_UserCrea)
         {
+            tbFacturaDetalles item = new tbFacturaDetalles();
+            item.pren_Id = pren_Id;
+            item.fade_UserCrea = fade_UserCrea;
 
-            var item = _mapper.Map<tbFacturaDetalles>(facturas);
             var response = _facturationServices.InsertFacturaDetalles(item);
             return Ok(response);
         }

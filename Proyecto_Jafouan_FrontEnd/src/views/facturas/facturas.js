@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { DataGrid, GridToolbar, esES } from '@mui/x-data-grid'
-import { IconButton } from '@material-ui/core'
+import { Collapse, IconButton } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import VisibilityIcon from '@material-ui/icons/Visibility'
@@ -35,6 +35,10 @@ import {
   CModalBody,
   CFormGroup,
   CFormRadio,
+  CAccordion,
+  CAccordionBody,
+  CAccordionHeader,
+  CAccordionItem,
 }
   from '@coreui/react'
 import { CardHeader } from 'reactstrap'
@@ -43,19 +47,24 @@ function Facturas() {
   const [Facturas, setFacturas] = useState([])
   const [sortModel, setSortModel] = useState([{ field: 'fact_Id', sort: 'asc' }])
   const [visible, setVisible] = useState(false)
-  const [visible2, setVisible2] = useState(false)
+
   const [Metodo, setMetodosDDL] = useState([]);
   const [Clientes, setClientesDDL] = useState([]);
   const [tabla, setTabla] = useState([]);
-  const [Modal, setModal] = useState(false)
+
   const user_Crea = parseInt(sessionStorage.getItem('user_Id'));
   const empl_Id = parseInt(sessionStorage.getItem('empl_Id'));
   const sucu_Id = sessionStorage.getItem('sucu_Id');
+
   const [visibleEnca, setvisibleEnca] = useState(false)
   const [validated, setValidated] = useState(false)
   const [deshabilitar, setdeshabilitar] = useState(true)
+  const [detalles, setdetalles] = useState(false)
+  const [Total, setTotal] = useState(0)
+  const [SubTotal, setSubTotal] = useState(0)
+  
 
-
+  
 
 
   const [nuevaFactura, setnuevaFactura] = useState({
@@ -64,12 +73,9 @@ function Facturas() {
     sucu_Id: sucu_Id,
     meto_Id: 0,
     fact_UserCrea: user_Crea
-
   })
 
-  const [Disponibles, setDisponibles] = useState({
-    pren_Id: 0
-  })
+
 
   const abrirycerrarInsert = (event) => {
     event.preventDefault()
@@ -114,18 +120,22 @@ function Facturas() {
       if (form.checkValidity() != false) {
         axios.post('api/Facturas/Insert', nuevaFactura, config)
           .then((response) => {
-            console.log(empl_Id)
             setdeshabilitar(!deshabilitar)
-            setnuevaFactura({
-              clie_Id: 0,
-              empl_Id: empl_Id,
-              sucu_Id: sucu_Id,
-              meto_Id: 0,
-              fact_UserCrea: user_Crea
+            setdetalles(!detalles)
+            console.log(response.data)
+
+
+            axios.get('api/Facturas/Index').then((response) => {
+              const insertarid = response.data.map((row) => ({
+                ...row,
+                id: row.fact_Id,
+              }))
+              setFacturas(insertarid)
             })
+        
+
             toast.success('Datos guardados correctamente.');
 
-            console.log(empl_Id);
 
           })
           .catch((error) => {
@@ -144,9 +154,16 @@ function Facturas() {
       }))
       setFacturas(insertarid)
     })
-  }, [Facturas])
 
-  axios.get('api/MetodosPagos/Index')
+    axios.get('api/Prendas/PrendasDisponibles').then((response) => {
+      const insertarid = response.data.map((row) => ({
+        ...row,
+        id: row.pren_Id,
+      }));
+      setPrendas(insertarid);
+    });
+
+    axios.get('api/MetodosPagos/Index')
     .then(response => {
       setMetodosDDL(response.data);
 
@@ -164,17 +181,57 @@ function Facturas() {
       console.error('Error fetching data from API:', error);
     });
 
+  }, [])
+
+ 
+
 
   const [prendas, setPrendas] = useState([]);
-  useEffect(() => {
-    axios.get('api/Prendas/PrendasDisponibles').then((response) => {
-      const insertarid = response.data.map((row) => ({
-        ...row,
-        id: row.pren_Id,
-      }));
-      setPrendas(insertarid);
+
+  const enviarDatos = async () => {
+    for (const prenda of tabla) {
+      const { pren_Id } = prenda;
+  
+        axios.post(`api/FacturaDetalles/Insert?pren_Id=${pren_Id}&fade_UserCrea=${user_Crea}`)
+        .then(response => {
+          if (response.status==200) {
+            axios.get('api/Prendas/PrendasDisponibles').then((response) => {
+              const insertarid = response.data.map((row) => ({
+                ...row,
+                id: row.pren_Id,
+              }));
+              setPrendas(insertarid);
+            });        
+          }
+          else{
+            toast.error('Ha ocurrido un Error Inesperado, Intente más tarde')
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching data from API:', error);
+        });
+    }
+    setTabla([]);
+    setvisibleEnca(!visibleEnca);
+    setdeshabilitar(!deshabilitar);
+    setVisible(!visible);
+    setnuevaFactura({
+    clie_Id: 0,
+    empl_Id: empl_Id,
+    sucu_Id: sucu_Id,
+    meto_Id: 0,
+    fact_UserCrea: user_Crea
     });
-  }, [prendas]);
+    setSubTotal(0);
+    setTotal(0);
+    setdetalles(!detalles);
+    toast.success('Compra Finalizada con Éxito');
+  };
+  
+
+
+  
+
 
   const handleSortModelChange = (model) => {
     setSortModel(model)
@@ -214,18 +271,24 @@ function Facturas() {
   ]
 
   const prens = [
-    { field: 'pren_Id', headerName: 'Id', width: 90 },
+    { field: 'pren_Precio', headerName: 'Precio', width: 70 },
     { field: 'pren_Descripcion', headerName: 'Prenda', width: 150 },
-    { field: 'pren_Talla', headerName: 'Talla', width: 150 },
+    { field: 'pren_Talla', headerName: 'Talla', width: 50},
+    {
+      renderCell: (params) => (
+        <div>
+          <img className='img-fluid'  src={params.row.pren_Imagen}></img>        
+        </div>
+      ),
+    },
     {
       field: 'acciones',
       headerName: 'Acciones',
-      width: 300,
+      width: 90,
       renderCell: (params) => (
         <div>
-
           <CButton color="danger ms-2" variant="outline"  onClick={(e) =>{
-              eliminarPrenda(params.row.pren_Id)
+              eliminarPrenda(params.row)
           }
                           }>
             <DeleteIcon />
@@ -235,46 +298,35 @@ function Facturas() {
       ),
     },
   ]
+
   
-  const [prendaSeleccionada, setPrendaSeleccionada] = useState(null);
-  const [cartasVisibles, setCartasVisibles] = useState(prendas);
-  const [prendasEliminadas, setPrendasEliminadas] = useState([]);
-
-
   const manejarClicImagen = async (params) => {
- setPrendaSeleccionada(params);
     setTabla((prevTabla) => [...prevTabla, params]);
     setPrendas((prevPrendas) => prevPrendas.filter((p) => p.id !== params.id));
-    console.log(params.id);
-  
-    axios
-      .put(`api/Prendas/Vendidas?pren_Id=${params.id}`)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });   
+
   };
 
+  useEffect(() => {
+    const totalidad = tabla.reduce((total, prenda) => {
+      const descuento = prenda.desc_Descuento || 0;
+      const precioConDescuento = prenda.pren_Precio * (1 - descuento / 100);
+      return total + precioConDescuento;
+    }, 0);
+    const sumaTotal = tabla.reduce((total, prenda) => total + prenda.pren_Precio, 0);
+    setSubTotal(sumaTotal);
+    setTotal(totalidad)
 
+  }, [tabla]);
+  
 
+const eliminarPrenda = (params) => {
+  setTabla((prevTabla) => prevTabla.filter((prenda) => prenda.pren_Id !== params.pren_Id));
+  setPrendas((prevPrendas) => [...prevPrendas, { ...params }]);
+};
 
-  const eliminarPrenda = (params) => {
+  
 
-    
-    axios.put(`api/Prendas/Disponibles?pren_Id=${params}`)
-      .then((response) => {
-        console.log(response.data)
-        setPrendas((prevPrendas) =>
-        prevPrendas.filter((prenda) => prenda.pren_Id !== params.id)
-      );
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
+  
   /*
       const eliminarPrenda = async (pren_Id) => {
       try {
@@ -314,7 +366,7 @@ function Facturas() {
     <div style={{ width: '100%' }}>
       <div className='col-12'>
         <CCard className="p-5   ">
-          <CCardHeader className='rounded-top mb-4' style={{ fontFamily: "revert-layer", textAlign: 'center', fontSize: 50 }}>Factura Detalle</CCardHeader>
+          <CCardHeader className='rounded-top mb-4' style={{ fontFamily: "revert-layer", textAlign: 'center', fontSize: 50 }}>Facturación</CCardHeader>
           <CCollapse visible={!visibleEnca}>
 
 
@@ -331,18 +383,22 @@ function Facturas() {
           </CCollapse>
 
           {/*Formulario Insertar*/}
-          <CCollapse visible={visible} className='col-12'>
-
+          <CCollapse visible={visible} className='col-12' >
+            
             <div className="card" >
+              
               <CCardBody>
                 <CForm
-                  className="row g-4 needs-validation"
+                  className="row  needs-validation"
                   noValidate
                   validated={validated}
                   onSubmit={handleSubmitI}>
                   <div className='col-5'>
 
-                    <CCard className="p-3 h-40 m-4">
+                    <CCard className="p-3 pr-5 h-40 m-4">
+                    <CardHeader className='mb-5'>
+                    <CardTitle>Datos de Facturación</CardTitle>
+                    </CardHeader>
                       <CCol md={12} className="">
                         <CFormSelect
                           disabled={!deshabilitar}
@@ -384,43 +440,85 @@ function Facturas() {
 
                       </CCol>
                       <CCollapse visible={deshabilitar}>
-                        <CCol xs={12} className='offset-5 mt-3'>
+                        <CCol xs={12} className='offset-3 mt-3'>
                           <CButton color="primary" type="submit" >
                             Siguiente
+                          </CButton>
+                          <CButton color="danger ms-2 text-light" onClick={abrirycerrarInsert}>
+                            Cancelar
+                          </CButton>
+                        </CCol>
+                      </CCollapse>
+                      <CCollapse visible={!deshabilitar}>
+                        <CCol xs={12} className='offset-4 mt-3'>
+                          <CButton color="primary"  onClick={enviarDatos}>
+                            Terminar Compra
                           </CButton>
 
                         </CCol>
                       </CCollapse>
                     </CCard>
-                  </div>
 
+                <CCollapse visible={detalles} >
+                    <CCard className="p-3  h-40 m-4">
+                 <div className='row'>
+                 <CCol md={6} className=''>
+                    <CFormInput
+                    type="text"
+                    label="Subtotal"
+                    value={'$'+' '+SubTotal }
+                    id="validationCustom01"
+                    disabled
+                    />
+                        </CCol>
 
-                  <div className='col-7 h-40'>
+                    <CCol md={6} className=''>
 
-                    <CCard className="p-4 h-40 m-4">
-                      <CCol md={12} className="">
-
-
-                        <DataGrid
-                          rows={tabla}
-                          columns={prens}
-                          sortModel={sortModel}
-                          onSortModelChange={handleSortModelChange}
-                          components={{
-                            Toolbar: GridToolbar,
-                            Search: SearchIcon,
-                          }}
-                          localeText={esES.components.MuiDataGrid.defaultProps.localeText}
-                        />
-
-                      </CCol>
+                     <CFormInput
+                    type="text"
+                    label="Total Con Descuento"
+                    value={'$'+' '+Total}
+                    id="validationCustom01"
+                    disabled
+                    />
+                        </CCol>
+                    </div>
                     </CCard>
+                </CCollapse>
                   </div>
 
+    {/*Tabla con las prendas*/}
+    <CCollapse
+  visible={detalles}
+  className='col-7 h-70'>
+                  <div >
+  <CCard className="p-4  h-40 m-4"  >
+    <CCol md={12} className="">
+      <div style={{ height: '426px', overflow: 'auto' }}>
+        <DataGrid
+          rows={tabla.map((row, index) => ({ ...row, id: index }))}
+          columns={prens}
+          sortModel={sortModel}
+          onSortModelChange={handleSortModelChange}
+          components={{
+            Toolbar: GridToolbar,
+            Search: SearchIcon,
+          }}
+          localeText={esES.components.MuiDataGrid.defaultProps.localeText}
+          getRowId={(row) => row.id}
+          getRowHeight={(params) => 100}
+        />
+      </div>
+    </CCol>
+  </CCard>
+</div>
+</CCollapse>
+
+    {/*Cards con las prendas*/}
+    <CCollapse visible={detalles} className='col-12'>
 
                   <div className='col-12'>
-
-                    <CCard className="p-3 h-100 m-4" style={{ maxHeight: '600px', overflowY: 'auto' }}>
+                    <CCard className="p-3 h-100 m-4" style={{ maxHeight: '600px', overflowY: 'auto'}}>
                       <div className="row">
                         {prendas.map((prenda) => (
                           <div className="col-md-3 mb-4" key={prenda?.id}>
@@ -432,6 +530,7 @@ function Facturas() {
                                 alt={prenda?.pren_Nombre}
                                 onClick={() => manejarClicImagen(prenda)}
                                 style={{ cursor: 'pointer', padding: '15px', borderRadius: '30px' }}
+                                title="Agregar"
                               />
                               {prenda?.desc_Descuento && (
                                 <div
@@ -493,7 +592,7 @@ function Facturas() {
                       </div>
                     </CCard>
                   </div>
-
+</CCollapse>
 
 
 
