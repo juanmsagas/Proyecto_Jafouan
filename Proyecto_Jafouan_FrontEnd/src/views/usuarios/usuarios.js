@@ -40,6 +40,7 @@ function Usuarios() {
   const [visibleEnca, setvisibleEnca   ] = useState(false)
   const [Empleados, setEmpleadosDDL] = useState([]);  
   const [Roles, setRolesDDL] = useState([]);  
+  const user_Crea = parseInt(sessionStorage.getItem('user_Id'));
 
 
   const [validated, setValidated] = useState(false)
@@ -51,6 +52,23 @@ function Usuarios() {
     }
     setValidated(true)
   }
+
+  
+if (user_Crea==null ||  isNaN(user_Crea)) {
+  window.location.href = '/';
+}
+
+const arregloJSONGET = sessionStorage.getItem("miArreglo");
+const miArreglo = JSON.parse(arregloJSONGET);
+
+const existeUsuarios = miArreglo.some(objeto => objeto.name === "Usuarios");
+
+if (existeUsuarios) {
+  
+} else {
+  window.location.href = '/#/Home';
+}
+
   const [nuevousuario, setNuevousuario] = useState({
     user_Id: 0,
     user_NombreUsuario: '',

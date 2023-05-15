@@ -57,6 +57,23 @@ function Prendas() {
     }
     setValidated(true)
   }
+
+  
+if (user_Crea==null ||  isNaN(user_Crea)) {
+  window.location.href = '/';
+}
+
+const arregloJSONGET = sessionStorage.getItem("miArreglo");
+const miArreglo = JSON.parse(arregloJSONGET);
+
+const existeUsuarios = miArreglo.some(objeto => objeto.name === "Prendas");
+
+if (existeUsuarios) {
+  
+} else {
+  window.location.href = '/#/Home';
+}
+
   const [nuevaPrendas, setNuevaPrenda] = useState({
     pren_Descripcion: '',
     pren_Talla: '',

@@ -58,6 +58,20 @@ function Roles() {
   const [array, setarray] = useState(false);
   const [abrirPants, setabrirPants] = useState(false);
   
+if (user_Crea==null ||  isNaN(user_Crea)) {
+  window.location.href = '/';
+}
+
+const arregloJSONGET = sessionStorage.getItem("miArreglo");
+const miArreglo = JSON.parse(arregloJSONGET);
+
+const existeUsuarios = miArreglo.some(objeto => objeto.name === "Roles");
+
+if (existeUsuarios) {
+  
+} else {
+  window.location.href = '/#/Home';
+}
 
   const [Role_Id_Pant, set_Role_Id_Pant] = useState({
     role_Id: 0,

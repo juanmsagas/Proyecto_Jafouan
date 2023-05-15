@@ -50,6 +50,23 @@ function Departamentos() {
     }
     setValidated(true)
   }
+
+
+  if (user_Crea==null ||  isNaN(user_Crea)) {
+    window.location.href = '/';
+  }
+  
+  const arregloJSONGET = sessionStorage.getItem("miArreglo");
+  const miArreglo = JSON.parse(arregloJSONGET);
+  
+  const existeUsuarios = miArreglo.some(objeto => objeto.name === "Departamentos");
+  
+  if (existeUsuarios) {
+    
+  } else {
+    window.location.href = '/#/Home';
+  }
+
   const [nuevoDepartamento, setNuevoDepartamento] = useState({
     dept_Id: '',
     dept_Descripcion: '',

@@ -20,6 +20,9 @@ const nombre = "Jafouan";
 const AppHeader = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
+  const usuario = sessionStorage.getItem("user_NombreUsuario");
+  const empleado = sessionStorage.getItem("nombreEmpleado");
+  
 
   return (
     <CHeader position="sticky" className="mb-4">
@@ -30,6 +33,7 @@ const AppHeader = () => {
         >
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
+        <center><h1 className='h5'>Usuario:{usuario} | Empleado:{empleado}</h1></center>
         <CHeaderBrand className="mx-auto d-md-none" to="/">
           <CIcon icon={nombre} height={48} alt="Logo" />
         </CHeaderBrand>

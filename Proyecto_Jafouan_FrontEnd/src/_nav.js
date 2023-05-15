@@ -3,39 +3,11 @@ import CIcon from "@coreui/icons-react";
 
 //import de los iconos a usar en la navbar
 import {
-  cilBell,
-  cilCalculator,
-  cilChartPie,
-  cilCursor,
-  cilDescription,
-  cilDrop,
   cilHome,
-  cilNotes,
-  cilPencil,
-  cilPuzzle,
-  cilSpeedometer,
-  cilStar,
-  cilUser,
-  cilContact,
-  cilTags,
-  cilSettings,
-  cilMap,
-  cilStorage,
-  cilCamera,
-  cilPeople,
-  cilBuilding,
-  cilMoney,
-  cilLibrary,
-  cilMinus,
   cilBank,
-  cilBadge,
-  cilPaintBucket,
-  cilCarAlt,
-  cilRestaurant,
-  cilGlobeAlt,
-  cilAlignCenter,
-  cilCasino,
-  cilPaperclip,
+  cilLockLocked,
+  cibLibreoffice,
+  cilCash,
 } from "@coreui/icons";
 import { CNavGroup, CNavItem, CNavTitle } from "@coreui/react";
 
@@ -44,6 +16,7 @@ import { CNavGroup, CNavItem, CNavTitle } from "@coreui/react";
 const arregloJSONGET = sessionStorage.getItem("miArreglo");
 const miArreglo = JSON.parse(arregloJSONGET);
 console.log(miArreglo);
+
 
 
 const Vera_Items = [];
@@ -106,7 +79,7 @@ if(Acce_Items.length!=0){
   component: CNavGroup,
   name: 'Seguridad',
   to: '/base',
-  icon: <CIcon icon={cilCasino} customClassName="nav-icon" />,
+  icon: <CIcon icon={cilLockLocked} customClassName="nav-icon" />,
   items: [...Acce_Items]
 })
 
@@ -122,7 +95,7 @@ if(Mant_Items.length!=0){
     component: CNavGroup,
     name: 'Mantenimiento',
     to: '/base',
-    icon: <CIcon icon={cilGlobeAlt} customClassName="nav-icon" />,
+    icon: <CIcon icon={cibLibreoffice} customClassName="nav-icon" />,
     items: [...Mant_Items]
   })
 
@@ -137,7 +110,7 @@ if(Vera_Items.length!=0){
     component: CNavGroup,
     name: 'Tienda',
     to: '/base',
-    icon: <CIcon icon={cilCasino} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilBank} customClassName="nav-icon" />,
     items: [...Vera_Items]
   })
 }
@@ -151,7 +124,7 @@ if(Fact_Items.length!=0){
     component: CNavGroup,
     name: 'Facturación',
     to: '/base',
-    icon: <CIcon icon={cilBank} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilCash} customClassName="nav-icon" />,
     items: [...Fact_Items]
   })
 }

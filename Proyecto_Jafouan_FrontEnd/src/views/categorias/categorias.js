@@ -51,6 +51,24 @@ function Categorias() {
     }
     setValidated(true)
   }
+
+  
+if (user_Crea==null ||  isNaN(user_Crea)) {
+  window.location.href = '/';
+}
+
+const arregloJSONGET = sessionStorage.getItem("miArreglo");
+const miArreglo = JSON.parse(arregloJSONGET);
+
+const existeUsuarios = miArreglo.some(objeto => objeto.name === "Categorias");
+
+if (existeUsuarios) {
+  
+} else {
+  window.location.href = '/#/Home';
+}
+
+
   const [nuevaCategoria, setNuevaCategorias] = useState({
     cate_Descripcion: '',
     cate_UserCrea: user_Crea

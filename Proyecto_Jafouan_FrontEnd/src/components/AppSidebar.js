@@ -22,29 +22,19 @@ const AppSidebar = () => {
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
-  
-const Menu = () => {
-  const [menuDataAcce, setmenuDataAcce] = useState([]);
-  const [menuDataMant, setmenuDataMant] = useState([]);
-  const [menuDataVera, setmenuDataVera] = useState([]);
+
+const [borderColor, setBorderColor] = useState('#ffffff');
 
   useEffect(() => {
-    const sessionId = parseInt(sessionStorage.getItem('user_Id'));
-    console.log(sessionId)
-    if (sessionId) {
-      axios
-        .get(`/api/Usuarios/menu?id=${sessionId}`)
-        .then((response) => {
-          menuDataAcce(response.data);
-          console.log(response.data)
-        })
-        .catch((error) => {
-          console.error('Error al obtener los datos del menú:', error);
-        });
-    }
-  }, []);
-}
+    const interval = setInterval(() => {
+      const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+      setBorderColor(randomColor);
+    }, 2000);
 
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
 
   return (
@@ -56,9 +46,11 @@ const Menu = () => {
         dispatch({ type: 'set', sidebarShow: visible })
       }}
     >
-      <CSidebarBrand className="d-none d-md-flex" to="/">
-        <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} />
-        <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} />
+      <CSidebarBrand className="d-none d-md-flex pt-3 pb-3" to="/">
+      <div style={{ width: '100px', height: '100px', overflow: 'hidden', borderRadius: '80%', border: '5px solid', transition: 'border-color 2s', borderColor: borderColor }}>
+                      <img src="https://i.ibb.co/j9Kn1tv/Logo-Login.png" style={{ objectFit: 'cover', width: '100%', height: '100%', borderRadius: '50%' }} alt="Imagen de Login" />
+                    </div>
+         
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>

@@ -7,6 +7,24 @@ function PDFDocument() {
   // creamos el documento PDF
   const doc = new jsPDF();
 
+  const user_Crea = parseInt(sessionStorage.getItem('user_Id'));
+
+  
+if (user_Crea==null ||  isNaN(user_Crea)) {
+    window.location.href = '/';
+  }
+  
+  const arregloJSONGET = sessionStorage.getItem("miArreglo");
+  const miArreglo = JSON.parse(arregloJSONGET);
+  
+  const existeUsuarios = miArreglo.some(objeto => objeto.name === "Categorias");
+  
+  if (existeUsuarios) {
+    
+  } else {
+    window.location.href = '/#/Home';
+  }
+
     const [data, setData] = useState([]);
     useEffect(() => {
       const fetchData = () => {

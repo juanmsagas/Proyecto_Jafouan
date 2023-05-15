@@ -46,6 +46,7 @@ function Sucursales() {
   const [Municipios, setMunicipiosDDL] = useState([]);  
   const [Modal, setModal] = useState(false)
   const [visibleEnca, setvisibleEnca   ] = useState(false)
+  const user_Crea = parseInt(sessionStorage.getItem('user_Id'));
 
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
@@ -56,6 +57,22 @@ function Sucursales() {
     }
     setValidated(true)
   }
+
+  
+if (user_Crea==null ||  isNaN(user_Crea)) {
+  window.location.href = '/';
+}
+
+const arregloJSONGET = sessionStorage.getItem("miArreglo");
+const miArreglo = JSON.parse(arregloJSONGET);
+
+const existeUsuarios = miArreglo.some(objeto => objeto.name === "Sucursales");
+
+if (existeUsuarios) {
+  
+} else {
+  window.location.href = '/#/Home';
+}
   const [nuevaSucursales, setnuevaSucursales] = useState({
     sucu_Nombre: '',
     muni_Id: '',

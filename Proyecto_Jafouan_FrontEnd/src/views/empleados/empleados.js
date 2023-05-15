@@ -74,6 +74,22 @@ function Empleados() {
     empl_UserCrea:user_Crea
 })
 
+
+if (user_Crea==null ||  isNaN(user_Crea)) {
+  window.location.href = '/';
+}
+
+const arregloJSONGET = sessionStorage.getItem("miArreglo");
+const miArreglo = JSON.parse(arregloJSONGET);
+
+const existeUsuarios = miArreglo.some(objeto => objeto.name === "Empleados");
+
+if (existeUsuarios) {
+  
+} else {
+  window.location.href = '/#/Home';
+}
+
 const [dept_Id, setdept_Id] = useState({
     dept_Id: ''
 })

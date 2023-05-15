@@ -56,7 +56,9 @@ GO
  CONSTRAINT PK_acce_tbPantallas_pant_Id				PRIMARY KEY(pant_Id),
  CONSTRAINT UQ_acce_tbPantallas_pant_Nombre			UNIQUE (pant_Nombre),
  CONSTRAINT UQ_acce_tbPantallas_pant_Identificador	UNIQUE (pant_Identificador),
- CONSTRAINT UQ_acce_tbPantallas_pant_href			UNIQUE (pant_href)
+ CONSTRAINT UQ_acce_tbPantallas_pant_href			UNIQUE (pant_href),
+ CONSTRAINT FK_acce_tbPantallas_pant_UserCrea		FOREIGN KEY (pant_UserCrea)			REFERENCES acce.tbUsuarios(user_Id),
+ CONSTRAINT FK_acce_tbPantallas_pant_UserModifica	FOREIGN KEY (pant_UserModifica)		REFERENCES acce.tbUsuarios(user_Id)
  );
 
  GO 
@@ -77,9 +79,18 @@ GO
  role_UserModifica		INT,
  role_FechaModifica		DATETIME
  CONSTRAINT PK_acce_tbRoles_role_Id					PRIMARY KEY(role_Id),
- CONSTRAINT UQ_role_tbRoles_role_Descripcion		UNIQUE(role_Descripcion)
+ CONSTRAINT UQ_role_tbRoles_role_Descripcion		UNIQUE(role_Descripcion),
+ CONSTRAINT FK_acce_tbRoles_role_UserCrea		FOREIGN KEY (role_UserCrea)			REFERENCES acce.tbUsuarios(user_Id),
+ CONSTRAINT FK_acce_tbRoles_role_UserModifica	FOREIGN KEY (role_UserModifica)		REFERENCES acce.tbUsuarios(user_Id)
  );
+
  GO
+
+ ALTER TABLE acce.tbUsuarios
+ ADD CONSTRAINT FK_acce_tbUsuarios_tbRoles_role_Id	FOREIGN KEY (role_Id)		REFERENCES acce.tbRoles(role_Id)
+
+ GO
+
  --****************************************************************/Tabla Roles********************************************************************--
 
  ----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -97,8 +108,10 @@ GO
  pantrol_UserModifica	INT,
  pantrol_FechaModifica	DATETIME,
  CONSTRAINT PK_acce_tbPantallasPorRol_pantrol_Id			PRIMARY KEY(pantrol_Id),
- CONSTRAINT FK_acce_tbPantallasPorRol_tbRoles_role_Id		FOREIGN KEY (role_Id)		REFERENCES acce.tbRoles(role_Id),
- CONSTRAINT FK_acce_tbPantallasPorRol_tbPantallas_pant_Id	FOREIGN KEY (pant_Id)		REFERENCES acce.tbPantallas(pant_Id),
+ CONSTRAINT FK_acce_tbPantallasPorRol_tbRoles_role_Id		FOREIGN KEY (role_Id)				REFERENCES acce.tbRoles(role_Id),
+ CONSTRAINT FK_acce_tbPantallasPorRol_tbPantallas_pant_Id	FOREIGN KEY (pant_Id)				REFERENCES acce.tbPantallas(pant_Id),
+ CONSTRAINT FK_acce_tbPantallasPorRol_pantrol_UserCrea		FOREIGN KEY (pantrol_UserCrea)		REFERENCES acce.tbUsuarios(user_Id),
+ CONSTRAINT FK_acce_tbPantallasPorRol_pantrol_UserModifica	FOREIGN KEY (pantrol_UserModifica)	REFERENCES acce.tbUsuarios(user_Id)
  );
 GO
  --*********************************************************/Tabla Roles Por Pantallas**************************************************************--
@@ -129,7 +142,9 @@ GO
  dept_UserModifica	INT,
  dept_FechaModifica	DATETIME
  CONSTRAINT PK_mant_tbDepartamentos_dept_Id			 PRIMARY KEY(dept_Id),
- CONSTRAINT UQ_mant_tbDepartamentos_dept_Descripcion UNIQUE(dept_Descripcion)
+ CONSTRAINT UQ_mant_tbDepartamentos_dept_Descripcion UNIQUE(dept_Descripcion),
+ CONSTRAINT FK_mant_tbDepartamentos_dept_UserCrea		FOREIGN KEY (dept_UserCrea)		REFERENCES acce.tbUsuarios(user_Id),
+ CONSTRAINT FK_mant_tbDepartamentos_dept_UserModifica	FOREIGN KEY (dept_UserModifica)	REFERENCES acce.tbUsuarios(user_Id)
  );
  GO
  --*************************************************************/Tabla Departamentos*****************************************************************--
@@ -143,13 +158,15 @@ GO
  muni_Descripcion	NVARCHAR(200)	NOT NULL,
 
  /********Campos de Auditoria*********/
- muni_Estado		BIT							DEFAULT 1,
+ muni_Estado		BIT								DEFAULT 1,
  muni_UserCrea		INT				NOT NULL,
- muni_FechaCrea		DATETIME					DEFAULT GETDATE(),
+ muni_FechaCrea		DATETIME						DEFAULT GETDATE(),
  muni_UserModifica	INT,
  muni_FechaModifica	DATETIME
- CONSTRAINT PK_mant_tbMunicipios_muni_Id		PRIMARY KEY(muni_Id),
- CONSTRAINT FK_mant_tbMunicipios_dept_Id		FOREIGN KEY (dept_Id)	REFERENCES mant.tbDepartamentos (dept_Id)
+ CONSTRAINT PK_mant_tbMunicipios_muni_Id			PRIMARY KEY(muni_Id),
+ CONSTRAINT FK_mant_tbMunicipios_dept_Id			FOREIGN KEY (dept_Id)			REFERENCES mant.tbDepartamentos (dept_Id),
+ CONSTRAINT FK_mant_tbMunicipios_muni_UserCrea		FOREIGN KEY (muni_UserCrea)		REFERENCES acce.tbUsuarios(user_Id),
+ CONSTRAINT FK_mant_tbMunicipios_muni_UserModifica	FOREIGN KEY (muni_UserModifica)	REFERENCES acce.tbUsuarios(user_Id)
  );
  GO
 --***************************************************************/Tabla Municipios******************************************************************--
@@ -168,7 +185,9 @@ GO
  estc_UserModifica	INT,
  estc_FechaModifica	DATETIME
  CONSTRAINT PK_mant_tbEstadosCiviles_estc_Id			PRIMARY KEY (estc_Id),
- CONSTRAINT UQ_mant_tbEstadosCiviles_estc_Descripcion	UNIQUE (estc_Descripcion)
+ CONSTRAINT UQ_mant_tbEstadosCiviles_estc_Descripcion	UNIQUE (estc_Descripcion),
+ CONSTRAINT FK_mant_tbEstadosCiviles_estc_UserCrea			FOREIGN KEY (estc_UserCrea)			REFERENCES acce.tbUsuarios(user_Id),
+ CONSTRAINT FK_mant_tbEstadosCiviles_estc_UserModifica		FOREIGN KEY (estc_UserModifica)		REFERENCES acce.tbUsuarios(user_Id)
  );
  GO
  --***********************************************************/Tabla Estados Civiles****************************************************************--
@@ -187,8 +206,9 @@ GO
  carg_FechaModificacion		DATETIME,
  carg_Estado				BIT				NOT NULL	DEFAULT(1)
  CONSTRAINT PK_mant_tbCargos_carg_Id					PRIMARY KEY (carg_Id),
- CONSTRAINT UQ_mant_tbCargos_carg_Descripcion			UNIQUE (carg_Descripcion)
-
+ CONSTRAINT UQ_mant_tbCargos_carg_Descripcion			UNIQUE (carg_Descripcion),
+ CONSTRAINT FK_mant_tbCargos_carg_UserCrea				FOREIGN KEY (carg_UserCrea)			REFERENCES acce.tbUsuarios(user_Id),
+ CONSTRAINT FK_mant_tbCargos_carg_UserModifica			FOREIGN KEY (carg_UserModifica)		REFERENCES acce.tbUsuarios(user_Id)
  );
  GO
 --****************************************************************/Tabla Cargos*********************************************************************--
@@ -219,7 +239,9 @@ GO
  sucu_UserModifica				INT,
  sucu_FechaModificacion			DATETIME
  CONSTRAINT PK_vera_tbSucursales_sucu_Id					PRIMARY KEY (sucu_Id),
- CONSTRAINT PK_vera_tbSucursales_tbMunicipios_muni_Id		FOREIGN KEY (muni_Id)		REFERENCES mant.tbMunicipios(muni_Id)
+ CONSTRAINT PK_vera_tbSucursales_tbMunicipios_muni_Id		FOREIGN KEY (muni_Id)				REFERENCES mant.tbMunicipios(muni_Id),
+ CONSTRAINT FK_vera_tbSucursales_sucu_UserCrea				FOREIGN KEY (sucu_UserCrea)			REFERENCES acce.tbUsuarios(user_Id),
+ CONSTRAINT FK_vera_tbSucursales_sucu_UserModifica			FOREIGN KEY (sucu_UserModifica)		REFERENCES acce.tbUsuarios(user_Id)
  );
  GO
 --************************************************************/Tabla Sucursales*********************************************************************--
@@ -238,7 +260,9 @@ GO
  cate_FechaModificacion		DATETIME,
  cate_Estado				BIT				NOT NULL	DEFAULT(1)
  CONSTRAINT PK_vera_tbCategorias_cate_Id				PRIMARY KEY (cate_Id),
- CONSTRAINT UQ_mant_tbCategorias_cate_Descripcion		UNIQUE (cate_Descripcion)
+ CONSTRAINT UQ_mant_tbCategorias_cate_Descripcion		UNIQUE		(cate_Descripcion),
+ CONSTRAINT FK_vera_tbCategorias_cate_UserCrea			FOREIGN KEY (cate_UserCrea)			REFERENCES acce.tbUsuarios(user_Id),
+ CONSTRAINT FK_vera_tbCategorias_cate_UserModifica		FOREIGN KEY (cate_UserModifica)		REFERENCES acce.tbUsuarios(user_Id)
  );
 
  GO
@@ -258,7 +282,9 @@ GO
  marc_FechaModificacion		DATETIME,
  marc_Estado				BIT				NOT NULL	DEFAULT(1)
  CONSTRAINT PK_vera_tbMarcas_marc_Id					PRIMARY KEY (marc_Id),
- CONSTRAINT UQ_mant_tbCategorias_marc_Descripcion		UNIQUE (marc_Descripcion)
+ CONSTRAINT UQ_mant_tbCategorias_marc_Descripcion		UNIQUE		(marc_Descripcion),
+ CONSTRAINT FK_vera_tbMarcas_marc_UserCrea				FOREIGN KEY (marc_UserCrea)			REFERENCES acce.tbUsuarios(user_Id),
+ CONSTRAINT FK_vera_tbMarcas_marc_UserModifica			FOREIGN KEY (marc_UserModifica)		REFERENCES acce.tbUsuarios(user_Id)
  );
  GO
 --****************************************************************/Tabla Marcas*********************************************************************--
@@ -287,12 +313,14 @@ GO
  empl_FechaCreacion				DATETIME		NOT NULL	DEFAULT(GETDATE()),
  empl_UserModifica				INT,
  empl_FechaModificacion			DATETIME
- CONSTRAINT PK_vera_tbEmpleados_empl_Id						PRIMARY KEY(empl_Id),
- CONSTRAINT CK_vera_tbEmpleados_empl_Sexo					CHECK(empl_sexo IN ('F', 'M')),
- CONSTRAINT FK_vera_tbEmpleados_tbSucursales_sucu_Id		FOREIGN KEY(sucu_Id)				REFERENCES vera.tbSucursales(sucu_Id),
+ CONSTRAINT PK_vera_tbEmpleados_empl_Id						PRIMARY KEY	(empl_Id),
+ CONSTRAINT CK_vera_tbEmpleados_empl_Sexo					CHECK		(empl_sexo IN ('F', 'M')),
+ CONSTRAINT FK_vera_tbEmpleados_tbSucursales_sucu_Id		FOREIGN KEY	(sucu_Id)				REFERENCES vera.tbSucursales(sucu_Id),
  CONSTRAINT FK_vera_tbEmpleados_tbEstadosCiviles_estc_Id	FOREIGN KEY (estc_Id)				REFERENCES mant.tbEstadosCiviles (estc_Id),
  CONSTRAINT FK_vera_tbEmpleados_tbMunicipios_muni_Id		FOREIGN KEY (muni_Id)				REFERENCES mant.tbMunicipios (muni_Id),
- CONSTRAINT FK_vera_tbEmpleados_tbCargos_carg_Id			FOREIGN KEY (carg_Id)				REFERENCES mant.tbCargos (carg_Id)
+ CONSTRAINT FK_vera_tbEmpleados_tbCargos_carg_Id			FOREIGN KEY (carg_Id)				REFERENCES mant.tbCargos (carg_Id),
+ CONSTRAINT FK_vera_tbEmpleados_empl_UserCrea				FOREIGN KEY (empl_UserCrea)			REFERENCES acce.tbUsuarios(user_Id),
+ CONSTRAINT FK_vera_tbEmpleados_empl_UserModifica			FOREIGN KEY (empl_UserModifica)		REFERENCES acce.tbUsuarios(user_Id)
  );
  GO
 
@@ -322,7 +350,9 @@ GO
  CONSTRAINT PK_vera_tbClientes_clie_Id							PRIMARY KEY (clie_Id),
  CONSTRAINT CK_vera_tbClientes_clie_Sexo						CHECK(clie_Sexo IN ('F', 'M')),
  CONSTRAINT FK_vera_tbClientes_tbEstadosCiviles_eciv_Id			FOREIGN KEY (estc_Id)				REFERENCES mant.tbEstadosCiviles (estc_Id),
- CONSTRAINT FK_vera_tbClientes_tbMunicipios_muni_Id				FOREIGN KEY (muni_Id)				REFERENCES mant.tbMunicipios (muni_Id)
+ CONSTRAINT FK_vera_tbClientes_tbMunicipios_muni_Id				FOREIGN KEY (muni_Id)				REFERENCES mant.tbMunicipios (muni_Id),
+ CONSTRAINT FK_vera_tbClientes_clie_UserCrea					FOREIGN KEY (clie_UserCrea)			REFERENCES acce.tbUsuarios(user_Id),
+ CONSTRAINT FK_vera_tbClientes_clie_UserModifica				FOREIGN KEY (clie_UserModifica)		REFERENCES acce.tbUsuarios(user_Id)
  );
  GO
 
@@ -344,6 +374,8 @@ CREATE TABLE vera.tbDescuentos(
  desc_FechaModificacion	DATETIME,
  desc_Estado			BIT								DEFAULT 1
  CONSTRAINT PK_vera_tbDescuentos_desc_Id				PRIMARY KEY (desc_Id),
+ CONSTRAINT FK_vera_tbDescuentos_desc_UserCrea			FOREIGN KEY (desc_UserCrea)			REFERENCES acce.tbUsuarios(user_Id),
+ CONSTRAINT FK_vera_tbDescuentos_desc_UserModifica		FOREIGN KEY (desc_UserModificacion)		REFERENCES acce.tbUsuarios(user_Id)
  );
 
  GO
@@ -369,7 +401,9 @@ CREATE TABLE vera.tbDescuentos(
   prov_UserModifica				INT,
   prov_FechaModificacion		DATETIME
   CONSTRAINT PK_vera_tbProveedores_prov_Id						 PRIMARY KEY (prov_Id),
-  CONSTRAINT FK_vera_tbProveedores_tbMunicipios_muni_Id			 FOREIGN KEY (muni_Id)				REFERENCES mant.tbMunicipios (muni_Id)
+  CONSTRAINT FK_vera_tbProveedores_tbMunicipios_muni_Id			 FOREIGN KEY (muni_Id)				REFERENCES mant.tbMunicipios (muni_Id),
+  CONSTRAINT FK_vera_tbProveedores_prov_UserCrea				 FOREIGN KEY (prov_UserCrea)		REFERENCES acce.tbUsuarios(user_Id),
+  CONSTRAINT FK_vera_tbProveedores_prov_UserModifica			 FOREIGN KEY (prov_UserModifica)	REFERENCES acce.tbUsuarios(user_Id)
  );
  GO
 --**************************************************************/Tabla Proveedores*********************************************************************--
@@ -389,6 +423,8 @@ CREATE TABLE vera.tbDescuentos(
  fard_Estado				BIT								DEFAULT 1,
 
  CONSTRAINT PK_vera_tbFardos_fard_Id						PRIMARY KEY (fard_Id),
+ CONSTRAINT FK_vera_tbFardos_fard_UserCrea					FOREIGN KEY (fard_UserCrea)				REFERENCES acce.tbUsuarios(user_Id),
+ CONSTRAINT FK_vera_tbFardos_fard_UserModificacion			FOREIGN KEY (fard_UserModificacion)		REFERENCES acce.tbUsuarios(user_Id)
  );
  
 --****************************************************************/Tabla Fardos************************************************************************--
@@ -410,8 +446,10 @@ CREATE TABLE vera.tbDescuentos(
  fapr_Estado				BIT								DEFAULT 1,
 
  CONSTRAINT PK_vera_tbFardosProveedor_fapr_Id						PRIMARY KEY (fapr_Id),
- CONSTRAINT FK_vera_tbFardosProveedor_vera_tbFardos_fard_Id FOREIGN KEY (fard_Id) REFERENCES vera.tbFardos(fard_Id),
- CONSTRAINT FK_vera_tbFardosProveedor_vera_tbProveedores_prov_Id FOREIGN KEY (prov_Id) REFERENCES vera.tbProveedores(prov_Id)
+ CONSTRAINT FK_vera_tbFardosProveedor_vera_tbFardos_fard_Id			FOREIGN KEY (fard_Id)					REFERENCES vera.tbFardos(fard_Id),
+ CONSTRAINT FK_vera_tbFardosProveedor_vera_tbProveedores_prov_Id	FOREIGN KEY (prov_Id)					REFERENCES vera.tbProveedores(prov_Id),
+ CONSTRAINT FK_vera_tbFardosProveedor_fapr_UserCrea					FOREIGN KEY (fapr_UserCrea)				REFERENCES acce.tbUsuarios(user_Id),
+ CONSTRAINT FK_vera_tbFardosProveedor_fapr_UserModificacion			FOREIGN KEY (fapr_UserModificacion)		REFERENCES acce.tbUsuarios(user_Id)
  );
 --**********************************************************/Tabla Fardos por Proveedor****************************************************************--
 
@@ -437,9 +475,13 @@ CREATE TABLE vera.tbPrendas(
  pren_Estado				BIT									DEFAULT 1
 
 CONSTRAINT PK_vera_tbPrendas_pren_Id							PRIMARY KEY(pren_Id),
-CONSTRAINT FK_vera_tbPrendas_marc_Id_vera_tbMarcas_marc_Id		FOREIGN KEY(marc_Id) REFERENCES vera.tbMarcas(marc_Id),
-CONSTRAINT FK_vera_tbPrendas_cate_Id_vera_tbCategorias_cate_Id	FOREIGN KEY(cate_Id) REFERENCES vera.tbCategorias(cate_Id),
-CONSTRAINT FK_vera_tbPrendas_fard_Id_vera_tbFardos_fard_Id		FOREIGN KEY(fard_Id) REFERENCES vera.tbFardos(fard_Id));
+CONSTRAINT FK_vera_tbPrendas_marc_Id_vera_tbMarcas_marc_Id		FOREIGN KEY(marc_Id)					REFERENCES vera.tbMarcas(marc_Id),
+CONSTRAINT FK_vera_tbPrendas_cate_Id_vera_tbCategorias_cate_Id	FOREIGN KEY(cate_Id)					REFERENCES vera.tbCategorias(cate_Id),
+CONSTRAINT FK_vera_tbPrendas_fard_Id_vera_tbFardos_fard_Id		FOREIGN KEY(fard_Id)					REFERENCES vera.tbFardos(fard_Id),
+CONSTRAINT FK_vera_tbPrendas_desc_Id_vera_tbDescuentos_desc_Id	FOREIGN KEY(desc_Id)					REFERENCES vera.tbDescuentos(desc_Id),
+CONSTRAINT FK_vera_tbPrendas_pren_UserCrea						FOREIGN KEY(pren_UserCrea)				REFERENCES acce.tbUsuarios(user_Id),
+CONSTRAINT FK_vera_tbPrendas_pren_UserModificacion				FOREIGN KEY(pren_UserModificacion)		REFERENCES acce.tbUsuarios(user_Id)
+);
 GO
 --***************************************************************/Tabla Prendas************************************************************************--
 
@@ -457,7 +499,9 @@ CREATE TABLE fact.tbMetodosPagos(
  meto_FechaModificacion		DATETIME,
  meto_Estado				BIT DEFAULT 1
 
- CONSTRAINT PK_fact_tbMetodoPago_meto_Id PRIMARY KEY (meto_Id));
+ CONSTRAINT PK_fact_tbMetodoPago_meto_Id PRIMARY KEY (meto_Id)
+ CONSTRAINT FK_fact_tbMetodoPago_meto_UserCrea						FOREIGN KEY(meto_UserCrea)				REFERENCES acce.tbUsuarios(user_Id),
+ CONSTRAINT FK_fact_tbMetodoPago_meto_UserModificacion				FOREIGN KEY(meto_UserModificacion)		REFERENCES acce.tbUsuarios(user_Id));
 GO
 --**********************************************************/Tabla Métodos de Pago********************************************************************--
 
@@ -479,10 +523,12 @@ CREATE TABLE fact.tbFacturas(
  fact_FechaModificacion	DATETIME
 
  CONSTRAINT PK_fact_tbFacturas_fact_Id						PRIMARY KEY(fact_Id),
- CONSTRAINT FK_fact_tbFacturas_vera_tbClientes_clie_Id		FOREIGN KEY(clie_Id)	REFERENCES vera.tbClientes(clie_Id),
- CONSTRAINT FK_fact_tbFacturas_vera_tbEmpleados_empl_Id		FOREIGN KEY(empl_Id)	REFERENCES vera.tbEmpleados(empl_Id),
- CONSTRAINT FK_fact_tbFacturas_vera_tbSucursales_sucu_Id	FOREIGN KEY(sucu_Id)	REFERENCES vera.tbSucursales(sucu_Id),
- CONSTRAINT FK_fact_tbFacturas_vera_tbMetodosPagos_meto_Id	FOREIGN KEY(meto_Id)	REFERENCES fact.tbMetodosPagos(meto_Id));
+ CONSTRAINT FK_fact_tbFacturas_vera_tbClientes_clie_Id		FOREIGN KEY(clie_Id)					REFERENCES vera.tbClientes(clie_Id),
+ CONSTRAINT FK_fact_tbFacturas_vera_tbEmpleados_empl_Id		FOREIGN KEY(empl_Id)					REFERENCES vera.tbEmpleados(empl_Id),
+ CONSTRAINT FK_fact_tbFacturas_vera_tbSucursales_sucu_Id	FOREIGN KEY(sucu_Id)					REFERENCES vera.tbSucursales(sucu_Id),
+ CONSTRAINT FK_fact_tbFacturas_vera_tbMetodosPagos_meto_Id	FOREIGN KEY(meto_Id)					REFERENCES fact.tbMetodosPagos(meto_Id),
+ CONSTRAINT FK_fact_tbFacturas_fact_UserCrea				FOREIGN KEY(fact_UserCrea)				REFERENCES acce.tbUsuarios(user_Id),
+ CONSTRAINT FK_fact_tbFacturas_fact_UserModificacion		FOREIGN KEY(fact_UserModificacion)		REFERENCES acce.tbUsuarios(user_Id));
  GO
 --**************************************************************/Tabla Factura*********************************************************************--
 
@@ -505,10 +551,14 @@ CREATE TABLE fact.tbFacturaDetalles(
  fade_Estado				BIT										DEFAULT 1
 
  CONSTRAINT PK_fact_tbFacturaDetalles_fade_Id						PRIMARY KEY(fade_Id)
- CONSTRAINT FK_fact_tbFacturaDetalles_tbFacturas_fact_Id			FOREIGN KEY(fact_Id)	REFERENCES fact.tbFacturas(fact_Id),
- CONSTRAINT FK_fact_tbFacturaDetalles_vera_tbPrendas_fact_Id		FOREIGN KEY(pren_Id)	REFERENCES vera.tbPrendas(pren_Id),
+ CONSTRAINT FK_fact_tbFacturaDetalles_tbFacturas_fact_Id			FOREIGN KEY(fact_Id)					REFERENCES fact.tbFacturas(fact_Id),
+ CONSTRAINT FK_fact_tbFacturaDetalles_vera_tbPrendas_fact_Id		FOREIGN KEY(pren_Id)					REFERENCES vera.tbPrendas(pren_Id),
+ CONSTRAINT FK_fact_tbFacturaDetalles_fade_UserCrea					FOREIGN KEY(fade_UserCrea)				REFERENCES acce.tbUsuarios(user_Id),
+ CONSTRAINT FK_fact_tbFacturaDetalles_fade_UserModificacion			FOREIGN KEY(fade_UserModificacion)		REFERENCES acce.tbUsuarios(user_Id)
  );
  GO
+
+
 --**********************************************************/Tabla Factura Detalle*****************************************************************--
 
 --******************************************************************/VERA**************************************************************************--
@@ -540,7 +590,12 @@ CREATE TABLE fact.tbFacturaDetalles(
 	
 	INSERT INTO acce.TbUsuarios (user_NombreUsuario, user_Contraseña,empl_Id,role_Id, user_Admin, user_UserCrea, user_Estado)
 	VALUES	(@User,@password,1,null,1,1,1)
- GO
+	GO
+
+	ALTER TABLE acce.tbUsuarios
+	ADD CONSTRAINT FK_acce_tbUsuarios_user_UserCrea					FOREIGN KEY(user_UserCrea)			REFERENCES acce.tbUsuarios(user_Id),
+	CONSTRAINT	FK_acce_tbUsuarios_user_UserModificacion			FOREIGN KEY(user_UserModifica)		REFERENCES acce.tbUsuarios(user_Id)
+	GO	
 --*************************************************************/Tabla Usuarios******************************************************************--
 
 --------------------------------------------------------------------------------------------------------------------------------------------------
@@ -568,7 +623,6 @@ INSERT INTO [acce].[tbPantallas]
 			('Fardos','verafard','/Fardos',1),
 			('Proveedores','veraprov','/Proveedores',1),
 			('Sucursales','verasucu','/Sucursales',1),
-			('Grafica','veragraf','/Grafica',1),
 			--Facturación
 			('Metodos de Pago','factmeto','/MetodosPago',1),
 			('Facturas','factfact','/Facturas',1);

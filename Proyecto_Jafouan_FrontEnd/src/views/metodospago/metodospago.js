@@ -50,6 +50,24 @@ function MetodosPago() {
     }
     setValidated(true)
   }
+
+
+  
+if (user_Crea==null ||  isNaN(user_Crea)) {
+  window.location.href = '/';
+}
+
+const arregloJSONGET = sessionStorage.getItem("miArreglo");
+const miArreglo = JSON.parse(arregloJSONGET);
+
+const existeUsuarios = miArreglo.some(objeto => objeto.name === "Metodos de Pago");
+
+if (existeUsuarios) {
+  
+} else {
+  window.location.href = '/#/Home';
+}
+
   const [nuevoMetodos, setNuevoMetodos] = useState({
     meto_Descripcion: '',
     meto_UserCrea: user_Crea

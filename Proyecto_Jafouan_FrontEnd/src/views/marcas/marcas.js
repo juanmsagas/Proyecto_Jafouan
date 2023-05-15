@@ -42,6 +42,7 @@ function Marcas() {
   const [visible2, setVisible2] = useState(false)
   const [Modal, setModal] = useState(false)
   const [visibleEnca, setvisibleEnca   ] = useState(false)
+  const user_Crea = parseInt(sessionStorage.getItem('user_Id'));
 
   const [validated, setValidated] = useState(false)
   const handleSubmit = (event) => {
@@ -52,6 +53,25 @@ function Marcas() {
     }
     setValidated(true)
   }
+
+
+
+  
+if (user_Crea==null ||  isNaN(user_Crea)) {
+  window.location.href = '/';
+}
+
+const arregloJSONGET = sessionStorage.getItem("miArreglo");
+const miArreglo = JSON.parse(arregloJSONGET);
+
+const existeUsuarios = miArreglo.some(objeto => objeto.name === "Marcos");
+
+if (existeUsuarios) {
+  
+} else {
+  window.location.href = '/#/Home';
+}
+
   const [nuevaMarca, setNuevaMarca] = useState({
     marc_Descripcion: '',
     marc_UserCrea: 1
