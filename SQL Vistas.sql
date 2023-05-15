@@ -1,6 +1,5 @@
 --************************************************************* VISTAS ******************************************************************--USE db_VERA
-USE db-VERA
-GO
+
 CREATE OR ALTER VIEW acce.VW_Usuarios
 AS
 SELECT	user_Id,

@@ -74,13 +74,12 @@ if (existeUsuarios) {
 }
 
   const [nuevousuario, setNuevousuario] = useState({
-    user_Id: 0,
+    user_UserCrea:user_Crea,
     user_NombreUsuario: '',
     empl_Id:0,
     user_Admin:false,
     user_Contraseña:'',
     role_Id:0,
-    user_UserCrea:user_Crea
 })
 const [Elimusuario, setElimusuario] = useState({
   user_Id: ''
@@ -91,7 +90,7 @@ const [Editarusuario, setEditarusuario] = useState({
     empl_Id:0,
     user_Admin:false,
     role_Id:0,
-    user_UserModifica:user_Crea
+    user_UserModifica:1
 })
 
 useEffect(() => {
@@ -133,7 +132,7 @@ const abrireditar = (params,event) => {
     empl_Id:params.empl_Id,
     role_Id:params.role_Id,
     user_Admin:params.user_Admin,
-    user_UserModifica:user_Crea
+    user_UserModifica:1
 }
 )}
 
@@ -158,7 +157,7 @@ const abrirDetalles = (params,event) => {
     EsAdmin: params.EsAdmin,
     role_Id:params.role_Id,
     user_Admin:params.user_Admin,
-    user_UserModifica:user_Crea
+    user_UserModifica:1
 }
 )}
 
@@ -172,7 +171,7 @@ const cerrarDetalles = (event) => {
     empl_Id:0,
     role_Id:0,
     user_Admin:false,
-    user_UserModifica:user_Crea
+    user_UserModifica:1
 }
 )}
 
@@ -186,7 +185,7 @@ const cerrarEditar = (event) => {
     empl_Id:0,
     role_Id:0,
     user_Admin:false,
-    user_UserModifica:user_Crea
+    user_UserModifica:1
 }
 )}
 
@@ -226,7 +225,11 @@ const handleSubmitI = (event) => {
       user_Admin:false
     })
   }
-  console.log(nuevousuario.user_Admin);
+
+  setNuevousuario({
+    user_UserCrea:user_Crea
+  })
+
 
     const config = {
         headers: {
@@ -255,9 +258,9 @@ const handleSubmitI = (event) => {
                 user_Id: '',
                 user_NombreUsuario: '',
                 nombreEmpleado:'',
-                user_UserCrea:user_Crea
+                user_UserCrea:1
             })
-            toast.success('EL usuario se ha insertado correctamentw.')};
+            toast.success('EL usuario se ha insertado correctamente.')};
           
         })
         .catch((error) => {

@@ -1255,3 +1255,10 @@ VALUES  ('Cazadora con bolsillos','S', 1, 120.00, 2, 1, 3, 'https://img.ltwebsta
 --******************************************************************/VERA**************************************************************************--
 
 --*****************************************************************/INSERTS************************************************************************--
+
+
+ALTER TABLE vera.tbFardos ADD CONSTRAINT UK_vera_tbFardos_UNIQUE UNIQUE(fard_Descripcion)
+ALTER TABLE vera.tbMarcas ADD CONSTRAINT UK_vera_tbMarcas_UNIQUE UNIQUE(marc_Descripcion)
+ALTER TABLE vera.tbSucursales ADD CONSTRAINT UK_vera_tbSucursales_UNIQUE UNIQUE(sucu_Nombre)
+ALTER TABLE vera.tbDescuentos ADD CONSTRAINT UK_vera_tbDescuentos_UNIQUE UNIQUE(desc_Color)
+ALTER TABLE acce.tbRoles ADD CONSTRAINT UK_acce_tbRoles_UNIQUE UNIQUE(role_Descripcion)
