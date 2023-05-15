@@ -150,6 +150,11 @@ const handleSubmitI = (event) => {
   if(form.checkValidity() != false){
     axios.post('api/EstadosCiviles/Insert', nuevoEstado, config)
         .then((response) => {
+          if (response.data.code == 409)
+          {
+            toast.error('El estado civil ya existe.');
+          }
+          else{
             console.log(response.data)
             setVisible(false)
             setvisibleEnca(!visibleEnca)
@@ -157,7 +162,7 @@ const handleSubmitI = (event) => {
                 estc_Descripcion: '',
                 estc_UserCrea:user_Crea
             })
-            toast.success('Estado civil insertado correctamente.');
+            toast.success('Estado civil insertado correctamente.')};
 
         })
         .catch((error) => {
@@ -259,9 +264,7 @@ const handleSubmitD = (event) => {
         <div>
       
         
-            <CButton  color="info ms-2" variant="outline">
-            <VisibilityIcon />
-          </CButton>
+
 
           <CButton color="warning ms-2" variant="outline" onClick={() => abrireditar(params.row)}>
         <EditIcon />
@@ -348,7 +351,7 @@ const handleSubmitD = (event) => {
 >
 
 
-       <CCol md={6} className=''>
+       <CCol md={12} className=''>
 
         <CFormInput
     type="text"
@@ -360,7 +363,7 @@ const handleSubmitD = (event) => {
 
     </CCol>
 
-    <CCol xs={12} className='offset-7'>
+    <CCol xs={12} className='offset-4'>
       <CButton color="primary"  type="submit">
         Guardar
       </CButton>
@@ -412,7 +415,7 @@ const handleSubmitD = (event) => {
 
   </CCol>
 
-  <CCol xs={12} className='offset-7'>
+  <CCol xs={12} className='offset-4'>
     <CButton color="primary" type="submit">
       Guardar
     </CButton>

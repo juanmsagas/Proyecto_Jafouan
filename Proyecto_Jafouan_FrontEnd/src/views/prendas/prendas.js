@@ -245,6 +245,11 @@ const handleSubmitI = (event) => {
   if(form.checkValidity() != false){
     axios.post('api/Prendas/Insert', nuevaPrendas, config)
         .then((response) => {
+          if (response.data.code == 409)
+          {
+            toast.error('La prenda ya existe.');
+          }
+          else{
             console.log(response.data)
             setVisible(false)
             setvisibleEnca(!visibleEnca)
@@ -259,7 +264,7 @@ const handleSubmitI = (event) => {
               pren_Imagen: '',
               pren_UserCrea: user_Crea
             })
-            toast.error('Prenda insertada correctamente.');
+            toast.error('Prenda insertada correctamente.')};
 
         })
         .catch((error) => {
@@ -1029,7 +1034,8 @@ const form = event.currentTarget
       </CCollapse>
       </CCard>
       </div>
-      <ToastContainer />
+      <ToastContainer></ToastContainer>
+
 
     </div>
   )

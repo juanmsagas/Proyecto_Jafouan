@@ -271,6 +271,11 @@ if (existeUsuarios) {
     if (form.checkValidity() != false) {
       axios.post('/api/Empleados/Insert', nuevoEmpleado, config)
         .then((response) => {
+          if (response.data.code == 409)
+          {
+            toast.error('No puede haber números de identidad repetidos.');
+          }
+          else{
           console.log(response.data)
           setVisible(false)
           setvisibleEnca(!visibleEnca)
@@ -288,7 +293,7 @@ if (existeUsuarios) {
             empl_Direccion: '',
             empl_UserCrea: user_Crea
           })
-          toast.success('Empleado insertado correctamente.');
+          toast.success('Empleado insertado correctamente.')};
 
         })
         .catch((error) => {

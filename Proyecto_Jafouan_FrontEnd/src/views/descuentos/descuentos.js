@@ -190,6 +190,11 @@ if (existeUsuarios) {
       if (form.checkValidity() != false) {
         axios.post('api/Descuentos/Insert', nuevoDescuento, config)
           .then((response) => {
+            if (response.data.code == 409)
+            {
+              toast.error('El color del descuento ya existe.');
+            }
+            else{
             console.log(response.data)
             setVisible(false)
             setvisibleEnca(!visibleEnca)
@@ -201,7 +206,7 @@ if (existeUsuarios) {
             })
 
 
-            toast.success('Descuento insertado correctamente.');
+            toast.success('Descuento insertado correctamente.')};
 
           })
           .catch((error) => {

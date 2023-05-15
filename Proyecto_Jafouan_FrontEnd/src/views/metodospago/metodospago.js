@@ -151,6 +151,11 @@ const handleSubmitI = (event) => {
   if(form.checkValidity() != false){
     axios.post('api/MetodosPagos/Insert', nuevoMetodos, config)
         .then((response) => {
+          if (response.data.code == 409)
+          {
+            toast.error('El método de pago ya existe.');
+          }
+          else{
             console.log(response.data)
             setVisible(false)
             setvisibleEnca(!visibleEnca)
@@ -158,7 +163,7 @@ const handleSubmitI = (event) => {
                 meto_Descripcion: '',
                 meto_UserCrea:user_Crea
             })
-            toast.success('Método de pago insertado correctamente.');
+            toast.success('Método de pago insertado correctamente.')};
 
         })
         .catch((error) => {
@@ -260,9 +265,7 @@ const handleSubmitD = (event) => {
         <div>
       
         
-            <CButton  color="info ms-2" variant="outline">
-            <VisibilityIcon />
-          </CButton>
+
 
           <CButton color="warning ms-2" variant="outline" onClick={() => abrireditar(params.row)}>
         <EditIcon />
@@ -349,7 +352,7 @@ const handleSubmitD = (event) => {
 >
 
 
-       <CCol md={6} className=''>
+       <CCol md={12} className=''>
 
         <CFormInput
     type="text"
@@ -361,7 +364,7 @@ const handleSubmitD = (event) => {
 
     </CCol>
 
-    <CCol xs={12} className='offset-7'>
+    <CCol xs={12} className='offset-4'>
       <CButton color="primary"  type="submit">
         Guardar
       </CButton>

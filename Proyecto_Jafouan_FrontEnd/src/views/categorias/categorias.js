@@ -163,6 +163,11 @@ if (existeUsuarios) {
       if (form.checkValidity() != false) {
         axios.post('api/Categorias/Insert', nuevaCategoria, config)
           .then((response) => {
+            if (response.data.code == 409)
+            {
+              toast.error('La categoría ya existe.');
+            }
+            else{
             console.log(response.data)
             setVisible(false)
             setvisibleEnca(!visibleEnca)
@@ -170,7 +175,7 @@ if (existeUsuarios) {
               cate_Descripcion: '',
               cate_UserCrea: user_Crea
             })
-            toast.success('Categoría insertada correctamente.');
+            toast.success('Categoría insertada correctamente.')};
           })
           .catch((error) => {
             console.log(error)
@@ -280,9 +285,6 @@ if (existeUsuarios) {
         <div>
 
 
-          <CButton color="info ms-2" variant="outline">
-            <VisibilityIcon />
-          </CButton>
 
           <CButton color="warning ms-2" variant="outline" onClick={() => abrireditar(params.row)}>
             <EditIcon />
@@ -369,7 +371,7 @@ if (existeUsuarios) {
                 >
 
 
-                  <CCol md={6} className=''>
+                  <CCol md={12} className=''>
 
                     <CFormInput
                       type="text"
@@ -381,7 +383,7 @@ if (existeUsuarios) {
 
                   </CCol>
 
-                  <CCol xs={12} className='offset-7'>
+                  <CCol xs={12} className='offset-4'>
                     <CButton color="primary" type="submit">
                       Guardar
                     </CButton>
@@ -433,7 +435,7 @@ if (existeUsuarios) {
 
                   </CCol>
 
-                  <CCol xs={12} className='offset-7'>
+                  <CCol xs={12} className='offset-4'>
                     <CButton color="primary" type="submit">
                       Guardar
                     </CButton>
