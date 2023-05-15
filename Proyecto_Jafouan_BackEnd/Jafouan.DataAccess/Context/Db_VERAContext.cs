@@ -36,6 +36,7 @@ namespace Jafouan.DataAccess.Context
         public virtual DbSet<VW_Pantallas> VW_Pantallas { get; set; }
         public virtual DbSet<VW_Prendas> VW_Prendas { get; set; }
         public virtual DbSet<VW_Proveedores> VW_Proveedores { get; set; }
+        public virtual DbSet<VW_Reporte> VW_Reporte { get; set; }
         public virtual DbSet<VW_Roles> VW_Roles { get; set; }
         public virtual DbSet<VW_Sucursales> VW_Sucursales { get; set; }
         public virtual DbSet<VW_Usuarios> VW_Usuarios { get; set; }
@@ -608,11 +609,6 @@ namespace Jafouan.DataAccess.Context
 
                 entity.ToView("VW_Prendas", "vera");
 
-                entity.Property(e => e.Disponibilidad)
-                    .IsRequired()
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.cate_Descripcion)
                     .IsRequired()
                     .HasMaxLength(100);
@@ -709,6 +705,19 @@ namespace Jafouan.DataAccess.Context
                 entity.Property(e => e.prov_Telefeno)
                     .IsRequired()
                     .HasMaxLength(20);
+            });
+
+            modelBuilder.Entity<VW_Reporte>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_Reporte", "vera");
+
+                entity.Property(e => e.Fecha).HasMaxLength(30);
+
+                entity.Property(e => e.Total_Dia).HasMaxLength(33);
+
+                entity.Property(e => e.Total_Ventas_Al_Dia).HasMaxLength(30);
             });
 
             modelBuilder.Entity<VW_Roles>(entity =>

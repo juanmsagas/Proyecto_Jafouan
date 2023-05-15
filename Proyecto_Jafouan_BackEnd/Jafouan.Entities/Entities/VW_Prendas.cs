@@ -24,7 +24,6 @@ namespace Jafouan.Entities.Entities
         public string fard_Descripcion { get; set; }
         public string pren_Imagen { get; set; }
         public bool? prend_EstadoTienda { get; set; }
-        public string Disponibilidad { get; set; }
         public bool? pren_Estado { get; set; }
         public int? pren_UserCrea { get; set; }
         public string empl_crea { get; set; }

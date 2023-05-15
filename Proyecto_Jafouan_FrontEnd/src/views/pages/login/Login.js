@@ -19,6 +19,7 @@ import { cilLockLocked, cilUser } from '@coreui/icons'
 import axios from 'axios'
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { CardHeader } from 'reactstrap'
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,11 +27,24 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [si, setsi] = useState(true);
 
   useEffect(() => {
     if (!loading) return;
+    if(username.length==0 ){
+      toast.warning("Usuario es requerido");
+      setLoading(false);
+      setsi(false)
+    }
 
-    axios.get('/api/Usuarios/Login/', { params: { username, password }})
+    if(password.length==0){
+      toast.warning("Contraseña es requerida");
+      setLoading(false);
+      setsi(false)
+    }
+
+    if(password.length!=0 && username.length!=0 ){
+      axios.get('/api/Usuarios/Login/', { params: { username, password }})
       .then((response) => {
         if(response.data.user_Id!=0){
           console.log(response.data)
@@ -39,7 +53,8 @@ const Login = () => {
           sessionStorage.setItem("sucu_Id", response.data.sucu_Id);
           sessionStorage.setItem("nombreEmpleado", response.data.nombreEmpleado);
           sessionStorage.setItem("empl_Id", response.data.empl_Id);
-
+          setUsername("");
+          setPassword("");
           navigate('/home');
         }
         else{
@@ -74,7 +89,7 @@ const Login = () => {
         .catch((error) => {
           console.log(error);
         });
-    
+      }
   }, [loading, username, password, navigate]);
 
   const handleSubmit = (e) => {
@@ -83,26 +98,46 @@ const Login = () => {
     setError('');
   };
 
+ const [borderColor, setBorderColor] = useState('#ffffff');
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+      setBorderColor(randomColor);
+    }, 2000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
-    <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
+    <div className="bg-light min-vh-100 d-flex flex-row align-items-center" style={{backgroundImage: "url('https://fotografias.antena3.com/clipping/cmsimages02/2022/02/08/65C13E6A-E9F2-4375-9060-A8D305A28134/tienda-ropa-segunda-mano_98.jpg?crop=1920,1080,x0,y200&width=1900&height=1069&optimize=high&format=webply')",backgroundSize:'cover',backgroundRepeat:'no-repeat'}}>
       <CContainer>
         <CRow className="justify-content-center">
-          <CCol md={8}>
+          <CCol md={6}>
             <CCardGroup>
-              <CCard className="p-4">
+              <CCard className="p-4 pb-5 pt-5" style={{backgroundColor: 'rgba(0, 0, 0, 0.7)', backgroundSize: 'cover', backgroundRepeat: 'no-repeat',border: '5px solid', transition: 'border-color 2s', borderColor: borderColor}}>
+                <div className='CardHeader  align-items-center'>
+                <center>
+                <div style={{ width: '200px', height: '200px', overflow: 'hidden', borderRadius: '50%', border: '5px solid', transition: 'border-color 2s', borderColor: borderColor }}>
+                      <img src="https://i.ibb.co/j9Kn1tv/Logo-Login.png" style={{ objectFit: 'cover', width: '100%', height: '100%', borderRadius: '50%' }} alt="Imagen de Login" />
+                    </div>
+                    <h1 className='h3 text-light mt-5'>Inicio de Sesión</h1>
+                    </center>
+                </div>
                 <CCardBody>
                   <CForm onSubmit={handleSubmit}>
-                    <h1>Login</h1>
-                    <p className="text-medium-emphasis">Sign In to your account</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
                       <CFormInput
-                        placeholder="Username"
-                        autoComplete="username"
+                        placeholder="Usuario"
+                        autoComplete="Usuario"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        
                       />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
@@ -111,44 +146,30 @@ const Login = () => {
                       </CInputGroupText>
                       <CFormInput
                         type="password"
-                        placeholder="Password"
+                        placeholder="Contraseña"
                         autoComplete="current-password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        
                       />
                     </CInputGroup>
                     <CRow>
+                      <center>
                       <CCol xs={6}>
-                        <CButton type="submit" color="primary" className="px-4" disabled={loading}>
-                          {loading ? 'Loading...' : 'Login'}
+                        <CButton type="submit" color="light lg" variant='outline' style={{border: '1px solid', transition: 'border-color 1s', borderColor: borderColor}} className="px-4 btn-lg" disabled={loading}>
+                          {loading ? 'Iniciando Sesión...' : 'Iniciar Sesión'}
                         </CButton>
                       </CCol>
                       <CCol xs={6} className="text-right">
-                        <CButton color="link" className="px-0">
-                          Forgot password?
-                        </CButton>
+                        
                       </CCol>
+                      </center>
                     </CRow>
                     {error && <p className="text-danger">{error}</p>}
                   </CForm>
                 </CCardBody>
               </CCard>  
-              <CCard className="text-white bg-primary py-5" style={{ width: '44%' }}>
-                <CCardBody className="text-center">
-                  <div>
-                    <h2>Sign up</h2>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                      tempor incididunt ut labore et dolore magna aliqua.
-                    </p>
-                    <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>
-                        Register Now!
-                      </CButton>
-                    </Link>
-                  </div>
-                </CCardBody>
-              </CCard>
+             
             </CCardGroup>
           </CCol>
         </CRow>

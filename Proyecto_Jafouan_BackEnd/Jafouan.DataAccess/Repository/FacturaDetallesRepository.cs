@@ -53,6 +53,12 @@ namespace Jafouan.DataAccess.Repository
             return db.Query<VW_FacturaDetalles>(ScriptsDataBase.INDEX_FACTURADETALLES, null, commandType: System.Data.CommandType.StoredProcedure);
         }
 
+        public IEnumerable<VW_Reporte> Reporte()
+        {
+            using var db = new SqlConnection(Jafouan_Context.ConnectionString);
+            return db.Query<VW_Reporte>(ScriptsDataBase.REPORTE, null, commandType: System.Data.CommandType.StoredProcedure);
+        }
+
         public RequestStatus Update(tbFacturaDetalles item)
         {
             using var db = new SqlConnection(Jafouan_Context.ConnectionString);

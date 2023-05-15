@@ -181,7 +181,9 @@ namespace Jafouan.DataAccess.Repository
         #endregion
 
 
-
+        #region Reporte
+        public static string REPORTE = "vera.UDP_tbFacturas_Reporte";
+        #endregion
 
 
 

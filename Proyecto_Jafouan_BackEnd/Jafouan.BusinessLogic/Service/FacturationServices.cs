@@ -30,6 +30,24 @@ namespace Jafouan.BusinessLogic.Service
 
         }
 
+        #region Reporte
+        public IEnumerable<VW_Reporte> Reporte()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _facturaDetallesRepository.Reporte();
+                return list;
+            }
+            catch (Exception e)
+            {
+                _= e.Message;
+                return Enumerable.Empty<VW_Reporte>();
+            }
+        }
+
+        #endregion
+
         #region Factura Detalles
 
 

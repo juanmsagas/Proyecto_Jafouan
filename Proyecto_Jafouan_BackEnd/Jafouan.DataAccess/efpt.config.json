@@ -174,11 +174,15 @@
          "ObjectType": 3
       },
       {
+         "Name": "[vera].[VW_Reporte]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[vera].[VW_Sucursales]",
          "ObjectType": 3
       }
    ],
-   "UiHint": "DESKTOP-BSILECU\\SQLEXPRESS.db_VERA",
+   "UiHint": "ISAAC\\SQLEXPRESS.db_VERA",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,
