@@ -159,8 +159,13 @@ if (existeUsuarios) {
       if (form.checkValidity() != false) {
         axios.post('api/Cargos/Insert', nuevoCargo, config)
           .then((response) => {
-            console.log(response.data)
-            setVisible(false)
+            console.log(response.status   )
+            if (response.data.code == 409)
+            {
+              toast.error('El cargo ya existe.');
+            }
+            else{
+                          setVisible(false)
             setvisibleEnca(!visibleEnca)
             setNuevaCargo({
               carg_Descripcion: '',
@@ -168,6 +173,8 @@ if (existeUsuarios) {
             })
             console.log(user_Crea)
             toast.success('Cargo insertado correctamente.');
+            }
+
           })
           .catch((error) => {
             console.log(error)
@@ -198,6 +205,11 @@ if (existeUsuarios) {
     if (form.checkValidity() != false) {
       axios.put('api/Cargos/Update', EditarCargo, config)
         .then((response) => {
+          if (response.data.code == 409)
+          {
+            toast.error('El cargo ya existe.');
+          }
+          else{
           console.log(response.data)
           setVisible2(!visible2)
           setvisibleEnca(!visibleEnca)
@@ -208,6 +220,7 @@ if (existeUsuarios) {
           })
           toast.success('Cargo editado correctamente.');
           console.log(response.data)
+        }
         })
         .catch((error) => {
           console.log(error)
@@ -269,9 +282,6 @@ if (existeUsuarios) {
         <div>
 
 
-          <CButton color="info ms-2" variant="outline">
-            <VisibilityIcon />
-          </CButton>
 
           <CButton color="warning ms-2" variant="outline" onClick={() => abrireditar(params.row)}>
             <EditIcon />
@@ -358,9 +368,9 @@ if (existeUsuarios) {
                 >
 
 
-                  <CCol md={6} className=''>
+                  <CCol md={12} className=''>
 
-                    <input
+                    <CFormInput
                     className='form-control'
                       type="text"
                       value={nuevoCargo.carg_Descripcion}
@@ -372,7 +382,7 @@ if (existeUsuarios) {
 
                   </CCol>
 
-                  <CCol xs={12} className='offset-7'>
+                  <CCol xs={12} className='offset-4'>
                     <CButton color="primary" type="submit">
                       Guardar
                     </CButton>
@@ -424,7 +434,7 @@ if (existeUsuarios) {
 
                   </CCol>
 
-                  <CCol xs={12} className='offset-7'>
+                  <CCol xs={12} className='offset-4'>
                     <CButton color="primary" type="submit">
                       Guardar
                     </CButton>

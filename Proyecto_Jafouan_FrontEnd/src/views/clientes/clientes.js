@@ -266,6 +266,11 @@ const handleSubmitI = (event) => {
   if(form.checkValidity() != false){
     axios.post('api/Clientes/Insert', nuevoCliente, config)
         .then((response) => {
+          if (response.data.code == 409)
+          {
+            toast.error('No puede haber números de identidad repetidos.');
+          }
+          else{
             console.log(response.data)
             setVisible(false)
             setvisibleEnca(!visibleEnca)
@@ -280,7 +285,7 @@ const handleSubmitI = (event) => {
               pren_Imagen: '',
               pren_UserCrea: user_Crea
             })
-            toast.success('Cliente insertado correctamente.');
+            toast.success('Cliente insertado correctamente.')};
 
         })
         .catch((error) => {

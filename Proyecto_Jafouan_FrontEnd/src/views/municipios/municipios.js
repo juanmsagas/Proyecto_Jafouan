@@ -171,6 +171,11 @@ const handleSubmitI = (event) => {
   if(form.checkValidity() != false){
     axios.post('api/Municipios/Insert', nuevoMunicipio, config)
         .then((response) => {
+          if (response.data.code == 409)
+          {
+            toast.error('El municipio ya existe.');
+          }
+          else{
             console.log(response.data)
             setVisible(false)
             setvisibleEnca(!visibleEnca)
@@ -180,7 +185,7 @@ const handleSubmitI = (event) => {
                 dept_Id:'',
                 muni_UserCrea:user_Crea
             })
-            toast.success('Municipio insertado correctamente.');
+            toast.success('Municipio insertado correctamente.')};
 
         })
         .catch((error) => {
@@ -421,7 +426,7 @@ const handleSubmitD = (event) => {
     </CCol>
 
 
-    <CCol xs={12} className='offset-7'>
+    <CCol xs={12} className='offset-4'>
       <CButton color="primary"  type="submit">
         Guardar
       </CButton>
@@ -498,7 +503,7 @@ const handleSubmitD = (event) => {
 
 
 
-  <CCol xs={12} className='offset-7'>
+  <CCol xs={12} className='offset-4'>
     <CButton color="primary" type="submit">
       Guardar
     </CButton>

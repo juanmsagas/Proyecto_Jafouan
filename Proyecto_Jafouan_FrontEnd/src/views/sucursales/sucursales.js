@@ -77,7 +77,7 @@ if (existeUsuarios) {
     sucu_Nombre: '',
     muni_Id: '',
     sucu_Direccion: '',
-    sucu_UserCrea:1,
+    sucu_UserCrea:user_Crea,
 })
 
 const [dept_Id, setdept_Id] = useState({
@@ -93,7 +93,7 @@ const [EditarSucursales, setEditarSucursales] = useState({
     sucu_Nombre: '',
     muni_Id: '',
     sucu_Direccion: '',
-    sucu_UserModifica:1,
+    sucu_UserModifica:user_Crea,
 })
 
 const abrirPrenda = (params,event) => {
@@ -111,7 +111,7 @@ const abrirPrenda = (params,event) => {
     dept_Id: params.dept_Id,
     muni_Id: params.muni_Id,
     sucu_Direccion: params.sucu_Direccion,
-    sucu_UserModifica:1,    
+    sucu_UserModifica:user_Crea,    
 })
 }
 
@@ -125,7 +125,7 @@ const cerrarEditar = (event) => {
     sucu_Nombre: '',
     muni_Id: '',
     sucu_Direccion: '',
-    sucu_UserModifica:1, 
+    sucu_UserModifica:user_Crea, 
 })
 }
 
@@ -139,7 +139,7 @@ const abrirycerrarInsert = (event) => {
     sucu_Nombre: '',
     muni_Id: '',
     sucu_Direccion: '',
-    sucu_UserModifica:1,
+    sucu_UserModifica:user_Crea,
 })
 
 }
@@ -164,6 +164,11 @@ const handleSubmitI = (event) => {
   if(form.checkValidity() != false){
     axios.post('api/Sucursales/Insert', nuevaSucursales, config)
         .then((response) => {
+          if (response.data.code == 409)
+          {
+            toast.error('La sucursal ya existe.');
+          }
+          else{
             console.log(response.data)
             setVisible(false)
             setvisibleEnca(!visibleEnca)
@@ -171,9 +176,9 @@ const handleSubmitI = (event) => {
                 sucu_Nombre: '',
                 muni_Id: '',
                 sucu_Direccion: '',
-                sucu_UserCrea:1,
+                sucu_UserCrea:user_Crea,
             })
-            toast.success('Sucursal insertada correctamente.');
+            toast.success('Sucursal insertada correctamente.')};
 
         })
         .catch((error) => {
@@ -210,7 +215,7 @@ const form = event.currentTarget
             sucu_Nombre: '',
             muni_Id: '',
             sucu_Direccion: '',
-            sucu_UserModifica:1,
+            sucu_UserModifica:user_Crea,
         })
         toast.success('Sucursal editada correctamente.');
 
@@ -506,7 +511,7 @@ required/>
 </CCol>
 
 
-    <CCol xs={12} className='offset-7'>
+    <CCol xs={12} className='offset-4'>
       <CButton color="primary"  type="submit">
         Guardar
       </CButton>
@@ -628,7 +633,7 @@ required/>
 
 
 
-  <CCol xs={12} className='offset-7'>
+  <CCol xs={12} className='offset-4'>
     <CButton color="primary" type="submit">
       Guardar
     </CButton>

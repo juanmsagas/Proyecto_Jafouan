@@ -8,6 +8,9 @@ import EditIcon from '@material-ui/icons/Edit'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import AddIcon  from '@material-ui/icons/Add'
 import SearchIcon from '@material-ui/icons/Search'
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import {CButton,
         CCollapse,
         CCard,
@@ -77,7 +80,7 @@ if (existeUsuarios) {
     user_Admin:false,
     user_Contraseña:'',
     role_Id:0,
-    user_UserCrea:1
+    user_UserCrea:user_Crea
 })
 const [Elimusuario, setElimusuario] = useState({
   user_Id: ''
@@ -88,7 +91,7 @@ const [Editarusuario, setEditarusuario] = useState({
     empl_Id:0,
     user_Admin:false,
     role_Id:0,
-    user_UserModifica:1
+    user_UserModifica:user_Crea
 })
 
 useEffect(() => {
@@ -130,7 +133,7 @@ const abrireditar = (params,event) => {
     empl_Id:params.empl_Id,
     role_Id:params.role_Id,
     user_Admin:params.user_Admin,
-    user_UserModifica:1
+    user_UserModifica:user_Crea
 }
 )}
 
@@ -155,7 +158,7 @@ const abrirDetalles = (params,event) => {
     EsAdmin: params.EsAdmin,
     role_Id:params.role_Id,
     user_Admin:params.user_Admin,
-    user_UserModifica:1
+    user_UserModifica:user_Crea
 }
 )}
 
@@ -169,7 +172,7 @@ const cerrarDetalles = (event) => {
     empl_Id:0,
     role_Id:0,
     user_Admin:false,
-    user_UserModifica:1
+    user_UserModifica:user_Crea
 }
 )}
 
@@ -183,7 +186,7 @@ const cerrarEditar = (event) => {
     empl_Id:0,
     role_Id:0,
     user_Admin:false,
-    user_UserModifica:1
+    user_UserModifica:user_Crea
 }
 )}
 
@@ -239,6 +242,12 @@ const handleSubmitI = (event) => {
   if(form.checkValidity() != false){
     axios.post('api/Usuarios/Insert', nuevousuario, config)
         .then((response) => {
+          console.log(response.data.code)
+          if (response.data.code == 409)
+          {
+            toast.error('El usuario ya existe.');
+          }
+          else{
             console.log(response.data)
             setVisible(false)
             setvisibleEnca(!visibleEnca)
@@ -246,8 +255,10 @@ const handleSubmitI = (event) => {
                 user_Id: '',
                 user_NombreUsuario: '',
                 nombreEmpleado:'',
-                user_UserCrea:1
+                user_UserCrea:user_Crea
             })
+            toast.success('EL usuario se ha insertado correctamentw.')};
+          
         })
         .catch((error) => {
             console.log(error)
@@ -279,7 +290,7 @@ const form = event.currentTarget
           setEditarusuario({
             user_Id: '',
             user_NombreUsuario: '',
-            user_UserModifica:1
+            user_UserModifica:user_Crea
         })  
         console.log(response.data)
       })
@@ -754,6 +765,7 @@ const handleSubmitD = (event) => {
       </CCollapse>
       </CCard>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   )
 }

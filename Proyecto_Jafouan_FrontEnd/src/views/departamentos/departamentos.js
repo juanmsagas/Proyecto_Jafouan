@@ -152,6 +152,11 @@ const handleSubmitI = (event) => {
   if(form.checkValidity() != false){
     axios.post('api/Departamentos/Insert', nuevoDepartamento, config)
         .then((response) => {
+          if (response.data.code == 409)
+          {
+            toast.error('El departamento ya existe.');
+          }
+          else{
             console.log(response.data)
             setVisible(false)
             setvisibleEnca(!visibleEnca)
@@ -160,7 +165,7 @@ const handleSubmitI = (event) => {
                 dept_Descripcion: '',
                 dept_UserCrea:user_Crea
             })
-            toast.success('Departamento insertado correctamente.');
+            toast.success('Departamento insertado correctamente.')};
 
         })
         .catch((error) => {
@@ -263,9 +268,6 @@ const handleSubmitD = (event) => {
         <div>
       
         
-            <CButton  color="info ms-2" variant="outline">
-            <VisibilityIcon />
-          </CButton>
 
           <CButton color="warning ms-2" variant="outline" onClick={() => abrireditar(params.row)}>
         <EditIcon />
@@ -375,7 +377,7 @@ const handleSubmitD = (event) => {
 
     </CCol>
 
-    <CCol xs={12} className='offset-7'>
+    <CCol xs={12} className='offset-4'>
       <CButton color="primary"  type="submit">
         Guardar
       </CButton>
@@ -427,7 +429,7 @@ const handleSubmitD = (event) => {
 
   </CCol>
 
-  <CCol xs={12} className='offset-7'>
+  <CCol xs={12} className='offset-4'>
     <CButton color="primary" type="submit">
       Guardar
     </CButton>
