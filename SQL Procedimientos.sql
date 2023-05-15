@@ -1108,7 +1108,8 @@ AS BEGIN
 				clie_Telefeno = @clie_Telefono,
 				muni_Id = @muni_Id,
 				clie_Direccion = @clie_Direccion,
-				clie_UserModifica = @clie_UserModifica
+				clie_UserModifica = @clie_UserModifica,
+				clie_FechaModificacion = GETDATE()
 				WHERE clie_Id		=	@clie_Id
 
 			SELECT 200 AS codeStatus, 'Cliente Modificado con éxito' AS messageStatus
@@ -1335,14 +1336,7 @@ AS BEGIN
  
 
   	BEGIN TRY
-	--si existe
-		IF EXISTS (SELECT * FROM vera.tbEmpleados WHERE empl_Identidad = @empl_Identidad AND empl_Estado  = 1)
-	     BEGIN
-            SELECT 409 AS codeStatus, 'El número de identidad del empleado ya existe' AS messageStatus
-         END
-	--si no existe
-		 ELSE IF NOT EXISTS (SELECT * FROM  vera.tbEmpleados WHERE empl_Identidad = @empl_Identidad)
-		 BEGIN
+
 			
 			UPDATE vera.tbEmpleados
 			SET
@@ -1357,12 +1351,13 @@ AS BEGIN
 				carg_Id = @carg_Id,
 				sucu_Id = @sucu_Id,
 				empl_Direccion = @empl_Direccion,
-				empl_UserModifica = @empl_UserModifica
+				empl_UserModifica = @empl_UserModifica,
+				empl_FechaModificacion = GETDATE()
 
 				WHERE empl_Id =	@empl_Id
 
 			SELECT 200 AS codeStatus, 'Empleado Modificada con éxito' AS messageStatus
-		END
+		
 
 	END TRY
 	BEGIN CATCH
@@ -1779,7 +1774,8 @@ AS BEGIN
 				cate_Id = @cate_Id,
 				fard_Id = @fard_Id,
 				pren_Imagen = @pren_Imagen,
-				pren_UserModificacion = @pren_UserModifica
+				pren_UserModificacion = @pren_UserModifica,
+				pren_FechaModificacion = GETDATE()
 
 				WHERE pren_Id =	@pren_Id
 
@@ -2420,7 +2416,15 @@ AS BEGIN
     GROUP BY cate_Descripcion
 
 END
+GO
+CREATE OR ALTER PROC vera.tbEmpleados_Grafica
+AS BEGIN
 
+SELECT TOP 5 empl_Nombres + ' ' + empl_ApellIdos as empl_Nombres, COUNT(fact_Id) as facturas FROM fact.tbFacturas T1
+INNER JOIN vera.tbEmpleados T2 ON T1.empl_Id = T2.empl_Id
+GROUP BY empl_Nombres  + ' ' + empl_ApellIdos
+
+END
 --***************************************************************/Reporte***************************************************************--
 
 
