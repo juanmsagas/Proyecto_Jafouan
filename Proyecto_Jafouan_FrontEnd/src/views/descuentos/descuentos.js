@@ -260,11 +260,14 @@ if (existeUsuarios) {
 
     }
 
+
     else {
       if (form.checkValidity() != false) {
         axios.put('api/Descuentos/Update', EditarDescuento, config)
           .then((response) => {
-
+            if(response.data.code == 500){
+              toast.error('Ya hay un descuento con ese color registrado')
+            }
             console.log(response.data)
             setVisible2(!visible2)
             setvisibleEnca(!visibleEnca)

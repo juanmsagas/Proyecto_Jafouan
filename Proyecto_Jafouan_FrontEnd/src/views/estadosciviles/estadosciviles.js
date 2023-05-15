@@ -191,7 +191,11 @@ const form = event.currentTarget
   if(form.checkValidity() != false){
   axios.put('api/EstadosCiviles/Update', EditarEstado, config)
       .then((response) => {
-          console.log(response.data)
+        if(response.data.code == 500){
+          toast.error('Ya existe un estado civil con ese nombre')
+        }
+        else{
+                    console.log(response.data)
           setVisible2(!visible2)
           setvisibleEnca(!visibleEnca)
           setEditarEstado({
@@ -200,6 +204,8 @@ const form = event.currentTarget
             estc_UserModifica:user_Crea
         })  
         toast.success('Estado civil editado correctamente.');
+        }
+
 
         console.log(response.data)
       })

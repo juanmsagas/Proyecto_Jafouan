@@ -192,7 +192,11 @@ const form = event.currentTarget
   if(form.checkValidity() != false){
   axios.put('api/MetodosPagos/Update', EditarMetodos, config)
       .then((response) => {
-          console.log(response.data)
+        if(response.data.code == 409){
+          toast.error('Ya hay un método de pago con ese nombre')
+        }
+        else{
+                    console.log(response.data)
           setVisible2(!visible2)
           setvisibleEnca(!visibleEnca)
           setEditarMetodos({
@@ -200,7 +204,9 @@ const form = event.currentTarget
             meto_Descripcion: '',
             meto_UserModifica:user_Crea
         })  
-        toast.success('Método de pago editado correctamente.');
+        toast.success('Método de pago editado correctamente.')
+        }
+;
 
         console.log(response.data)
       })

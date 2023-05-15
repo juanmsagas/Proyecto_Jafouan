@@ -209,6 +209,10 @@ if (existeUsuarios) {
           {
             toast.error('El cargo ya existe.');
           }
+          else if(response.data.code == 500){
+            toast.error('Ya hay un cargo con ese nombre.');
+
+          }
           else{
           console.log(response.data)
           setVisible2(!visible2)
