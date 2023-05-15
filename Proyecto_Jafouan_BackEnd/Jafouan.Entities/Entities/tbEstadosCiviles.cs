@@ -22,6 +22,8 @@ namespace Jafouan.Entities.Entities
         public int? estc_UserModifica { get; set; }
         public DateTime? estc_FechaModifica { get; set; }
 
+        public virtual tbUsuarios estc_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios estc_UserModificaNavigation { get; set; }
         public virtual ICollection<tbClientes> tbClientes { get; set; }
         public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
     }

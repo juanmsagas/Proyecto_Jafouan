@@ -1,5 +1,4 @@
 
-USE db-VERA
 GO
 CREATE SCHEMA acce
 GO

@@ -18,6 +18,8 @@ namespace Jafouan.Entities.Entities
         public DateTime? fapr_FechaModificacion { get; set; }
         public bool? fapr_Estado { get; set; }
 
+        public virtual tbUsuarios fapr_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios fapr_UserModificacionNavigation { get; set; }
         public virtual tbFardos fard { get; set; }
         public virtual tbProveedores prov { get; set; }
     }

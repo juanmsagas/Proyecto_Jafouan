@@ -32,6 +32,8 @@ namespace Jafouan.Entities.Entities
         public DateTime? empl_FechaModificacion { get; set; }
 
         public virtual tbCargos carg { get; set; }
+        public virtual tbUsuarios empl_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios empl_UserModificaNavigation { get; set; }
         public virtual tbEstadosCiviles estc { get; set; }
         public virtual tbMunicipios muni { get; set; }
         public virtual tbSucursales sucu { get; set; }

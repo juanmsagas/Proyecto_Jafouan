@@ -8,6 +8,11 @@ namespace Jafouan.Entities.Entities
 {
     public partial class tbDescuentos
     {
+        public tbDescuentos()
+        {
+            tbPrendas = new HashSet<tbPrendas>();
+        }
+
         public int desc_Id { get; set; }
         public string desc_Color { get; set; }
         public string desc_ColorHexa { get; set; }
@@ -17,5 +22,9 @@ namespace Jafouan.Entities.Entities
         public int? desc_UserModificacion { get; set; }
         public DateTime? desc_FechaModificacion { get; set; }
         public bool? desc_Estado { get; set; }
+
+        public virtual tbUsuarios desc_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios desc_UserModificacionNavigation { get; set; }
+        public virtual ICollection<tbPrendas> tbPrendas { get; set; }
     }
 }

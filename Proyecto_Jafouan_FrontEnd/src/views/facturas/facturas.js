@@ -39,6 +39,7 @@ import {
   CAccordionBody,
   CAccordionHeader,
   CAccordionItem,
+  CCardTitle,
 }
   from '@coreui/react'
 import { CardHeader } from 'reactstrap'
@@ -47,10 +48,15 @@ function Facturas() {
   const [Facturas, setFacturas] = useState([])
   const [sortModel, setSortModel] = useState([{ field: 'fact_Id', sort: 'asc' }])
   const [visible, setVisible] = useState(false)
+  const [visible2, setVisible2] = useState(false)
+
 
   const [Metodo, setMetodosDDL] = useState([]);
   const [Clientes, setClientesDDL] = useState([]);
   const [tabla, setTabla] = useState([]);
+
+  const [tablaDetalles, setTablaDetalles] = useState([]);
+
 
   const user_Crea = parseInt(sessionStorage.getItem('user_Id'));
   const empl_Id = parseInt(sessionStorage.getItem('empl_Id'));
@@ -81,6 +87,19 @@ if (existeUsuarios) {
 }
 
 
+  const[detallesInfo, setdetallesInfo] = useState({
+    clie_Nombre:"",
+    empl_Nombre:"",
+    fact_Fecha:"",
+    sucu_Nombre:"",
+    meto_Descripcion:"",
+    empl_crea:"",
+    fact_FechaCreacion:"",
+    fact_UserModificacion:"",
+    empl_Modifica:"",
+    fact_FechaModificacion:""
+  })
+
   const [nuevaFactura, setnuevaFactura] = useState({
     clie_Id: 0,
     empl_Id: empl_Id,
@@ -89,6 +108,66 @@ if (existeUsuarios) {
     fact_UserCrea: user_Crea
   })
 
+
+
+
+  const abrirDetallesInfo = (params, event) => {
+    if (event) {
+      event.preventDefault()
+    }
+    setVisible2(!visible2)
+    setValidated(false)
+    setvisibleEnca(!visibleEnca)
+    console.log(params)
+    const fecha = new Date(params.fact_Fecha);
+    const fechaFormateada = fecha.toISOString().slice(0, 10);
+    const fecha2 = new Date(params.fact_FechaCreacion);
+    const fechaFormateada2 = fecha2.toISOString().slice(0, 10);
+    const fecha3 = new Date(params.fact_FechaModificacion);
+    const fechaFormateada3 = fecha3.toISOString().slice(0, 10);
+
+
+    axios.get(`api/FacturaDetalles/Find?id=${params.fact_Id}`)
+    .then((response) => {
+      console.log(response.data)
+      setTablaDetalles(response.data);
+
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+
+    setdetallesInfo({
+    clie_Nombre:            params.clie_Nombre ,
+    empl_Nombre:            params.empl_Nombre ,
+    fact_Fecha:             fechaFormateada ,
+    sucu_Nombre:            params.sucu_Nombre ,
+    meto_Descripcion:       params.meto_Descripcion ,
+    empl_crea:              params.empl_crea ,
+    fact_FechaCreacion:     fechaFormateada2 ,
+    empl_Modifica:          params.empl_Modifica ,
+    fact_FechaModificacion: fechaFormateada3
+    })
+  }
+
+  
+  const cerrarDetallesInfo = (event) => {
+    event.preventDefault()
+    setVisible2(!visible2)
+    setvisibleEnca(!visibleEnca)
+    setdetallesInfo({
+      clie_Nombre:"",
+      empl_Nombre:"",
+      fact_Fecha:"",
+      sucu_Nombre:"",
+      meto_Descripcion:"",
+      empl_crea:"",
+      fact_FechaCreacion:"",
+      fact_UserModificacion:"",
+      empl_Modifica:"",
+      fact_FechaModificacion:""
+    })
+  }
 
 
   const abrirycerrarInsert = (event) => {
@@ -266,9 +345,11 @@ if (existeUsuarios) {
         <div>
 
 
-          <CButton color="info ms-2" variant="outline">
+          
+          <CButton color="info ms-2" variant="outline" onClick={() => abrirDetallesInfo(params.row)}>
             <VisibilityIcon />
           </CButton>
+
 
           <CButton color="warning ms-2" variant="outline" onClick={(e) => (params.row)}>
             <EditIcon />
@@ -313,6 +394,19 @@ if (existeUsuarios) {
     },
   ]
 
+  const datos_Detalle = [
+    { field: 'fade_Total', headerName: 'Precio', flex: 1 },
+    { field: 'pren_Descripcion', headerName: 'Prenda', flex: 1 },
+    { field: 'pren_Talla', headerName: 'Talla', flex: 1 },
+    {
+      
+      renderCell: (params) => (
+        <div>
+          <img className='img-fluid'  src={params.row.pren_Imagen}></img>        
+        </div>
+      ),
+    },
+  ]
   
   const manejarClicImagen = async (params) => {
     setTabla((prevTabla) => [...prevTabla, params]);
@@ -530,7 +624,6 @@ const eliminarPrenda = (params) => {
 
     {/*Cards con las prendas*/}
     <CCollapse visible={detalles} className='col-12'>
-
                   <div className='col-12'>
                     <CCard className="p-3 h-100 m-4" style={{ maxHeight: '600px', overflowY: 'auto'}}>
                       <div className="row">
@@ -615,6 +708,140 @@ const eliminarPrenda = (params) => {
             </div>
           </CCollapse>
 
+
+          <CCollapse visible={visible2} className='col-12 '>
+
+<CCard className="mt-3">
+  <CCardHeader>
+    <h1 className='h3 text-center'>Detalles</h1>
+  </CCardHeader>
+  <CCardBody>
+    <CForm
+      className="row g-3 needs-validation"
+    >
+
+
+
+      <CCol md={6} className=''>
+
+        <CFormInput
+          type="disabled"
+          value={detallesInfo.clie_Nombre}
+          id="validationCustom01"
+          label="Cliente"
+          disabled
+          required />
+
+      </CCol>
+
+
+
+      <CCol md={6} className=''>
+
+        <CFormInput
+          type="disabled"
+          value={detallesInfo.fact_Fecha}
+          id="validationCustom01"
+          label="Empleado"
+          disabled
+          required />
+
+      </CCol>
+
+
+
+      <CCol md={4} className="">
+        <CFormInput
+          type="disabled"
+          value={detallesInfo.fact_Fecha}
+          id="validationCustom01"
+          label="Fecha de Facturación"
+          disabled
+          required />
+
+      </CCol>
+
+      <CCol md={4} className="">
+        <CFormInput
+          type="disabled"
+          value={detallesInfo.meto_Descripcion}
+          id="validationCustom01"
+          disabled
+          label="Metodo de pago"
+          required />
+
+      </CCol>
+
+
+
+      <CCol md={4} className="">
+        <CFormInput
+          type="disabled"
+          value={detallesInfo.sucu_Nombre}
+          id="validationCustom01"
+          disabled
+          label="Sucursal"
+          required />
+
+      </CCol>
+
+
+    
+
+      <table className='table'>
+        <thead>
+          <tr>
+            <th>Accion</th>
+            <th>Usuario</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Creación</td>
+            <td>{detallesInfo.empl_crea}</td>
+            <td>{detallesInfo.fact_FechaCreacion}</td>
+          </tr>
+          <tr>
+            <td>Modificación</td>
+            <td>{detallesInfo.empl_Modifica}</td>
+            <td>{detallesInfo.fact_FechaModificacion}</td>
+          </tr>
+        </tbody>
+      </table>
+  <CCard className="p-2"  >
+    <CCardHeader>
+      <CCardTitle>Prendas Compradas</CCardTitle>
+    </CCardHeader>
+    <CCol md={12} className="">
+      <div style={{ height: '300px', overflow: 'auto' }}>
+      <DataGrid
+          rows={tablaDetalles.map((row, index) => ({ ...row, id: index }))}
+          columns={datos_Detalle}
+          sortModel={sortModel}
+          onSortModelChange={handleSortModelChange}
+          components={{
+            Toolbar: GridToolbar,
+            Search: SearchIcon,
+          }}
+          localeText={esES.components.MuiDataGrid.defaultProps.localeText}
+          getRowId={(row) => row.id}
+          getRowHeight={(params) => 100}
+        />
+</div>
+</CCol>
+</CCard>
+
+
+      <CCol xs={12} className='offset-5'>
+        <CButton color="danger text-light" className='ms-2' href="#" onClick={cerrarDetallesInfo}>
+          Cerrar
+        </CButton>
+      </CCol>
+    </CForm>
+  </CCardBody>
+</CCard>
+</CCollapse>
           <CCollapse visible={!visibleEnca}>
             <CCard className="mt-3 p-1">
 

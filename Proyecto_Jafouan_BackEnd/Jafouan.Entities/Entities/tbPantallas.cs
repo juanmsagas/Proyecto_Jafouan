@@ -23,6 +23,8 @@ namespace Jafouan.Entities.Entities
         public int? pant_UserModifica { get; set; }
         public DateTime? pant_FechaModifica { get; set; }
 
+        public virtual tbUsuarios pant_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios pant_UserModificaNavigation { get; set; }
         public virtual ICollection<tbPantallasPorRol> tbPantallasPorRol { get; set; }
     }
 }

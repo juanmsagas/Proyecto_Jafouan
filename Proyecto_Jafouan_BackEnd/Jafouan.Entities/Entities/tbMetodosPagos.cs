@@ -21,6 +21,8 @@ namespace Jafouan.Entities.Entities
         public DateTime? meto_FechaModificacion { get; set; }
         public bool? meto_Estado { get; set; }
 
+        public virtual tbUsuarios meto_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios meto_UserModificacionNavigation { get; set; }
         public virtual ICollection<tbFacturas> tbFacturas { get; set; }
     }
 }

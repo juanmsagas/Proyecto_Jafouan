@@ -21,6 +21,8 @@ namespace Jafouan.Entities.Entities
         public DateTime? cate_FechaModificacion { get; set; }
         public bool? cate_Estado { get; set; }
 
+        public virtual tbUsuarios cate_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios cate_UserModificaNavigation { get; set; }
         public virtual ICollection<tbPrendas> tbPrendas { get; set; }
     }
 }

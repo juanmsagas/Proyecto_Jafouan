@@ -21,6 +21,8 @@ namespace Jafouan.Entities.Entities
         public int? dept_UserModifica { get; set; }
         public DateTime? dept_FechaModifica { get; set; }
 
+        public virtual tbUsuarios dept_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios dept_UserModificaNavigation { get; set; }
         public virtual ICollection<tbMunicipios> tbMunicipios { get; set; }
     }
 }

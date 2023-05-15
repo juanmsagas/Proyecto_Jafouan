@@ -95,11 +95,11 @@ namespace Jafouan.BusinessLogic.Service
         }
 
         //FIND
-        public VW_FacturaDetalles FindFacturaDetalles(int id)
+        public IEnumerable<VW_FacturaDetalles> FindFacturaDetalles(int id)
         {
             var result = new ServiceResult();
 
-            var list = _facturaDetallesRepository.Find(id);
+            var list = _facturaDetallesRepository.FindDetalles(id);
             return list;
         }
 

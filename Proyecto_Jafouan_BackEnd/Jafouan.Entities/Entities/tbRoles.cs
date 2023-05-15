@@ -11,6 +11,7 @@ namespace Jafouan.Entities.Entities
         public tbRoles()
         {
             tbPantallasPorRol = new HashSet<tbPantallasPorRol>();
+            tbUsuarios = new HashSet<tbUsuarios>();
         }
 
         public int role_Id { get; set; }
@@ -21,6 +22,9 @@ namespace Jafouan.Entities.Entities
         public int? role_UserModifica { get; set; }
         public DateTime? role_FechaModifica { get; set; }
 
+        public virtual tbUsuarios role_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios role_UserModificaNavigation { get; set; }
         public virtual ICollection<tbPantallasPorRol> tbPantallasPorRol { get; set; }
+        public virtual ICollection<tbUsuarios> tbUsuarios { get; set; }
     }
 }

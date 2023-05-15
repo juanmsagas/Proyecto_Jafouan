@@ -34,6 +34,17 @@ namespace Jafouan.DataAccess.Repository
             return result;
         }
 
+        public IEnumerable<VW_FacturaDetalles> FindDetalles(int? id)
+        {
+            using var db = new SqlConnection(Jafouan_Context.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@fact_Id", id, DbType.Int32, ParameterDirection.Input);
+
+
+            var result = db.Query<VW_FacturaDetalles>(ScriptsDataBase.FIND_FACTURADETALLES, parametros, commandType: System.Data.CommandType.StoredProcedure);
+            return result;
+        }
+
         public RequestStatus Insert(tbFacturaDetalles item)
         {
             using var db = new SqlConnection(Jafouan_Context.ConnectionString);

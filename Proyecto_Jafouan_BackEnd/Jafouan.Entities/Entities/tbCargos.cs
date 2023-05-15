@@ -21,6 +21,8 @@ namespace Jafouan.Entities.Entities
         public DateTime? carg_FechaModificacion { get; set; }
         public bool? carg_Estado { get; set; }
 
+        public virtual tbUsuarios carg_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios carg_UserModificaNavigation { get; set; }
         public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
     }
 }

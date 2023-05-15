@@ -29,6 +29,8 @@ namespace Jafouan.Entities.Entities
         public int? clie_UserModifica { get; set; }
         public DateTime? clie_FechaModificacion { get; set; }
 
+        public virtual tbUsuarios clie_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios clie_UserModificaNavigation { get; set; }
         public virtual tbEstadosCiviles estc { get; set; }
         public virtual tbMunicipios muni { get; set; }
         public virtual ICollection<tbFacturas> tbFacturas { get; set; }
