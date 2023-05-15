@@ -2410,7 +2410,7 @@ GO
 CREATE OR ALTER PROC vera.UDP_tbCategorias_Grafica
 AS BEGIN
 
-  SELECT TOP 5 cate_Descripcion, COUNT(pren_Id) 
+  SELECT TOP 5 cate_Descripcion, COUNT(pren_Id) AS cate_Id
     FROM vera.tbPrendas T1
     INNER JOIN vera.tbCategorias T2 ON T2.cate_Id = T1.cate_Id
     GROUP BY cate_Descripcion

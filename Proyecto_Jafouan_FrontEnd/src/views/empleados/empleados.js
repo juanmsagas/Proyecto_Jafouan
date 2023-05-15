@@ -61,6 +61,23 @@ function Empleados() {
     }
     setValidated(true)
   }
+
+  
+if (user_Crea==null ||  isNaN(user_Crea)) {
+  window.location.href = '/';
+}
+
+const arregloJSONGET = sessionStorage.getItem("miArreglo");
+const miArreglo = JSON.parse(arregloJSONGET);
+
+const existeUsuarios = miArreglo.some(objeto => objeto.name === "Empleados");
+
+if (existeUsuarios) {
+  
+} else {
+  window.location.href = '/#/Home';
+}
+
   const [nuevoEmpleado, setnuevoEmpleado] = useState({
     empl_Nombres: '',
     empl_Apellidos: '',

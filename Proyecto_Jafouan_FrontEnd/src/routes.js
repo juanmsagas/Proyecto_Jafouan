@@ -18,7 +18,7 @@ const Proveedores = React.lazy(() => import('./views/proveedores/proveedores'))
 const Sucursales = React.lazy(() => import('./views/sucursales/sucursales'))
 const Clientes = React.lazy(() => import('./views/clientes/clientes'))
 const Facturas = React.lazy(() => import('./views/facturas/facturas'))
-const Reporte = React.lazy(() => import('./views/Reporte/reporte'))
+const Reporte = React.lazy(() => import('./views/reporte/reporte'))
 const Home = React.lazy(() => import('./views/Home/home'))
 
 
