@@ -41,6 +41,8 @@ function Clientes() {
   const [sortModel, setSortModel] = useState([{ field: 'clie_Id', sort: 'asc' }])
   const [visible, setVisible] = useState(false)
   const [visible2, setVisible2] = useState(false)
+  const [visible3, setVisible3] = useState(false)
+
   const [Departamentos, setDepartamentosDDL] = useState([]);  
   const [Municipios, setMunicipiosDDL] = useState([]);  
   const [EstCivil, setEstCivilDDL] = useState([]);
@@ -111,6 +113,8 @@ const [EditarCliente, setEditarCliente] = useState({
     clie_UserModifica: user_Crea,
 })
 
+
+
 const abrirPrenda = (params,event) => {
   if (event) {
     event.preventDefault()
@@ -139,6 +143,65 @@ const abrirPrenda = (params,event) => {
     clie_UserModifica:user_Crea,    
 })
 }
+
+const abrirDetalles = (params,event) => {
+  if (event) {
+    event.preventDefault()
+  }
+  setVisible3(!visible3)
+  setvisibleEnca(!visibleEnca)
+  console.log(params)
+  const fecha = new Date(params.clie_FechaNacimiento);
+  const fechaFormateada = fecha.toISOString().slice(0, 10);
+  setValidated(false)
+  console.log(params.empl_crea
+    )
+
+  setEditarCliente({
+    clie_Id:params.clie_Id,
+    clie_Nombres: params.clie_Nombres,
+    clie_ApellIdos: params.clie_ApellIdos,
+    carg_Id: params.carg_Id,
+    clie_FechaNacimiento: fechaFormateada,
+    muni_Descripcion: params.muni_Descripcion,
+    dept_Descripcion: params.dept_Descripcion,
+    estc_Descripcion: params.estc_Descripcion,
+    clie_Identidad:params.clie_Identidad,
+    empl_crea: params.empl_crea    ,
+    empl_Modifica: params.empl_Modifica,
+    clie_FechaCreacion: params.clie_FechaCreacion,
+    clie_FechaModificacion: params.clie_FechaModificacion,
+    clieSexo: params.clieSexo,
+    estc_Id: params.estc_Id,
+    clie_Telefeno: params.clie_Telefeno,
+    dept_Id: params.dept_Id,
+    muni_Id: params.muni_Id,
+    sucu_Id: params.sucu_Id,
+    clie_Direccion: params.clie_Direccion,
+    clie_UserModifica:user_Crea,    
+})
+}
+
+const cerrarDetalles = (event) => {
+  event.preventDefault()
+  setVisible3(!visible3)
+  setvisibleEnca(!visibleEnca)
+  setEditarCliente({
+    clie_Id:0,
+    clie_Nombres: '',
+    clie_Apellidos: '',
+    carg_Id: 0,
+    clie_FechaNacimiento: '',
+    clie_Sexo: 0,
+    estc_Id: 0,
+    clie_Telefeno: '',
+    muni_Id: '',
+    sucu_Id: '',
+    clie_Direccion: '',
+    clie_UserModifica:user_Crea,    
+})
+}
+
 
 
 const cerrarEditar = (event) => {
@@ -356,7 +419,7 @@ const handleSubmitD = (event) => {
         <div>
       
         
-            <CButton  color="info ms-2" variant="outline">
+            <CButton  color="info ms-2" variant="outline" onClick={() => abrirDetalles(params.row)}>
             <VisibilityIcon />
           </CButton>
 
@@ -848,6 +911,200 @@ required/>
       </CCardBody>
     </CCard>
   </CCollapse>
+
+
+
+
+
+   {/*Formulario Detalles*/}
+   <CCollapse visible={visible3} className='col-12 '>
+    
+    <CCard className="mt-3">
+      <CCardHeader>
+        <h1 className='h3 text-center'>Detalles</h1>
+      </CCardHeader>
+      <CCardBody>
+    <CForm
+  className="row g-3 needs-validation"
+>
+
+<CCol md={0} className=''>
+<CFormInput
+type="hidden"
+value={EditarCliente.clie_Id}
+onChange={(e) => setEditarCliente({ ...EditarCliente, clie_Id: e.target.value })}
+required/>
+
+</CCol>
+
+
+<CCol md={6} className=''>
+
+<CFormInput
+type="disabled"
+value={EditarCliente.clie_Nombres}
+onChange={(e) => setEditarCliente({ ...EditarCliente, clie_Nombres: e.target.value })}
+id="validationCustom01"
+label="Nombres"
+disabled
+required/>
+
+</CCol>
+
+
+
+<CCol md={6} className=''>
+
+<CFormInput
+type="disabled"
+value={EditarCliente.clie_ApellIdos}
+onChange={(e) => setEditarCliente({ ...EditarCliente, clie_Apellidos: e.target.value })}
+id="validationCustom01"
+label="Apellidos"
+disabled
+required/>
+
+</CCol>
+
+
+
+<CCol md={4} className="">
+<CFormInput
+type="disabled"
+value={EditarCliente.clie_Identidad}
+onChange={(e) => setEditarCliente({ ...EditarCliente, clie_Identidad: e.target.value })}
+id="validationCustom01"
+label="Identidad"
+disabled
+required/>
+
+</CCol>
+
+<CCol md={4} className="">
+<CFormInput
+type="disabled"
+value={EditarCliente.estc_Descripcion}
+onChange={(e) => setEditarCliente({ ...EditarCliente, estc_Descripcion: e.target.value })}
+id="validationCustom01"
+disabled
+label="Estado Civil"
+required/>
+
+</CCol>
+
+<CCol md={4} className="">
+<CFormInput
+type="disabled"
+value={EditarCliente.clieSexo}
+onChange={(e) => setEditarCliente({ ...EditarCliente, clieSexo: e.target.value })}
+id="validationCustom01"
+disabled
+label="Sexo"
+required/>
+
+</CCol>
+
+
+<CCol md={6} className="">
+<CFormInput
+type="disabled"
+value={EditarCliente.dept_Descripcion}
+onChange={(e) => setEditarCliente({ ...EditarCliente, dept_Descripcion: e.target.value })}
+id="validationCustom01"
+disabled
+label="Departamento"
+required/>
+
+</CCol>
+
+
+
+<CCol md={6} className="">
+<CFormInput
+type="disabled"
+value={EditarCliente.muni_Descripcion}
+onChange={(e) => setEditarCliente({ ...EditarCliente, muni_Descripcion: e.target.value })}
+id="validationCustom01"
+label="Municipio"
+disabled
+required/>
+
+</CCol>
+
+<CCol md={6} className="">
+<CFormInput
+type="disabled"
+value={EditarCliente.clie_FechaNacimiento}
+onChange={(e) => setEditarCliente({ ...EditarCliente, clie_FechaNacimiento: e.target.value })}
+id="validationCustom01"
+label="Fecha de Nacimiento"
+disabled
+required/>
+
+</CCol>
+
+<CCol md={6} className=''>
+
+<CFormInput
+type="disabled"
+value={EditarCliente.clie_Telefeno}
+onChange={(e) => setEditarCliente({ ...EditarCliente, clie_Telefeno: e.target.value })}
+id="validationCustom01"
+label="Telefono"
+disabled
+required/>
+
+</CCol>
+
+<CCol md={12} className=''>
+
+<CFormInput
+type="disabled"
+value={EditarCliente.clie_Direccion}
+onChange={(e) => setEditarCliente({ ...EditarCliente, clie_Direccion: e.target.value })}
+id="validationCustom01"
+label="Dirección"
+disabled
+required/>
+
+</CCol>
+
+<table className='table'>
+                          <thead>
+                            <tr>
+                              <th>Accion</th>
+                              <th>Usuario</th>
+                              <th>Fecha</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Creación</td>
+                              <td>{EditarCliente.empl_crea}</td>
+                              <td>{EditarCliente.clie_FechaCreacion}</td>
+                            </tr>
+                            <tr>
+                              <td>Modificación</td>
+                              <td>{EditarCliente.empl_Modifica}</td>
+                              <td>{EditarCliente.clie_FechaModificacion}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+
+
+
+  <CCol xs={12} className='offset-5'>
+
+    <CButton color="danger text-light" className='ms-2' href="#"  onClick={cerrarDetalles}>
+      Cancelar
+    </CButton>
+  </CCol>
+</CForm>
+      </CCardBody>
+    </CCard>
+  </CCollapse>
+
 
 
       <CCollapse visible={!visibleEnca}>

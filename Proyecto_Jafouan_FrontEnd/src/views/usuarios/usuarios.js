@@ -36,6 +36,7 @@ function Usuarios() {
   const [sortModel, setSortModel] = useState([{ field: 'user_Id', sort: 'asc' }])
   const [visible, setVisible] = useState(false)
   const [visible2, setVisible2] = useState(false)
+  const [visible3, setVisible3] = useState(false)
   const [Modal, setModal] = useState(false)
   const [visibleEnca, setvisibleEnca   ] = useState(false)
   const [Empleados, setEmpleadosDDL] = useState([]);  
@@ -121,12 +122,53 @@ const abrireditar = (params,event) => {
   setVisible2(!visible2)
   setvisibleEnca(!visibleEnca)
   setValidated(false)
+  console.log(params);
+
   setEditarusuario({
     user_Id: params.user_Id,
     user_NombreUsuario:  params.user_NombreUsuario,
     empl_Id:params.empl_Id,
     role_Id:params.role_Id,
     user_Admin:params.user_Admin,
+    user_UserModifica:1
+}
+)}
+
+
+const abrirDetalles = (params,event) => {
+  if (event) {
+    event.preventDefault()
+  }
+  setVisible3(!visible3)
+  setvisibleEnca(!visibleEnca)
+  setValidated(false)
+  setEditarusuario({
+    user_Id: params.user_Id,
+    user_NombreUsuario:  params.user_NombreUsuario,
+    empl_Id:params.empl_Id,
+    nombreEmpleado: params.nombreEmpleado,
+    role_Descripcion: params.role_Descripcion,
+    empl_Crea: params.empl_Crea,
+    empl_Modifica: params.empl_Modifica,
+    user_FechaCrea: params.user_FechaCrea,
+    user_FechaModifica: params.user_FechaModifica,
+    EsAdmin: params.EsAdmin,
+    role_Id:params.role_Id,
+    user_Admin:params.user_Admin,
+    user_UserModifica:1
+}
+)}
+
+const cerrarDetalles = (event) => {
+  event.preventDefault()
+  setVisible3(!visible3)
+  setvisibleEnca(!visibleEnca)
+  setEditarusuario({
+    user_Id: 0,
+    user_NombreUsuario:  '',
+    empl_Id:0,
+    role_Id:0,
+    user_Admin:false,
     user_UserModifica:1
 }
 )}
@@ -305,7 +347,7 @@ const handleSubmitD = (event) => {
         <div>
       
         
-            <CButton  color="info ms-2" variant="outline">
+            <CButton  color="info ms-2" variant="outline" onClick={() => abrirDetalles(params.row)}>
             <VisibilityIcon />
           </CButton>
 
@@ -572,6 +614,126 @@ const handleSubmitD = (event) => {
       </CCardBody>
     </CCard>
   </CCollapse>
+
+  
+                  {/*Formulario Detalles*/}
+                  <CCollapse visible={visible3} className='col-12 '>
+
+                    <CCard className="mt-3">
+                      <CCardHeader>
+                        <h1 className='h3 text-center'>Detalles</h1>
+                      </CCardHeader>
+                      <CCardBody>
+                        <CForm
+                          className="row g-3 needs-validation"
+                        >
+
+                          <CCol md={0} className=''>
+                            <CFormInput
+                              type="hidden"
+                              value={Editarusuario.user_Id}
+                              onChange={(e) => setEditarusuario({ ...Editarusuario, user_Id: e.target.value })}
+                              required />
+
+                          </CCol>
+
+
+                          <CCol md={6} className=''>
+
+                            <CFormInput
+                              type="disabled"
+                              value={Editarusuario.user_NombreUsuario}
+                              onChange={(e) => setEditarusuario({ ...Editarusuario, user_NombreUsuario: e.target.value })}
+                              id="validationCustom01"
+                              label="Usuario"
+                              disabled
+                              required />
+
+                          </CCol>
+
+
+
+                          <CCol md={6} className=''>
+
+                            <CFormInput
+                              type="disabled"
+                              value={Editarusuario.nombreEmpleado}
+                              onChange={(e) => setEditarusuario({ ...Editarusuario, nombreEmpleado: e.target.value })}
+                              id="validationCustom01"
+                              label="Empleado"
+                              disabled
+                              required />
+
+                          </CCol>
+
+
+
+                          <CCol md={6} className="">
+                            <CFormInput
+                              type="disabled"
+                              value={Editarusuario.role_Descripcion}
+                              onChange={(e) => setEditarusuario({ ...Editarusuario, role_Descripcion: e.target.value })}
+                              id="validationCustom01"
+                              label="Rol"
+                              disabled
+                              required />
+
+                          </CCol>
+
+                          <CCol md={6} className="">
+                            <CFormInput
+                              type="disabled"
+                              value={Editarusuario.EsAdmin}
+                              onChange={(e) => setEditarusuario({ ...Editarusuario, EsAdmin: e.target.value })}
+                              id="validationCustom01"
+                              disabled
+                              label="¿Es Admin?"
+                              required />
+
+                          </CCol>
+
+
+                  
+                 
+
+                          <table className='table'>
+                            <thead>
+                              <tr>
+                                <th>Accion</th>
+                                <th>Usuario</th>
+                                <th>Fecha</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Creación</td>
+                                <td>{Editarusuario.empl_Crea}</td>
+                                <td>{Editarusuario.user_FechaCrea}</td>
+                              </tr>
+                              <tr>
+                                <td>Modificación</td>
+                                <td>{Editarusuario.empl_Modifica}</td>
+                                <td>{Editarusuario.user_FechaModifica}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+
+
+
+
+                          <CCol xs={12} className='offset-5'>
+
+                            <CButton color="danger text-light" className='ms-2' href="#" onClick={cerrarDetalles}>
+                              Cancelar
+                            </CButton>
+                          </CCol>
+                        </CForm>
+                      </CCardBody>
+                    </CCard>
+                  </CCollapse>
+
+
+
 
 
       <CCollapse visible={!visibleEnca}>

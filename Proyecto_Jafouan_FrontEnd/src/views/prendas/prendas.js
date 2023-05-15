@@ -40,6 +40,7 @@ function Prendas() {
   const [visible, setVisible] = useState(false)
   const [Modal, setModal] = useState(false)
   const [visible2, setVisible2] = useState(false)
+  const [visible3, setVisible3] = useState(false)
   const [descuentos, setDescuentoDDL] = useState([]);  
   const [marcas, setMarcasDDL] = useState([]);
   const [fardos, setFardosDDL] = useState([]);
@@ -101,7 +102,7 @@ const [editarPrenda, seteditarPrenda] = useState({
   cate_Id: '',
   fard_Id: '',
   pren_Imagen: '',
-  pren_UserModifica: user_Crea
+  pren_UserModificacion: user_Crea
 })
 
 const abrirPrenda = (params,event) => {
@@ -122,7 +123,57 @@ const abrirPrenda = (params,event) => {
     cate_Id: params.cate_Id,
     fard_Id: params.fard_Id,
     pren_Imagen: params.pren_Imagen,
-    pren_UserModifica: user_Crea
+    pren_UserModificacion: user_Crea
+})
+}
+
+const abrirDetalles = (params,event) => {
+  if (event) {
+    event.preventDefault()
+  }
+  setVisible3(!visible3)
+  setValidated(false)
+  setvisibleEnca(!visibleEnca)
+  console.log(params)
+  seteditarPrenda({
+    pren_Id: params.pren_Id,
+    pren_Descripcion: params.pren_Descripcion,
+    pren_Talla: params.pren_Talla,
+    desc_Id: params.desc_Id,
+    pren_Precio: params.pren_Precio,
+    cate_Descripcion: params.cate_Descripcion,
+    marc_Descripcion: params.marc_Descripcion,
+    fard_Descripcion: params.fard_Descripcion,
+    desc_Color: params.desc_Color,
+    desc_Descuento: params.desc_Descuento,
+    empl_crea: params.empl_crea,
+    empl_Modifica: params.empl_Modifica,
+    pren_FechaModificacion: params.pren_FechaModificacion,
+    pren_FechaCreacion: params.pren_FechaCreacion,
+    marc_Id: params.marc_Id,
+    disponibilidad: params.disponibilidad,
+    cate_Id: params.cate_Id,
+    fard_Id: params.fard_Id,
+    pren_Imagen: params.pren_Imagen,
+    pren_UserModificacion: user_Crea
+})
+}
+
+const cerrarDetalles = (event) => {
+  event.preventDefault()
+  setVisible3(!visible3)
+  setvisibleEnca(!visibleEnca)
+  seteditarPrenda({
+    pren_Id: 0,
+    pren_Descripcion: '',
+    pren_Talla: '',
+    desc_Id: '',
+    pren_Precio: 0,
+    marc_Id: '',
+    cate_Id: '',
+    fard_Id: '',
+    pren_Imagen: '',
+    pren_UserModificacion: user_Crea
 })
 }
 
@@ -140,7 +191,7 @@ const cerrarEditar = (event) => {
     cate_Id: '',
     fard_Id: '',
     pren_Imagen: '',
-    pren_UserModifica: user_Crea
+    pren_UserModificacion: user_Crea
 })
 }
 
@@ -250,7 +301,7 @@ const form = event.currentTarget
             cate_Id: '',
             fard_Id: '',
             pren_Imagen: '',
-            pren_UserModifica: user_Crea
+            pren_UserModificacion: user_Crea
         })
         toast.success('Prenda editada correctamente.');
 
@@ -322,7 +373,7 @@ const form = event.currentTarget
         <div>
       
         
-            <CButton  color="info ms-2" variant="outline">
+            <CButton  color="info ms-2" variant="outline"  onClick={() => abrirDetalles(params.row)}>
             <VisibilityIcon />
           </CButton>
 
@@ -778,6 +829,186 @@ const form = event.currentTarget
       </CCardBody>
     </CCard>
   </CCollapse>
+
+  
+                  {/*Formulario Detalles*/}
+                  <CCollapse visible={visible3} className='col-12 '>
+
+                    <CCard className="mt-3">
+                      <CCardHeader>
+                        <h1 className='h3 text-center'>Detalles</h1>
+                      </CCardHeader>
+                      <CCardBody>
+                        <CForm
+                          className="row g-3 needs-validation"
+                        >
+
+                          <CCol md={0} className=''>
+                            <CFormInput
+                              type="hidden"
+                              value={editarPrenda.pren_Id}
+                              onChange={(e) => seteditarPrenda({ ...editarPrenda, pren_Id: e.target.value })}
+                              required />
+
+                          </CCol>
+
+
+                          <CCol md={6} className=''>
+
+                            <CFormInput
+                              type="disabled"
+                              value={editarPrenda.pren_Descripcion}
+                              onChange={(e) => seteditarPrenda({ ...editarPrenda, pren_Descripcion: e.target.value })}
+                              id="validationCustom01"
+                              label="Descripcion"
+                              disabled
+                              required />
+
+                          </CCol>
+
+
+
+                          <CCol md={6} className=''>
+
+                            <CFormInput
+                              type="disabled"
+                              value={editarPrenda.pren_Talla}
+                              onChange={(e) => seteditarPrenda({ ...editarPrenda, pren_Talla: e.target.value })}
+                              id="validationCustom01"
+                              label="Talla"
+                              disabled
+                              required />
+
+                          </CCol>
+
+
+
+                          <CCol md={4} className="">
+                            <CFormInput
+                              type="disabled"
+                              value={editarPrenda.desc_Color}
+                              onChange={(e) => seteditarPrenda({ ...editarPrenda, desc_Color: e.target.value })}
+                              id="validationCustom01"
+                              label="Color de descuento"
+                              disabled
+                              required />
+
+                          </CCol>
+
+                          <CCol md={4} className="">
+                            <CFormInput
+                              type="disabled"
+                              value={editarPrenda.desc_Descuento}
+                              onChange={(e) => seteditarPrenda({ ...editarPrenda, desc_Descuento: e.target.value })}
+                              id="validationCustom01"
+                              disabled
+                              label="Descuento"
+                              required />
+
+                          </CCol>
+
+                          <CCol md={4} className="">
+                            <CFormInput
+                              type="disabled"
+                              value={editarPrenda.pren_Precio}
+                              onChange={(e) => seteditarPrenda({ ...editarPrenda, pren_Precio: e.target.value })}
+                              id="validationCustom01"
+                              disabled
+                              label="Precio"
+                              required />
+
+                          </CCol>
+
+                          <CCol md={6} className="">
+                            <CFormInput
+                              type="disabled"
+                              value={editarPrenda.marc_Descripcion}
+                              onChange={(e) => seteditarPrenda({ ...editarPrenda, marc_Descripcion: e.target.value })}
+                              id="validationCustom01"
+                              disabled
+                              label="Marca"
+                              required />
+
+                          </CCol>
+
+                          <CCol md={6} className="">
+                            <CFormInput
+                              type="disabled"
+                              value={editarPrenda.cate_Descripcion}
+                              onChange={(e) => seteditarPrenda({ ...editarPrenda, cate_Descripcion: e.target.value })}
+                              id="validationCustom01"
+                              disabled
+                              label="Categoría"
+                              required />
+
+                          </CCol>
+
+
+                          <CCol md={6} className="">
+                            <CFormInput
+                              type="disabled"
+                              value={editarPrenda.fard_Descripcion}
+                              onChange={(e) => seteditarPrenda({ ...editarPrenda, fard_Descripcion: e.target.value })}
+                              id="validationCustom01"
+                              disabled
+                              label="Fardo"
+                              required />
+
+                          </CCol>
+
+                          <CCol md={6} className="">
+                            <CFormInput
+                              type="disabled"
+                              value={editarPrenda.disponibilidad}
+                              onChange={(e) => seteditarPrenda({ ...editarPrenda, disponibilidad: e.target.value })}
+                              id="validationCustom01"
+                              disabled
+                              label="Disponibilidad"
+                              required />
+
+                          </CCol>
+
+
+               
+
+                          <table className='table'>
+                            <thead>
+                              <tr>
+                                <th>Accion</th>
+                                <th>Usuario</th>
+                                <th>Fecha</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Creación</td>
+                                <td>{editarPrenda.empl_crea}</td>
+                                <td>{editarPrenda.pren_FechaCreacion}</td>
+                              </tr>
+                              <tr>
+                                <td>Modificación</td>
+                                <td>{editarPrenda.empl_Modifica}</td>
+                                <td>{editarPrenda.pren_FechaModificacion}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+
+
+
+
+                          <CCol xs={12} className='offset-5'>
+
+                            <CButton color="danger text-light" className='ms-2' href="#" onClick={cerrarDetalles}>
+                              Cancelar
+                            </CButton>
+                          </CCol>
+                        </CForm>
+                      </CCardBody>
+                    </CCard>
+                  </CCollapse>
+
+
+
 
 
       <CCollapse visible={!visibleEnca}>
