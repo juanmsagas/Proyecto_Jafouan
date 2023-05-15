@@ -1,0 +1,12 @@
+C:\Users\isaac\OneDrive\Escritorio\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\bin\Release\net5.0\Jafouan.Entities.deps.json
+C:\Users\isaac\OneDrive\Escritorio\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\bin\Release\net5.0\Jafouan.Entities.dll
+C:\Users\isaac\OneDrive\Escritorio\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\bin\Release\net5.0\ref\Jafouan.Entities.dll
+C:\Users\isaac\OneDrive\Escritorio\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\bin\Release\net5.0\Jafouan.Entities.pdb
+C:\Users\isaac\OneDrive\Escritorio\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\obj\Release\net5.0\Jafouan.Entities.csproj.AssemblyReference.cache
+C:\Users\isaac\OneDrive\Escritorio\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\obj\Release\net5.0\Jafouan.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\isaac\OneDrive\Escritorio\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\obj\Release\net5.0\Jafouan.Entities.AssemblyInfoInputs.cache
+C:\Users\isaac\OneDrive\Escritorio\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\obj\Release\net5.0\Jafouan.Entities.AssemblyInfo.cs
+C:\Users\isaac\OneDrive\Escritorio\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\obj\Release\net5.0\Jafouan.Entities.csproj.CoreCompileInputs.cache
+C:\Users\isaac\OneDrive\Escritorio\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\obj\Release\net5.0\Jafouan.Entities.dll
+C:\Users\isaac\OneDrive\Escritorio\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\obj\Release\net5.0\ref\Jafouan.Entities.dll
+C:\Users\isaac\OneDrive\Escritorio\Proyecto_Jafouan\Proyecto_Jafouan_BackEnd\Jafouan.Entities\obj\Release\net5.0\Jafouan.Entities.pdb
