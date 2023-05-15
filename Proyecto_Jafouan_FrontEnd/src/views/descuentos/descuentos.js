@@ -268,7 +268,8 @@ if (existeUsuarios) {
             if(response.data.code == 500){
               toast.error('Ya hay un descuento con ese color registrado')
             }
-            console.log(response.data)
+            else{
+                          console.log(response.data)
             setVisible2(!visible2)
             setvisibleEnca(!visibleEnca)
             setEditarDescuento({
@@ -280,7 +281,9 @@ if (existeUsuarios) {
             }
             )
 
-            toast.success('Descuento editado correctamente.');
+            toast.success('Descuento editado correctamente.')
+            }
+;
 
             console.log(response.data)
           })

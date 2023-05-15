@@ -57,21 +57,21 @@ function Roles() {
 
   const [array, setarray] = useState(false);
   const [abrirPants, setabrirPants] = useState(false);
-  
-if (user_Crea==null ||  isNaN(user_Crea)) {
-  window.location.href = '/';
-}
 
-const arregloJSONGET = sessionStorage.getItem("miArreglo");
-const miArreglo = JSON.parse(arregloJSONGET);
+  if (user_Crea == null || isNaN(user_Crea)) {
+    window.location.href = '/';
+  }
 
-const existeUsuarios = miArreglo.some(objeto => objeto.name === "Roles");
+  const arregloJSONGET = sessionStorage.getItem("miArreglo");
+  const miArreglo = JSON.parse(arregloJSONGET);
 
-if (existeUsuarios) {
-  
-} else {
-  window.location.href = '/#/Home';
-}
+  const existeUsuarios = miArreglo.some(objeto => objeto.name === "Roles");
+
+  if (existeUsuarios) {
+
+  } else {
+    window.location.href = '/#/Home';
+  }
 
   const [Role_Id_Pant, set_Role_Id_Pant] = useState({
     role_Id: 0,
@@ -126,7 +126,7 @@ if (existeUsuarios) {
     });
   };
 
-  const cerrarPantallas=(event)=>{
+  const cerrarPantallas = (event) => {
     event.preventDefault();
     setvisibleEnca(!visibleEnca);
     setabrirPants(!abrirPants);
@@ -187,21 +187,23 @@ if (existeUsuarios) {
       axios
         .post("api/Roles/Insert", nuevoRol, config)
         .then((response) => {
-          console.log(response.data);
 
-          set_Role_Id_Pant({
-            role_Id: parseInt(response.data[1].codeStatus) ,
-            role_Descripcion: response.data[1].messageStatus,
-          });
-          sessionStorage.setItem("role_Id", response.data[1].codeStatus);
-          if (response.data[0].codeStatus == 200) {
-            setinsertado(!insertado);
-            setNuevoRol({
-              role_Descripcion: "",
-              role_UserCrea: user_Crea
+
+            set_Role_Id_Pant({
+              role_Id: parseInt(response.data[1].codeStatus),
+              role_Descripcion: response.data[1].messageStatus,
             });
-            setVisible(!visible);
-          }
+            sessionStorage.setItem("role_Id", response.data[1].codeStatus);
+            if (response.data[0].codeStatus == 200) {
+              setinsertado(!insertado);
+              setNuevoRol({
+                role_Descripcion: "",
+                role_UserCrea: user_Crea
+              });
+              setVisible(!visible);
+            }
+          
+
         })
         .catch((error) => {
           console.log(error);
@@ -215,7 +217,7 @@ if (existeUsuarios) {
   const handleOptionChange = (selected) => {
     setSelectedOptions(selected);
   };
-  {/*Edit Pantallas*/}
+  {/*Edit Pantallas*/ }
   const handleOptionChangeEdit = (selected) => {
     setSelectedDeOptions(selected);
   };
@@ -238,7 +240,7 @@ if (existeUsuarios) {
     console.log(set_Role_Id_Pant_Envio)
   }, [selectedOptions]);
 
-  {/*Edit Pantallas*/}
+  {/*Edit Pantallas*/ }
   useEffect(() => {
     const rolePantArrayEdit = [];
 
@@ -247,7 +249,7 @@ if (existeUsuarios) {
       const rolePantObj = {
         role_Id: parseInt(role_Id),
         pant_Id: option.value,
-        pantrol_UserCrea: parseInt(user_Crea) 
+        pantrol_UserCrea: parseInt(user_Crea)
       };
 
       rolePantArrayEdit.push(rolePantObj);
@@ -265,9 +267,9 @@ if (existeUsuarios) {
       setarray(false);
     }
   }, [Role_Id_PantEnvio]);
-  
-  
-  {/*Edit Pantallas*/}
+
+
+  {/*Edit Pantallas*/ }
   useEffect(() => {
     console.log(Role_Id_PantEnvio)
     if (Role_Id_PantEnvio.length > 0) {
@@ -289,7 +291,7 @@ if (existeUsuarios) {
     Role_Id_PantEnvio.forEach((rolePant, index) => {
       const postData = {
         ...rolePant,
-        index: index + 1, 
+        index: index + 1,
       };
 
       axios
@@ -319,7 +321,7 @@ if (existeUsuarios) {
     Role_Id_PantEnvio.forEach((rolePant, index) => {
       const postData = {
         ...rolePant,
-        index: index + 1, 
+        index: index + 1,
       };
       console.log(postData)
       axios
@@ -336,8 +338,8 @@ if (existeUsuarios) {
     setvisibleEnca(!visibleEnca);
     toast.success("Lo Permisos fueron Editados con exito");
   };
-  
-  
+
+
   const abrirPantallas = (params, event) => {
     if (event) {
       event.preventDefault();
@@ -349,12 +351,12 @@ if (existeUsuarios) {
       role_Id: parseInt(params.role_Id),
       role_Descripcion: params.role_Descripcion
     });
-    
+
   };
 
 
   const handleButtonClick = (role_Id) => {
-   
+
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -379,7 +381,7 @@ if (existeUsuarios) {
       });
 
   };
-  
+
   {
     /*Fin de Pantallas Por Rol*/
   }
@@ -409,7 +411,7 @@ if (existeUsuarios) {
           setEditarRol({
             role_Id: 0,
             role_Descripcion: "",
-            role_UserModifica: user_Crea  
+            role_UserModifica: user_Crea
           });
         })
         .catch((error) => {
@@ -477,16 +479,16 @@ if (existeUsuarios) {
             <EditIcon />
           </CButton>
 
-          <CButton 
-  color="dark ms-2" 
-  variant="outline"
-  onClick={() => {
-    abrirPantallas(params.row);
-    handleButtonClick(params.row.role_Id);
-  }}
->
-  <MonitorIcon />
-</CButton>
+          <CButton
+            color="dark ms-2"
+            variant="outline"
+            onClick={() => {
+              abrirPantallas(params.row);
+              handleButtonClick(params.row.role_Id);
+            }}
+          >
+            <MonitorIcon />
+          </CButton>
 
 
           <CButton
@@ -695,24 +697,24 @@ if (existeUsuarios) {
                     />
                   </CCol>
 
-                  
 
-                    <center>
-                        <CButton disabled={!array} color="primary" type="submit">
-                          Guardar
-                        </CButton>
-                        
-                  <CButton
-                        color="danger text-light"
-                        className="ms-2"
-                        href="#"
-                        onClick={
-                          cerrarPantallas
-                        }                        
-                        >
-                        Cancelar
-                      </CButton>
-                          </center>
+
+                  <center>
+                    <CButton disabled={!array} color="primary" type="submit">
+                      Guardar
+                    </CButton>
+
+                    <CButton
+                      color="danger text-light"
+                      className="ms-2"
+                      href="#"
+                      onClick={
+                        cerrarPantallas
+                      }
+                    >
+                      Cancelar
+                    </CButton>
+                  </center>
                 </CForm>
               </CCardBody>
             </CCard>
@@ -774,63 +776,63 @@ if (existeUsuarios) {
 
           {/*Formulario Editar*/}
           <CCollapse visible={visible2}>
-          <CCol md={8} className="offset-2">
-            <CCard className="mt-3">
-              <CCardHeader>
-                <h1 className="h3 text-center">Editar Rol</h1>
-              </CCardHeader>
-              <CCardBody>
-                <CForm
-                  className="row g-3 needs-validation"
-                  noValidate
-                  validated={validated}
-                  onSubmit={handleSubmitE}
-                >
-                  <CCol md={6} className="">
-                    <CFormInput
-                      type="hidden"
-                      value={EditarRol.role_Id}
-                      onChange={(e) =>
-                        setEditarRol({ ...EditarRol, role_Id: e.target.value })
-                      }
-                      id="validationCustom01"
-                      required
-                    />
-                  </CCol>
-                  <CCol md={12} className="">
-                    <CFormInput
-                      type="text"
-                      minLength={2}
-                      value={EditarRol.role_Descripcion}
-                      onChange={(e) =>
-                        setEditarRol({
-                          ...EditarRol,
-                          role_Descripcion: e.target.value,
-                        })
-                      }
-                      id="validationCustom01"
-                      label="Nombre Rol"
-                      required
-                    />
-                  </CCol>
-                  <center>
-                  <CCol xs={12} className="">
-                    <CButton color="primary" type="submit">
-                      Guardar
-                    </CButton>
-                    <CButton
-                      color="danger text-light"
-                      className="ms-2"
-                      href="#"
-                      onClick={cerrarEditar}
-                    >
-                      Cancelar
-                    </CButton>
-                  </CCol>
-                  </center>
-                </CForm>
-              </CCardBody>
-            </CCard>
+            <CCol md={8} className="offset-2">
+              <CCard className="mt-3">
+                <CCardHeader>
+                  <h1 className="h3 text-center">Editar Rol</h1>
+                </CCardHeader>
+                <CCardBody>
+                  <CForm
+                    className="row g-3 needs-validation"
+                    noValidate
+                    validated={validated}
+                    onSubmit={handleSubmitE}
+                  >
+                    <CCol md={6} className="">
+                      <CFormInput
+                        type="hidden"
+                        value={EditarRol.role_Id}
+                        onChange={(e) =>
+                          setEditarRol({ ...EditarRol, role_Id: e.target.value })
+                        }
+                        id="validationCustom01"
+                        required
+                      />
+                    </CCol>
+                    <CCol md={12} className="">
+                      <CFormInput
+                        type="text"
+                        minLength={2}
+                        value={EditarRol.role_Descripcion}
+                        onChange={(e) =>
+                          setEditarRol({
+                            ...EditarRol,
+                            role_Descripcion: e.target.value,
+                          })
+                        }
+                        id="validationCustom01"
+                        label="Nombre Rol"
+                        required
+                      />
+                    </CCol>
+                    <center>
+                      <CCol xs={12} className="">
+                        <CButton color="primary" type="submit">
+                          Guardar
+                        </CButton>
+                        <CButton
+                          color="danger text-light"
+                          className="ms-2"
+                          href="#"
+                          onClick={cerrarEditar}
+                        >
+                          Cancelar
+                        </CButton>
+                      </CCol>
+                    </center>
+                  </CForm>
+                </CCardBody>
+              </CCard>
             </CCol>
           </CCollapse>
 
