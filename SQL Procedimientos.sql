@@ -1,5 +1,5 @@
 --**********************************************************PROCEDIMIENTOS*********************************************************************--
-USE db-VERA
+USE db_VERA
 GO
 
 --*****************************************************************ACCE************************************************************************--
@@ -2301,12 +2301,12 @@ WHERE fade_Estado = 1;
 END
 GO
 
-CREATE OR ALTER PROC fact.UDP_tbFacturaDetalles_FIND
-@fade_Id INT
+CREATE OR ALTER PROC fact.UDP_tbFacturaDetalles_FIND 
+@fact_Id INT
 AS BEGIN
 
 SELECT * FROM fact.VW_FacturaDetalles
-WHERE fade_Id = @fade_Id
+WHERE fact_Id = @fact_Id
 
 END
 GO

@@ -18,6 +18,8 @@ namespace Jafouan.Entities.Entities
         public DateTime? pantrol_FechaModifica { get; set; }
 
         public virtual tbPantallas pant { get; set; }
+        public virtual tbUsuarios pantrol_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios pantrol_UserModificaNavigation { get; set; }
         public virtual tbRoles role { get; set; }
     }
 }

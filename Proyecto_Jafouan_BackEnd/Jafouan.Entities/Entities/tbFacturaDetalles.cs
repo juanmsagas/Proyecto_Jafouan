@@ -20,6 +20,8 @@ namespace Jafouan.Entities.Entities
         public bool? fade_Estado { get; set; }
 
         public virtual tbFacturas fact { get; set; }
+        public virtual tbUsuarios fade_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios fade_UserModificacionNavigation { get; set; }
         public virtual tbPrendas pren { get; set; }
     }
 }

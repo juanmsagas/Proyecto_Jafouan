@@ -380,6 +380,14 @@ namespace Jafouan.DataAccess.Context
                 entity.Property(e => e.pren_Descripcion)
                     .IsRequired()
                     .HasMaxLength(100);
+
+                entity.Property(e => e.pren_Imagen).IsRequired();
+
+                entity.Property(e => e.pren_Precio).HasColumnType("decimal(8, 2)");
+
+                entity.Property(e => e.pren_Talla)
+                    .IsRequired()
+                    .HasMaxLength(100);
             });
 
             modelBuilder.Entity<VW_Facturas>(entity =>
@@ -608,6 +616,11 @@ namespace Jafouan.DataAccess.Context
                 entity.HasNoKey();
 
                 entity.ToView("VW_Prendas", "vera");
+
+                entity.Property(e => e.Disponibilidad)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.cate_Descripcion)
                     .IsRequired()
@@ -854,6 +867,17 @@ namespace Jafouan.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.carg_FechaModificacion).HasColumnType("datetime");
+
+                entity.HasOne(d => d.carg_UserCreaNavigation)
+                    .WithMany(p => p.tbCargoscarg_UserCreaNavigation)
+                    .HasForeignKey(d => d.carg_UserCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_mant_tbCargos_carg_UserCrea");
+
+                entity.HasOne(d => d.carg_UserModificaNavigation)
+                    .WithMany(p => p.tbCargoscarg_UserModificaNavigation)
+                    .HasForeignKey(d => d.carg_UserModifica)
+                    .HasConstraintName("FK_mant_tbCargos_carg_UserModifica");
             });
 
             modelBuilder.Entity<tbCategorias>(entity =>
@@ -879,6 +903,17 @@ namespace Jafouan.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.cate_FechaModificacion).HasColumnType("datetime");
+
+                entity.HasOne(d => d.cate_UserCreaNavigation)
+                    .WithMany(p => p.tbCategoriascate_UserCreaNavigation)
+                    .HasForeignKey(d => d.cate_UserCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_vera_tbCategorias_cate_UserCrea");
+
+                entity.HasOne(d => d.cate_UserModificaNavigation)
+                    .WithMany(p => p.tbCategoriascate_UserModificaNavigation)
+                    .HasForeignKey(d => d.cate_UserModifica)
+                    .HasConstraintName("FK_vera_tbCategorias_cate_UserModifica");
             });
 
             modelBuilder.Entity<tbClientes>(entity =>
@@ -930,6 +965,17 @@ namespace Jafouan.DataAccess.Context
                     .IsUnicode(false)
                     .IsFixedLength(true);
 
+                entity.HasOne(d => d.clie_UserCreaNavigation)
+                    .WithMany(p => p.tbClientesclie_UserCreaNavigation)
+                    .HasForeignKey(d => d.clie_UserCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_vera_tbClientes_clie_UserCrea");
+
+                entity.HasOne(d => d.clie_UserModificaNavigation)
+                    .WithMany(p => p.tbClientesclie_UserModificaNavigation)
+                    .HasForeignKey(d => d.clie_UserModifica)
+                    .HasConstraintName("FK_vera_tbClientes_clie_UserModifica");
+
                 entity.HasOne(d => d.estc)
                     .WithMany(p => p.tbClientes)
                     .HasForeignKey(d => d.estc_Id)
@@ -969,6 +1015,17 @@ namespace Jafouan.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.dept_FechaModifica).HasColumnType("datetime");
+
+                entity.HasOne(d => d.dept_UserCreaNavigation)
+                    .WithMany(p => p.tbDepartamentosdept_UserCreaNavigation)
+                    .HasForeignKey(d => d.dept_UserCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_mant_tbDepartamentos_dept_UserCrea");
+
+                entity.HasOne(d => d.dept_UserModificaNavigation)
+                    .WithMany(p => p.tbDepartamentosdept_UserModificaNavigation)
+                    .HasForeignKey(d => d.dept_UserModifica)
+                    .HasConstraintName("FK_mant_tbDepartamentos_dept_UserModifica");
             });
 
             modelBuilder.Entity<tbDescuentos>(entity =>
@@ -993,6 +1050,16 @@ namespace Jafouan.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.desc_FechaModificacion).HasColumnType("datetime");
+
+                entity.HasOne(d => d.desc_UserCreaNavigation)
+                    .WithMany(p => p.tbDescuentosdesc_UserCreaNavigation)
+                    .HasForeignKey(d => d.desc_UserCrea)
+                    .HasConstraintName("FK_vera_tbDescuentos_desc_UserCrea");
+
+                entity.HasOne(d => d.desc_UserModificacionNavigation)
+                    .WithMany(p => p.tbDescuentosdesc_UserModificacionNavigation)
+                    .HasForeignKey(d => d.desc_UserModificacion)
+                    .HasConstraintName("FK_vera_tbDescuentos_desc_UserModifica");
             });
 
             modelBuilder.Entity<tbEmpleados>(entity =>
@@ -1052,6 +1119,17 @@ namespace Jafouan.DataAccess.Context
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_vera_tbEmpleados_tbCargos_carg_Id");
 
+                entity.HasOne(d => d.empl_UserCreaNavigation)
+                    .WithMany(p => p.tbEmpleadosempl_UserCreaNavigation)
+                    .HasForeignKey(d => d.empl_UserCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_vera_tbEmpleados_empl_UserCrea");
+
+                entity.HasOne(d => d.empl_UserModificaNavigation)
+                    .WithMany(p => p.tbEmpleadosempl_UserModificaNavigation)
+                    .HasForeignKey(d => d.empl_UserModifica)
+                    .HasConstraintName("FK_vera_tbEmpleados_empl_UserModifica");
+
                 entity.HasOne(d => d.estc)
                     .WithMany(p => p.tbEmpleados)
                     .HasForeignKey(d => d.estc_Id)
@@ -1092,6 +1170,17 @@ namespace Jafouan.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.estc_FechaModifica).HasColumnType("datetime");
+
+                entity.HasOne(d => d.estc_UserCreaNavigation)
+                    .WithMany(p => p.tbEstadosCivilesestc_UserCreaNavigation)
+                    .HasForeignKey(d => d.estc_UserCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_mant_tbEstadosCiviles_estc_UserCrea");
+
+                entity.HasOne(d => d.estc_UserModificaNavigation)
+                    .WithMany(p => p.tbEstadosCivilesestc_UserModificaNavigation)
+                    .HasForeignKey(d => d.estc_UserModifica)
+                    .HasConstraintName("FK_mant_tbEstadosCiviles_estc_UserModifica");
             });
 
             modelBuilder.Entity<tbFacturaDetalles>(entity =>
@@ -1118,6 +1207,16 @@ namespace Jafouan.DataAccess.Context
                     .HasForeignKey(d => d.fact_Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_fact_tbFacturaDetalles_tbFacturas_fact_Id");
+
+                entity.HasOne(d => d.fade_UserCreaNavigation)
+                    .WithMany(p => p.tbFacturaDetallesfade_UserCreaNavigation)
+                    .HasForeignKey(d => d.fade_UserCrea)
+                    .HasConstraintName("FK_fact_tbFacturaDetalles_fade_UserCrea");
+
+                entity.HasOne(d => d.fade_UserModificacionNavigation)
+                    .WithMany(p => p.tbFacturaDetallesfade_UserModificacionNavigation)
+                    .HasForeignKey(d => d.fade_UserModificacion)
+                    .HasConstraintName("FK_fact_tbFacturaDetalles_fade_UserModificacion");
 
                 entity.HasOne(d => d.pren)
                     .WithMany(p => p.tbFacturaDetalles)
@@ -1153,6 +1252,16 @@ namespace Jafouan.DataAccess.Context
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_fact_tbFacturas_vera_tbEmpleados_empl_Id");
 
+                entity.HasOne(d => d.fact_UserCreaNavigation)
+                    .WithMany(p => p.tbFacturasfact_UserCreaNavigation)
+                    .HasForeignKey(d => d.fact_UserCrea)
+                    .HasConstraintName("FK_fact_tbFacturas_fact_UserCrea");
+
+                entity.HasOne(d => d.fact_UserModificacionNavigation)
+                    .WithMany(p => p.tbFacturasfact_UserModificacionNavigation)
+                    .HasForeignKey(d => d.fact_UserModificacion)
+                    .HasConstraintName("FK_fact_tbFacturas_fact_UserModificacion");
+
                 entity.HasOne(d => d.meto)
                     .WithMany(p => p.tbFacturas)
                     .HasForeignKey(d => d.meto_Id)
@@ -1184,6 +1293,16 @@ namespace Jafouan.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.fard_FechaModificacion).HasColumnType("datetime");
+
+                entity.HasOne(d => d.fard_UserCreaNavigation)
+                    .WithMany(p => p.tbFardosfard_UserCreaNavigation)
+                    .HasForeignKey(d => d.fard_UserCrea)
+                    .HasConstraintName("FK_vera_tbFardos_fard_UserCrea");
+
+                entity.HasOne(d => d.fard_UserModificacionNavigation)
+                    .WithMany(p => p.tbFardosfard_UserModificacionNavigation)
+                    .HasForeignKey(d => d.fard_UserModificacion)
+                    .HasConstraintName("FK_vera_tbFardos_fard_UserModificacion");
             });
 
             modelBuilder.Entity<tbFardosProveedor>(entity =>
@@ -1200,6 +1319,16 @@ namespace Jafouan.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.fapr_FechaModificacion).HasColumnType("datetime");
+
+                entity.HasOne(d => d.fapr_UserCreaNavigation)
+                    .WithMany(p => p.tbFardosProveedorfapr_UserCreaNavigation)
+                    .HasForeignKey(d => d.fapr_UserCrea)
+                    .HasConstraintName("FK_vera_tbFardosProveedor_fapr_UserCrea");
+
+                entity.HasOne(d => d.fapr_UserModificacionNavigation)
+                    .WithMany(p => p.tbFardosProveedorfapr_UserModificacionNavigation)
+                    .HasForeignKey(d => d.fapr_UserModificacion)
+                    .HasConstraintName("FK_vera_tbFardosProveedor_fapr_UserModificacion");
 
                 entity.HasOne(d => d.fard)
                     .WithMany(p => p.tbFardosProveedor)
@@ -1237,6 +1366,17 @@ namespace Jafouan.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.marc_FechaModificacion).HasColumnType("datetime");
+
+                entity.HasOne(d => d.marc_UserCreaNavigation)
+                    .WithMany(p => p.tbMarcasmarc_UserCreaNavigation)
+                    .HasForeignKey(d => d.marc_UserCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_vera_tbMarcas_marc_UserCrea");
+
+                entity.HasOne(d => d.marc_UserModificaNavigation)
+                    .WithMany(p => p.tbMarcasmarc_UserModificaNavigation)
+                    .HasForeignKey(d => d.marc_UserModifica)
+                    .HasConstraintName("FK_vera_tbMarcas_marc_UserModifica");
             });
 
             modelBuilder.Entity<tbMetodosPagos>(entity =>
@@ -1257,6 +1397,16 @@ namespace Jafouan.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.meto_FechaModificacion).HasColumnType("datetime");
+
+                entity.HasOne(d => d.meto_UserCreaNavigation)
+                    .WithMany(p => p.tbMetodosPagosmeto_UserCreaNavigation)
+                    .HasForeignKey(d => d.meto_UserCrea)
+                    .HasConstraintName("FK_fact_tbMetodoPago_meto_UserCrea");
+
+                entity.HasOne(d => d.meto_UserModificacionNavigation)
+                    .WithMany(p => p.tbMetodosPagosmeto_UserModificacionNavigation)
+                    .HasForeignKey(d => d.meto_UserModificacion)
+                    .HasConstraintName("FK_fact_tbMetodoPago_meto_UserModificacion");
             });
 
             modelBuilder.Entity<tbMunicipios>(entity =>
@@ -1294,6 +1444,17 @@ namespace Jafouan.DataAccess.Context
                     .HasForeignKey(d => d.dept_Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_mant_tbMunicipios_dept_Id");
+
+                entity.HasOne(d => d.muni_UserCreaNavigation)
+                    .WithMany(p => p.tbMunicipiosmuni_UserCreaNavigation)
+                    .HasForeignKey(d => d.muni_UserCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_mant_tbMunicipios_muni_UserCrea");
+
+                entity.HasOne(d => d.muni_UserModificaNavigation)
+                    .WithMany(p => p.tbMunicipiosmuni_UserModificaNavigation)
+                    .HasForeignKey(d => d.muni_UserModifica)
+                    .HasConstraintName("FK_mant_tbMunicipios_muni_UserModifica");
             });
 
             modelBuilder.Entity<tbPantallas>(entity =>
@@ -1333,6 +1494,17 @@ namespace Jafouan.DataAccess.Context
                 entity.Property(e => e.pant_href)
                     .IsRequired()
                     .HasMaxLength(70);
+
+                entity.HasOne(d => d.pant_UserCreaNavigation)
+                    .WithMany(p => p.tbPantallaspant_UserCreaNavigation)
+                    .HasForeignKey(d => d.pant_UserCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_acce_tbPantallas_pant_UserCrea");
+
+                entity.HasOne(d => d.pant_UserModificaNavigation)
+                    .WithMany(p => p.tbPantallaspant_UserModificaNavigation)
+                    .HasForeignKey(d => d.pant_UserModifica)
+                    .HasConstraintName("FK_acce_tbPantallas_pant_UserModifica");
             });
 
             modelBuilder.Entity<tbPantallasPorRol>(entity =>
@@ -1355,6 +1527,17 @@ namespace Jafouan.DataAccess.Context
                     .HasForeignKey(d => d.pant_Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_acce_tbPantallasPorRol_tbPantallas_pant_Id");
+
+                entity.HasOne(d => d.pantrol_UserCreaNavigation)
+                    .WithMany(p => p.tbPantallasPorRolpantrol_UserCreaNavigation)
+                    .HasForeignKey(d => d.pantrol_UserCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_acce_tbPantallasPorRol_pantrol_UserCrea");
+
+                entity.HasOne(d => d.pantrol_UserModificaNavigation)
+                    .WithMany(p => p.tbPantallasPorRolpantrol_UserModificaNavigation)
+                    .HasForeignKey(d => d.pantrol_UserModifica)
+                    .HasConstraintName("FK_acce_tbPantallasPorRol_pantrol_UserModifica");
 
                 entity.HasOne(d => d.role)
                     .WithMany(p => p.tbPantallasPorRol)
@@ -1398,6 +1581,12 @@ namespace Jafouan.DataAccess.Context
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_vera_tbPrendas_cate_Id_vera_tbCategorias_cate_Id");
 
+                entity.HasOne(d => d.desc)
+                    .WithMany(p => p.tbPrendas)
+                    .HasForeignKey(d => d.desc_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_vera_tbPrendas_desc_Id_vera_tbDescuentos_desc_Id");
+
                 entity.HasOne(d => d.fard)
                     .WithMany(p => p.tbPrendas)
                     .HasForeignKey(d => d.fard_Id)
@@ -1409,6 +1598,16 @@ namespace Jafouan.DataAccess.Context
                     .HasForeignKey(d => d.marc_Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_vera_tbPrendas_marc_Id_vera_tbMarcas_marc_Id");
+
+                entity.HasOne(d => d.pren_UserCreaNavigation)
+                    .WithMany(p => p.tbPrendaspren_UserCreaNavigation)
+                    .HasForeignKey(d => d.pren_UserCrea)
+                    .HasConstraintName("FK_vera_tbPrendas_pren_UserCrea");
+
+                entity.HasOne(d => d.pren_UserModificacionNavigation)
+                    .WithMany(p => p.tbPrendaspren_UserModificacionNavigation)
+                    .HasForeignKey(d => d.pren_UserModificacion)
+                    .HasConstraintName("FK_vera_tbPrendas_pren_UserModificacion");
             });
 
             modelBuilder.Entity<tbProveedores>(entity =>
@@ -1453,6 +1652,17 @@ namespace Jafouan.DataAccess.Context
                     .HasForeignKey(d => d.muni_Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_vera_tbProveedores_tbMunicipios_muni_Id");
+
+                entity.HasOne(d => d.prov_UserCreaNavigation)
+                    .WithMany(p => p.tbProveedoresprov_UserCreaNavigation)
+                    .HasForeignKey(d => d.prov_UserCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_vera_tbProveedores_prov_UserCrea");
+
+                entity.HasOne(d => d.prov_UserModificaNavigation)
+                    .WithMany(p => p.tbProveedoresprov_UserModificaNavigation)
+                    .HasForeignKey(d => d.prov_UserModifica)
+                    .HasConstraintName("FK_vera_tbProveedores_prov_UserModifica");
             });
 
             modelBuilder.Entity<tbRoles>(entity =>
@@ -1477,6 +1687,17 @@ namespace Jafouan.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.role_FechaModifica).HasColumnType("datetime");
+
+                entity.HasOne(d => d.role_UserCreaNavigation)
+                    .WithMany(p => p.tbRolesrole_UserCreaNavigation)
+                    .HasForeignKey(d => d.role_UserCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_acce_tbRoles_role_UserCrea");
+
+                entity.HasOne(d => d.role_UserModificaNavigation)
+                    .WithMany(p => p.tbRolesrole_UserModificaNavigation)
+                    .HasForeignKey(d => d.role_UserModifica)
+                    .HasConstraintName("FK_acce_tbRoles_role_UserModifica");
             });
 
             modelBuilder.Entity<tbSucursales>(entity =>
@@ -1513,6 +1734,17 @@ namespace Jafouan.DataAccess.Context
                     .HasForeignKey(d => d.muni_Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("PK_vera_tbSucursales_tbMunicipios_muni_Id");
+
+                entity.HasOne(d => d.sucu_UserCreaNavigation)
+                    .WithMany(p => p.tbSucursalessucu_UserCreaNavigation)
+                    .HasForeignKey(d => d.sucu_UserCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_vera_tbSucursales_sucu_UserCrea");
+
+                entity.HasOne(d => d.sucu_UserModificaNavigation)
+                    .WithMany(p => p.tbSucursalessucu_UserModificaNavigation)
+                    .HasForeignKey(d => d.sucu_UserModifica)
+                    .HasConstraintName("FK_vera_tbSucursales_sucu_UserModifica");
             });
 
             modelBuilder.Entity<tbUsuarios>(entity =>
@@ -1540,6 +1772,22 @@ namespace Jafouan.DataAccess.Context
                 entity.Property(e => e.user_NombreUsuario)
                     .IsRequired()
                     .HasMaxLength(200);
+
+                entity.HasOne(d => d.role)
+                    .WithMany(p => p.tbUsuarios)
+                    .HasForeignKey(d => d.role_Id)
+                    .HasConstraintName("FK_acce_tbUsuarios_tbRoles_role_Id");
+
+                entity.HasOne(d => d.user_UserCreaNavigation)
+                    .WithMany(p => p.Inverseuser_UserCreaNavigation)
+                    .HasForeignKey(d => d.user_UserCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_acce_tbUsuarios_user_UserCrea");
+
+                entity.HasOne(d => d.user_UserModificaNavigation)
+                    .WithMany(p => p.Inverseuser_UserModificaNavigation)
+                    .HasForeignKey(d => d.user_UserModifica)
+                    .HasConstraintName("FK_acce_tbUsuarios_user_UserModificacion");
             });
 
             OnModelCreatingPartial(modelBuilder);

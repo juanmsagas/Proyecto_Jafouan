@@ -30,8 +30,11 @@ namespace Jafouan.Entities.Entities
         public bool? pren_Estado { get; set; }
 
         public virtual tbCategorias cate { get; set; }
+        public virtual tbDescuentos desc { get; set; }
         public virtual tbFardos fard { get; set; }
         public virtual tbMarcas marc { get; set; }
+        public virtual tbUsuarios pren_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios pren_UserModificacionNavigation { get; set; }
         public virtual ICollection<tbFacturaDetalles> tbFacturaDetalles { get; set; }
     }
 }

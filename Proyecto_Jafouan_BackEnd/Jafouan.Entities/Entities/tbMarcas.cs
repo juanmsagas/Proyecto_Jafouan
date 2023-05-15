@@ -21,6 +21,8 @@ namespace Jafouan.Entities.Entities
         public DateTime? marc_FechaModificacion { get; set; }
         public bool? marc_Estado { get; set; }
 
+        public virtual tbUsuarios marc_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios marc_UserModificaNavigation { get; set; }
         public virtual ICollection<tbPrendas> tbPrendas { get; set; }
     }
 }

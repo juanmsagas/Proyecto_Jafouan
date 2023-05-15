@@ -26,6 +26,8 @@ namespace Jafouan.Entities.Entities
 
         public virtual tbClientes clie { get; set; }
         public virtual tbEmpleados empl { get; set; }
+        public virtual tbUsuarios fact_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios fact_UserModificacionNavigation { get; set; }
         public virtual tbMetodosPagos meto { get; set; }
         public virtual tbSucursales sucu { get; set; }
         public virtual ICollection<tbFacturaDetalles> tbFacturaDetalles { get; set; }

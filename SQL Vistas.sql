@@ -416,10 +416,13 @@ GO
 
 CREATE OR ALTER VIEW fact.VW_FacturaDetalles
 AS
-SELECT	fade_Id, 
+SELECT	fade_Id,
 		fact_Id, 
 		T1.pren_Id,
 		T2.pren_Descripcion,
+		T2.pren_Precio,
+		T2.pren_Talla,
+		T2.pren_Imagen,
 		fade_Cantidad, 
 		fade_Total, 
 		fade_UserCrea, 

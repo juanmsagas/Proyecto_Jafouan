@@ -7,18 +7,18 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA1N7DQ2BYT0iz5B6zHIGZOwAAAAACAAAAAAAQZgAAAAEAACAAAACEBFoPj1WvtwDi7mSiz61ptMU39++O/C9aKhKvEhcaEAAAAAAOgAAAAAIAACAAAADbPiXZaS4U2PpqISm6O7pHfGWAhEBJje8qD0sNacKH6yAAAAAiQH0vodsi7jK6eBxN+BuK7voqoDWCm3hWuImAWosSvkAAAAAkAjkyz8K81/04O3HyfVwaHorwuC0KIetJxQSNzgty0tl8bs7AQCgPY7ePOFjlEq1sYqZDSJaFNdLl38EnM7bG</EncryptedPassword>
-    <History>True|2023-05-15T12:31:01.3477665Z;False|2023-05-15T06:26:11.2128027-06:00;False|2023-05-15T06:23:45.3105329-06:00;</History>
+    <History>True|2023-05-15T16:41:29.5435424Z;True|2023-05-15T06:31:01.3477665-06:00;False|2023-05-15T06:26:11.2128027-06:00;False|2023-05-15T06:23:45.3105329-06:00;</History>
     <_PublishTargetUrl>ftp://198.37.116.42/www.Jafouan.somee.com</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="appsettings.Development.json">
-      <publishTime>04/27/2023 17:21:02</publishTime>
+      <publishTime>05/08/2023 14:21:43</publishTime>
     </File>
     <File Include="appsettings.json">
-      <publishTime>05/15/2023 06:27:23</publishTime>
+      <publishTime>05/15/2023 10:35:12</publishTime>
     </File>
     <File Include="appsettings.production.json">
-      <publishTime>05/15/2023 06:27:37</publishTime>
+      <publishTime>05/15/2023 10:38:13</publishTime>
     </File>
     <File Include="AutoMapper.dll">
       <publishTime>01/16/2023 09:41:56</publishTime>
@@ -105,37 +105,37 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>09/12/2019 11:08:36</publishTime>
     </File>
     <File Include="Jafouan.API.deps.json">
-      <publishTime>05/15/2023 06:27:37</publishTime>
+      <publishTime>05/15/2023 10:38:12</publishTime>
     </File>
     <File Include="Jafouan.API.dll">
-      <publishTime>05/15/2023 06:27:33</publishTime>
+      <publishTime>05/15/2023 10:38:03</publishTime>
     </File>
     <File Include="Jafouan.API.exe">
-      <publishTime>05/15/2023 06:27:33</publishTime>
+      <publishTime>05/15/2023 10:38:03</publishTime>
     </File>
     <File Include="Jafouan.API.pdb">
-      <publishTime>05/15/2023 06:27:33</publishTime>
+      <publishTime>05/15/2023 10:38:03</publishTime>
     </File>
     <File Include="Jafouan.API.runtimeconfig.json">
-      <publishTime>05/15/2023 06:23:32</publishTime>
+      <publishTime>05/15/2023 10:38:03</publishTime>
     </File>
     <File Include="Jafouan.BusinessLogic.dll">
-      <publishTime>05/15/2023 06:23:29</publishTime>
+      <publishTime>05/15/2023 10:38:02</publishTime>
     </File>
     <File Include="Jafouan.BusinessLogic.pdb">
-      <publishTime>05/15/2023 06:23:29</publishTime>
+      <publishTime>05/15/2023 10:38:02</publishTime>
     </File>
     <File Include="Jafouan.DataAccess.dll">
-      <publishTime>05/15/2023 06:23:28</publishTime>
+      <publishTime>05/15/2023 10:38:02</publishTime>
     </File>
     <File Include="Jafouan.DataAccess.pdb">
-      <publishTime>05/15/2023 06:23:28</publishTime>
+      <publishTime>05/15/2023 10:38:02</publishTime>
     </File>
     <File Include="Jafouan.Entities.dll">
-      <publishTime>05/15/2023 06:23:26</publishTime>
+      <publishTime>05/15/2023 10:38:01</publishTime>
     </File>
     <File Include="Jafouan.Entities.pdb">
-      <publishTime>05/15/2023 06:23:26</publishTime>
+      <publishTime>05/15/2023 10:38:01</publishTime>
     </File>
     <File Include="ko/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>09/12/2019 11:09:00</publishTime>
@@ -363,7 +363,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>09/12/2019 11:08:36</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>05/15/2023 06:27:37</publishTime>
+      <publishTime>05/15/2023 10:38:12</publishTime>
     </File>
     <File Include="zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>09/12/2019 11:09:00</publishTime>

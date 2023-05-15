@@ -17,7 +17,7 @@ if (user_Crea==null ||  isNaN(user_Crea)) {
   const arregloJSONGET = sessionStorage.getItem("miArreglo");
   const miArreglo = JSON.parse(arregloJSONGET);
   
-  const existeUsuarios = miArreglo.some(objeto => objeto.name === "Categorias");
+  const existeUsuarios = miArreglo.some(objeto => objeto.name === "Reporte");
   
   if (existeUsuarios) {
     

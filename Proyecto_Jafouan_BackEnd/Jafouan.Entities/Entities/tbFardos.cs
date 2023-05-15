@@ -22,6 +22,8 @@ namespace Jafouan.Entities.Entities
         public DateTime? fard_FechaModificacion { get; set; }
         public bool? fard_Estado { get; set; }
 
+        public virtual tbUsuarios fard_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios fard_UserModificacionNavigation { get; set; }
         public virtual ICollection<tbFardosProveedor> tbFardosProveedor { get; set; }
         public virtual ICollection<tbPrendas> tbPrendas { get; set; }
     }

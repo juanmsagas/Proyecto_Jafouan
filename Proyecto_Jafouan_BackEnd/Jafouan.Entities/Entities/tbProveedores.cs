@@ -26,6 +26,8 @@ namespace Jafouan.Entities.Entities
         public DateTime? prov_FechaModificacion { get; set; }
 
         public virtual tbMunicipios muni { get; set; }
+        public virtual tbUsuarios prov_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios prov_UserModificaNavigation { get; set; }
         public virtual ICollection<tbFardosProveedor> tbFardosProveedor { get; set; }
     }
 }

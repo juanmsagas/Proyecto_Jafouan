@@ -12,6 +12,9 @@ namespace Jafouan.Entities.Entities
         public int fact_Id { get; set; }
         public int pren_Id { get; set; }
         public string pren_Descripcion { get; set; }
+        public decimal pren_Precio { get; set; }
+        public string pren_Talla { get; set; }
+        public string pren_Imagen { get; set; }
         public int fade_Cantidad { get; set; }
         public decimal fade_Total { get; set; }
         public int? fade_UserCrea { get; set; }

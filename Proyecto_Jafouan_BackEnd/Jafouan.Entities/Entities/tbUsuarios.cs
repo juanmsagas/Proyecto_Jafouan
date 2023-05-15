@@ -8,6 +8,52 @@ namespace Jafouan.Entities.Entities
 {
     public partial class tbUsuarios
     {
+        public tbUsuarios()
+        {
+            Inverseuser_UserCreaNavigation = new HashSet<tbUsuarios>();
+            Inverseuser_UserModificaNavigation = new HashSet<tbUsuarios>();
+            tbCargoscarg_UserCreaNavigation = new HashSet<tbCargos>();
+            tbCargoscarg_UserModificaNavigation = new HashSet<tbCargos>();
+            tbCategoriascate_UserCreaNavigation = new HashSet<tbCategorias>();
+            tbCategoriascate_UserModificaNavigation = new HashSet<tbCategorias>();
+            tbClientesclie_UserCreaNavigation = new HashSet<tbClientes>();
+            tbClientesclie_UserModificaNavigation = new HashSet<tbClientes>();
+            tbDepartamentosdept_UserCreaNavigation = new HashSet<tbDepartamentos>();
+            tbDepartamentosdept_UserModificaNavigation = new HashSet<tbDepartamentos>();
+            tbDescuentosdesc_UserCreaNavigation = new HashSet<tbDescuentos>();
+            tbDescuentosdesc_UserModificacionNavigation = new HashSet<tbDescuentos>();
+            tbEmpleadosempl_UserCreaNavigation = new HashSet<tbEmpleados>();
+            tbEmpleadosempl_UserModificaNavigation = new HashSet<tbEmpleados>();
+            tbEstadosCivilesestc_UserCreaNavigation = new HashSet<tbEstadosCiviles>();
+            tbEstadosCivilesestc_UserModificaNavigation = new HashSet<tbEstadosCiviles>();
+            tbFacturaDetallesfade_UserCreaNavigation = new HashSet<tbFacturaDetalles>();
+            tbFacturaDetallesfade_UserModificacionNavigation = new HashSet<tbFacturaDetalles>();
+            tbFacturasfact_UserCreaNavigation = new HashSet<tbFacturas>();
+            tbFacturasfact_UserModificacionNavigation = new HashSet<tbFacturas>();
+            tbFardosProveedorfapr_UserCreaNavigation = new HashSet<tbFardosProveedor>();
+            tbFardosProveedorfapr_UserModificacionNavigation = new HashSet<tbFardosProveedor>();
+            tbFardosfard_UserCreaNavigation = new HashSet<tbFardos>();
+            tbFardosfard_UserModificacionNavigation = new HashSet<tbFardos>();
+            tbMarcasmarc_UserCreaNavigation = new HashSet<tbMarcas>();
+            tbMarcasmarc_UserModificaNavigation = new HashSet<tbMarcas>();
+            tbMetodosPagosmeto_UserCreaNavigation = new HashSet<tbMetodosPagos>();
+            tbMetodosPagosmeto_UserModificacionNavigation = new HashSet<tbMetodosPagos>();
+            tbMunicipiosmuni_UserCreaNavigation = new HashSet<tbMunicipios>();
+            tbMunicipiosmuni_UserModificaNavigation = new HashSet<tbMunicipios>();
+            tbPantallasPorRolpantrol_UserCreaNavigation = new HashSet<tbPantallasPorRol>();
+            tbPantallasPorRolpantrol_UserModificaNavigation = new HashSet<tbPantallasPorRol>();
+            tbPantallaspant_UserCreaNavigation = new HashSet<tbPantallas>();
+            tbPantallaspant_UserModificaNavigation = new HashSet<tbPantallas>();
+            tbPrendaspren_UserCreaNavigation = new HashSet<tbPrendas>();
+            tbPrendaspren_UserModificacionNavigation = new HashSet<tbPrendas>();
+            tbProveedoresprov_UserCreaNavigation = new HashSet<tbProveedores>();
+            tbProveedoresprov_UserModificaNavigation = new HashSet<tbProveedores>();
+            tbRolesrole_UserCreaNavigation = new HashSet<tbRoles>();
+            tbRolesrole_UserModificaNavigation = new HashSet<tbRoles>();
+            tbSucursalessucu_UserCreaNavigation = new HashSet<tbSucursales>();
+            tbSucursalessucu_UserModificaNavigation = new HashSet<tbSucursales>();
+        }
+
         public int user_Id { get; set; }
         public string user_NombreUsuario { get; set; }
         public int empl_Id { get; set; }
@@ -19,5 +65,51 @@ namespace Jafouan.Entities.Entities
         public DateTime? user_FechaCrea { get; set; }
         public int? user_UserModifica { get; set; }
         public DateTime? user_FechaModifica { get; set; }
+
+        public virtual tbRoles role { get; set; }
+        public virtual tbUsuarios user_UserCreaNavigation { get; set; }
+        public virtual tbUsuarios user_UserModificaNavigation { get; set; }
+        public virtual ICollection<tbUsuarios> Inverseuser_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbUsuarios> Inverseuser_UserModificaNavigation { get; set; }
+        public virtual ICollection<tbCargos> tbCargoscarg_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbCargos> tbCargoscarg_UserModificaNavigation { get; set; }
+        public virtual ICollection<tbCategorias> tbCategoriascate_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbCategorias> tbCategoriascate_UserModificaNavigation { get; set; }
+        public virtual ICollection<tbClientes> tbClientesclie_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbClientes> tbClientesclie_UserModificaNavigation { get; set; }
+        public virtual ICollection<tbDepartamentos> tbDepartamentosdept_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbDepartamentos> tbDepartamentosdept_UserModificaNavigation { get; set; }
+        public virtual ICollection<tbDescuentos> tbDescuentosdesc_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbDescuentos> tbDescuentosdesc_UserModificacionNavigation { get; set; }
+        public virtual ICollection<tbEmpleados> tbEmpleadosempl_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbEmpleados> tbEmpleadosempl_UserModificaNavigation { get; set; }
+        public virtual ICollection<tbEstadosCiviles> tbEstadosCivilesestc_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbEstadosCiviles> tbEstadosCivilesestc_UserModificaNavigation { get; set; }
+        public virtual ICollection<tbFacturaDetalles> tbFacturaDetallesfade_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbFacturaDetalles> tbFacturaDetallesfade_UserModificacionNavigation { get; set; }
+        public virtual ICollection<tbFacturas> tbFacturasfact_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbFacturas> tbFacturasfact_UserModificacionNavigation { get; set; }
+        public virtual ICollection<tbFardosProveedor> tbFardosProveedorfapr_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbFardosProveedor> tbFardosProveedorfapr_UserModificacionNavigation { get; set; }
+        public virtual ICollection<tbFardos> tbFardosfard_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbFardos> tbFardosfard_UserModificacionNavigation { get; set; }
+        public virtual ICollection<tbMarcas> tbMarcasmarc_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbMarcas> tbMarcasmarc_UserModificaNavigation { get; set; }
+        public virtual ICollection<tbMetodosPagos> tbMetodosPagosmeto_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbMetodosPagos> tbMetodosPagosmeto_UserModificacionNavigation { get; set; }
+        public virtual ICollection<tbMunicipios> tbMunicipiosmuni_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbMunicipios> tbMunicipiosmuni_UserModificaNavigation { get; set; }
+        public virtual ICollection<tbPantallasPorRol> tbPantallasPorRolpantrol_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbPantallasPorRol> tbPantallasPorRolpantrol_UserModificaNavigation { get; set; }
+        public virtual ICollection<tbPantallas> tbPantallaspant_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbPantallas> tbPantallaspant_UserModificaNavigation { get; set; }
+        public virtual ICollection<tbPrendas> tbPrendaspren_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbPrendas> tbPrendaspren_UserModificacionNavigation { get; set; }
+        public virtual ICollection<tbProveedores> tbProveedoresprov_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbProveedores> tbProveedoresprov_UserModificaNavigation { get; set; }
+        public virtual ICollection<tbRoles> tbRolesrole_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbRoles> tbRolesrole_UserModificaNavigation { get; set; }
+        public virtual ICollection<tbSucursales> tbSucursalessucu_UserCreaNavigation { get; set; }
+        public virtual ICollection<tbSucursales> tbSucursalessucu_UserModificaNavigation { get; set; }
     }
 }
