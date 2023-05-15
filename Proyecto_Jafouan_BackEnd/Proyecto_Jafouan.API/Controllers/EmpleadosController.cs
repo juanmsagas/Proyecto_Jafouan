@@ -32,6 +32,15 @@ namespace Jafouan.API.Controllers
             return Ok(list);
         }
 
+        [HttpGet("Grafica")]
+        public IActionResult Grafica()
+        {
+            var list = _ventaRopaServices.GraficaEmpleados();
+
+            return Ok(list);
+        }
+
+
         [HttpPost("Insert")]
         public IActionResult InsertEmpleados([FromBody] EmpleadosViewModel empleados)
         {

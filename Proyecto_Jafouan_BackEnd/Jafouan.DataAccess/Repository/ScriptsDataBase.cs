@@ -154,6 +154,8 @@ namespace Jafouan.DataAccess.Repository
         public static string DISPONIBLE_PRENDAS = "vera.UDP_tbPrendas_DISPONIBLE";
         public static string VENDIDA_PRENDAS = "vera.UDP_tbPrendas_VENDIDA";
         public static string PRENDASDISPONIBLES = "vera.UDP_tbPrendas_PRENDASDISPONIBLES";
+        public static string Grafica = "vera.UDP_tbCategorias_Grafica";
+        public static string Grafica2 = "vera.tbEmpleados_Grafica";
         #endregion
 
         #region Proveedores

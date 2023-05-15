@@ -1,6 +1,7 @@
 ﻿using Jafouan.DataAccess.Repository;
 using Jafouan.Entities.Entities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -293,6 +294,20 @@ namespace Jafouan.BusinessLogic.Service
                 return (IEnumerable<VW_Empleados>)result.Error(e.Message);
             }
         }
+        
+        public IEnumerable GraficaEmpleados()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _empleadosRepository.GraficaEmpleados();
+                return list;
+            }
+            catch (Exception e)
+            {
+                return (IEnumerable<VW_Empleados>)result.Error(e.Message);
+            }
+        }
 
 
         //INSERT
@@ -401,6 +416,20 @@ namespace Jafouan.BusinessLogic.Service
             try
             {
                 var list = _prendasRepository.List();
+                return list;
+            }
+            catch (Exception e)
+            {
+                return (IEnumerable<VW_Prendas>)result.Error(e.Message);
+            }
+        }
+
+        public IEnumerable Grafica()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _prendasRepository.Grafica();
                 return list;
             }
             catch (Exception e)

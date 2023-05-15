@@ -568,6 +568,7 @@ INSERT INTO [acce].[tbPantallas]
 			('Fardos','verafard','/Fardos',1),
 			('Proveedores','veraprov','/Proveedores',1),
 			('Sucursales','verasucu','/Sucursales',1),
+			('Grafica','veragraf','/Grafica',1),
 			--Facturación
 			('Metodos de Pago','factmeto','/MetodosPago',1),
 			('Facturas','factfact','/Facturas',1);
