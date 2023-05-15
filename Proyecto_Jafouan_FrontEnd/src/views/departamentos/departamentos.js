@@ -195,7 +195,11 @@ const form = event.currentTarget
   if(form.checkValidity() != false){
   axios.put('api/Departamentos/Update', EditarDepartamento, config)
       .then((response) => {
-          console.log(response.data)
+        if(response.data.code == 500){
+          toast.error('Ya hay un departamento con ese nombre')
+        }
+        else{
+                    console.log(response.data)
           setVisible2(!visible2)
           setvisibleEnca(!visibleEnca)
           setEditarDepartamento({
@@ -204,6 +208,8 @@ const form = event.currentTarget
             dept_UserModifica:user_Crea
         })  
         toast.success('Departamento editado correctamente.');
+        }
+
 
         console.log(response.data)
       })

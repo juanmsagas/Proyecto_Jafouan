@@ -192,7 +192,11 @@ function Fardos() {
     if (form.checkValidity() != false) {
       axios.put('api/Fardos/Update', EditarFardo, config)
         .then((response) => {
-          console.log(response.data)
+          if(response.data.code == 500){
+            toast.error('Ya hay un fardo con ese nombre')
+          }
+          else{
+           console.log(response.data)
           setVisible2(!visible2)
           setvisibleEnca(!visibleEnca)
           setEditarFardo({
@@ -200,9 +204,10 @@ function Fardos() {
             fard_Descripcion: '',
             fard_UserModifica: user_Crea
           })
-          toast.success('Fardo editado correctamente.');
+          toast.success('Fardo editado correctamente.')};
+          
+   
 
-          console.log(response.data)
         })
         .catch((error) => {
           console.log(error)

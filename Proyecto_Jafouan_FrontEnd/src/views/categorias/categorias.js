@@ -201,7 +201,7 @@ if (existeUsuarios) {
       event.preventDefault()
       event.stopPropagation()
     }
-    if (nuevaCategoria.cate_Descripcion === '') {
+    if (EditarCategoria.cate_Descripcion === '') {
       event.preventDefault();
       event.stopPropagation();
       setValidated(true)
@@ -212,6 +212,11 @@ if (existeUsuarios) {
     if (form.checkValidity() != false) {
       axios.put('api/Categorias/Update', EditarCategoria, config)
         .then((response) => {
+          if(response.data.code == 500){
+            toast.error('Ya existe una categoría con ese nombre')
+          }
+          else{
+                  console.log(response.status)
           console.log(response.data)
           setVisible2(!visible2)
           setvisibleEnca(!visibleEnca)
@@ -221,6 +226,8 @@ if (existeUsuarios) {
             cate_UserModifica: user_Crea
           })
           toast.success('Categoría editada correctamente.');
+          }
+    
 
           console.log(response.data)
         })

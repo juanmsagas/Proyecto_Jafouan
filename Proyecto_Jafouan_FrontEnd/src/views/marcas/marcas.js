@@ -201,7 +201,11 @@ function Marcas() {
     if (form.checkValidity() != false) {
       axios.put('api/Marcas/Update', EditarMarca, config)
         .then((response) => {
-          console.log(response.data)
+          if(response.data.code == 409){
+            toast.error('Ya hay una marca registrada con ese nombre')
+          }
+          else{
+                      console.log(response.data)
           setVisible2(!visible2)
           setvisibleEnca(!visibleEnca)
           setEditarMarca({
@@ -212,6 +216,8 @@ function Marcas() {
           toast.success('Marca editada correctamente.');
 
           console.log(response.data)
+          }
+
         })
         .catch((error) => {
           console.log(error)

@@ -207,7 +207,11 @@ const form = event.currentTarget
   if(form.checkValidity() != false){
   axios.put('api/Sucursales/Update', EditarSucursales, config)
       .then((response) => {
-          console.log(response.data)
+        if(response.data.code == 500){
+          toast.error('Ya hay una sucursal con ese nombre')
+        }
+        else{
+                    console.log(response.data)
           setVisible2(!visible2)
           setvisibleEnca(!visibleEnca)
           setEditarSucursales({
@@ -217,7 +221,9 @@ const form = event.currentTarget
             sucu_Direccion: '',
             sucu_UserModifica:user_Crea,
         })
-        toast.success('Sucursal editada correctamente.');
+        toast.success('Sucursal editada correctamente.')
+        }
+;
 
         console.log(response.data)
       })
@@ -555,7 +561,7 @@ required/>
 <CFormInput
 type="text"
 value={EditarSucursales.sucu_Nombre}
-onChange={(e) => ({ ...EditarSucursales, sucu_Nombre: e.target.value })}
+onChange={(e) => setEditarSucursales({ ...EditarSucursales, sucu_Nombre: e.target.value })}
 id="validationCustom01"
 label="Nombre"
 required/>
