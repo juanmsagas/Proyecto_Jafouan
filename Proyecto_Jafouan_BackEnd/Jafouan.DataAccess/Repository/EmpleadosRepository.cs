@@ -2,6 +2,7 @@
 using Jafouan.Entities.Entities;
 using Microsoft.Data.SqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -61,6 +62,12 @@ namespace Jafouan.DataAccess.Repository
         {
             using var db = new SqlConnection(Jafouan_Context.ConnectionString);
             return db.Query<VW_Empleados>(ScriptsDataBase.INDEX_EMPLEADOS, null, commandType: System.Data.CommandType.StoredProcedure);
+        }
+
+        public IEnumerable GraficaEmpleados()
+        {
+            using var db = new SqlConnection(Jafouan_Context.ConnectionString);
+            return db.Query(ScriptsDataBase.Grafica2, null, commandType: System.Data.CommandType.StoredProcedure);
         }
 
         public RequestStatus Update(tbEmpleados item)

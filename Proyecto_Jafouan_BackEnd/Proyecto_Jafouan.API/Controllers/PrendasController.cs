@@ -30,6 +30,14 @@ namespace Jafouan.API.Controllers
 
             return Ok(list);
         }
+
+        [HttpGet("Grafica")]
+        public IActionResult Grafica()
+        {
+            var list = _ventaRopaServices.Grafica();
+
+            return Ok(list);
+        }
         [HttpGet("PrendasDisponibles")]
         public IActionResult PrendasDisponibles()
         {

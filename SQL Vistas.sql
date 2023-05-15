@@ -344,6 +344,8 @@ SELECT	pren_Id,
 		T5.fard_Descripcion,
 		pren_Imagen, 
 		prend_EstadoTienda, 
+		CASE prend_EstadoTienda WHEN 1 THEN 'Disponible'
+		ELSE 'Vendida' END as Disponibilidad,
 		pren_Estado,
 		pren_UserCrea, 
 		empl_crea = (SELECT nombreEmpleado FROM acce.VW_Usuarios WHERE [user_Id] = pren_UserCrea),

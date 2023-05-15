@@ -2,6 +2,7 @@
 using Jafouan.Entities.Entities;
 using Microsoft.Data.SqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -110,6 +111,12 @@ namespace Jafouan.DataAccess.Repository
         VW_Prendas IRepository<tbPrendas, VW_Prendas>.Find(int? id)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable Grafica()
+        {
+            using var db = new SqlConnection(Jafouan_Context.ConnectionString);
+            return db.Query(ScriptsDataBase.Grafica, null, commandType: System.Data.CommandType.StoredProcedure);
         }
 
         IEnumerable<VW_Prendas> IRepository<tbPrendas, VW_Prendas>.List()
